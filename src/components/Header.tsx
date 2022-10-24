@@ -1,6 +1,7 @@
 // import { useNavigate, useSearchParams } from "react-router-dom";
 // import { getPath } from "../util/svg";
 
+import { A } from "@solidjs/router";
 import HelpIcon from "./icons/HelpIcon";
 import SettingsIcon from "./icons/SettingsIcon";
 import StatsIcon from "./icons/StatsIcon";
@@ -34,9 +35,9 @@ export default function Header() {
     <header class="pt-8 h-10 relative dark:text-gray-200 z-10">
       <div class="relative h-full">
         <div class="space-x-1 flex absolute left-0 bottom-1">
-          <button aria-label="Help">
+          <A href="/">
             <HelpIcon />
-          </button>
+          </A>
         </div>
         <button
           class="absolute bottom-0 left-1/2 transform -translate-x-1/2 "

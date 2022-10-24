@@ -36,5 +36,5 @@ export default function () {
 
   // .pointColor("color")(document.getElementById("globeViz"));
 
-  return <div id="globeViz" ref={globeRef!}></div>;
+  return <div ref={globeRef!}></div>;
 }

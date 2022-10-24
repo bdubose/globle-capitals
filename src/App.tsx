@@ -1,8 +1,9 @@
 import { Route, Routes } from "@solidjs/router";
 import type { Component } from "solid-js";
 
-import BasicGlobe from "./components/BasicGlobe";
+import BasicGlobe from "./components/globes/BasicGlobe";
 import Header from "./components/Header";
+import Game from "./routes/Game";
 import Home from "./routes/Home";
 
 const daySky = {
@@ -38,6 +39,7 @@ const App: Component = () => {
         <Header />
         <Routes>
           <Route path="/" component={Home} />
+          <Route path="/game" component={Game} />
         </Routes>
       </main>
       <div
