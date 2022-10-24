@@ -1,0 +1,30 @@
+.day-sky {
+  background: radial-gradient(
+      ellipse at top,
+      rgba(63, 201, 255, 0.7),
+      transparent
+    ),
+    radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.7), transparent)
+      no-repeat fixed;
+  margin: 0;
+}
+
+.night-sky {
+  background: radial-gradient(ellipse at top, #160152, black),
+    radial-gradient(ellipse at bottom, #7d3074, black) no-repeat fixed;
+  margin: 0;
+}
+
+.stars {
+  background: transparent
+    url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
+  opacity: 0.5;
+}
+
+.clouds {
+  backgroundimage: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/131045/clouds.png),
+    url(https://assets.codepen.io/557388/clouds.png);
+  backgroundrepeat: repeat repeat;
+  margintop: 8rem;
+  opacity: 0.2;
+}
