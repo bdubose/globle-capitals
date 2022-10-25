@@ -11,8 +11,8 @@ export default function ({ setGuesses, guesses }: Props) {
   const cities = data["data"] as City[];
   let formRef: HTMLFormElement;
 
-  function findGuess(guess: string) {
-    return cities.find((city) => {
+  function findCity(guess: string, list: City[]) {
+    return list.find((city) => {
       const searcher = guess.trimEnd().toLowerCase();
       const indexed = city.city_ascii.toLowerCase();
       return searcher === indexed;
@@ -22,14 +22,20 @@ export default function ({ setGuesses, guesses }: Props) {
   function enterGuess(e: Event) {
     e.preventDefault();
     const formData = new FormData(formRef);
+    formRef.reset();
     const guess = formData.get("guess");
-    console.log("Guess:", guess);
+    // console.log("Guess:", guess);
     if (typeof guess === "string") {
-      const newCity = findGuess(guess);
-      console.log("New city:", newCity);
+      const newCity = findCity(guess, cities);
+      // console.log("New city:", newCity);
       if (newCity) {
+        const existingGuess = findCity(
+          guess,
+          guesses.map((g) => g.city)
+        );
+        if (existingGuess) return console.log(`Already guessed ${guess}.`);
         setGuesses([...guesses, { city: newCity, order: guesses.length }]);
-        console.log("Guesses:", guesses);
+        // console.log("Guesses:", guesses);
       }
     }
   }

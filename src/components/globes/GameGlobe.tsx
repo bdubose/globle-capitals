@@ -2,8 +2,6 @@ import Globe from "globe.gl";
 import { createEffect, createSignal, onMount, Show } from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
-import data from "../../data/filter_cities.json";
-import { SetStoreFunction } from "solid-js/store";
 
 type Props = {
   // setGuesses: SetStoreFunction<Guess[]>;
@@ -11,8 +9,7 @@ type Props = {
 };
 
 export default function ({ guesses }: Props) {
-  // const cities = guesses.map((guess) => guess.city);
-
+  // Maps
   const colourMap = {
     Asia: "yellow",
     Europe: "purple",
@@ -23,32 +20,46 @@ export default function ({ guesses }: Props) {
     None: "white",
   };
 
+  // Refs
+  let globeRef: HTMLDivElement | undefined;
+  const globe = Globe();
+
+  // Signals
+  const [isLoaded, setIsLoaded] = createSignal(false);
+
+  // Derived signals
   const cityPoints = () =>
     guesses.map(({ city }) => {
       const continent = (city.continent || "None") as Continent;
       return {
-        ...city,
+        lat: city.lat,
+        lng: city.lng,
         label: `<b class="text-black bg-pink-100 p-1">${city.city}</b>`,
         color: colourMap[continent],
+        // radius:
       };
     });
-
-  let globeRef: HTMLDivElement | undefined;
-  const globe = Globe();
-
-  // Not sure how to make the globe reactive. In react, I could set the
-  // properties as states and change them with React, but can't do that
-  // here
-
-  // 1. Re-render the globe?
-  // 2. Invent some kind of SolidJs binding?
-  // 3. Initialize the globe with predefined functions?
-
-  // Nevermind I have an instance of the globe to work with :)
-  //
-
-  // Signals
-  const [isLoaded, setIsLoaded] = createSignal(false);
+  // All possible combinations
+  // array.flatMap((v, i) => array.slice(i+1).map(w => [v,w]))
+  function createArc(city1: City, city2: City) {
+    return {
+      startLng: city1.lng,
+      startLat: city1.lat,
+      endLng: city2.lng,
+      endLat: city2.lat,
+      color: "red",
+    };
+  }
+  const arcs = () => {
+    if (guesses.length <= 1) return [];
+    else if (guesses.length === 2)
+      return [createArc(guesses[0].city, guesses[1].city)];
+    return guesses.flatMap(({ city: city1 }, i) => {
+      return guesses.slice(i + 1).map(({ city: city2 }) => {
+        return createArc(city1, city2);
+      });
+    });
+  };
 
   // Context params
   const parser = new UAParser();
@@ -83,6 +94,11 @@ export default function ({ guesses }: Props) {
         .pointsTransitionDuration(0)
         .onPointClick(turnGlobe)
         .labelColor(() => "red")
+        .arcColor("color")
+        .arcDashLength(() => 0.75)
+        .arcDashGap(() => 0.1)
+        .arcDashAnimateTime(() => 2500)
+        .arcAltitude(() => 0.05)
         .width(size)
         .height(size)
         .backgroundColor("#00000000")
@@ -99,9 +115,12 @@ export default function ({ guesses }: Props) {
   });
 
   createEffect(() => {
-    const points = cityPoints();
-    console.log(points);
-    globe.pointsData(cityPoints());
+    if (guesses.length > 0) {
+      const newestPoint = cityPoints()[cityPoints().length - 1];
+      const { lat, lng } = newestPoint;
+      turnGlobe({ lat, lng });
+      globe.pointsData(cityPoints()).arcsData(arcs());
+    }
   });
 
   // .pointColor("color")(document.getElementById("globeViz"));
