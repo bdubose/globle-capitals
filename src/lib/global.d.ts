@@ -30,6 +30,17 @@ declare global {
     city: City;
     order: number;
   };
+
+  type Coords = {
+    lat: number;
+    lng: number;
+  };
+
+  type Cartesian = {
+    x: number;
+    y: number;
+    z: number;
+  };
 }
 
 export {};

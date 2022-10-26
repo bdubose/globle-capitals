@@ -2,6 +2,23 @@ import Globe from "globe.gl";
 import { createEffect, createSignal, onMount, Show } from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
+import {
+  scaleSequentialSqrt,
+  scaleRadial,
+  scaleDiverging,
+  scaleLinear,
+} from "d3-scale";
+import {
+  interpolateBasis,
+  interpolateRgb,
+  interpolateRgbBasis,
+} from "d3-interpolate";
+import {
+  interpolateBuPu,
+  interpolateOrRd,
+  interpolateGreys,
+  interpolateTurbo,
+} from "d3-scale-chromatic";
 
 type Props = {
   // setGuesses: SetStoreFunction<Guess[]>;
@@ -42,12 +59,32 @@ export default function ({ guesses }: Props) {
   // All possible combinations
   // array.flatMap((v, i) => array.slice(i+1).map(w => [v,w]))
   function createArc(city1: City, city2: City) {
+    // const gradient = interpolateTurbo;
+    // const gradient = interpolateRgb("red", "gray");
+
+    const gradient = interpolateRgbBasis(["red", "white", "red"]);
+    const scale = scaleSequentialSqrt(gradient).domain([0, 0.2]);
+    // const divergent = scaleDiverging()
+    //   .domain([0, 1, 0])
+    //   // @ts-ignore
+    //   .range(["white", "orange", "red"]);
+    // @ts-ignore
+    // const linear = scaleLinear(gradient).domain([0, 0.75, 1]);
+    const linear = scaleLinear([0, 0.25, 1], ["white", "red", "white"]);
+
+    // .range(["red", "green", "blue"]);
+    // old()
+    // ScaleRadial wants number, but I want to give it a function
+    // const colourScale = scaleRadial().domain([0, 1]).range([0, 1]);
+
+    // const radial = scaleRadial(gradient).domain([10, 100]).range(["blue", "red"])
+
     return {
       startLng: city1.lng,
       startLat: city1.lat,
       endLng: city2.lng,
       endLat: city2.lat,
-      color: "red",
+      color: linear,
     };
   }
   const arcs = () => {
