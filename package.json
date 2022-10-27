@@ -28,6 +28,7 @@
     "d3-scale-chromatic": "^3.0.0",
     "globe.gl": "^2.26.6",
     "solid-js": "^1.5.1",
+    "spherical-geometry-js": "^3.0.0",
     "ua-parser-js": "^1.0.32"
   }
 }

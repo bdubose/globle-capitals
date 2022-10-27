@@ -2,23 +2,8 @@ import Globe from "globe.gl";
 import { createEffect, createSignal, onMount, Show } from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
-import {
-  scaleSequentialSqrt,
-  scaleRadial,
-  scaleDiverging,
-  scaleLinear,
-} from "d3-scale";
-import {
-  interpolateBasis,
-  interpolateRgb,
-  interpolateRgbBasis,
-} from "d3-interpolate";
-import {
-  interpolateBuPu,
-  interpolateOrRd,
-  interpolateGreys,
-  interpolateTurbo,
-} from "d3-scale-chromatic";
+import { ans } from "../../util/answer";
+import { arcGradient } from "../../util/geometry";
 
 type Props = {
   // setGuesses: SetStoreFunction<Guess[]>;
@@ -56,41 +41,24 @@ export default function ({ guesses }: Props) {
         // radius:
       };
     });
-  // All possible combinations
-  // array.flatMap((v, i) => array.slice(i+1).map(w => [v,w]))
+
   function createArc(city1: City, city2: City) {
-    // const gradient = interpolateTurbo;
-    // const gradient = interpolateRgb("red", "gray");
-
-    const gradient = interpolateRgbBasis(["red", "white", "red"]);
-    const scale = scaleSequentialSqrt(gradient).domain([0, 0.2]);
-    // const divergent = scaleDiverging()
-    //   .domain([0, 1, 0])
-    //   // @ts-ignore
-    //   .range(["white", "orange", "red"]);
-    // @ts-ignore
-    // const linear = scaleLinear(gradient).domain([0, 0.75, 1]);
-    const linear = scaleLinear([0, 0.25, 1], ["white", "red", "white"]);
-
-    // .range(["red", "green", "blue"]);
-    // old()
-    // ScaleRadial wants number, but I want to give it a function
-    // const colourScale = scaleRadial().domain([0, 1]).range([0, 1]);
-
-    // const radial = scaleRadial(gradient).domain([10, 100]).range(["blue", "red"])
-
+    const gradient = arcGradient(city1, city2, ans);
+    const label = `<b class="text-black bg-pink-100 p-1">${city1.city_ascii} to ${city2.city_ascii}</b>`;
     return {
       startLng: city1.lng,
       startLat: city1.lat,
       endLng: city2.lng,
       endLat: city2.lat,
-      color: linear,
+      color: gradient,
+      label,
     };
   }
   const arcs = () => {
     if (guesses.length <= 1) return [];
     else if (guesses.length === 2)
       return [createArc(guesses[0].city, guesses[1].city)];
+    // All possible combinations
     return guesses.flatMap(({ city: city1 }, i) => {
       return guesses.slice(i + 1).map(({ city: city2 }) => {
         return createArc(city1, city2);
@@ -132,10 +100,15 @@ export default function ({ guesses }: Props) {
         .onPointClick(turnGlobe)
         .labelColor(() => "red")
         .arcColor("color")
-        .arcDashLength(() => 0.75)
-        .arcDashGap(() => 0.1)
-        .arcDashAnimateTime(() => 2500)
-        .arcAltitude(() => 0.05)
+        .arcStroke(1.5)
+        // .arcDashLength(() => 0.75)
+        // .arcDashGap(() => 0.1)
+        // .arcDashAnimateTime(() => 2500)
+        // .arcAltitude(() => 0.05)
+        .arcAltitudeAutoScale(0)
+        .arcsTransitionDuration(0)
+        .arcLabel("label")
+
         .width(size)
         .height(size)
         .backgroundColor("#00000000")
