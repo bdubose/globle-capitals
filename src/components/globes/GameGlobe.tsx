@@ -1,16 +1,16 @@
 import Globe from "globe.gl";
-import { createEffect, createSignal, onMount, Show } from "solid-js";
+import { Accessor, createEffect, createSignal, onMount, Show } from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
 import { ans } from "../../util/answer";
 import { arcGradient } from "../../util/geometry";
 
 type Props = {
-  // setGuesses: SetStoreFunction<Guess[]>;
-  guesses: Guess[];
+  guesses: GuessStore;
+  pov: Accessor<Coords>;
 };
 
-export default function ({ guesses }: Props) {
+export default function ({ guesses, pov }: Props) {
   // Maps
   const colourMap = {
     Asia: "yellow",
@@ -31,7 +31,7 @@ export default function ({ guesses }: Props) {
 
   // Derived signals
   const cityPoints = () =>
-    guesses.map(({ city }) => {
+    guesses.cities.map(({ city }) => {
       const continent = (city.continent || "None") as Continent;
       return {
         lat: city.lat,
@@ -55,12 +55,13 @@ export default function ({ guesses }: Props) {
     };
   }
   const arcs = () => {
-    if (guesses.length <= 1) return [];
-    else if (guesses.length === 2)
-      return [createArc(guesses[0].city, guesses[1].city)];
+    const { cities } = guesses;
+    if (cities.length <= 1) return [];
+    else if (cities.length === 2)
+      return [createArc(cities[0].city, cities[1].city)];
     // All possible combinations
-    return guesses.flatMap(({ city: city1 }, i) => {
-      return guesses.slice(i + 1).map(({ city: city2 }) => {
+    return cities.flatMap(({ city: city1 }, i) => {
+      return cities.slice(i + 1).map(({ city: city2 }) => {
         return createArc(city1, city2);
       });
     });
@@ -82,6 +83,8 @@ export default function ({ guesses }: Props) {
     controls.autoRotate = false;
     globe.pointOfView(coords, 250);
   }
+
+  // TODO arcs to animate from start to end
 
   // Effects
   onMount(() => {
@@ -124,8 +127,9 @@ export default function ({ guesses }: Props) {
     }
   });
 
+  // When there's a new guess, turn globe to that point
   createEffect(() => {
-    if (guesses.length > 0) {
+    if (guesses.numGuesses > 0) {
       const newestPoint = cityPoints()[cityPoints().length - 1];
       const { lat, lng } = newestPoint;
       turnGlobe({ lat, lng });
@@ -133,7 +137,10 @@ export default function ({ guesses }: Props) {
     }
   });
 
-  // .pointColor("color")(document.getElementById("globeViz"));
+  // When player clicks on a city name, turn to it
+  createEffect(() => {
+    turnGlobe(pov());
+  });
 
   return (
     <div>

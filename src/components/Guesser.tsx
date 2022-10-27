@@ -1,10 +1,9 @@
-import { Setter } from "solid-js";
 import { SetStoreFunction } from "solid-js/store";
 import data from "../data/filter_cities.json";
 
 type Props = {
-  setGuesses: SetStoreFunction<Guess[]>;
-  guesses: Guess[];
+  setGuesses: SetStoreFunction<GuessStore>;
+  guesses: GuessStore;
 };
 
 export default function ({ setGuesses, guesses }: Props) {
@@ -31,11 +30,13 @@ export default function ({ setGuesses, guesses }: Props) {
       if (newCity) {
         const existingGuess = findCity(
           guess,
-          guesses.map((g) => g.city)
+          guesses.cities.map((g) => g.city)
         );
         if (existingGuess) return console.log(`Already guessed ${guess}.`);
-        setGuesses([...guesses, { city: newCity, order: guesses.length }]);
-        // console.log("Guesses:", guesses);
+        setGuesses("cities", (prev) => [
+          ...prev,
+          { city: newCity, order: prev.length },
+        ]);
       }
     }
   }

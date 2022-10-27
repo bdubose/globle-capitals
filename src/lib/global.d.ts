@@ -41,6 +41,13 @@ declare global {
     y: number;
     z: number;
   };
+
+  type GuessStore = {
+    cities: Guess[];
+    readonly sortedGuesses: Guess[];
+    readonly numGuesses: number;
+    readonly closest: number;
+  };
 }
 
 export {};
