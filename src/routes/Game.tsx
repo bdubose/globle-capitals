@@ -1,4 +1,4 @@
-import { createSignal, lazy, Suspense } from "solid-js";
+import { createEffect, createSignal, lazy, Suspense } from "solid-js";
 import { createStore } from "solid-js/store";
 import { computeDistanceBetween } from "spherical-geometry-js";
 import Guesser from "../components/Guesser";
@@ -8,8 +8,11 @@ import { ans } from "../util/answer";
 const GameGlobe = lazy(() => import("../components/globes/GameGlobe"));
 
 export default function () {
-  const [pov, setPov] = createSignal<Coords>({ lat: 43.7417, lng: -79.3733 });
+  // Signals
+  const [pov, setPov] = createSignal<Coords | null>(null);
+  const [win, setWin] = createSignal(false);
 
+  // Stores
   const [guesses, setGuesses] = createStore({
     cities: [] as Guess[],
     get sortedGuesses() {
@@ -29,9 +32,15 @@ export default function () {
     },
   });
 
+  // Effects
+  createEffect(() => {
+    const winningGuess = guesses.cities.find(({ city }) => city.id === ans.id);
+    if (winningGuess) setWin(true);
+  });
+
   return (
     <div>
-      <Guesser setGuesses={setGuesses} guesses={guesses} />
+      <Guesser setGuesses={setGuesses} guesses={guesses} win={win} />
       <Suspense fallback={<p>Loading...</p>}>
         <GameGlobe guesses={guesses} pov={pov} />
       </Suspense>

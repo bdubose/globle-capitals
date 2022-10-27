@@ -7,7 +7,7 @@ import { arcGradient } from "../../util/geometry";
 
 type Props = {
   guesses: GuessStore;
-  pov: Accessor<Coords>;
+  pov: Accessor<Coords | null>;
 };
 
 export default function ({ guesses, pov }: Props) {
@@ -54,17 +54,34 @@ export default function ({ guesses, pov }: Props) {
       label,
     };
   }
+
+  // Option 1: Arcs between all guesses
+  // const arcs = () => {
+  //   const { cities } = guesses;
+  //   if (cities.length <= 1) return [];
+  //   else if (cities.length === 2)
+  //     return [createArc(cities[0].city, cities[1].city)];
+  //   // All possible combinations
+  //   return cities.flatMap(({ city: city1 }, i) => {
+  //     return cities.slice(i + 1).map(({ city: city2 }) => {
+  //       return createArc(city1, city2);
+  //     });
+  //   });
+  // };
+
+  // Option 2: Arcs between consecutive guesses
   const arcs = () => {
     const { cities } = guesses;
     if (cities.length <= 1) return [];
     else if (cities.length === 2)
       return [createArc(cities[0].city, cities[1].city)];
     // All possible combinations
-    return cities.flatMap(({ city: city1 }, i) => {
-      return cities.slice(i + 1).map(({ city: city2 }) => {
-        return createArc(city1, city2);
-      });
-    });
+    const a = [];
+    for (let i = 0; i < cities.length - 1; i++) {
+      const arc = createArc(cities[i].city, cities[i + 1].city);
+      a.push(arc);
+    }
+    return a;
   };
 
   // Context params
@@ -139,7 +156,8 @@ export default function ({ guesses, pov }: Props) {
 
   // When player clicks on a city name, turn to it
   createEffect(() => {
-    turnGlobe(pov());
+    const newPov = pov();
+    if (newPov) turnGlobe(newPov);
   });
 
   return (
