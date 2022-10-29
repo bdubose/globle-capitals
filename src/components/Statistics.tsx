@@ -1,7 +1,5 @@
 import dayjs from "dayjs";
 import { Accessor, onCleanup, onMount, Setter, Signal } from "solid-js";
-import { Portal, Show } from "solid-js/web";
-import clickOutside from "../directives/clickOutside";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import XIcon from "./icons/XIcon";
 
@@ -10,28 +8,16 @@ type Props = {
   setShowStats: Setter<Boolean>;
 };
 
-declare module "solid-js" {
-  namespace JSX {
-    interface Directives {
-      // use:clickOutside
-      clickOutside: () => void;
-    }
-  }
-}
-
-// Declaring directive because otherwise typescript removes from file.
-const directive = clickOutside;
+export const firstStats = {
+  gamesWon: 0,
+  lastWin: "1970-01-01",
+  currentStreak: 0,
+  maxStreak: 0,
+  usedGuesses: [],
+  emojiGuesses: "",
+};
 
 export default function ({ showStats, setShowStats }: Props) {
-  const firstStats = {
-    gamesWon: 0,
-    lastWin: dayjs("1970-01-01"),
-    currentStreak: 0,
-    maxStreak: 0,
-    usedGuesses: [],
-    emojiGuesses: "",
-  };
-
   const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
   const {
     gamesWon,
@@ -48,7 +34,9 @@ export default function ({ showStats, setShowStats }: Props) {
   const isSameDay = dayjs(lastWin).isSame(dayjs(), "date");
   const todaysGuesses = isSameDay ? usedGuesses[usedGuesses.length - 1] : "--";
 
-  const showLastWin = dayjs(lastWin).isAfter("2022-01-01") ? lastWin : "--";
+  const showLastWin = dayjs(lastWin).isAfter("2022-01-01")
+    ? dayjs(lastWin).format("YYYY-MM-DD")
+    : "--";
 
   const statsTable = [
     { label: "Last win", value: showLastWin?.toString() },
@@ -75,8 +63,10 @@ export default function ({ showStats, setShowStats }: Props) {
   }
   onMount(() => {
     document.body.addEventListener("click", triggerCloseModal);
-    modalRef.classList.remove("opacity-0");
-    modalRef.classList.add("opacity-100");
+    setTimeout(() => {
+      modalRef.classList.remove("opacity-0");
+      modalRef.classList.add("opacity-100");
+    }, 200);
   });
   onCleanup(() => {
     document.body.removeEventListener("click", triggerCloseModal);

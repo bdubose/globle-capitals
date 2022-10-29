@@ -3,6 +3,7 @@ import {
   createEffect,
   createSignal,
   lazy,
+  on,
   onCleanup,
   onMount,
   Suspense,
@@ -14,6 +15,8 @@ import List from "../components/List";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { ans } from "../util/answer";
 import data from "../data/filter_cities.json";
+import { firstStats } from "../components/Statistics";
+import { setShowStats } from "../App";
 
 const GameGlobe = lazy(() => import("../components/globes/GameGlobe"));
 
@@ -27,9 +30,11 @@ export default function () {
   const noCities = { cities: [] as string[] };
   const [storedGuesses, storeGuesses] = useLocalStorage<typeof noCities>(
     "guesses",
-    {
-      ...noCities,
-    }
+    { ...noCities }
+  );
+  const [storedStats, storeStats] = useLocalStorage<Stats>(
+    "statistics",
+    firstStats
   );
 
   const restoredGuesses = () =>
@@ -73,21 +78,65 @@ export default function () {
       setGuesses({ cities: [] });
       return;
     }
+    if (win()) setTimeout(() => setShowStats(true), 2000);
   });
 
   // Resets guesses when stored guesses expired
   createEffect(() => {
-    // onCleanup(() => {
     console.log("Running storing effect.");
     const storable = guesses.cities.map((guess) => guess.city.city_ascii);
     console.log("storable", storable);
     storeGuesses({ cities: storable });
   });
-  // createEffect(() => {
-  //   if (restoredGuesses().length === 0) {
-  //     setGuesses({ cities: [] });
-  //   }
-  // });
+
+  // When the player wins!
+  createEffect(
+    on(win, () => {
+      const today = dayjs();
+      // const lastWin
+      // const previousWin = storedStats().lastWin;
+      const lastWin = dayjs(storedStats().lastWin);
+      if (win() && lastWin.isBefore(today, "date")) {
+        // Store new stats in local storage
+        const lastWin = today;
+        const gamesWon = storedStats().gamesWon + 1;
+        // const streakBroken = dateDiffInDays(storedStats.lastWin, lastWin) > 1;
+        const streakBroken = lastWin.diff(today, "date") > 1;
+        const currentStreak = streakBroken
+          ? 1
+          : storedStats().currentStreak + 1;
+        const maxStreak =
+          currentStreak > storedStats().maxStreak
+            ? currentStreak
+            : storedStats().maxStreak;
+        const usedGuesses = [...storedStats().usedGuesses, guesses.numGuesses];
+        const emojiGuesses = "";
+        // const chunks = [];
+        // for (let i = 0; i < guesses.numGuesses; i += 8) {
+        //   chunks.push(guesses.cities.slice(i, i + 8));
+        // }
+        // const emojiGuesses = chunks
+        //   .map((each) =>
+        //     each
+        //       .map((guess) => getColourEmoji(guess, guesses[guesses.length - 1]))
+        //       .join("")
+        //   )
+        //   .join("\n");
+        const newStats = {
+          lastWin: lastWin.toString(),
+          gamesWon,
+          currentStreak,
+          maxStreak,
+          usedGuesses,
+          emojiGuesses,
+        };
+        storeStats(newStats);
+
+        // Show stats
+        setTimeout(() => setShowStats(true), 3000);
+      }
+    })
+  );
 
   return (
     <div>

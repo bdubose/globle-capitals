@@ -1,4 +1,4 @@
-import { Accessor, createSignal, Setter } from "solid-js";
+import { Accessor, createSignal, onMount, Setter } from "solid-js";
 import { SetStoreFunction } from "solid-js/store";
 import data from "../data/filter_cities.json";
 import { ans } from "../util/answer";
@@ -12,12 +12,17 @@ type Props = {
 
 export default function ({ setGuesses, guesses, win }: Props) {
   const cities = data["data"] as City[];
+  const winMsg = `The mystery city is ${ans.city_ascii}!`;
   const [msg, setMsg] = createSignal("");
   const msgColour = () => {
     return win() ? "green" : "rgb(185 28 28)";
   };
 
   let formRef: HTMLFormElement;
+
+  onMount(() => {
+    if (win()) setMsg(winMsg);
+  });
 
   function findCity(guess: string, list: City[]) {
     return list.find((city) => {
@@ -44,8 +49,7 @@ export default function ({ setGuesses, guesses, win }: Props) {
       ...prev,
       { city: newCity, order: prev.length },
     ]);
-    if (newCity.id === ans.id)
-      return setMsg(`The mystery city is ${ans.city_ascii}`);
+    if (newCity.id === ans.id) return setMsg(winMsg);
     return setMsg("");
   }
 
@@ -67,12 +71,14 @@ export default function ({ setGuesses, guesses, win }: Props) {
           w-full"
           placeholder="Enter city name here."
           autocomplete="off"
+          disabled={win()}
         />
         <button
           type="submit"
           class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 
           dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
-          font-bold py-1 md:py-2 px-4 rounded focus:shadow-outline "
+          font-bold py-1 md:py-2 px-4 rounded focus:shadow-outline"
+          disabled={win()}
         >
           Enter
         </button>

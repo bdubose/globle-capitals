@@ -53,7 +53,7 @@ declare global {
 
   type Stats = {
     gamesWon: number;
-    lastWin: Dayjs;
+    lastWin: string;
     currentStreak: number;
     maxStreak: number;
     usedGuesses: number[];

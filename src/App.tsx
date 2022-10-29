@@ -1,5 +1,5 @@
 import { Route, Routes } from "@solidjs/router";
-import { Component, createSignal, Show } from "solid-js";
+import { Component, createSignal, Show, useContext } from "solid-js";
 
 import Header from "./components/Header";
 import Statistics from "./components/Statistics";
@@ -32,12 +32,9 @@ const clouds = {
   opacity: 0.2,
 };
 
+export const [showStats, setShowStats] = createSignal(false);
 const App: Component = () => {
-  const [showStats, setShowStats] = createSignal(false);
-  let statsButton;
-  // const toggleStats = () => {
-  //   if (!showStats()) setShowStats(true);
-  // };
+  // const [showStats, setShowStats] = useContext(StatsContext);
   return (
     <div class="relative top-0 bottom-0 left-0 right-0 min-h-screen">
       <Show when={showStats()}>
