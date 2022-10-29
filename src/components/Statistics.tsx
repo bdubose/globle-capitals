@@ -1,7 +1,17 @@
-import dayjs from "dayjs";
-import { Accessor, onCleanup, onMount, Setter, Signal } from "solid-js";
+import dayjs, { locale } from "dayjs";
+import {
+  Accessor,
+  createSignal,
+  onCleanup,
+  onMount,
+  Setter,
+  Show,
+  Signal,
+} from "solid-js";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import XIcon from "./icons/XIcon";
+import Modal from "./Modal";
+import Prompt from "./Prompt";
 
 type Props = {
   showStats: Accessor<Boolean>;
@@ -17,7 +27,7 @@ export const firstStats = {
   emojiGuesses: "",
 };
 
-export default function ({ showStats, setShowStats }: Props) {
+export default function (props: Props) {
   const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
   const {
     gamesWon,
@@ -47,42 +57,16 @@ export default function ({ showStats, setShowStats }: Props) {
     { label: "Avg. guesses", value: showAvgGuesses },
   ];
 
-  // Modal
-  let modalRef: HTMLDivElement;
-  function closeModal() {
-    modalRef.classList.remove("opacity-100");
-    modalRef.classList.add("opacity-0");
-    setTimeout(() => {
-      setShowStats(false);
-    }, 200);
-  }
-  function triggerCloseModal(e: Event) {
-    if (modalRef && !modalRef.contains(e.target as Node)) {
-      closeModal();
-    }
-  }
-  onMount(() => {
-    document.body.addEventListener("click", triggerCloseModal);
-    setTimeout(() => {
-      modalRef.classList.remove("opacity-0");
-      modalRef.classList.add("opacity-100");
-    }, 200);
-  });
-  onCleanup(() => {
-    document.body.removeEventListener("click", triggerCloseModal);
-  });
+  // Prompt
+  const [showPrompt, setShowPrompt] = createSignal(false);
+  const [promptType, setPromptType] = createSignal<Prompt>("Reset");
 
   return (
-    <div
-      class="border-4 border-sky-300 dark:border-slate-700 bg-sky-100 
-        dark:bg-slate-900 drop-shadow-xl 
-      z-40 w-full sm:w-fit inset-x-0 mx-auto py-6 px-6 rounded-md space-y-2 
-      absolute top-20
-      transition-opacity ease-in-out duration-200 opacity-0 
-      "
-      ref={modalRef!}
-    >
-      <button class="absolute top-3 right-4" onClick={closeModal}>
+    <Modal trigger={props.setShowStats}>
+      <button
+        class="absolute top-3 right-4"
+        onClick={() => props.setShowStats(false)}
+      >
         <XIcon />
       </button>
       <h2 class="text-3xl text-center font-extrabold dark:text-gray-200">
@@ -115,7 +99,7 @@ export default function ({ showStats, setShowStats }: Props) {
           class=" text-red-700 border-red-700 border rounded-md px-6 py-2 block
           text-base font-medium hover:bg-red-700 hover:text-gray-300
           focus:outline-none focus:ring-2 focus:ring-red-300 sm:mx-4"
-          // onClick={promptReset}
+          onClick={() => setShowPrompt(true)}
         >
           Reset
         </button>
@@ -129,6 +113,9 @@ export default function ({ showStats, setShowStats }: Props) {
           Share
         </button>
       </div>
-    </div>
+      <Show when={showPrompt()}>
+        <Prompt setShowPrompt={setShowPrompt} promptType={promptType} />
+      </Show>
+    </Modal>
   );
 }

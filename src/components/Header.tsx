@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import { Accessor, Setter, Show } from "solid-js";
+import { Accessor, createEffect, Setter, Show } from "solid-js";
 import HelpIcon from "./icons/HelpIcon";
 import SettingsIcon from "./icons/SettingsIcon";
 import StatsIcon from "./icons/StatsIcon";
@@ -23,6 +23,10 @@ export default function Header({ showStats, setShowStats }: Props) {
   const toggleStats = () => {
     setShowStats(!showStats());
   };
+
+  createEffect(() => {
+    console.log("Show stats:", showStats());
+  });
 
   const svgColour = theme.nightMode ? "rgb(209 213 219)" : "black";
 

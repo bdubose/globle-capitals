@@ -59,6 +59,8 @@ declare global {
     usedGuesses: number[];
     emojiGuesses: string;
   };
+
+  type Prompt = "Reset" | "Message";
 }
 
 export {};
