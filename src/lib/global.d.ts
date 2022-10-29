@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 declare global {
   type Continent =
     | "Asia"
@@ -47,6 +49,15 @@ declare global {
     readonly sortedGuesses: Guess[];
     readonly numGuesses: number;
     readonly closest: number;
+  };
+
+  type Stats = {
+    gamesWon: number;
+    lastWin: Dayjs;
+    currentStreak: number;
+    maxStreak: number;
+    usedGuesses: number[];
+    emojiGuesses: string;
   };
 }
 

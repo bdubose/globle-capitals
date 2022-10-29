@@ -26,7 +26,6 @@ export function useLocalStorage<T>(
 ): [Accessor<T>, Setter<T>] {
   const defaultWithDay = { ...defaultValue, day: dayjs().toString() };
   const storedValue = getStorageValue<T>(key, defaultWithDay);
-  // const storedWithoutDay =
 
   // Get expiration from local storage
   // If expiration is later than now, don't edit expiration and change value
@@ -38,9 +37,9 @@ export function useLocalStorage<T>(
     const oldExpiration = dayjs(storedValue.day || "9999-12-31").endOf("day");
     const newExpiration = dayjs().endOf("day");
 
-    console.log("Expiration:", oldExpiration.toString());
-    console.log("Now:", dayjs().toString());
-    console.log("New expiration:", newExpiration.toString());
+    // console.log("Expiration:", oldExpiration.toString());
+    // console.log("Now:", dayjs().toString());
+    // console.log("New expiration:", newExpiration.toString());
 
     if (oldExpiration.isAfter(dayjs())) {
       console.log(`Saving to local storage "${key}".`);

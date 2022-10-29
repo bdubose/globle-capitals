@@ -24,8 +24,10 @@ export default function () {
   });
 
   return (
-    <A href="game">
-      <div ref={globeRef!} />
-    </A>
+    <div class="w-fit">
+      <A href="game">
+        <div ref={globeRef!} class="w-fit mx-0" />
+      </A>
+    </div>
   );
 }

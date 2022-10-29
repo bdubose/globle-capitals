@@ -5,6 +5,7 @@ export default function () {
       height="24"
       viewBox="0 0 24 24"
       width="24"
+      class="cursor-pointer"
     >
       <path
         fill="black"
