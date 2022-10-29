@@ -26,6 +26,7 @@
     "d3-interpolate": "^3.0.1",
     "d3-scale": "^4.0.2",
     "d3-scale-chromatic": "^3.0.0",
+    "dayjs": "^1.11.6",
     "globe.gl": "^2.26.6",
     "solid-js": "^1.5.1",
     "spherical-geometry-js": "^3.0.0",
