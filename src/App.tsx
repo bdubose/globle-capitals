@@ -25,10 +25,10 @@ const stars = {
 };
 
 const clouds = {
-  backgroundImage:
+  "background-image":
     "url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/131045/clouds.png), url(https://assets.codepen.io/557388/clouds.png)",
-  backgroundRepeat: "repeat repeat",
-  marginTop: "8rem",
+  "background-repeat": "repeat repeat",
+  "margin-top": "8rem",
   opacity: 0.2,
 };
 

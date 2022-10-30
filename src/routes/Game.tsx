@@ -83,9 +83,7 @@ export default function () {
 
   // Resets guesses when stored guesses expired
   createEffect(() => {
-    console.log("Running storing effect.");
     const storable = guesses.cities.map((guess) => guess.city.city_ascii);
-    console.log("storable", storable);
     storeGuesses({ cities: storable });
   });
 

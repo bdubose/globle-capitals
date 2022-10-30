@@ -42,7 +42,7 @@ export default function ({ guesses, pov }: Props) {
       };
     });
 
-  function createArc(city1: City, city2: City) {
+  function createArc(city1: City, city2: City, isLast: boolean) {
     const gradient = arcGradient(city1, city2, ans);
     const label = `<b class="text-black bg-pink-100 p-1">${city1.city_ascii} to ${city2.city_ascii}</b>`;
     return {
@@ -51,6 +51,7 @@ export default function ({ guesses, pov }: Props) {
       endLng: city2.lng,
       endLat: city2.lat,
       color: gradient,
+      transition: isLast,
       label,
     };
   }
@@ -74,11 +75,12 @@ export default function ({ guesses, pov }: Props) {
     const { cities } = guesses;
     if (cities.length <= 1) return [];
     else if (cities.length === 2)
-      return [createArc(cities[0].city, cities[1].city)];
+      return [createArc(cities[0].city, cities[1].city, true)];
     // All possible combinations
     const a = [];
     for (let i = 0; i < cities.length - 1; i++) {
-      const arc = createArc(cities[i].city, cities[i + 1].city);
+      const isLast = i === cities.length - 2;
+      const arc = createArc(cities[i].city, cities[i + 1].city, isLast);
       a.push(arc);
     }
     return a;
@@ -112,21 +114,27 @@ export default function ({ guesses, pov }: Props) {
         // .onGlobeClick(() => (controls.autoRotate = false))
         .onGlobeClick(turnGlobe)
         .pointsData(cityPoints())
-        .pointAltitude(() => 0.02)
+        .pointAltitude(0.02)
         .pointColor("color")
         .pointLabel("label")
         .pointRadius(0.5)
         .pointsTransitionDuration(0)
         .onPointClick(turnGlobe)
-        .labelColor(() => "red")
+        .labelColor("red")
         .arcColor("color")
-        .arcStroke(1.5)
-        // .arcDashLength(() => 0.75)
-        // .arcDashGap(() => 0.1)
-        // .arcDashAnimateTime(() => 2500)
-        // .arcAltitude(() => 0.05)
-        .arcAltitudeAutoScale(0)
+        .arcStroke(1.25)
+        .arcAltitude(0)
+
+        .arcDashLength(1)
+        .arcDashGap(0)
+        .arcDashInitialGap("transition")
+        .arcDashAnimateTime(300)
         .arcsTransitionDuration(0)
+
+        // .arcDashLength(0.5)
+        // .arcDashGap(0)
+        // .arcDashAnimateTime(5000)
+
         .arcLabel("label")
 
         .width(size)
