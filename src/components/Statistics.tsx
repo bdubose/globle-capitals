@@ -64,25 +64,46 @@ export default function (props: Props) {
 
   // Saving score
   async function handleCredentialResponse(
-    response: google.accounts.id.CredentialResponse
+    googleResponse?: google.accounts.id.CredentialResponse
   ) {
-    const token = response.credential;
-    const decodedToken = jwtDecode(token);
-    console.log(decodedToken);
+    try {
+      const body = JSON.stringify({
+        token: googleResponse?.credential,
+      });
+      const netlifyResponse = await fetch("/.netlify/functions/save_to_db", {
+        method: "POST",
+        body,
+      });
+      const message = await netlifyResponse.json();
+      console.log(message);
+    } catch (e) {
+      console.log("Failed to save score.");
+      console.error(e);
+    }
+
     // const {id, email, name, photoUrl} = decodedToken
-    const id = 151;
-    const getPokemon = `https://pokeapi.co/api/v2/ability/${id}/`;
-    const result = await fetch(getPokemon);
-    const data = await result.json();
-    console.log(data);
+    // const id = 151;
+    // const getPokemon = `https://pokeapi.co/api/v2/ability/${id}/`;
+    // const result = await fetch(getPokemon);
+    // const data = await result.json();
+    // console.log(data);
   }
   onMount(() => {
+    // TODO use store credential to send token to serverless function even when
+    // prompt doesn't work (not sure this will work but worth a shot.)
+    // google.accounts.id.storeCredential
     google.accounts.id.initialize({
       client_id:
         "197638666704-ta3tn996fsubrmog0nmkrekp0u7nslq7.apps.googleusercontent.com",
       callback: handleCredentialResponse,
     });
-    google.accounts.id.prompt();
+    google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        console.log("Google log-in prompt not displayed.");
+        // handleCredentialResponse();
+        console.log(notification.getSkippedReason());
+      }
+    });
   });
 
   return (

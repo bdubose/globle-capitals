@@ -12,7 +12,7 @@ type Props = {
 
 export default function Header({ showStats, setShowStats }: Props) {
   // const { theme } = useContext(ThemeContext);
-  const theme = { nightMode: false };
+  // const theme = { nightMode: false };
   // const navigate = useNavigate();
   // Set up practice mode
   // const [params] = useSearchParams();
@@ -24,11 +24,7 @@ export default function Header({ showStats, setShowStats }: Props) {
     setShowStats(!showStats());
   };
 
-  createEffect(() => {
-    console.log("Show stats:", showStats());
-  });
-
-  const svgColour = theme.nightMode ? "rgb(209 213 219)" : "black";
+  // const svgColour = theme.nightMode ? "rgb(209 213 219)" : "black";
 
   return (
     <header class="pt-8 h-10 relative dark:text-gray-200 z-10">
