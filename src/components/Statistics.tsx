@@ -1,4 +1,5 @@
 import dayjs, { locale } from "dayjs";
+import jwtDecode from "jwt-decode";
 import {
   Accessor,
   createSignal,
@@ -60,6 +61,29 @@ export default function (props: Props) {
   // Prompt
   const [showPrompt, setShowPrompt] = createSignal(false);
   const [promptType, setPromptType] = createSignal<Prompt>("Reset");
+
+  // Saving score
+  async function handleCredentialResponse(
+    response: google.accounts.id.CredentialResponse
+  ) {
+    const token = response.credential;
+    const decodedToken = jwtDecode(token);
+    console.log(decodedToken);
+    // const {id, email, name, photoUrl} = decodedToken
+    const id = 151;
+    const getPokemon = `https://pokeapi.co/api/v2/ability/${id}/`;
+    const result = await fetch(getPokemon);
+    const data = await result.json();
+    console.log(data);
+  }
+  onMount(() => {
+    google.accounts.id.initialize({
+      client_id:
+        "197638666704-ta3tn996fsubrmog0nmkrekp0u7nslq7.apps.googleusercontent.com",
+      callback: handleCredentialResponse,
+    });
+    google.accounts.id.prompt();
+  });
 
   return (
     <Modal trigger={props.setShowStats}>

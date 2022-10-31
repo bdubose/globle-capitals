@@ -1,4 +1,6 @@
 /* @refresh reload */
+/// <reference types="google.accounts" />
+
 import { render } from "solid-js/web";
 
 import "./index.css";

@@ -1,5 +1,5 @@
 import { Route, Routes } from "@solidjs/router";
-import { Component, createSignal, Show, useContext } from "solid-js";
+import { Component, createSignal, Show } from "solid-js";
 
 import Header from "./components/Header";
 import Statistics from "./components/Statistics";
