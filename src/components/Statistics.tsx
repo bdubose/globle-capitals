@@ -87,10 +87,9 @@ export default function (props: Props) {
     setPromptType("Message");
     setPromptText("Stats reset.");
     setTimeout(() => {
-      setShowPrompt(false);
       props.setShowStats(false);
       navigate("/");
-    }, 1500);
+    }, 2000);
   }
 
   return (

@@ -1,8 +1,6 @@
 import dayjs from "dayjs";
 import { Accessor, createEffect, createSignal, Setter } from "solid-js";
 
-type LocalStore<T> = { day: string } & T;
-
 function getStorageValue<T>(key: string, defaultValue?: LocalStore<T>) {
   const saved = localStorage.getItem(key);
   if (saved) {

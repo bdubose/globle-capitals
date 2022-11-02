@@ -78,6 +78,8 @@ declare global {
     exp: number;
     jti: string;
   };
+
+  type LocalStore<T> = { day: string } & T;
 }
 
 export {};

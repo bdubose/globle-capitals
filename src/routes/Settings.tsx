@@ -1,7 +1,7 @@
 // import { invariant } from "@solidjs/router/dist/utils";
+import dayjs from "dayjs";
 import jwtDecode from "jwt-decode";
 import { createSignal, onMount, Show } from "solid-js";
-import invariant from "tiny-invariant";
 import Prompt from "../components/Prompt";
 import { firstStats } from "../components/Statistics";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -10,22 +10,35 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export default function () {
   const [isConnected, setIsConnected] = createSignal(false);
-  const [userToken, setUserToken] = createSignal<Token | null>(null);
+  // const [userToken, setUserToken] = createSignal<Token | null>(null);
+  const [token, setToken] = createSignal("");
   const [msg, setMsg] = createSignal("");
   const [showPrompt, setShowPrompt] = createSignal(false);
   const [promptText, setPromptText] = createSignal("");
+  const [promptType, setPromptType] = createSignal<Prompt>("Choice");
+  const [promptAction, setPromptAction] = createSignal(restoreBackup);
   const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
+  const [backupStats, setBackupStats] = createSignal<Stats | null>(null);
 
   let googleBtn: HTMLDivElement;
-  function handleCredentialResponse(
+  async function handleCredentialResponse(
     googleResponse?: google.accounts.id.CredentialResponse
   ) {
     if (googleResponse) {
       const googleToken = googleResponse?.credential;
-      const decodedToken = jwtDecode(googleToken) as Token;
-      setUserToken(decodedToken);
-      setMsg(`Google account ${decodedToken.email} connected!`);
-      setIsConnected(true);
+      const endpoint = `/.netlify/functions/backup?token=${googleToken}`;
+      try {
+        const netlifyResponse = await fetch(endpoint);
+        if (netlifyResponse.status === 200) {
+          const data = await netlifyResponse.json();
+          console.log("data:", data);
+          if (data.document) {
+            setBackupStats(data.document);
+          }
+        }
+        setToken(googleToken);
+        setIsConnected(true);
+      } catch (e) {}
     } else {
       setMsg("Failed to connect to Google account.");
     }
@@ -44,23 +57,22 @@ export default function () {
   });
 
   // Saving score
-  async function saveScore() {
+  async function saveBackup() {
     try {
-      const email = userToken()?.email;
-      invariant(email, "An error occurred.");
       const body = JSON.stringify({
-        ...storedStats(),
-        email,
+        stats: storedStats(),
+        token: token(),
       });
-      const netlifyResponse = await fetch("/.netlify/functions/save_to_db", {
-        method: "POST",
+      const netlifyResponse = await fetch("/.netlify/functions/backup", {
+        method: "PUT",
         body,
       });
-      const message = await netlifyResponse.json();
-      if (netlifyResponse.status === 200) {
-        setIsConnected(true);
-      }
-      console.log(message);
+      const data = await netlifyResponse.json();
+      const message = data.message;
+      setPromptType("Message");
+      setPromptText(message);
+      setShowPrompt(true);
+      setBackupStats(storedStats());
     } catch (e) {
       console.log("Failed to save score.");
       console.error(e);
@@ -68,12 +80,52 @@ export default function () {
     }
   }
 
-  // Restore score
-  function restoreScorePrompt() {
+  // Restore backup
+  function restoreBackupPrompt() {
+    setPromptType("Choice");
     setPromptText(
       "Are you sure you want to restore from backup? This will replace your current score."
     );
+    setPromptAction(() => restoreBackup);
     setShowPrompt(true);
+  }
+  async function restoreBackup() {
+    try {
+      const endpoint = `/.netlify/functions/backup?token=${token()}`;
+      const netlifyResponse = await fetch(endpoint);
+      const data = await netlifyResponse.json();
+      storeStats(data.document);
+      setPromptType("Message");
+      setPromptText("Backup restored.");
+    } catch (e) {
+      console.error(e);
+      setMsg("Failed to restore backup. Please contact support.");
+    }
+  }
+
+  // Delete backup
+  function deleteBackupPrompt() {
+    setPromptType("Choice");
+    setPromptText("Are you sure you want to delete your backup?");
+    setPromptAction(() => deleteBackup);
+    setShowPrompt(true);
+  }
+  async function deleteBackup() {
+    try {
+      const endpoint = `/.netlify/functions/backup?token=${token()}`;
+      const netlifyResponse = await fetch(endpoint, {
+        method: "DELETE",
+      });
+      const data = await netlifyResponse.json();
+      storeStats(firstStats);
+      setPromptType("Message");
+      setPromptText(data.message);
+      setBackupStats(null);
+    } catch (e) {
+      console.log("Failed to restore score.");
+      console.error(e);
+      setMsg("Failed to restore score. Please contact support.");
+    }
   }
 
   return (
@@ -81,14 +133,33 @@ export default function () {
       <h2 class="text-3xl text-center font-extrabold dark:text-gray-200">
         Settings
       </h2>
-      <h3 class="text-2xl font-extrabold dark:text-gray-200">Score backup</h3>
-      <div class="flex items-center space-x-3">
-        <p>Connect to Google to backup your score:</p>
-      </div>
-      <p>{msg()}</p>
-      <Show when={!isConnected()}>
-        <div ref={googleBtn!} class="w-fit"></div>
+      <h3 class="text-2xl font-extrabold dark:text-gray-200">Stats backup</h3>
+
+      <Show
+        when={isConnected()}
+        fallback={
+          <div>
+            <p>Connect to Google to backup your score:</p>
+            <div ref={googleBtn!} class="w-fit my-3" />
+          </div>
+        }
+      >
+        <p>
+          Google account <b>{jwtDecode<Token>(token()).email}</b> connected!
+        </p>
+        <Show when={backupStats()} fallback={<p>No stats saved yet.</p>} keyed>
+          {(stats) => {
+            return (
+              <p>
+                Date saved:
+                {dayjs(stats.lastWin).format(" YYYY-MM-DD")}, streak:{" "}
+                {stats.maxStreak}.
+              </p>
+            );
+          }}
+        </Show>
       </Show>
+      <p>{msg()}</p>
       <div class="flex space-x-3">
         <button
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
@@ -97,7 +168,7 @@ export default function () {
           disabled:bg-blue-400
           justify-around"
           disabled={!isConnected()}
-          onClick={saveScore}
+          onClick={saveBackup}
         >
           Save
         </button>
@@ -108,7 +179,7 @@ export default function () {
           disabled:bg-blue-400
           justify-around"
           disabled={!isConnected()}
-          onClick={restoreScorePrompt}
+          onClick={restoreBackupPrompt}
         >
           Restore
         </button>
@@ -116,8 +187,9 @@ export default function () {
           class=" text-red-700 border-red-700 border rounded-md px-6 py-2 block
           text-base font-medium hover:bg-red-700 hover:text-gray-300
           focus:outline-none focus:ring-2 focus:ring-red-300 
-          disabled:bg-red-300 disabled:text-red-700 disabled:border-none"
-          disabled={!isConnected()}
+          disabled:text-red-400 disabled:bg-transparent disabled:border-red-400"
+          disabled={!isConnected() || !backupStats}
+          onClick={deleteBackupPrompt}
         >
           Delete
         </button>
@@ -125,9 +197,9 @@ export default function () {
       <Prompt
         setShowPrompt={setShowPrompt}
         showPrompt={showPrompt}
-        promptType="Choice"
+        promptType={promptType()}
         text={promptText()}
-        yes={() => console.log("yes")}
+        yes={promptAction()}
       />
     </div>
   );

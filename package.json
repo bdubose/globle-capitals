@@ -31,6 +31,7 @@
     "d3-scale-chromatic": "^3.0.0",
     "dayjs": "^1.11.6",
     "globe.gl": "^2.26.6",
+    "google-auth-library": "^8.6.0",
     "jwt-decode": "^3.1.2",
     "mongodb": "^4.11.0",
     "solid-js": "^1.5.1",

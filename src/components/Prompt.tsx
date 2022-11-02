@@ -1,5 +1,5 @@
 import { useNavigate } from "@solidjs/router";
-import { Accessor, createSignal, Setter, Show } from "solid-js";
+import { Accessor, createSignal, onMount, Setter, Show } from "solid-js";
 import { setShowStats } from "../App";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { resetAll } from "../util/reset";
@@ -21,19 +21,29 @@ type Props = {
   text: string;
 } & (Choice | Message);
 
-export default function (props: Props) {
+export function Prompt(props: Props) {
   const [resetComplete, setResetComplete] = createSignal(false);
 
   function runYes() {
     if (props.promptType === "Choice") {
       props.yes();
+      setTimeout(() => {
+        props.setShowPrompt(false);
+      }, 2000);
     } else {
       return console.log("An error occurred.");
     }
   }
 
+  onMount(() => {
+    if (props.promptType === "Message") {
+      console.log("Closing prompt");
+      setTimeout(() => props.setShowPrompt(false), 2000);
+    }
+  });
+
   return (
-    <Modal setTrigger={props.setShowPrompt} trigger={props.showPrompt}>
+    <>
       <p class="text-gray-900 dark:text-gray-200 max-w-xs">{props.text}</p>
       <Show when={props.promptType === "Choice"}>
         <div class="py-4 flex justify-center sm:space-x-8">
@@ -55,6 +65,14 @@ export default function (props: Props) {
           </button>
         </div>
       </Show>
+    </>
+  );
+}
+
+export default function (props: Props) {
+  return (
+    <Modal setTrigger={props.setShowPrompt} trigger={props.showPrompt}>
+      <Prompt {...props} />
     </Modal>
   );
 }
