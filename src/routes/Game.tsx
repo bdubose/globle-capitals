@@ -98,7 +98,7 @@ export default function () {
         // Store new stats in local storage
         const lastWin = today;
         const gamesWon = storedStats().gamesWon + 1;
-        // const streakBroken = dateDiffInDays(storedStats.lastWin, lastWin) > 1;
+        // const streakBroken = dateDiffInDays(storedStats().lastWin, lastWin) > 1;
         const streakBroken = lastWin.diff(today, "date") > 1;
         const currentStreak = streakBroken
           ? 1
@@ -131,7 +131,7 @@ export default function () {
         storeStats(newStats);
 
         // Show stats
-        setTimeout(() => setShowStats(true), 3000);
+        setTimeout(() => setShowStats(true), 2000);
       }
     })
   );

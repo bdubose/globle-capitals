@@ -1,6 +1,12 @@
+// import { invariant } from "@solidjs/router/dist/utils";
 import jwtDecode from "jwt-decode";
 import { createSignal, onMount, Show } from "solid-js";
+import invariant from "tiny-invariant";
 import Prompt from "../components/Prompt";
+import { firstStats } from "../components/Statistics";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+
+// TODO create resource and loading visibilty
 
 export default function () {
   const [isConnected, setIsConnected] = createSignal(false);
@@ -8,6 +14,7 @@ export default function () {
   const [msg, setMsg] = createSignal("");
   const [showPrompt, setShowPrompt] = createSignal(false);
   const [promptText, setPromptText] = createSignal("");
+  const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
 
   let googleBtn: HTMLDivElement;
   function handleCredentialResponse(
@@ -39,8 +46,11 @@ export default function () {
   // Saving score
   async function saveScore() {
     try {
+      const email = userToken()?.email;
+      invariant(email, "An error occurred.");
       const body = JSON.stringify({
-        token: userToken(),
+        ...storedStats(),
+        email,
       });
       const netlifyResponse = await fetch("/.netlify/functions/save_to_db", {
         method: "POST",

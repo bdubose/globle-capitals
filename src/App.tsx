@@ -1,7 +1,8 @@
 import { Route, Routes } from "@solidjs/router";
-import { Component, createSignal } from "solid-js";
+import { Component, createSignal, Show } from "solid-js";
 
 import Header from "./components/Header";
+import Modal from "./components/Modal";
 import Statistics from "./components/Statistics";
 import Game from "./routes/Game";
 import Home from "./routes/Home";
@@ -34,13 +35,14 @@ const clouds = {
 };
 
 export const [showStats, setShowStats] = createSignal(false);
+
 const App: Component = () => {
-  // const [showStats, setShowStats] = useContext(StatsContext);
+  // const [showStats, setShowStats] = createSignal(false);
   return (
     <div class="relative top-0 bottom-0 left-0 right-0 min-h-screen">
-      {/* <Show when={showStats()}> */}
-      <Statistics showStats={showStats} setShowStats={setShowStats} />
-      {/* </Show> */}
+      <Modal trigger={showStats} setTrigger={setShowStats}>
+        <Statistics showStats={showStats} setShowStats={setShowStats} />
+      </Modal>
       <main class="max-w-2xl mx-auto px-4 py-8 z-20 relative">
         <Header showStats={showStats} setShowStats={setShowStats} />
         <Routes>

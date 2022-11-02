@@ -1,16 +1,14 @@
 import { useNavigate } from "@solidjs/router";
-import dayjs, { locale } from "dayjs";
-import jwtDecode from "jwt-decode";
+import dayjs from "dayjs";
 import {
   Accessor,
+  createEffect,
+  createMemo,
   createSignal,
-  onCleanup,
+  on,
   onMount,
   Setter,
-  Show,
-  Signal,
 } from "solid-js";
-import { setShowStats } from "../App";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { resetAll } from "../util/reset";
 import XIcon from "./icons/XIcon";
@@ -33,6 +31,7 @@ export const firstStats = {
 
 export default function (props: Props) {
   const navigate = useNavigate();
+  console.log("Loading stats into modal");
   const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
   const {
     gamesWon,
@@ -43,24 +42,34 @@ export default function (props: Props) {
     emojiGuesses,
   } = storedStats();
 
-  const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
-  const avgGuesses = Math.round((sumGuesses / usedGuesses.length) * 100) / 100;
-  const showAvgGuesses = usedGuesses.length === 0 ? "--" : avgGuesses;
-  const isSameDay = dayjs(lastWin).isSame(dayjs(), "date");
-  const todaysGuesses = isSameDay ? usedGuesses[usedGuesses.length - 1] : "--";
+  onMount(() => {
+    console.log("Mounted stats");
+  });
 
-  const showLastWin = dayjs(lastWin).isAfter("2022-01-01")
-    ? dayjs(lastWin).format("YYYY-MM-DD")
-    : "--";
+  const statsTable = createMemo(() => {
+    const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
+    const avgGuesses =
+      Math.round((sumGuesses / usedGuesses.length) * 100) / 100;
+    const showAvgGuesses = usedGuesses.length === 0 ? "--" : avgGuesses;
+    const isSameDay = dayjs(lastWin).isSame(dayjs(), "date");
+    const todaysGuesses = isSameDay
+      ? usedGuesses[usedGuesses.length - 1]
+      : "--";
 
-  const statsTable = [
-    { label: "Last win", value: showLastWin?.toString() },
-    { label: "Today's guesses", value: todaysGuesses },
-    { label: "Games won", value: gamesWon },
-    { label: "Current streak", value: currentStreak },
-    { label: "Max streak", value: maxStreak },
-    { label: "Avg. guesses", value: showAvgGuesses },
-  ];
+    const showLastWin = dayjs(lastWin).isAfter("2022-01-01")
+      ? dayjs(lastWin).format("YYYY-MM-DD")
+      : "--";
+
+    const statsTable = [
+      { label: "Last win", value: showLastWin?.toString() },
+      { label: "Today's guesses", value: todaysGuesses },
+      { label: "Games won", value: gamesWon },
+      { label: "Current streak", value: currentStreak },
+      { label: "Max streak", value: maxStreak },
+      { label: "Avg. guesses", value: showAvgGuesses },
+    ];
+    return statsTable;
+  });
 
   // Prompt
   const [showPrompt, setShowPrompt] = createSignal(false);
@@ -79,13 +88,13 @@ export default function (props: Props) {
     setPromptText("Stats reset.");
     setTimeout(() => {
       setShowPrompt(false);
-      setShowStats(false);
+      props.setShowStats(false);
       navigate("/");
     }, 1500);
   }
 
   return (
-    <Modal trigger={props.showStats} setTrigger={props.setShowStats}>
+    <>
       <button
         class="absolute top-3 right-4"
         onClick={() => props.setShowStats(false)}
@@ -100,7 +109,7 @@ export default function (props: Props) {
         class="mx-auto dark:text-gray-200 w-full max-w-sm"
       >
         <tbody>
-          {statsTable.map((row, idx) => {
+          {statsTable().map((row, idx) => {
             return (
               <tr>
                 <td
@@ -147,6 +156,6 @@ export default function (props: Props) {
         text={promptText()}
         yes={resetStats}
       />
-    </Modal>
+    </>
   );
 }

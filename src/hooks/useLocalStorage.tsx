@@ -1,12 +1,6 @@
 import dayjs from "dayjs";
 import { Accessor, createEffect, createSignal, Setter } from "solid-js";
 
-// interface IStorage extends Object {
-//   day?: string;
-// }
-
-// type LocalStore = Record<string, any> & { day: string };
-
 type LocalStore<T> = { day: string } & T;
 
 function getStorageValue<T>(key: string, defaultValue?: LocalStore<T>) {
@@ -36,10 +30,6 @@ export function useLocalStorage<T>(
   createEffect(() => {
     const oldExpiration = dayjs(storedValue.day || "9999-12-31").endOf("day");
     const newExpiration = dayjs().endOf("day");
-
-    // console.log("Expiration:", oldExpiration.toString());
-    // console.log("Now:", dayjs().toString());
-    // console.log("New expiration:", newExpiration.toString());
 
     if (oldExpiration.isAfter(dayjs())) {
       console.log(`Saving to local storage "${key}".`);
