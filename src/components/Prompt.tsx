@@ -6,52 +6,41 @@ import { resetAll } from "../util/reset";
 import Modal from "./Modal";
 import { firstStats } from "./Statistics";
 
-type Props = {
-  setShowPrompt: Setter<boolean>;
-  promptType: Accessor<Prompt>;
+type Choice = {
+  promptType: "Choice";
+  yes: () => void;
 };
 
-export default function (props: Props) {
-  // Reset stats
-  const firstMessage =
-    props.promptType() === "Reset"
-      ? "Are you sure you want to reset your score?"
-      : "";
-  const [msg, setMsg] = createSignal(firstMessage);
-  const [showBtns, setShowBtns] = createSignal(props.promptType() === "Reset");
-  const [resetComplete, setResetComplete] = createSignal(false);
-  const navigate = useNavigate();
+type Message = {
+  promptType: "Message";
+};
 
-  function resetStats() {
-    resetAll();
-    setShowBtns(false);
-    setMsg("Stats reset.");
-    setTimeout(() => {
-      // props.setShowPrompt(false);
-      setShowStats(false);
-      navigate("/");
-    }, 1500);
+type Props = {
+  setShowPrompt: Setter<boolean>;
+  showPrompt: Accessor<boolean>;
+  text: string;
+} & (Choice | Message);
+
+export default function (props: Props) {
+  const [resetComplete, setResetComplete] = createSignal(false);
+
+  function runYes() {
+    if (props.promptType === "Choice") {
+      props.yes();
+    } else {
+      return console.log("An error occurred.");
+    }
   }
-  // Clipboard
-  // const [showCopyMsg, setShowCopyMsg] = createSignal(false);
-  //   const options = { year: "numeric", month: "short", day: "numeric" };
-  //   const event = new Date();
-  //   // @ts-ignore
-  //   const unambiguousDate = event.toLocaleDateString(locale, options);
-  //   const date = unambiguousDate === "Invalid Date" ? today : unambiguousDate;
-  //   async function copyToClipboard() {
-  //     const shareString = `🌎 ${date} 🌍
-  // 🔥 ${currentStreak} | ${localeList[locale]["Stats7"]}: ${showAvgGuesses}
-  // ${lastWin === today ? emojiGuesses : "--"} = ${todaysGuesses}
+
   return (
-    <Modal trigger={props.setShowPrompt}>
-      <p class="text-gray-900 dark:text-gray-200">{msg()}</p>
-      <Show when={showBtns()}>
+    <Modal setTrigger={props.setShowPrompt} trigger={props.showPrompt}>
+      <p class="text-gray-900 dark:text-gray-200 max-w-xs">{props.text}</p>
+      <Show when={props.promptType === "Choice"}>
         <div class="py-4 flex justify-center sm:space-x-8">
           <button
             class="bg-red-700 text-white rounded-md px-6 py-2 block 
             text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
-            onClick={resetStats}
+            onClick={runYes}
             disabled={resetComplete()}
           >
             Yes

@@ -1,3 +1,4 @@
+import { useNavigate } from "@solidjs/router";
 import dayjs, { locale } from "dayjs";
 import jwtDecode from "jwt-decode";
 import {
@@ -9,14 +10,16 @@ import {
   Show,
   Signal,
 } from "solid-js";
+import { setShowStats } from "../App";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { resetAll } from "../util/reset";
 import XIcon from "./icons/XIcon";
 import Modal from "./Modal";
 import Prompt from "./Prompt";
 
 type Props = {
-  showStats: Accessor<Boolean>;
-  setShowStats: Setter<Boolean>;
+  showStats: Accessor<boolean>;
+  setShowStats: Setter<boolean>;
 };
 
 export const firstStats = {
@@ -29,6 +32,7 @@ export const firstStats = {
 };
 
 export default function (props: Props) {
+  const navigate = useNavigate();
   const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
   const {
     gamesWon,
@@ -60,54 +64,28 @@ export default function (props: Props) {
 
   // Prompt
   const [showPrompt, setShowPrompt] = createSignal(false);
-  const [promptType, setPromptType] = createSignal<Prompt>("Reset");
+  const [promptType, setPromptType] = createSignal<Prompt>("Choice");
+  const [promptText, setPromptText] = createSignal("");
 
-  // Saving score
-  async function handleCredentialResponse(
-    googleResponse?: google.accounts.id.CredentialResponse
-  ) {
-    try {
-      const body = JSON.stringify({
-        token: googleResponse?.credential,
-      });
-      const netlifyResponse = await fetch("/.netlify/functions/save_to_db", {
-        method: "POST",
-        body,
-      });
-      const message = await netlifyResponse.json();
-      console.log(message);
-    } catch (e) {
-      console.log("Failed to save score.");
-      console.error(e);
-    }
-
-    // const {id, email, name, photoUrl} = decodedToken
-    // const id = 151;
-    // const getPokemon = `https://pokeapi.co/api/v2/ability/${id}/`;
-    // const result = await fetch(getPokemon);
-    // const data = await result.json();
-    // console.log(data);
+  function promptResetStats() {
+    setPromptText("Are you sure you want to reset your score?");
+    setPromptType("Choice");
+    setShowPrompt(true);
   }
-  onMount(() => {
-    // TODO use store credential to send token to serverless function even when
-    // prompt doesn't work (not sure this will work but worth a shot.)
-    // google.accounts.id.storeCredential
-    google.accounts.id.initialize({
-      client_id:
-        "197638666704-ta3tn996fsubrmog0nmkrekp0u7nslq7.apps.googleusercontent.com",
-      callback: handleCredentialResponse,
-    });
-    google.accounts.id.prompt((notification) => {
-      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        console.log("Google log-in prompt not displayed.");
-        // handleCredentialResponse();
-        console.log(notification.getSkippedReason());
-      }
-    });
-  });
+
+  function resetStats() {
+    resetAll();
+    setPromptType("Message");
+    setPromptText("Stats reset.");
+    setTimeout(() => {
+      setShowPrompt(false);
+      setShowStats(false);
+      navigate("/");
+    }, 1500);
+  }
 
   return (
-    <Modal trigger={props.setShowStats}>
+    <Modal trigger={props.showStats} setTrigger={props.setShowStats}>
       <button
         class="absolute top-3 right-4"
         onClick={() => props.setShowStats(false)}
@@ -117,7 +95,10 @@ export default function (props: Props) {
       <h2 class="text-3xl text-center font-extrabold dark:text-gray-200">
         Statistics
       </h2>
-      <table cell-padding="4rem" class="mx-auto dark:text-gray-200 w-full">
+      <table
+        cell-padding="4rem"
+        class="mx-auto dark:text-gray-200 w-full max-w-sm"
+      >
         <tbody>
           {statsTable.map((row, idx) => {
             return (
@@ -144,7 +125,7 @@ export default function (props: Props) {
           class=" text-red-700 border-red-700 border rounded-md px-6 py-2 block
           text-base font-medium hover:bg-red-700 hover:text-gray-300
           focus:outline-none focus:ring-2 focus:ring-red-300 sm:mx-4"
-          onClick={() => setShowPrompt(true)}
+          onClick={promptResetStats}
         >
           Reset
         </button>
@@ -158,9 +139,14 @@ export default function (props: Props) {
           Share
         </button>
       </div>
-      <Show when={showPrompt()}>
-        <Prompt setShowPrompt={setShowPrompt} promptType={promptType} />
-      </Show>
+
+      <Prompt
+        showPrompt={showPrompt}
+        setShowPrompt={setShowPrompt}
+        promptType={promptType()}
+        text={promptText()}
+        yes={resetStats}
+      />
     </Modal>
   );
 }

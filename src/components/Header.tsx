@@ -44,7 +44,9 @@ export default function Header({ showStats, setShowStats }: Props) {
             </button>
           </Show>
           <button aria-label="Settings">
-            <SettingsIcon />
+            <A href="/settings">
+              <SettingsIcon />
+            </A>
           </button>
         </div>
       </div>

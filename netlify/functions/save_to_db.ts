@@ -1,15 +1,10 @@
 import { Handler } from "@netlify/functions";
-import jwtDecode from "jwt-decode";
 
 const handler: Handler = async (event, context) => {
   try {
-    console.log("Identity:", context.identity);
-    console.log("Client context:", context.clientContext);
-    console.log("All context", context);
-    console.log("Headers", event.headers);
-    const googleToken = event.body as string;
-    const decodedToken = jwtDecode(googleToken);
-    console.log(decodedToken);
+    const tokenString = event.body as string;
+    const token = JSON.parse(tokenString) as Token;
+    // const decodedToken = jwtDecode(googleToken);
 
     return {
       statusCode: 200,
@@ -27,3 +22,7 @@ const handler: Handler = async (event, context) => {
 };
 
 export { handler };
+
+// TODO other functions
+// Get score
+// Delete backup

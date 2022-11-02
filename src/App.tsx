@@ -1,10 +1,11 @@
 import { Route, Routes } from "@solidjs/router";
-import { Component, createSignal, Show } from "solid-js";
+import { Component, createSignal } from "solid-js";
 
 import Header from "./components/Header";
 import Statistics from "./components/Statistics";
 import Game from "./routes/Game";
 import Home from "./routes/Home";
+import Settings from "./routes/Settings";
 
 const daySky = {
   background: `radial-gradient(ellipse at top, rgba(63, 201, 255, 0.7), transparent),
@@ -37,14 +38,15 @@ const App: Component = () => {
   // const [showStats, setShowStats] = useContext(StatsContext);
   return (
     <div class="relative top-0 bottom-0 left-0 right-0 min-h-screen">
-      <Show when={showStats()}>
-        <Statistics showStats={showStats} setShowStats={setShowStats} />
-      </Show>
+      {/* <Show when={showStats()}> */}
+      <Statistics showStats={showStats} setShowStats={setShowStats} />
+      {/* </Show> */}
       <main class="max-w-2xl mx-auto px-4 py-8 z-20 relative">
         <Header showStats={showStats} setShowStats={setShowStats} />
         <Routes>
           <Route path="/" component={Home} />
           <Route path="/game" component={Game} />
+          <Route path="/settings" component={Settings} />
         </Routes>
       </main>
       <div

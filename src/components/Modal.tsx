@@ -1,45 +1,81 @@
-import { onMount, onCleanup, children, ParentProps, Setter } from "solid-js";
+import {
+  Accessor,
+  children,
+  createEffect,
+  createSignal,
+  on,
+  onCleanup,
+  onMount,
+  ParentProps,
+  Setter,
+  Show,
+} from "solid-js";
 
 type Props = {
-  trigger: Setter<boolean>;
+  trigger: Accessor<boolean>;
+  setTrigger: Setter<boolean>;
 };
 
-export default function (props: ParentProps<Props>) {
-  const c = children(() => props.children);
-  // Modal
-  let modalRef: HTMLDivElement;
-  function closeModal() {
-    setTimeout(() => {
-      props.trigger(false);
-    }, 200);
-    modalRef.classList.remove("opacity-100");
-    modalRef.classList.add("opacity-0");
-  }
-  function triggerCloseModal(e: Event) {
-    if (modalRef && !modalRef.contains(e.target as Node)) {
-      closeModal();
+export default function Outer(props: ParentProps<Props>) {
+  const [innerTrigger, setInnerTrigger] = createSignal(false);
+  createEffect(
+    on(props.trigger, () => {
+      if (props.trigger()) {
+        setInnerTrigger(true);
+      } else {
+        setTimeout(() => {
+          setInnerTrigger(false);
+        }, 500);
+      }
+    })
+  );
+
+  return (
+    <div>
+      <Show when={innerTrigger()}>
+        <Inner trigger={props.trigger} setTrigger={props.setTrigger}>
+          {props.children}
+        </Inner>
+      </Show>
+    </div>
+  );
+}
+
+function Inner(props: ParentProps<Props>) {
+  let innerRef: HTMLDivElement;
+  function triggerClose(e: Event) {
+    if (innerRef && !innerRef.contains(e.target as Node)) {
+      props.setTrigger(false);
     }
   }
   onMount(() => {
-    document.body.addEventListener("click", triggerCloseModal);
+    document.body.addEventListener("click", triggerClose);
+    // Has to run immediately after mount.
     setTimeout(() => {
-      modalRef.classList.remove("opacity-0");
-      modalRef.classList.add("opacity-100");
-    }, 200);
+      innerRef.classList.remove("opacity-0");
+      innerRef.classList.add("opacity-100");
+    }, 0);
+  });
+  createEffect(() => {
+    if (!props.trigger()) {
+      innerRef.classList.remove("opacity-100");
+      innerRef.classList.add("opacity-0");
+    }
   });
   onCleanup(() => {
-    document.body.removeEventListener("click", triggerCloseModal);
-    props.trigger(false);
+    document.body.removeEventListener("click", triggerClose);
+    props.setTrigger(false);
   });
+  const c = children(() => props.children);
   return (
     <div
       class="border-4 border-sky-300 dark:border-slate-700 bg-sky-100 
-      dark:bg-slate-900 drop-shadow-xl 
-    z-40 w-full sm:w-fit inset-x-0 mx-auto py-6 px-6 rounded-md space-y-2 
-    absolute top-20
-    transition-opacity ease-in-out duration-200 opacity-0 
+    dark:bg-slate-900 drop-shadow-xl 
+    z-40 w-fit inset-x-0 mx-auto m py-6 px-6 rounded-md space-y-2 
+    absolute top-20 
+    transition-opacity ease-in-out duration-500 opacity-0 
     "
-      ref={modalRef!}
+      ref={innerRef!}
     >
       {c()}
     </div>
