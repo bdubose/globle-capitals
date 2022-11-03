@@ -1,18 +1,9 @@
 import { useNavigate } from "@solidjs/router";
 import dayjs from "dayjs";
-import {
-  Accessor,
-  createEffect,
-  createMemo,
-  createSignal,
-  on,
-  onMount,
-  Setter,
-} from "solid-js";
+import { Accessor, createMemo, createSignal, onMount, Setter } from "solid-js";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { resetAll } from "../util/reset";
 import XIcon from "./icons/XIcon";
-import Modal from "./Modal";
 import Prompt from "./Prompt";
 
 type Props = {

@@ -27,7 +27,8 @@ export default function () {
   const cities = data["data"] as City[];
 
   // Local storage
-  const noCities = { cities: [] as string[] };
+  const expiration = dayjs().endOf("day").toDate();
+  const noCities = { cities: [] as string[], expiration };
   const [storedGuesses, storeGuesses] = useLocalStorage<typeof noCities>(
     "guesses",
     { ...noCities }
@@ -37,13 +38,15 @@ export default function () {
     firstStats
   );
 
-  const restoredGuesses = () =>
-    storedGuesses()
+  const restoredGuesses = () => {
+    console.log("Restoring guesses.");
+    return storedGuesses()
       .cities.map((cityName, idx) => {
         const city = cities.find((c) => c.city_ascii === cityName);
         return { city, order: idx };
       })
       .filter((guess) => Boolean(guess.city)) as Guess[];
+  };
 
   // Stores
   const [guesses, setGuesses] = createStore({
@@ -71,6 +74,10 @@ export default function () {
     if (winningGuess) setWin(true);
   });
 
+  onMount(() => {
+    console.log("Mounting game");
+  });
+
   // Stores guesses when new guess added
   // TODO guesses not resetting on globle??
   onMount(() => {
@@ -84,7 +91,10 @@ export default function () {
   // Resets guesses when stored guesses expired
   createEffect(() => {
     const storable = guesses.cities.map((guess) => guess.city.city_ascii);
-    storeGuesses({ cities: storable });
+    storeGuesses({
+      cities: storable,
+      expiration,
+    });
   });
 
   // When the player wins!

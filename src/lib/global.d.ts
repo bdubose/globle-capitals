@@ -79,7 +79,7 @@ declare global {
     jti: string;
   };
 
-  type LocalStore<T> = { day: string } & T;
+  // type LocalStore<T extends object> = { expiration?: string } & T;
 }
 
 export {};

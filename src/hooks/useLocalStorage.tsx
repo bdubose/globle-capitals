@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
 import { Accessor, createEffect, createSignal, Setter } from "solid-js";
 
-function getStorageValue<T>(key: string, defaultValue?: LocalStore<T>) {
+function getStorageValue<T extends object>(key: string, defaultValue?: T) {
   const saved = localStorage.getItem(key);
   if (saved) {
-    return JSON.parse(saved) as LocalStore<T>;
+    return JSON.parse(saved) as T;
   } else if (defaultValue) {
     return defaultValue;
   } else {
@@ -12,32 +12,40 @@ function getStorageValue<T>(key: string, defaultValue?: LocalStore<T>) {
   }
 }
 
-export function useLocalStorage<T>(
+export function useLocalStorage<T extends Record<string, any>>(
   key: string,
   defaultValue: T
 ): [Accessor<T>, Setter<T>] {
-  const defaultWithDay = { ...defaultValue, day: dayjs().toString() };
-  const storedValue = getStorageValue<T>(key, defaultWithDay);
+  // const defaultWithDay = { ...defaultValue, expiration: dayjs().toString() };
+  // const storedValue = getStorageValue<T>(key, defaultWithDay);
+  // defaultValue['expiration']
+  // const y = "expiration" in defaultValue ? {...defaultValue} : {...defaultValue, expiration: null}
+
+  // const x = {...defaultValue, expiration: defaultValue?.expiration}
+
+  const expiringDefault = Object.keys(defaultValue).includes("expiration")
+    ? { ...defaultValue }
+    : { ...defaultValue, expiration: null };
+
+  const storedValue = getStorageValue<T>(key, expiringDefault);
 
   // Get expiration from local storage
   // If expiration is later than now, don't edit expiration and change value
   // If expiration is earlier than now, reset expiration and reset value
+  const expiration = dayjs(storedValue.expiration || "9999-12-31").endOf("day");
+  const isNotExpired = expiration.isAfter(dayjs());
+  const startingValue = isNotExpired ? storedValue : defaultValue;
 
-  const [newValue, setNewValue] = createSignal(storedValue as T);
+  const [newValue, setNewValue] = createSignal(startingValue);
 
   createEffect(() => {
-    const oldExpiration = dayjs(storedValue.day || "9999-12-31").endOf("day");
-    const newExpiration = dayjs().endOf("day");
-
-    if (oldExpiration.isAfter(dayjs())) {
+    if (isNotExpired) {
       console.log(`Saving to local storage "${key}".`);
-      const newData = { ...newValue(), day: newExpiration };
-      localStorage.setItem(key, JSON.stringify(newData));
+      localStorage.setItem(key, JSON.stringify(newValue()));
     } else {
       console.log(`Local storage "${key}" expired.`);
       localStorage.setItem(key, JSON.stringify(defaultValue));
     }
   });
-
   return [newValue, setNewValue];
 }

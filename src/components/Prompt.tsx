@@ -1,10 +1,5 @@
-import { useNavigate } from "@solidjs/router";
 import { Accessor, createSignal, onMount, Setter, Show } from "solid-js";
-import { setShowStats } from "../App";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { resetAll } from "../util/reset";
 import Modal from "./Modal";
-import { firstStats } from "./Statistics";
 
 type Choice = {
   promptType: "Choice";
