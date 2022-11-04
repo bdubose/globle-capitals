@@ -1,4 +1,5 @@
 import { UAParser } from "ua-parser-js";
+import { isDark } from "../App";
 
 import earthDay from "../images/earth-day.webp";
 import earthNight from "../images/earth-night.webp";
@@ -14,13 +15,13 @@ export const globeImg = (nightMode: boolean) => {
 
   // const time = nightMode ? "night" : "day";
   if (isSafari && version < 14) {
-    if (nightMode) {
+    if (isDark()) {
       return earthNightSafari;
     } else {
       return earthDaySafari;
     }
   } else {
-    if (nightMode) {
+    if (isDark()) {
       return earthNight;
     } else {
       return earthDay;

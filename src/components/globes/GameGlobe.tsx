@@ -3,7 +3,7 @@ import { Accessor, createEffect, createSignal, onMount, Show } from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
 import { ans } from "../../util/answer";
-import { arcGradient } from "../../util/geometry";
+import { arcGradient, getCitySize } from "../../util/geometry";
 
 type Props = {
   guesses: GuessStore;
@@ -30,6 +30,17 @@ export default function ({ guesses, pov }: Props) {
   const [isLoaded, setIsLoaded] = createSignal(false);
 
   // Derived signals
+  // const cityPoints = () =>
+  //   guesses.cities.map(({ city }) => {
+  //     const continent = (city.continent || "None") as Continent;
+  //     return {
+  //       lat: city.lat,
+  //       lng: city.lng,
+  //       label: `<b class="text-black bg-pink-100 p-1">${city.city}</b>`,
+  //       color: colourMap[continent],
+  //       radius: getCitySize(city.population),
+  //     };
+  //   });
   const cityPoints = () =>
     guesses.cities.map(({ city }) => {
       const continent = (city.continent || "None") as Continent;
@@ -38,7 +49,10 @@ export default function ({ guesses, pov }: Props) {
         lng: city.lng,
         label: `<b class="text-black bg-pink-100 p-1">${city.city}</b>`,
         color: colourMap[continent],
-        // radius:
+        radius: getCitySize(city.population),
+        element: `<svg>
+            <circle cx="1" cy="1" r="${getCitySize(city.population)}" />
+          </svg>`,
       };
     });
 
@@ -56,20 +70,6 @@ export default function ({ guesses, pov }: Props) {
     };
   }
 
-  // Option 1: Arcs between all guesses
-  // const arcs = () => {
-  //   const { cities } = guesses;
-  //   if (cities.length <= 1) return [];
-  //   else if (cities.length === 2)
-  //     return [createArc(cities[0].city, cities[1].city)];
-  //   // All possible combinations
-  //   return cities.flatMap(({ city: city1 }, i) => {
-  //     return cities.slice(i + 1).map(({ city: city2 }) => {
-  //       return createArc(city1, city2);
-  //     });
-  //   });
-  // };
-
   // Option 2: Arcs between consecutive guesses
   const arcs = () => {
     const { cities } = guesses;
@@ -77,13 +77,13 @@ export default function ({ guesses, pov }: Props) {
     else if (cities.length === 2)
       return [createArc(cities[0].city, cities[1].city, true)];
     // All possible combinations
-    const a = [];
+    const arcs = [];
     for (let i = 0; i < cities.length - 1; i++) {
       const isLast = i === cities.length - 2;
       const arc = createArc(cities[i].city, cities[i + 1].city, isLast);
-      a.push(arc);
+      arcs.push(arc);
     }
-    return a;
+    return arcs;
   };
 
   // Context params
@@ -103,23 +103,22 @@ export default function ({ guesses, pov }: Props) {
     globe.pointOfView(coords, 250);
   }
 
-  // TODO arcs to animate from start to end
-
   // Effects
   onMount(() => {
     if (globeRef) {
       globe
         .globeImageUrl(globeImg(nightMode))
         .onGlobeReady(() => setIsLoaded(true))
-        // .onGlobeClick(() => (controls.autoRotate = false))
         .onGlobeClick(turnGlobe)
+
         .pointsData(cityPoints())
         .pointAltitude(0.02)
         .pointColor("color")
         .pointLabel("label")
-        .pointRadius(0.5)
+        .pointRadius("radius")
         .pointsTransitionDuration(0)
         .onPointClick(turnGlobe)
+
         .labelColor("red")
         .arcColor("color")
         .arcStroke(1.25)

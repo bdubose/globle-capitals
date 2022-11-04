@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { Accessor, createMemo, createSignal, onMount, Setter } from "solid-js";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { resetAll } from "../util/reset";
+import Icon from "./Icon";
 import XIcon from "./icons/XIcon";
 import Prompt from "./Prompt";
 
@@ -89,7 +90,7 @@ export default function (props: Props) {
         class="absolute top-3 right-4"
         onClick={() => props.setShowStats(false)}
       >
-        <XIcon />
+        <Icon shape="x" />
       </button>
       <h2 class="text-3xl text-center font-extrabold dark:text-gray-200">
         Statistics

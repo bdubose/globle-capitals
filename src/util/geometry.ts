@@ -1,4 +1,4 @@
-import { scaleSequential } from "d3-scale";
+import { scaleLinear, scaleSequential } from "d3-scale";
 import { interpolateTurbo } from "d3-scale-chromatic";
 import {
   computeDistanceBetween,
@@ -6,6 +6,7 @@ import {
   computeOffset,
 } from "spherical-geometry-js";
 import { MAX_DISTANCE } from "./constants";
+import data from "../data/filter_cities.json";
 
 export function arcGradient(a1: Coords, a2: Coords, ans: Coords) {
   // Colours
@@ -24,4 +25,18 @@ export function arcGradient(a1: Coords, a2: Coords, ans: Coords) {
     return color;
   };
   return getOffsetCoords;
+}
+
+export function getCitySize(pop: number) {
+  const cities = data["data"] as City[];
+  const populations = cities
+    .map((city) => city.population)
+    .sort((a, z) => a - z);
+  const minPop = populations[0];
+  const maxPop = populations[populations.length - 1];
+  // Given a value from the domain, returns a number from the range
+  const domain = [minPop, maxPop];
+  const range = [0.5, 1.5];
+  const scale = scaleLinear(domain, range);
+  return scale(pop);
 }

@@ -1,8 +1,6 @@
 import { A } from "@solidjs/router";
-import { Accessor, createEffect, Setter, Show } from "solid-js";
-import HelpIcon from "./icons/HelpIcon";
-import SettingsIcon from "./icons/SettingsIcon";
-import StatsIcon from "./icons/StatsIcon";
+import { Accessor, Setter, Show } from "solid-js";
+import Icon from "./Icon";
 
 type Props = {
   showStats: Accessor<boolean>;
@@ -31,26 +29,29 @@ export default function Header({ showStats, setShowStats }: Props) {
       <div class="relative h-full">
         <div class="space-x-1 flex absolute left-0 bottom-1">
           <A href="/">
-            <HelpIcon />
+            <Icon shape="help" />
           </A>
         </div>
-        <button class="absolute bottom-0 left-1/2 transform -translate-x-1/2">
+        <A
+          class="absolute bottom-0 left-1/2 transform -translate-x-1/2"
+          href="/game"
+        >
           <h1 class="text-3xl font-extrabold">GLOBLE: CITIES</h1>
-        </button>
+        </A>
         <div class="space-x-1 flex absolute right-0 bottom-1">
-          <Show when={!showStats()} fallback={<StatsIcon />}>
+          <Show when={!showStats()} fallback={<Icon shape="stats" />}>
             <button aria-label="Statistics" onClick={toggleStats}>
-              <StatsIcon />
+              <Icon shape="stats" />
             </button>
           </Show>
           <button aria-label="Settings">
             <A href="/settings">
-              <SettingsIcon />
+              <Icon shape="settings" />
             </A>
           </button>
         </div>
       </div>
-      <hr class="bottom-0 border-black" />
+      <hr class="bottom-0 border-black dark:border-gray-200" />
     </header>
   );
 }

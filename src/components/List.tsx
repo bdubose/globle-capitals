@@ -69,9 +69,8 @@ export default function ({ guesses, setPov }: Props) {
           <div class="flex items-center space-x-1">
             <p>Closest border: {formatKm(guesses.closest, isShowingKm())}</p>
             <Toggle
-              name="unit-switch"
               setToggle={toggleShowingKm}
-              toggle={isShowingKm}
+              toggleProp={isShowingKm}
               on="km"
               off="miles"
             />

@@ -34,16 +34,20 @@ const clouds = {
   opacity: 0.2,
 };
 
+// Global state
 export const [showStats, setShowStats] = createSignal(false);
+export const [isDark, setIsDark] = createSignal(false);
 
 const App: Component = () => {
-  // const [showStats, setShowStats] = createSignal(false);
   return (
-    <div class="relative top-0 bottom-0 left-0 right-0 min-h-screen">
+    <div
+      class="relative top-0 bottom-0 left-0 right-0 min-h-screen "
+      classList={{ dark: isDark() }}
+    >
       <Modal trigger={showStats} setTrigger={setShowStats}>
         <Statistics showStats={showStats} setShowStats={setShowStats} />
       </Modal>
-      <main class="max-w-2xl mx-auto px-4 py-8 z-20 relative">
+      <main class="max-w-2xl mx-auto px-4 py-8 z-20 relative dark:text-gray-200">
         <Header showStats={showStats} setShowStats={setShowStats} />
         <Routes>
           <Route path="/" component={Home} />
@@ -52,13 +56,14 @@ const App: Component = () => {
         </Routes>
       </main>
       <div
-        // style={nightMode ? nightSky : daySky}
-        style={daySky}
+        style={isDark() ? nightSky : daySky}
+        // style={daySky}
+        // classList={theme() === "day" ? "day-sky" : "night-sky"}
         class="absolute top-0 bottom-0 left-0 right-0 block z-0 h-full pointer-events-none"
       ></div>
       <div
-        // style={nightMode ? stars : clouds}
-        style={clouds}
+        style={isDark() ? stars : clouds}
+        // style={clouds}
         class="absolute top-0 bottom-0 left-0 right-0 block z-10 pointer-events-none"
       ></div>
     </div>

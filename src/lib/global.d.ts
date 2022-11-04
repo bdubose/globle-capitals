@@ -79,6 +79,8 @@ declare global {
     jti: string;
   };
 
+  type Theme = "Day" | "Night";
+
   // type LocalStore<T extends object> = { expiration?: string } & T;
 }
 
