@@ -20,7 +20,7 @@ declare global {
     iso2: string;
     iso3: string;
     admin_name: string;
-    capital: string;
+    capital: "admin" | "primary" | "minor" | null;
     population: number;
     is_territory: boolean;
     continent: Continent;
@@ -78,10 +78,6 @@ declare global {
     exp: number;
     jti: string;
   };
-
-  type Theme = "Day" | "Night";
-
-  // type LocalStore<T extends object> = { expiration?: string } & T;
 }
 
 export {};

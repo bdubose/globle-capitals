@@ -4,7 +4,6 @@ import {
   createSignal,
   lazy,
   on,
-  onCleanup,
   onMount,
   Suspense,
 } from "solid-js";
@@ -72,10 +71,6 @@ export default function () {
   createEffect(() => {
     const winningGuess = guesses.cities.find(({ city }) => city.id === ans.id);
     if (winningGuess) setWin(true);
-  });
-
-  onMount(() => {
-    console.log("Mounting game");
   });
 
   // Stores guesses when new guess added

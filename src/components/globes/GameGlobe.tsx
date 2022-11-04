@@ -3,7 +3,12 @@ import { Accessor, createEffect, createSignal, onMount, Show } from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
 import { ans } from "../../util/answer";
-import { arcGradient, getCitySize } from "../../util/geometry";
+import {
+  arcGradient,
+  cityLabelColour,
+  findClosestColour,
+  getCitySize,
+} from "../../util/geometry";
 
 type Props = {
   guesses: GuessStore;
@@ -43,12 +48,24 @@ export default function ({ guesses, pov }: Props) {
   //   });
   const cityPoints = () =>
     guesses.cities.map(({ city }) => {
-      const continent = (city.continent || "None") as Continent;
+      // const continent = (city.continent || "None") as Continent;
+      const color = city.capital === "primary" ? "#8F5D00" : "#00587A";
+      // ? { admin: "#FFC457", primary: "#3FC9FF", minor: "#FFC457" }[
+      //     city.capital
+      //   ]
+      // : "#FFC457";
+      const labelColour = cityLabelColour(city, ans);
       return {
         lat: city.lat,
         lng: city.lng,
-        label: `<b class="text-black bg-pink-100 p-1">${city.city}</b>`,
-        color: colourMap[continent],
+        label: `<p 
+        class="text-black py-1 px-2 text-center font-bold"
+        style="background-color: ${labelColour.light};"
+        >${city.city},<br/>${city.country}</p>`,
+        // >${city.city} (${city.country})</b>`,
+        // color: colourMap[continent],
+        color: labelColour.dark,
+        // color,
         radius: getCitySize(city.population),
         element: `<svg>
             <circle cx="1" cy="1" r="${getCitySize(city.population)}" />
@@ -58,7 +75,15 @@ export default function ({ guesses, pov }: Props) {
 
   function createArc(city1: City, city2: City, isLast: boolean) {
     const gradient = arcGradient(city1, city2, ans);
-    const label = `<b class="text-black bg-pink-100 p-1">${city1.city_ascii} to ${city2.city_ascii}</b>`;
+    const labelColour = findClosestColour(city1, city2, ans);
+    // const style = { "background-color": labelColour };
+    // console.log("Style", city1.city_ascii, city2.city_ascii, style);
+    const label = `<p
+    class="text-black py-1 px-2 text-center font-bold"
+    style="background-color: ${labelColour};"
+    >${city1.city_ascii} to ${city2.city_ascii}</p>`;
+    // console.log(label);
+
     return {
       startLng: city1.lng,
       startLat: city1.lat,

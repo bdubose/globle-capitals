@@ -1,4 +1,4 @@
-import { Accessor, createEffect, Match, Setter, Switch } from "solid-js";
+import { Accessor, Setter } from "solid-js";
 
 type Props = {
   // toggleProp: boolean;
@@ -15,8 +15,6 @@ export default function Toggle(props: Props) {
       setToggle((prev) => !prev);
     }
   }
-
-  createEffect(() => console.log("Toggle prop:", props.toggleProp));
 
   const label = () => (props.toggleProp() ? props.on : props.off);
 
