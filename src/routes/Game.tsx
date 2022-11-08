@@ -1,10 +1,12 @@
 import dayjs from "dayjs";
 import {
   createEffect,
+  createResource,
   createSignal,
   lazy,
   on,
   onMount,
+  Show,
   Suspense,
 } from "solid-js";
 import { createStore } from "solid-js/store";
@@ -12,10 +14,10 @@ import { computeDistanceBetween } from "spherical-geometry-js";
 import Guesser from "../components/Guesser";
 import List from "../components/List";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { ans } from "../util/answer";
 import data from "../data/filter_cities.json";
 import { firstStats } from "../components/Statistics";
 import { setShowStats } from "../App";
+import { getAnswer } from "../util/encryption";
 
 const GameGlobe = lazy(() => import("../components/globes/GameGlobe"));
 
@@ -24,6 +26,8 @@ export default function () {
   const [pov, setPov] = createSignal<Coords | null>(null);
   const [win, setWin] = createSignal(false);
   const cities = data["data"] as City[];
+  const [ans] = createResource(getAnswer);
+  // const [ans, setAns] = createSignal()
 
   // Local storage
   const expiration = dayjs().endOf("day").toDate();
@@ -52,9 +56,10 @@ export default function () {
     cities: restoredGuesses() as Guess[],
     get sortedGuesses() {
       const copy = [...this.cities];
+      // if (!ans()) return []
       return copy.sort((a, z) => {
-        const proximityA = computeDistanceBetween(a.city, ans);
-        const proximityB = computeDistanceBetween(z.city, ans);
+        const proximityA = computeDistanceBetween(a.city, ans() || a.city);
+        const proximityB = computeDistanceBetween(z.city, ans() || z.city);
         return proximityA - proximityB;
       });
     },
@@ -63,13 +68,18 @@ export default function () {
     },
     get closest() {
       const closestCity = this.sortedGuesses[0];
-      return computeDistanceBetween(closestCity.city, ans);
+      return computeDistanceBetween(
+        closestCity.city,
+        ans() || closestCity.city
+      );
     },
   });
 
   // Effects
   createEffect(() => {
-    const winningGuess = guesses.cities.find(({ city }) => city.id === ans.id);
+    const winningGuess = guesses.cities.find(
+      ({ city }) => city.id === ans()?.id
+    );
     if (winningGuess) setWin(true);
   });
 
@@ -144,9 +154,15 @@ export default function () {
   return (
     <div>
       <Guesser setGuesses={setGuesses} guesses={guesses} win={win} />
-      <Suspense fallback={<p>Loading...</p>}>
-        <GameGlobe guesses={guesses} pov={pov} />
-      </Suspense>
+      <Show when={ans()} keyed>
+        {(ans) => {
+          return (
+            <Suspense fallback={<p>Loading...</p>}>
+              <GameGlobe guesses={guesses} pov={pov} ans={ans} />
+            </Suspense>
+          );
+        }}
+      </Show>
       <List guesses={guesses} setPov={setPov} />
     </div>
   );

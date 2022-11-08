@@ -38,7 +38,9 @@ export default function () {
         }
         setToken(googleToken);
         setIsConnected(true);
-      } catch (e) {}
+      } catch (e) {
+        console.error(e);
+      }
     } else {
       setMsg("Failed to connect to Google account.");
     }

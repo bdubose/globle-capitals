@@ -19,11 +19,10 @@ export async function verify(token: string) {
   return userId;
 }
 
-function convertStats(raw: LocalStore<Stats>) {
+function convertStats(raw: Stats) {
   return {
     ...raw,
     lastWin: dayjs(raw.lastWin).toDate(),
-    day: dayjs(raw.day).toDate(),
   };
 }
 
@@ -31,7 +30,7 @@ async function put(event: Event, db: Db) {
   // const body = JSON.parse(body || "{}");
   const body = JSON.parse(event.body || "{}");
   const tokenString = body.token as string;
-  const stats = body.stats as LocalStore<Stats>;
+  const stats = body.stats as Stats;
   const parsedStats = convertStats(stats);
   const userId = await verify(tokenString);
   const data = {
@@ -136,7 +135,3 @@ const handler: Handler = async (event, context) => {
 };
 
 export { handler };
-
-// TODO other functions
-// Get score
-// Delete backup

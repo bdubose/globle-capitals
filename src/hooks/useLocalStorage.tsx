@@ -16,13 +16,6 @@ export function useLocalStorage<T extends Record<string, any>>(
   key: string,
   defaultValue: T
 ): [Accessor<T>, Setter<T>] {
-  // const defaultWithDay = { ...defaultValue, expiration: dayjs().toString() };
-  // const storedValue = getStorageValue<T>(key, defaultWithDay);
-  // defaultValue['expiration']
-  // const y = "expiration" in defaultValue ? {...defaultValue} : {...defaultValue, expiration: null}
-
-  // const x = {...defaultValue, expiration: defaultValue?.expiration}
-
   const expiringDefault = Object.keys(defaultValue).includes("expiration")
     ? { ...defaultValue }
     : { ...defaultValue, expiration: null };

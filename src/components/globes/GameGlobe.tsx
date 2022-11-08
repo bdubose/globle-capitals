@@ -2,7 +2,6 @@ import Globe from "globe.gl";
 import { Accessor, createEffect, createSignal, onMount, Show } from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
-import { ans } from "../../util/answer";
 import {
   arcGradient,
   cityLabelColour,
@@ -13,9 +12,10 @@ import {
 type Props = {
   guesses: GuessStore;
   pov: Accessor<Coords | null>;
+  ans: City;
 };
 
-export default function ({ guesses, pov }: Props) {
+export default function ({ guesses, pov, ans }: Props) {
   // Maps
   const colourMap = {
     Asia: "yellow",
@@ -79,8 +79,7 @@ export default function ({ guesses, pov }: Props) {
     // const style = { "background-color": labelColour };
     // console.log("Style", city1.city_ascii, city2.city_ascii, style);
     const label = `<p
-    class="text-black py-1 px-2 text-center font-bold"
-    style="background-color: ${labelColour};"
+    class="text-black py-1 px-2 text-center font-bold bg-yellow-50"
     >${city1.city_ascii} to ${city2.city_ascii}</p>`;
     // console.log(label);
 

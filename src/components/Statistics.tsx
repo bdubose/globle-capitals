@@ -1,10 +1,9 @@
 import { useNavigate } from "@solidjs/router";
 import dayjs from "dayjs";
-import { Accessor, createMemo, createSignal, onMount, Setter } from "solid-js";
+import { Accessor, createMemo, createSignal, Setter } from "solid-js";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { resetAll } from "../util/reset";
 import Icon from "./Icon";
-import XIcon from "./icons/XIcon";
 import Prompt from "./Prompt";
 
 type Props = {
@@ -33,10 +32,6 @@ export default function (props: Props) {
     usedGuesses,
     emojiGuesses,
   } = storedStats();
-
-  onMount(() => {
-    console.log("Mounted stats");
-  });
 
   const statsTable = createMemo(() => {
     const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);

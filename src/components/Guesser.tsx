@@ -1,7 +1,14 @@
-import { Accessor, createSignal, onMount, Setter } from "solid-js";
+import {
+  Accessor,
+  createResource,
+  createSignal,
+  onMount,
+  Setter,
+} from "solid-js";
 import { SetStoreFunction } from "solid-js/store";
 import data from "../data/filter_cities.json";
-import { ans } from "../util/answer";
+import { decrypt, getAnswer } from "../util/encryption";
+// import { ans } from "../util/encryption";
 
 type Props = {
   setGuesses: SetStoreFunction<GuessStore>;
@@ -11,18 +18,20 @@ type Props = {
 };
 
 export default function ({ setGuesses, guesses, win }: Props) {
+  onMount(() => {
+    if (win()) setMsg(winMsg);
+  });
+
+  const [ans] = createResource(getAnswer);
+
   const cities = data["data"] as City[];
-  const winMsg = `The mystery city is ${ans.city_ascii}!`;
+  const winMsg = `The mystery city is ${ans()?.city_ascii}!`;
   const [msg, setMsg] = createSignal("");
   const msgColour = () => {
     return win() ? "green" : "rgb(185 28 28)";
   };
 
   let formRef: HTMLFormElement;
-
-  onMount(() => {
-    if (win()) setMsg(winMsg);
-  });
 
   function findCity(guess: string, list: City[]) {
     return list.find((city) => {
@@ -49,7 +58,7 @@ export default function ({ setGuesses, guesses, win }: Props) {
       ...prev,
       { city: newCity, order: prev.length },
     ]);
-    if (newCity.id === ans.id) return setMsg(winMsg);
+    if (newCity.id === ans()?.id) return setMsg(winMsg);
     return setMsg("");
   }
 

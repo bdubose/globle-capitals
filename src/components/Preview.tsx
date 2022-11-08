@@ -3,6 +3,11 @@ import * as d3 from "d3";
 import { interpolateTurbo, scaleSequential } from "d3";
 import earth from "../images/earth-day.webp";
 
+// TODO earth picture should maybe be smaller? If it's the exact same pic, next screen might load better
+// TODO night earth
+// TODO add circles to labels
+// TODO font and colour in label should be on theme (and just nicer to look at)
+
 type City = {
   name: string;
   x: number;
