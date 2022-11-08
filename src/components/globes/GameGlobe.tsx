@@ -59,8 +59,8 @@ export default function ({ guesses, pov }: Props) {
         lat: city.lat,
         lng: city.lng,
         label: `<p 
-        class="text-black py-1 px-2 text-center font-bold"
-        style="background-color: ${labelColour.light};"
+        class="text-black py-1 px-2 text-center font-bold bg-yellow-50"
+        
         >${city.city},<br/>${city.country}</p>`,
         // >${city.city} (${city.country})</b>`,
         // color: colourMap[continent],
