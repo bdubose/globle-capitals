@@ -4,6 +4,7 @@ import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
 import { arcGradient, cityLabelColour, getCitySize } from "../../util/geometry";
 import { theme } from "../../App";
+import rawCountryData from "../../data/country_data.json";
 
 type Props = {
   guesses: GuessStore;
@@ -12,16 +13,7 @@ type Props = {
 };
 
 export default function ({ guesses, pov, ans }: Props) {
-  // Maps
-  const colourMap = {
-    Asia: "yellow",
-    Europe: "purple",
-    Africa: "brown",
-    "North America": "red",
-    "South America": "green",
-    Oceania: "blue",
-    None: "white",
-  };
+  const countryData = rawCountryData["features"];
 
   // Refs
   let globeRef: HTMLDivElement | undefined;
@@ -50,13 +42,23 @@ export default function ({ guesses, pov, ans }: Props) {
       };
     });
 
+  const countries = () => {
+    return guesses.cities
+      .map(({ city }) => {
+        const country = countryData.find((country) => {
+          return country.properties.NAME === city.country;
+        });
+        return { geometry: country?.geometry, colour: "black" };
+      })
+      .filter((c) => Boolean(c));
+  };
+
   function createArc(city1: City, city2: City, isLast: boolean) {
     const gradient = arcGradient(city1, city2, ans);
     const label = `<p
     class="text-black py-1 px-2 text-center font-bold bg-yellow-50"
     style="background-color: ${labelBg};"
     >${city1.city_ascii} to ${city2.city_ascii}</p>`;
-
     return {
       startLng: city1.lng,
       startLat: city1.lat,
@@ -120,22 +122,21 @@ export default function ({ guesses, pov, ans }: Props) {
         .pointsTransitionDuration(0)
         .onPointClick(turnGlobe)
 
-        .labelColor("red")
         .arcColor("color")
         .arcStroke(1.25)
         .arcAltitude(0)
-
         .arcDashLength(1)
         .arcDashGap(0)
         .arcDashInitialGap("transition")
         .arcDashAnimateTime(300)
         .arcsTransitionDuration(0)
+        .arcLabel("label")
 
-        // .arcDashLength(0.5)
-        // .arcDashGap(0)
-        // .arcDashAnimateTime(5000)
-
-        .arcLabel("label")(globeRef);
+        .polygonsData(countries())
+        .polygonCapColor(() => "transparent")
+        .polygonAltitude(0)
+        .polygonSideColor("colour")
+        .polygonStrokeColor("colour")(globeRef);
 
       // Initial settings
       const controls = globe.controls() as any;
@@ -151,7 +152,7 @@ export default function ({ guesses, pov, ans }: Props) {
       const newestPoint = cityPoints()[cityPoints().length - 1];
       const { lat, lng } = newestPoint;
       turnGlobe({ lat, lng });
-      globe.pointsData(cityPoints()).arcsData(arcs());
+      globe.pointsData(cityPoints()).arcsData(arcs()).polygonsData(countries());
     }
   });
 
