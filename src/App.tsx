@@ -4,6 +4,7 @@ import { Component, createSignal, Show } from "solid-js";
 import Header from "./components/Header";
 import Modal from "./components/Modal";
 import Statistics from "./components/Statistics";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 import Game from "./routes/Game";
 import Home from "./routes/Home";
 import Settings from "./routes/Settings";
@@ -36,13 +37,16 @@ const clouds = {
 
 // Global state
 export const [showStats, setShowStats] = createSignal(false);
-export const [isDark, setIsDark] = createSignal(false);
+// export const [isDark, setIsDark] = createSignal(false);
+export const [theme, setTheme] = useLocalStorage<{ isDark: boolean }>("theme", {
+  isDark: false,
+});
 
 const App: Component = () => {
   return (
     <div
       class="relative top-0 bottom-0 left-0 right-0 min-h-screen "
-      classList={{ dark: isDark() }}
+      classList={{ dark: theme().isDark }}
     >
       <Modal trigger={showStats} setTrigger={setShowStats}>
         <Statistics showStats={showStats} setShowStats={setShowStats} />
@@ -56,13 +60,13 @@ const App: Component = () => {
         </Routes>
       </main>
       <div
-        style={isDark() ? nightSky : daySky}
+        style={theme().isDark ? nightSky : daySky}
         // style={daySky}
         // classList={theme() === "day" ? "day-sky" : "night-sky"}
         class="absolute top-0 bottom-0 left-0 right-0 block z-0 h-full pointer-events-none"
       ></div>
       <div
-        style={isDark() ? stars : clouds}
+        style={theme().isDark ? stars : clouds}
         // style={clouds}
         class="absolute top-0 bottom-0 left-0 right-0 block z-10 pointer-events-none"
       ></div>

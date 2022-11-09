@@ -2,12 +2,8 @@ import Globe from "globe.gl";
 import { Accessor, createEffect, createSignal, onMount, Show } from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
-import {
-  arcGradient,
-  cityLabelColour,
-  findClosestColour,
-  getCitySize,
-} from "../../util/geometry";
+import { arcGradient, cityLabelColour, getCitySize } from "../../util/geometry";
+import { theme } from "../../App";
 
 type Props = {
   guesses: GuessStore;
@@ -33,39 +29,20 @@ export default function ({ guesses, pov, ans }: Props) {
 
   // Signals
   const [isLoaded, setIsLoaded] = createSignal(false);
+  const labelBg = theme().isDark ? "#F3E2F1" : "#FEFCE8";
 
   // Derived signals
-  // const cityPoints = () =>
-  //   guesses.cities.map(({ city }) => {
-  //     const continent = (city.continent || "None") as Continent;
-  //     return {
-  //       lat: city.lat,
-  //       lng: city.lng,
-  //       label: `<b class="text-black bg-pink-100 p-1">${city.city}</b>`,
-  //       color: colourMap[continent],
-  //       radius: getCitySize(city.population),
-  //     };
-  //   });
   const cityPoints = () =>
     guesses.cities.map(({ city }) => {
-      // const continent = (city.continent || "None") as Continent;
-      const color = city.capital === "primary" ? "#8F5D00" : "#00587A";
-      // ? { admin: "#FFC457", primary: "#3FC9FF", minor: "#FFC457" }[
-      //     city.capital
-      //   ]
-      // : "#FFC457";
       const labelColour = cityLabelColour(city, ans);
       return {
         lat: city.lat,
         lng: city.lng,
         label: `<p 
         class="text-black py-1 px-2 text-center font-bold bg-yellow-50"
-        
+        style="background-color: ${labelBg};"
         >${city.city},<br/>${city.country}</p>`,
-        // >${city.city} (${city.country})</b>`,
-        // color: colourMap[continent],
         color: labelColour.dark,
-        // color,
         radius: getCitySize(city.population),
         element: `<svg>
             <circle cx="1" cy="1" r="${getCitySize(city.population)}" />
@@ -75,13 +52,10 @@ export default function ({ guesses, pov, ans }: Props) {
 
   function createArc(city1: City, city2: City, isLast: boolean) {
     const gradient = arcGradient(city1, city2, ans);
-    const labelColour = findClosestColour(city1, city2, ans);
-    // const style = { "background-color": labelColour };
-    // console.log("Style", city1.city_ascii, city2.city_ascii, style);
     const label = `<p
     class="text-black py-1 px-2 text-center font-bold bg-yellow-50"
+    style="background-color: ${labelBg};"
     >${city1.city_ascii} to ${city2.city_ascii}</p>`;
-    // console.log(label);
 
     return {
       startLng: city1.lng,
@@ -113,7 +87,6 @@ export default function ({ guesses, pov, ans }: Props) {
   // Context params
   const parser = new UAParser();
   const device = parser.getDevice();
-  const nightMode = false;
   const size = device.type === "mobile" ? 320 : 600; // px on one side
 
   // Turn globe on click
@@ -131,7 +104,11 @@ export default function ({ guesses, pov, ans }: Props) {
   onMount(() => {
     if (globeRef) {
       globe
-        .globeImageUrl(globeImg(nightMode))
+        .globeImageUrl(globeImg())
+        .width(size)
+        .height(size)
+        .backgroundColor("#00000000")
+        .atmosphereColor(theme().isDark ? "rgba(63, 201, 255)" : "lightskyblue")
         .onGlobeReady(() => setIsLoaded(true))
         .onGlobeClick(turnGlobe)
 
@@ -158,14 +135,7 @@ export default function ({ guesses, pov, ans }: Props) {
         // .arcDashGap(0)
         // .arcDashAnimateTime(5000)
 
-        .arcLabel("label")
-
-        .width(size)
-        .height(size)
-        .backgroundColor("#00000000")
-        .atmosphereColor(nightMode ? "rgba(63, 201, 255)" : "lightskyblue")(
-        globeRef
-      );
+        .arcLabel("label")(globeRef);
 
       // Initial settings
       const controls = globe.controls() as any;

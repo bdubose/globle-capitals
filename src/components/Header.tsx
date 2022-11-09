@@ -36,7 +36,7 @@ export default function Header({ showStats, setShowStats }: Props) {
           class="absolute bottom-0 left-1/2 transform -translate-x-1/2"
           href="/game"
         >
-          <h1 class="text-3xl font-extrabold">GLOBLE: CITIES</h1>
+          <h1 class="text-3xl font-extrabold font-header">GLOBLE: CITIES</h1>
         </A>
         <div class="space-x-1 flex absolute right-0 bottom-1">
           <Show when={!showStats()} fallback={<Icon shape="stats" />}>

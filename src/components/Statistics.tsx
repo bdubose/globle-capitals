@@ -87,7 +87,7 @@ export default function (props: Props) {
       >
         <Icon shape="x" />
       </button>
-      <h2 class="text-3xl text-center font-extrabold dark:text-gray-200">
+      <h2 class="text-3xl text-center font-extrabold font-header dark:text-gray-200">
         Statistics
       </h2>
       <table

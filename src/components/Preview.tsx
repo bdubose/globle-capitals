@@ -1,18 +1,13 @@
 import { onMount } from "solid-js";
 import * as d3 from "d3";
 import { interpolateTurbo, scaleSequential } from "d3";
-import earth from "../images/earth-day.webp";
-
-// TODO earth picture should maybe be smaller? If it's the exact same pic, next screen might load better
-// TODO night earth
-// TODO add circles to labels
-// TODO font and colour in label should be on theme (and just nicer to look at)
+import { globePreviewImg } from "../util/globe";
+import { theme } from "../App";
 
 type City = {
   name: string;
   x: number;
   y: number;
-  width: number;
 };
 
 export default function () {
@@ -21,11 +16,11 @@ export default function () {
   const height = width / 2;
 
   const points = [
-    { name: "Ottawa", x: 150, y: 90, width: 60 },
-    { name: "Tokyo", x: 520, y: 100, width: 52 },
-    { name: "Pretoria", x: 310, y: 200, width: 65 },
-    { name: "Lima", x: 160, y: 160, width: 47 },
-    { name: "Cairo", x: 325, y: 110, width: 47 },
+    { name: "Ottawa", x: 170, y: 55 },
+    { name: "Tokyo", x: 520, y: 90 },
+    { name: "Pretoria", x: 340, y: 190 },
+    { name: "Brasilia", x: 225, y: 168 },
+    { name: "Cairo", x: 343, y: 90 },
   ] as City[];
 
   const endPoint = points[points.length - 1];
@@ -33,7 +28,7 @@ export default function () {
   const distance = (p1: City, p2: City) =>
     Math.sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2);
 
-  const control = (p: City) => distance(p, endPoint) / 2.5;
+  const control = (p: City) => distance(p, endPoint) / 3;
 
   // const control = 80;
   const up = (p: City) => ({ x: p.x, y: p.y - control(p) });
@@ -59,7 +54,7 @@ export default function () {
 
   const range = 50;
   const colours = [...Array(range)].map((_, i) => {
-    const colourScale = scaleSequential(interpolateTurbo).domain([0.7, 0]);
+    const colourScale = scaleSequential(interpolateTurbo).domain([0.8, 0]);
     return colourScale(i / range);
   });
 
@@ -85,19 +80,9 @@ export default function () {
         return d;
       });
 
-    const rects = d3
-      .select(svg)
-      .selectAll("rect")
-      .data(points)
-      .enter()
-      .append("rect")
-      .attr("x", (d, i) => d.x - 5)
-      .attr("y", (d, i) => d.y - 20)
-      .attr("width", (d) => d.width)
-      .attr("height", 30)
-      .attr("opacity", 0)
-      .attr("fill", "rgb(254 252 232)")
-      .text((d) => d.name);
+    // d3.text()
+
+    const textWidths = [] as number[];
 
     const texts = d3
       .select(svg)
@@ -106,17 +91,49 @@ export default function () {
       .enter()
       .append("text")
       .attr("opacity", 0)
-      .attr("x", (d, i) => d.x)
-      .attr("y", (d, i) => d.y)
-      .text((d) => d.name);
+      .attr("font-size", 12)
+      .attr("font-weight", "bold")
+      .text((d) => d.name)
+      .each(function (d, i) {
+        textWidths.push(this.getComputedTextLength());
+      })
+      .attr("x", (d, i) => d.x - textWidths[i] / 2)
+      .attr("y", (d, i) => d.y - 20);
+
+    const rects = d3
+      .select(svg)
+      .selectAll("rect")
+      .data(points)
+      .enter()
+      .append("rect")
+      .attr("x", (d, i) => d.x - (textWidths[i] + 10) / 2)
+      .attr("y", (d, i) => d.y - 40)
+      .attr("width", (d, i) => textWidths[i] + 10)
+      .attr("height", 30)
+      .attr("opacity", 0)
+      .attr("fill", theme().isDark ? "#F3E2F1" : "#FEFCE8");
+
+    const circles = d3
+      .select(svg)
+      .selectAll("circle")
+      .data(points)
+      .enter()
+      .append("circle")
+      .attr("cx", (d, i) => d.x)
+      .attr("cy", (d, i) => d.y)
+      .attr("r", 10)
+      .attr("opacity", 0)
+      // .attr("width", (d) => d.width)
+      // .attr("height", 30)
+      // .attr("opacity", 0)
+      .attr("fill", "url(#gradient)");
+    // .text((d) => d.name);
 
     const quadratics = pathData.map((data) => {
       const path = d3.path();
       const { p1, p2, bcp } = data;
-      const x2 = p2.x + p2.width / 2;
-      const y2 = p2.y - 5;
-      path.moveTo(p1.x + p1.width / 2, p1.y - 5);
-      path.bezierCurveTo(bcp[0].x, bcp[0].y, bcp[1].x, bcp[1].y, x2, y2);
+      path.moveTo(p1.x, p1.y);
+      path.bezierCurveTo(bcp[0].x, bcp[0].y, bcp[1].x, bcp[1].y, p2.x, p2.y);
       const string = path.toString();
       return { path: string };
     });
@@ -134,13 +151,24 @@ export default function () {
       .attr("stroke-dasharray", 1000)
       .attr("stroke-dashoffset", 1000);
 
-    function animateRect(idx: number) {
-      const rectNodes = rects.nodes();
+    const rectNodes = rects.nodes();
+    const textNodes = texts.nodes();
+    const pathNodes = paths.nodes();
+    const circleNodes = circles.nodes();
+
+    function animateLabel(idx: number) {
       const rectNode = rectNodes[idx];
-      const textNodes = texts.nodes();
       const textNode = textNodes[idx];
+      const circNode = circleNodes[idx];
 
       d3.select(textNode)
+        .raise()
+        .attr("opacity", 0)
+        .transition()
+        .attr("opacity", 1)
+        .duration(1000);
+
+      d3.select(circNode)
         .attr("opacity", 0)
         .transition()
         .attr("opacity", 1)
@@ -152,13 +180,12 @@ export default function () {
         .attr("opacity", 1)
         .duration(1000)
         .on("end", () => {
-          if (idx === 0) return animateRect(idx + 1);
+          if (idx === 0) return animateLabel(idx + 1);
           animatePath(idx - 1);
         });
     }
 
     function animatePath(idx: number) {
-      const pathNodes = paths.nodes();
       if (idx === pathNodes.length) return;
       const pathNode = pathNodes[idx];
       const len = pathNode.getTotalLength() || width;
@@ -170,10 +197,10 @@ export default function () {
         .ease(d3.easeQuadInOut)
         .attr("stroke-dashoffset", 0)
         .duration(1000)
-        .on("end", () => animateRect(idx + 2));
+        .on("end", () => animateLabel(idx + 2));
     }
 
-    animateRect(0);
+    animateLabel(0);
   });
 
   return (
@@ -181,12 +208,9 @@ export default function () {
       <div
         style={{
           position: "absolute",
-          background: `url(${earth})`,
-          "background-repeat": "no-repeat",
-          "background-size": `${width}px ${height}px`,
+          background: `url(${globePreviewImg()}) 0% 0% / 600px 300px no-repeat`,
           width: width + "px",
           height: height + "px",
-          filter: "blur(1px)",
         }}
       />
       <svg

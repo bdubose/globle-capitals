@@ -1,7 +1,6 @@
 import { Accessor, Setter } from "solid-js";
 
 type Props = {
-  // toggleProp: boolean;
   toggleProp: Accessor<boolean>;
   setToggle: Setter<boolean>;
   on: string;

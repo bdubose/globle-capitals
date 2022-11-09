@@ -8,9 +8,9 @@ export default function () {
   return (
     <div>
       <Preview />
-      <Suspense fallback={<p>Loading...</p>}>
+      {/* <Suspense fallback={<p>Loading...</p>}>
         <NavGlobe />
-      </Suspense>
+      </Suspense> */}
     </div>
   );
 }
