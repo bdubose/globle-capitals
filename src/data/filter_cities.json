@@ -4485,7 +4485,7 @@
       "iso2": "TW",
       "iso3": "TWN",
       "admin_name": "Taipei",
-      "capital": null,
+      "capital": "primary",
       "population": 2684567.0,
       "is_territory": false,
       "continent": "Asia",

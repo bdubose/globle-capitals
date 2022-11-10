@@ -12,7 +12,7 @@ function getStorageValue<T extends object>(key: string, defaultValue?: T) {
   }
 }
 
-export function useLocalStorage<T extends Record<string, any>>(
+function useLocalStorage<T extends Record<string, any>>(
   key: string,
   defaultValue: T
 ): [Accessor<T>, Setter<T>] {
@@ -41,4 +41,37 @@ export function useLocalStorage<T extends Record<string, any>>(
     }
   });
   return [newValue, setNewValue];
+}
+
+// Theme
+export const [theme, setTheme] = useLocalStorage<{ isDark: boolean }>("theme", {
+  isDark: false,
+});
+
+// Stats
+const firstStats = {
+  gamesWon: 0,
+  lastWin: "1970-01-01",
+  currentStreak: 0,
+  maxStreak: 0,
+  usedGuesses: [] as number[],
+  emojiGuesses: "",
+};
+export const [storedStats, storeStats] = useLocalStorage(
+  "statistics",
+  firstStats
+);
+export function resetStats() {
+  storeStats(firstStats);
+}
+
+// Guesses
+const expiration = dayjs().endOf("day").toDate();
+const noCities = { cities: [] as string[], expiration };
+export const [storedGuesses, storeGuesses] = useLocalStorage<typeof noCities>(
+  "guesses",
+  { ...noCities }
+);
+export function resetGuesses() {
+  storeGuesses(noCities);
 }

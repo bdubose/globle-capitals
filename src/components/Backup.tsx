@@ -1,23 +1,19 @@
-// import { invariant } from "@solidjs/router/dist/utils";
 import dayjs from "dayjs";
 import jwtDecode from "jwt-decode";
 import { createSignal, onMount, Show } from "solid-js";
 import Prompt from "../components/Prompt";
-import { firstStats } from "../components/Statistics";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { resetStats, storedStats, storeStats } from "../util/globalState";
 
 // TODO create resource and loading visibilty
 
 export default function () {
   const [isConnected, setIsConnected] = createSignal(false);
-  // const [userToken, setUserToken] = createSignal<Token | null>(null);
   const [token, setToken] = createSignal("");
   const [msg, setMsg] = createSignal("");
   const [showPrompt, setShowPrompt] = createSignal(false);
   const [promptText, setPromptText] = createSignal("");
   const [promptType, setPromptType] = createSignal<Prompt>("Choice");
   const [promptAction, setPromptAction] = createSignal(restoreBackup);
-  const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
   const [backupStats, setBackupStats] = createSignal<Stats | null>(null);
 
   let googleBtn: HTMLDivElement;
@@ -119,7 +115,7 @@ export default function () {
         method: "DELETE",
       });
       const data = await netlifyResponse.json();
-      storeStats(firstStats);
+      resetStats();
       setPromptType("Message");
       setPromptText(data.message);
       setBackupStats(null);
@@ -132,7 +128,7 @@ export default function () {
 
   return (
     <div class="p-4 space-y-6">
-      <h3 class="text-2xl font-extrabold">Stats Backup</h3>
+      <h3 class="text-2xl font-extrabold font-header">Stats Backup</h3>
       <Show
         when={isConnected()}
         fallback={

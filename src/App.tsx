@@ -1,25 +1,14 @@
 import { Route, Routes } from "@solidjs/router";
-import { Component, createSignal, Show } from "solid-js";
+import { Component, createEffect, createSignal } from "solid-js";
+import "./background.css";
 
 import Header from "./components/Header";
 import Modal from "./components/Modal";
 import Statistics from "./components/Statistics";
-import { useLocalStorage } from "./hooks/useLocalStorage";
 import Game from "./routes/Game";
 import Home from "./routes/Home";
 import Settings from "./routes/Settings";
-
-const daySky = {
-  background: `radial-gradient(ellipse at top, rgba(63, 201, 255, 0.7), transparent),
-    radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.7), transparent) no-repeat fixed`,
-  margin: "0px",
-};
-
-const nightSky = {
-  background: `radial-gradient(ellipse at top, #160152, black),
-  radial-gradient(ellipse at bottom, #7D3074, black) no-repeat fixed`,
-  margin: "0px",
-};
+import { theme } from "./util/globalState";
 
 const stars = {
   background:
@@ -37,10 +26,6 @@ const clouds = {
 
 // Global state
 export const [showStats, setShowStats] = createSignal(false);
-// export const [isDark, setIsDark] = createSignal(false);
-export const [theme, setTheme] = useLocalStorage<{ isDark: boolean }>("theme", {
-  isDark: false,
-});
 
 const App: Component = () => {
   return (
@@ -48,6 +33,14 @@ const App: Component = () => {
       class="relative top-0 bottom-0 left-0 right-0 min-h-screen "
       classList={{ dark: theme().isDark }}
     >
+      {/* <div style={{
+  background: `radial-gradient(ellipse at top, #160152, black),
+  radial-gradient(ellipse at bottom, #7D3074, black) no-repeat fixed`,
+  margin: "0px",
+  transition: "background 1000ms linear",
+}}>
+
+      </div> */}
       <Modal trigger={showStats} setTrigger={setShowStats}>
         <Statistics showStats={showStats} setShowStats={setShowStats} />
       </Modal>
@@ -60,15 +53,19 @@ const App: Component = () => {
         </Routes>
       </main>
       <div
-        style={theme().isDark ? nightSky : daySky}
-        // style={daySky}
-        // classList={theme() === "day" ? "day-sky" : "night-sky"}
-        class="absolute top-0 bottom-0 left-0 right-0 block z-0 h-full pointer-events-none"
+        classList={{ night: theme().isDark }}
+        class="absolute top-0 bottom-0 left-0 right-0 block z-0 h-full 
+        pointer-events-none sky"
       ></div>
       <div
-        style={theme().isDark ? stars : clouds}
-        // style={clouds}
-        class="absolute top-0 bottom-0 left-0 right-0 block z-10 pointer-events-none"
+        classList={{ empty: theme().isDark }}
+        class="absolute top-0 bottom-0 left-0 right-0 block z-10 pointer-events-none
+        clouds"
+      ></div>
+      <div
+        classList={{ empty: !theme().isDark }}
+        class="absolute top-0 bottom-0 left-0 right-0 block z-10 pointer-events-none
+        stars"
       ></div>
     </div>
   );

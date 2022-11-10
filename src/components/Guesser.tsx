@@ -2,6 +2,7 @@ import { Accessor, createEffect, createResource, createSignal } from "solid-js";
 import { SetStoreFunction } from "solid-js/store";
 import rawCityData from "../data/filter_cities.json";
 import { getAnswer } from "../util/encryption";
+import { theme } from "../util/globalState";
 
 type Props = {
   setGuesses: SetStoreFunction<GuessStore>;
@@ -15,11 +16,18 @@ export default function ({ setGuesses, guesses, win }: Props) {
   const cities = rawCityData["data"] as City[];
   const [msg, setMsg] = createSignal("");
   const msgColour = () => {
-    return win() ? "green" : "rgb(185 28 28)";
+    const green = theme().isDark ? "rgb(134 239 172)" : "rgb(134 239 172)";
+    if (win()) return green;
+    if (msg().includes("not a capital city")) return "orangered";
+    return win() ? green : "rgb(185 28 28)";
   };
 
   createEffect(() => {
-    if (win() && ans()?.city_ascii) {
+    if (ans.loading) {
+      setMsg("");
+    } else if (ans.error) {
+      setMsg("An error has occurred. Please try again later.");
+    } else if (win() && ans()?.city_ascii) {
       setMsg(`The mystery city is ${ans()?.city_ascii}!`);
     } else if (win() && !ans()?.city_ascii) {
       setMsg("You win!");
@@ -54,6 +62,8 @@ export default function ({ setGuesses, guesses, win }: Props) {
       { city: newCity, order: prev.length },
     ]);
     if (newCity.id === ans()?.id) return;
+    if (newCity.capital !== "primary")
+      return setMsg(`${newCity.city_ascii} is not a capital city.`);
     return setMsg("");
   }
 
@@ -80,14 +90,14 @@ export default function ({ setGuesses, guesses, win }: Props) {
         <button
           type="submit"
           class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 
-          dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
+          dark:hover:bg-purple-900 dark:disabled:bg-purple-900 disabled:bg-blue-900  text-white 
           font-bold py-1 md:py-2 px-4 rounded focus:shadow-outline"
           disabled={win()}
         >
           Enter
         </button>
       </form>
-      <p class="text-center" style={{ color: msgColour() }}>
+      <p class="text-center font-bold" style={{ color: msgColour() }}>
         {msg()}
       </p>
     </div>

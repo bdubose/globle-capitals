@@ -13,11 +13,15 @@ import { createStore } from "solid-js/store";
 import { computeDistanceBetween } from "spherical-geometry-js";
 import Guesser from "../components/Guesser";
 import List from "../components/List";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import data from "../data/filter_cities.json";
-import { firstStats } from "../components/Statistics";
 import { setShowStats } from "../App";
 import { getAnswer } from "../util/encryption";
+import {
+  storedGuesses,
+  storeGuesses,
+  storedStats,
+  storeStats,
+} from "../util/globalState";
 
 const GameGlobe = lazy(() => import("../components/globes/GameGlobe"));
 
@@ -27,19 +31,6 @@ export default function () {
   const [win, setWin] = createSignal(false);
   const cities = data["data"] as City[];
   const [ans] = createResource(getAnswer);
-  // const [ans, setAns] = createSignal()
-
-  // Local storage
-  const expiration = dayjs().endOf("day").toDate();
-  const noCities = { cities: [] as string[], expiration };
-  const [storedGuesses, storeGuesses] = useLocalStorage<typeof noCities>(
-    "guesses",
-    { ...noCities }
-  );
-  const [storedStats, storeStats] = useLocalStorage<Stats>(
-    "statistics",
-    firstStats
-  );
 
   const restoredGuesses = () => {
     console.log("Restoring guesses.");
@@ -98,7 +89,7 @@ export default function () {
     const storable = guesses.cities.map((guess) => guess.city.city_ascii);
     storeGuesses({
       cities: storable,
-      expiration,
+      expiration: dayjs().endOf("day").toDate(),
     });
   });
 

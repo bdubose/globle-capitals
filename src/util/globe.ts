@@ -1,5 +1,5 @@
 import { UAParser } from "ua-parser-js";
-import { theme } from "../App";
+// import { theme } from "../App";
 
 import earthDay from "../images/earth-day.webp";
 import earthNight from "../images/earth-night.webp";
@@ -7,6 +7,7 @@ import earthDayNoBg from "../images/earth-day-no-bg.webp";
 import earthNightNoBg from "../images/earth-night-no-bg.webp";
 import earthDaySafari from "../images/safari-14-earth-day.jpg";
 import earthNightSafari from "../images/safari-14-earth-night.jpg";
+import { theme } from "./globalState";
 
 export const globeImg = () => {
   const parser = new UAParser();

@@ -2,9 +2,9 @@ import Globe from "globe.gl";
 import { Accessor, createEffect, createSignal, onMount, Show } from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
-import { arcGradient, cityLabelColour, getCitySize } from "../../util/geometry";
-import { theme } from "../../App";
+import { arcGradient, cityColour, getCitySize } from "../../util/geometry";
 import rawCountryData from "../../data/country_data.json";
+import { theme } from "../../util/globalState";
 
 type Props = {
   guesses: GuessStore;
@@ -26,7 +26,7 @@ export default function ({ guesses, pov, ans }: Props) {
   // Derived signals
   const cityPoints = () =>
     guesses.cities.map(({ city }) => {
-      const labelColour = cityLabelColour(city, ans);
+      const pointColour = cityColour(city, ans);
       return {
         lat: city.lat,
         lng: city.lng,
@@ -34,7 +34,7 @@ export default function ({ guesses, pov, ans }: Props) {
         class="text-black py-1 px-2 text-center font-bold bg-yellow-50"
         style="background-color: ${labelBg};"
         >${city.city},<br/>${city.country}</p>`,
-        color: labelColour.dark,
+        color: pointColour,
         radius: getCitySize(city.population),
         element: `<svg>
             <circle cx="1" cy="1" r="${getCitySize(city.population)}" />
@@ -43,14 +43,13 @@ export default function ({ guesses, pov, ans }: Props) {
     });
 
   const countries = () => {
-    return guesses.cities
-      .map(({ city }) => {
-        const country = countryData.find((country) => {
-          return country.properties.NAME === city.country;
-        });
-        return { geometry: country?.geometry, colour: "black" };
-      })
-      .filter((c) => Boolean(c));
+    return guesses.cities.map(({ city }, idx) => {
+      const country = countryData.find((country) => {
+        return country.properties.NAME === city.country;
+      });
+      const transition = idx === guesses.numGuesses - 1 ? 400 : 0;
+      return { geometry: country?.geometry, colour: "black", transition };
+    });
   };
 
   function createArc(city1: City, city2: City, isLast: boolean) {
@@ -114,7 +113,6 @@ export default function ({ guesses, pov, ans }: Props) {
         .onGlobeReady(() => setIsLoaded(true))
         .onGlobeClick(turnGlobe)
 
-        .pointsData(cityPoints())
         .pointAltitude(0.02)
         .pointColor("color")
         .pointLabel("label")
@@ -132,10 +130,11 @@ export default function ({ guesses, pov, ans }: Props) {
         .arcsTransitionDuration(0)
         .arcLabel("label")
 
-        .polygonsData(countries())
+        // .polygonsData(countries())
         .polygonCapColor(() => "transparent")
         .polygonAltitude(0)
         .polygonSideColor("colour")
+        .polygonsTransitionDuration(0)
         .polygonStrokeColor("colour")(globeRef);
 
       // Initial settings

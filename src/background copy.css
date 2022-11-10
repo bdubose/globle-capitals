@@ -1,0 +1,39 @@
+@property --myColor1 {
+  syntax: "<color>";
+  initial-value: #0f0;
+  inherits: false;
+}
+
+@property --myColor2 {
+  syntax: "<color>";
+  initial-value: rgb(40, 190, 145);
+  inherits: false;
+}
+
+.sky {
+  width: 200px;
+  height: 100px;
+  background: linear-gradient(var(--myColor1), var(--myColor2));
+  transition: --myColor1 3s, --myColor2 3s;
+}
+
+.sky:hover {
+  --myColor1: red;
+  --myColor2: #e1af2f;
+}
+
+.day {
+  /* background: radial-gradient(
+      ellipse at top,
+      rgba(63, 201, 255, 0.7),
+      transparent
+    ),
+    radial-gradient(ellipse at bottom, rgba(255, 196, 87, 0.7), transparent)
+      no-repeat fixed; */
+}
+
+.night {
+  /* background: radial-gradient(ellipse at top, #160152, black),
+    radial-gradient(ellipse at bottom, #7d3074, black) no-repeat fixed; */
+  background-color: purple;
+}

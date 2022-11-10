@@ -2,7 +2,7 @@ import { onMount } from "solid-js";
 import * as d3 from "d3";
 import { interpolateTurbo, scaleSequential } from "d3";
 import { globePreviewImg } from "../util/globe";
-import { theme } from "../App";
+import { theme } from "../util/globalState";
 
 type City = {
   name: string;
@@ -13,7 +13,7 @@ type City = {
 export default function () {
   let svg: SVGSVGElement;
   const width = 600;
-  const height = width / 2;
+  const height = 250;
 
   const points = [
     { name: "Ottawa", x: 170, y: 55 },

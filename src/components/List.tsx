@@ -67,7 +67,7 @@ export default function ({ guesses, setPov }: Props) {
       <Show when={guesses.numGuesses > 0}>
         <div class="mt-8">
           <div class="flex items-center space-x-1">
-            <p>Closest border: {formatKm(guesses.closest, isShowingKm())}</p>
+            <p>Closest city: {formatKm(guesses.closest, isShowingKm())}</p>
             <Toggle
               setToggle={toggleShowingKm}
               toggleProp={isShowingKm}

@@ -42,15 +42,16 @@ export function getCitySize(pop: number) {
   return scale(pop);
 }
 
-export function cityLabelColour(city: City, ans: City) {
-  // Colours
+export function cityColour(city: City, ans: City) {
+  if (city.capital !== "primary") return "white";
   const gradient = interpolateTurbo;
   const colourScale = scaleSequential(gradient).domain([MAX_DISTANCE, 0]);
   const proximity = computeDistanceBetween(city, ans);
   const fullColour = colourScale(proximity);
   const light = tinycolor(fullColour).lighten(45).toHexString();
   const dark = tinycolor(fullColour).darken(10).toHexString();
-  return { full: fullColour, light, dark };
+  // return { full: fullColour, light, dark };
+  return fullColour;
 }
 
 export function findClosestColour(a1: Coords, a2: Coords, ans: Coords) {

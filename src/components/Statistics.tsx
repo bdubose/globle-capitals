@@ -1,8 +1,13 @@
 import { useNavigate } from "@solidjs/router";
 import dayjs from "dayjs";
 import { Accessor, createMemo, createSignal, Setter } from "solid-js";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { resetAll } from "../util/reset";
+import {
+  resetGuesses,
+  storedStats,
+  storeGuesses,
+  storeStats,
+} from "../util/globalState";
+// import { resetAll } from "../util/reset";
 import Icon from "./Icon";
 import Prompt from "./Prompt";
 
@@ -11,19 +16,10 @@ type Props = {
   setShowStats: Setter<boolean>;
 };
 
-export const firstStats = {
-  gamesWon: 0,
-  lastWin: "1970-01-01",
-  currentStreak: 0,
-  maxStreak: 0,
-  usedGuesses: [],
-  emojiGuesses: "",
-};
-
 export default function (props: Props) {
   const navigate = useNavigate();
   console.log("Loading stats into modal");
-  const [storedStats, storeStats] = useLocalStorage("statistics", firstStats);
+
   const {
     gamesWon,
     lastWin,
@@ -70,7 +66,8 @@ export default function (props: Props) {
   }
 
   function resetStats() {
-    resetAll();
+    resetGuesses();
+    resetStats();
     setPromptType("Message");
     setPromptText("Stats reset.");
     setTimeout(() => {
