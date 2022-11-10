@@ -10,6 +10,8 @@ declare global {
     | "Oceania"
     | "None";
 
+  type Unit = "km" | "miles";
+
   type City = {
     id: number;
     city: string;

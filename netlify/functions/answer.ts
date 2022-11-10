@@ -1,9 +1,7 @@
 import { Handler } from "@netlify/functions";
-import data from "../../src/data/filter_cities.json";
+import data from "../../src/data/answers.json";
 import crypto from "crypto-js";
 import dayjs from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
-dayjs.extend(advancedFormat);
 
 // TODO there could be potential daylight savings time issues
 
@@ -13,10 +11,9 @@ function encrypt(text: string) {
   return encyptedText;
 }
 
-function generateKey(list: any[]) {
-  const shuffleAdjust = dayjs().isBefore(dayjs("2022-08-01")) ? "5" : "8";
-  const dayCode = parseInt(dayjs().endOf("day").format("X"));
+function generateKey(list: any[], dayCode: number) {
   const SHUFFLE_KEY = process.env.SHUFFLE_KEY || "1";
+  const shuffleAdjust = dayjs().isBefore(dayjs("2022-08-01")) ? "5" : "8";
   const key =
     Math.floor(dayCode / parseInt(SHUFFLE_KEY + shuffleAdjust)) % list.length;
   return key;
@@ -24,10 +21,15 @@ function generateKey(list: any[]) {
 
 const handler: Handler = async (event, context) => {
   try {
+    // throw "Test error!";
+    const dayString = event.queryStringParameters?.day || "";
+    const dayCode = parseInt(dayString);
+    if (!dayCode) throw "Parameter error";
+    // console.log(dayCode);
     const cities = data["data"] as City[];
-    const key = generateKey(cities);
+    const key = generateKey(cities, dayCode);
     const city = cities[key];
-    console.log("city", city);
+    // console.log("city", city);
     const answer = encrypt(JSON.stringify(city));
     return {
       statusCode: 200,

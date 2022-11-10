@@ -1,4 +1,13 @@
-import { createSignal, For, Match, Setter, Show, Switch } from "solid-js";
+import {
+  createEffect,
+  createSignal,
+  For,
+  Match,
+  Setter,
+  Show,
+  Switch,
+} from "solid-js";
+import { distanceUnit, setDistanceUnit, setTheme } from "../util/globalState";
 import Toggle from "./Toggle";
 
 type Props = {
@@ -6,9 +15,22 @@ type Props = {
   setPov: Setter<Coords>;
 };
 
+export function formatKm(m: number) {
+  const BIN = 10;
+  const unitMap: Record<Unit, number> = {
+    km: 1000,
+    miles: 1609.34,
+  };
+  const value = m / unitMap[distanceUnit().unit];
+  if (value < BIN) return "< " + BIN;
+  const rounded = Math.round(value / BIN) * BIN;
+  const format = (num: number) =>
+    num.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return `${format(rounded)}`;
+}
+
 export default function ({ guesses, setPov }: Props) {
   const [isSortedByDistance, toggleSortByDistance] = createSignal(true);
-  const [isShowingKm, toggleShowingKm] = createSignal(true);
 
   const sortedGuesses = () => {
     if (isSortedByDistance()) {
@@ -18,17 +40,9 @@ export default function ({ guesses, setPov }: Props) {
     }
   };
 
-  function formatKm(m: number, isKm: boolean) {
-    const METERS_PER_MILE = 1609.34;
-    const BIN = 10;
-    const value = isKm ? m / 1000 : m / METERS_PER_MILE;
-    if (value < BIN) return "< " + BIN;
-    const rounded = Math.round(value / BIN) * BIN;
-    const format = (num: number) =>
-      num.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    return `~ ${format(rounded)}`;
-  }
+  const isAlreadyShowingKm = distanceUnit().unit === "km";
+  const [isShowingKm, setShowingKm] = createSignal(isAlreadyShowingKm);
+  createEffect(() => setDistanceUnit({ unit: isShowingKm() ? "km" : "miles" }));
 
   return (
     <div class="md:ml-10 md:mr-0 py-8 dark:text-white z-30 mb-20">
@@ -67,9 +81,9 @@ export default function ({ guesses, setPov }: Props) {
       <Show when={guesses.numGuesses > 0}>
         <div class="mt-8">
           <div class="flex items-center space-x-1">
-            <p>Closest city: {formatKm(guesses.closest, isShowingKm())}</p>
+            <p>Closest city: {formatKm(guesses.closest)}</p>
             <Toggle
-              setToggle={toggleShowingKm}
+              setToggle={setShowingKm}
               toggleProp={isShowingKm}
               on="km"
               off="miles"

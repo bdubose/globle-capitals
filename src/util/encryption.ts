@@ -1,4 +1,7 @@
 import crypto from "crypto-js";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+dayjs.extend(advancedFormat);
 
 const key = import.meta.env.VITE_CRYPTO_KEY;
 
@@ -9,7 +12,8 @@ export function decrypt(encryptedText: string) {
 }
 
 export async function getAnswer() {
-  const endpoint = `/.netlify/functions/answer`;
+  const dayCode = dayjs().endOf("day").format("X");
+  const endpoint = `/.netlify/functions/answer?day=${dayCode}`;
   try {
     const netlifyResponse = await fetch(endpoint);
     if (netlifyResponse.status !== 200) throw "Server error";

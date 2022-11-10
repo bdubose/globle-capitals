@@ -6,7 +6,6 @@ import { setTheme, theme } from "../util/globalState";
 export default function () {
   const isAlreadyDark = theme().isDark;
   const [dark, setDark] = createSignal(isAlreadyDark);
-
   createEffect(() => setTheme({ isDark: dark() }));
 
   return (

@@ -8,12 +8,12 @@ import invariant from "tiny-invariant";
 // TODO check that userId is actually unique
 
 export async function verify(token: string) {
-  const CLIENT_ID = process.env.CLIENT_ID || "";
+  const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "";
 
-  const oauthClient = new OAuth2Client(CLIENT_ID);
+  const oauthClient = new OAuth2Client(GOOGLE_CLIENT_ID);
   const ticket = await oauthClient.verifyIdToken({
     idToken: token,
-    audience: CLIENT_ID,
+    audience: GOOGLE_CLIENT_ID,
   });
   const userId = ticket.getUserId();
   return userId;

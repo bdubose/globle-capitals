@@ -15,7 +15,6 @@ export default function () {
   let svg: SVGSVGElement;
   const parser = new UAParser();
   const isMobile = parser.getDevice().type === "mobile";
-  console.log("parser device", parser.getDevice());
   const convertMobile = (num: number) => (num * 7) / 12;
   const width = isMobile ? 350 : 600;
   const height = isMobile ? convertMobile(250) : 250;
