@@ -16,7 +16,7 @@ export default function ({ setGuesses, guesses, win }: Props) {
   const cities = rawCityData["data"] as City[];
   const [msg, setMsg] = createSignal("");
   const msgColour = () => {
-    const green = theme().isDark ? "rgb(134 239 172)" : "rgb(134 239 172)";
+    const green = theme().isDark ? "rgb(134 239 172)" : "rgb(22 101 52)";
     if (win()) return green;
     if (msg().includes("not a capital city")) return "orangered";
     return win() ? green : "rgb(185 28 28)";
@@ -52,6 +52,8 @@ export default function ({ setGuesses, guesses, win }: Props) {
     if (typeof guess !== "string") return setMsg("Error entering city name.");
     const newCity = findCity(guess, cities);
     if (!newCity) return setMsg(`"${guess}" not found in database.`);
+    if (newCity.capital !== "primary")
+      return setMsg(`${newCity.city_ascii} is not a capital city.`);
     const existingGuess = findCity(
       guess,
       guesses.cities.map((g) => g.city)
@@ -62,8 +64,6 @@ export default function ({ setGuesses, guesses, win }: Props) {
       { city: newCity, order: prev.length },
     ]);
     if (newCity.id === ans()?.id) return;
-    if (newCity.capital !== "primary")
-      return setMsg(`${newCity.city_ascii} is not a capital city.`);
     return setMsg("");
   }
 

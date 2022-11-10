@@ -27,16 +27,18 @@ export default function Header({ showStats, setShowStats }: Props) {
   return (
     <header class="pt-8 h-10 relative dark:text-gray-200 z-10">
       <div class="relative h-full">
-        <div class="space-x-1 flex absolute left-0 bottom-1">
+        <div class="flex absolute left-0 bottom-1">
           <A href="/">
             <Icon shape="help" />
           </A>
         </div>
         <A
-          class="absolute bottom-0 left-1/2 transform -translate-x-1/2"
+          class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-max"
           href="/game"
         >
-          <h1 class="text-3xl font-extrabold font-header">GLOBLE: CAPITALS</h1>
+          <h1 class="text-2xl sm:text-3xl font-extrabold font-header">
+            GLOBLE: CAPITALS
+          </h1>
         </A>
         <div class="space-x-1 flex absolute right-0 bottom-1">
           <Show when={!showStats()} fallback={<Icon shape="stats" />}>

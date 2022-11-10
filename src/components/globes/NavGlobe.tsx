@@ -8,7 +8,7 @@ export default function () {
   let globeRef: HTMLDivElement | undefined;
   const globe = Globe();
   const parser = new UAParser();
-  const isMobile = parser.getDevice().type !== "console";
+  const isMobile = parser.getDevice().type === "mobile";
 
   onMount(() => {
     if (globeRef) {

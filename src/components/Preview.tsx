@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { interpolateTurbo, scaleSequential } from "d3";
 import { globePreviewImg } from "../util/globe";
 import { theme } from "../util/globalState";
+import UAParser from "ua-parser-js";
 
 type City = {
   name: string;
@@ -12,16 +13,26 @@ type City = {
 
 export default function () {
   let svg: SVGSVGElement;
-  const width = 600;
-  const height = 250;
+  const parser = new UAParser();
+  const isMobile = parser.getDevice().type === "mobile";
+  console.log("parser device", parser.getDevice());
+  const convertMobile = (num: number) => (num * 7) / 12;
+  const width = isMobile ? 350 : 600;
+  const height = isMobile ? convertMobile(250) : 250;
 
-  const points = [
+  let points = [
     { name: "Ottawa", x: 170, y: 55 },
     { name: "Tokyo", x: 520, y: 90 },
     { name: "Pretoria", x: 340, y: 190 },
     { name: "Brasilia", x: 225, y: 168 },
     { name: "Cairo", x: 343, y: 90 },
   ] as City[];
+
+  if (isMobile) {
+    points = points.map((p) => {
+      return { name: p.name, x: convertMobile(p.x), y: convertMobile(p.y) };
+    });
+  }
 
   const endPoint = points[points.length - 1];
 
@@ -98,7 +109,7 @@ export default function () {
         textWidths.push(this.getComputedTextLength());
       })
       .attr("x", (d, i) => d.x - textWidths[i] / 2)
-      .attr("y", (d, i) => d.y - 20);
+      .attr("y", (d, i) => (isMobile ? d.y - 15 : d.y - 20));
 
     const rects = d3
       .select(svg)
@@ -107,9 +118,9 @@ export default function () {
       .enter()
       .append("rect")
       .attr("x", (d, i) => d.x - (textWidths[i] + 10) / 2)
-      .attr("y", (d, i) => d.y - 40)
+      .attr("y", (d, i) => (isMobile ? d.y - 30 : d.y - 40))
       .attr("width", (d, i) => textWidths[i] + 10)
-      .attr("height", 30)
+      .attr("height", isMobile ? 20 : 30)
       .attr("opacity", 0)
       .attr("fill", theme().isDark ? "#F3E2F1" : "#FEFCE8");
 
@@ -208,7 +219,9 @@ export default function () {
       <div
         style={{
           position: "absolute",
-          background: `url(${globePreviewImg()}) 0% 0% / 600px 300px no-repeat`,
+          background: `url(${globePreviewImg()}) 0% 0% / ${width}px ${
+            height + 50
+          }px no-repeat`,
           width: width + "px",
           height: height + "px",
         }}

@@ -48,11 +48,13 @@ export function cityColour(city: City, ans: City) {
   const colourScale = scaleSequential(gradient).domain([MAX_DISTANCE, 0]);
   const proximity = computeDistanceBetween(city, ans);
   const fullColour = colourScale(proximity);
-  const light = tinycolor(fullColour).lighten(45).toHexString();
-  const dark = tinycolor(fullColour).darken(10).toHexString();
+  // const light = tinycolor(fullColour).lighten(45).toHexString();
+  // const dark = tinycolor(fullColour).darken(10).toHexString();
   // return { full: fullColour, light, dark };
   return fullColour;
 }
+
+export const maxColour = scaleSequential(interpolateTurbo)(1);
 
 export function findClosestColour(a1: Coords, a2: Coords, ans: Coords) {
   // Colours

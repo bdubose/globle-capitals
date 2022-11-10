@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         header: ['Montserrat', 'sans-serif'],
       },
+      fontSize: {
+        "mobile-header": ["1.4rem", "1.7rem"]
+      }
     },
   },
   plugins: [],
