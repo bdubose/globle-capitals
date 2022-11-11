@@ -1,5 +1,5 @@
 import { Route, Routes } from "@solidjs/router";
-import { Component, createEffect, createSignal } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import "./background.css";
 
 import Header from "./components/Header";

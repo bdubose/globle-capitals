@@ -13,7 +13,7 @@ import { createStore } from "solid-js/store";
 import { computeDistanceBetween } from "spherical-geometry-js";
 import Guesser from "../components/Guesser";
 import List from "../components/List";
-import data from "../data/filter_cities.json";
+import data from "../data/answers.json";
 import { setShowStats } from "../App";
 import { getAnswer } from "../util/encryption";
 import {

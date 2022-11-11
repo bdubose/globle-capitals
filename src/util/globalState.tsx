@@ -77,7 +77,6 @@ export function resetGuesses() {
 }
 
 // Shows km or miles
-// type Unit = {unit: "km" | "miles"}
 export const [distanceUnit, setDistanceUnit] = useLocalStorage<{ unit: Unit }>(
   "distance_unit",
   { unit: "km" }

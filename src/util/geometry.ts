@@ -7,7 +7,7 @@ import {
 } from "spherical-geometry-js";
 import tinycolor from "tinycolor2";
 import { MAX_DISTANCE } from "./constants";
-import data from "../data/filter_cities.json";
+import data from "../data/answers.json";
 
 export function arcGradient(a1: Coords, a2: Coords, ans: Coords) {
   // Colours

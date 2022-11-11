@@ -7,12 +7,7 @@ import { distanceUnit, theme } from "../util/globalState";
 import Fuse from "fuse.js";
 import { formatKm } from "./List";
 
-// TODO orangered has poor contrast
-// TODO consistency with msg colours
-// TODO st. and saint in fuzzy match
-// TODO Marie-Galante causes an error
 // TODO Cities list emptied after I refreshed for first time after new day!
-// Day changed
 
 type Props = {
   setGuesses: SetStoreFunction<GuessStore>;
@@ -27,10 +22,12 @@ export default function ({ setGuesses, guesses, win }: Props) {
   const [msg, setMsg] = createSignal("");
   const msgColour = () => {
     const green = theme().isDark ? "rgb(134 239 172)" : "rgb(22 101 52)";
-    if (win()) return green;
-    if (msg().includes("not a capital city")) return "orangered";
-    if (msg().includes("from the answer")) return "orangered";
-    return win() ? green : "rgb(185 28 28)";
+    const neutral = theme().isDark ? "rgb(229 231 235)" : "black";
+    // if (win()) return green;
+    // if (msg().includes("not a capital city")) return neutral;
+    // if (msg().includes("from the answer")) return neutral;
+    // if (msg().includes("Did you mean")) return neutral;
+    return win() ? green : neutral;
   };
 
   createEffect(() => {
@@ -49,11 +46,12 @@ export default function ({ setGuesses, guesses, win }: Props) {
   let formRef: HTMLFormElement;
 
   function findCity(newGuess: string, list: City[]) {
+    const searchPhrase = newGuess.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
     const answerIndex = new Fuse(list, {
       keys: ["city", "city_ascii", "admin_name"],
       includeScore: true,
     });
-    const results = answerIndex.search(newGuess);
+    const results = answerIndex.search(searchPhrase);
     if (results.length === 0) {
       setMsg(`"${newGuess}" not found in database.`);
       return;
@@ -78,13 +76,15 @@ export default function ({ setGuesses, guesses, win }: Props) {
         includeScore: true,
       });
       const bigCitiesFound = bigCityIndex.search(newGuess);
-      const topBigCity = bigCitiesFound[0];
-      const topScore = topBigCity.score ?? 1;
-      if (topScore < 0.03) {
-        setMsg(`${topBigCity.item} is not a capital city.`);
-      } else {
-        setMsg(`"${newGuess}" not found in database.`);
+      if (bigCitiesFound.length >= 1) {
+        const topBigCity = bigCitiesFound[0];
+        const topScore = topBigCity.score ?? 1;
+        if (topScore < 0.03) {
+          setMsg(`${topBigCity.item} is not a capital city.`);
+          return;
+        }
       }
+      setMsg(`"${newGuess}" not found in database.`);
     }
   }
 
@@ -103,10 +103,8 @@ export default function ({ setGuesses, guesses, win }: Props) {
     setMsg(
       `${newCity.city_ascii} is ${formatKm(guesses.closest)} ${
         distanceUnit().unit
-      } from the answer.`
+      } from the answer!`
     );
-
-    return;
   }
 
   return (
