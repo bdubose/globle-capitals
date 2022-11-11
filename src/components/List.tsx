@@ -59,7 +59,7 @@ export default function ({ guesses, setPov }: Props) {
       </Switch>
       <ul class="grid grid-cols-3 md:grid-cols-4 gap-3">
         <For each={sortedGuesses()}>
-          {({ city }) => {
+          {(city) => {
             const flagProp = city.iso2.toLowerCase();
             return (
               <li>

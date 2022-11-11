@@ -1,5 +1,3 @@
-import { Dayjs } from "dayjs";
-
 declare global {
   type Continent =
     | "Asia"
@@ -30,11 +28,6 @@ declare global {
     rank: number;
   };
 
-  type Guess = {
-    city: City;
-    order: number;
-  };
-
   type Coords = {
     lat: number;
     lng: number;
@@ -47,8 +40,8 @@ declare global {
   };
 
   type GuessStore = {
-    cities: Guess[];
-    readonly sortedGuesses: Guess[];
+    cities: City[];
+    readonly sortedGuesses: City[];
     readonly numGuesses: number;
     readonly closest: number;
   };

@@ -1,15 +1,10 @@
 import { useNavigate } from "@solidjs/router";
 import dayjs from "dayjs";
 import { Accessor, createMemo, createSignal, Setter } from "solid-js";
-import {
-  resetGuesses,
-  storedStats,
-  storeGuesses,
-  storeStats,
-} from "../util/globalState";
-// import { resetAll } from "../util/reset";
+import { resetGuesses, resetStats, storedStats } from "../util/globalState";
 import Icon from "./Icon";
 import Prompt from "./Prompt";
+import UAParser from "ua-parser-js";
 
 type Props = {
   showStats: Accessor<boolean>;
@@ -18,7 +13,6 @@ type Props = {
 
 export default function (props: Props) {
   const navigate = useNavigate();
-  console.log("Loading stats into modal");
 
   const {
     gamesWon,
@@ -29,13 +23,17 @@ export default function (props: Props) {
     emojiGuesses,
   } = storedStats();
 
+  const wonToday = createMemo(() => {
+    const lastWin = dayjs(storedStats().lastWin);
+    return lastWin.isSame(dayjs(), "date");
+  });
+
   const statsTable = createMemo(() => {
     const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
     const avgGuesses =
       Math.round((sumGuesses / usedGuesses.length) * 100) / 100;
     const showAvgGuesses = usedGuesses.length === 0 ? "--" : avgGuesses;
-    const isSameDay = dayjs(lastWin).isSame(dayjs(), "date");
-    const todaysGuesses = isSameDay
+    const todaysGuesses = wonToday()
       ? usedGuesses[usedGuesses.length - 1]
       : "--";
 
@@ -65,7 +63,7 @@ export default function (props: Props) {
     setShowPrompt(true);
   }
 
-  function resetStats() {
+  function triggerResetStats() {
     resetGuesses();
     resetStats();
     setPromptType("Message");
@@ -76,8 +74,48 @@ export default function (props: Props) {
     }, 2000);
   }
 
+  // Share score
+  async function copyToClipboard() {
+    const date = dayjs(lastWin);
+    const sumGuesses = usedGuesses.reduce((a, b) => a + b, 0);
+    const avgGuesses =
+      Math.round((sumGuesses / usedGuesses.length) * 100) / 100;
+    const showAvgGuesses = usedGuesses.length === 0 ? "--" : avgGuesses;
+    const todaysGuesses = wonToday()
+      ? usedGuesses[usedGuesses.length - 1]
+      : "--";
+    const shareString = `🌎 ${date.format("MMM D, YYYY")} 🌍
+🔥 ${currentStreak} | Avg. Guesses: ${showAvgGuesses}
+${wonToday() ? emojiGuesses : "--"} = ${todaysGuesses}
+
+#globle #capitals`;
+
+    try {
+      const parser = new UAParser();
+      const isMobile = parser.getDevice().type === "mobile";
+      const isFirefox = parser.getBrowser().name === "Firefox";
+      setPromptType("Message");
+      if ("canShare" in navigator && isMobile && !isFirefox) {
+        await navigator.share({ title: "Plurality Stats", text: shareString });
+        setPromptText("Shared!");
+        setShowPrompt(true);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareString);
+        setPromptText("Copied!");
+        setShowPrompt(true);
+      } else {
+        document.execCommand("copy", true, shareString);
+        setPromptText("Copied!");
+        setShowPrompt(true);
+      }
+    } catch (e) {
+      setPromptText("This browser cannot share");
+      setShowPrompt(true);
+    }
+  }
+
   return (
-    <>
+    <div class="min-w-[250px]">
       <button
         class="absolute top-3 right-4"
         onClick={() => props.setShowStats(false)}
@@ -123,10 +161,12 @@ export default function (props: Props) {
         </button>
         <button
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
+          disabled:bg-blue-900 dark:disabled:bg-purple-900
           text-white dark:text-gray-200 rounded-md px-8 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           justify-around sm:flex-grow sm:mx-10"
-          // onClick={copyToClipboard}
+          onClick={copyToClipboard}
+          disabled={!wonToday()}
         >
           Share
         </button>
@@ -137,8 +177,8 @@ export default function (props: Props) {
         setShowPrompt={setShowPrompt}
         promptType={promptType()}
         text={promptText()}
-        yes={resetStats}
+        yes={triggerResetStats}
       />
-    </>
+    </div>
   );
 }

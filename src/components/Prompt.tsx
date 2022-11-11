@@ -32,7 +32,6 @@ export function Prompt(props: Props) {
 
   onMount(() => {
     if (props.promptType === "Message") {
-      console.log("Closing prompt");
       setTimeout(() => props.setShowPrompt(false), 2000);
     }
   });

@@ -25,7 +25,7 @@ export default function ({ guesses, pov, ans }: Props) {
 
   // Derived signals
   const cityPoints = () =>
-    guesses.cities.map(({ city }) => {
+    guesses.cities.map((city) => {
       const pointColour = cityColour(city, ans);
       return {
         lat: city.lat,
@@ -43,13 +43,20 @@ export default function ({ guesses, pov, ans }: Props) {
     });
 
   const countries = () => {
-    return guesses.cities.map(({ city }, idx) => {
-      const country = countryData.find((country) => {
-        return country.properties.NAME === city.country;
-      });
-      const transition = idx === guesses.numGuesses - 1 ? 400 : 0;
-      return { geometry: country?.geometry, colour: "black", transition };
-    });
+    return guesses.cities
+      .map((city, idx) => {
+        const country = countryData.find((country) => {
+          return country.properties.NAME === city.country;
+        });
+        const transition = idx === guesses.numGuesses - 1 ? 400 : 0;
+        const output = {
+          geometry: country?.geometry,
+          colour: "black",
+          transition,
+        };
+        return output;
+      })
+      .filter(({ geometry }) => Boolean(geometry));
   };
 
   function createArc(city1: City, city2: City, isLast: boolean) {
@@ -74,12 +81,12 @@ export default function ({ guesses, pov, ans }: Props) {
     const { cities } = guesses;
     if (cities.length <= 1) return [];
     else if (cities.length === 2)
-      return [createArc(cities[0].city, cities[1].city, true)];
+      return [createArc(cities[0], cities[1], true)];
     // All possible combinations
     const arcs = [];
     for (let i = 0; i < cities.length - 1; i++) {
       const isLast = i === cities.length - 2;
-      const arc = createArc(cities[i].city, cities[i + 1].city, isLast);
+      const arc = createArc(cities[i], cities[i + 1], isLast);
       arcs.push(arc);
     }
     return arcs;

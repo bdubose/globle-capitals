@@ -13,7 +13,7 @@ function encrypt(text: string) {
 
 function generateKey(list: any[], dayCode: number) {
   const SHUFFLE_KEY = process.env.SHUFFLE_KEY || "1";
-  const shuffleAdjust = dayjs().isBefore(dayjs("2022-08-01")) ? "5" : "8";
+  const shuffleAdjust = dayjs().isBefore(dayjs("2022-08-01")) ? "5" : "15";
   const key =
     Math.floor(dayCode / parseInt(SHUFFLE_KEY + shuffleAdjust)) % list.length;
   return key;

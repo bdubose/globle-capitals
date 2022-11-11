@@ -7,6 +7,13 @@ import { distanceUnit, theme } from "../util/globalState";
 import Fuse from "fuse.js";
 import { formatKm } from "./List";
 
+// TODO orangered has poor contrast
+// TODO consistency with msg colours
+// TODO st. and saint in fuzzy match
+// TODO Marie-Galante causes an error
+// TODO Cities list emptied after I refreshed for first time after new day!
+// Day changed
+
 type Props = {
   setGuesses: SetStoreFunction<GuessStore>;
   guesses: GuessStore;
@@ -27,6 +34,7 @@ export default function ({ setGuesses, guesses, win }: Props) {
   };
 
   createEffect(() => {
+    // console.log(ans());
     if (ans.loading) {
       setMsg("");
     } else if (ans.state === "ready" && !ans()) {
@@ -54,11 +62,9 @@ export default function ({ setGuesses, guesses, win }: Props) {
     const topAnswer = results[0];
     const topScore = topAnswer.score ?? 1;
     if (topScore < 0.025) {
-      const existingGuess = guesses.cities
-        .map((g) => g.city)
-        .find((guess) => {
-          return topAnswer.item.id === guess.id;
-        });
+      const existingGuess = guesses.cities.find((guess) => {
+        return topAnswer.item.id === guess.id;
+      });
       if (existingGuess) {
         setMsg(`Already guessed ${existingGuess.city_ascii}.`);
         return;
@@ -92,10 +98,7 @@ export default function ({ setGuesses, guesses, win }: Props) {
     if (!newCity) return;
     if (newCity.capital !== "primary")
       return setMsg(`${newCity.city_ascii} is not a capital city.`);
-    setGuesses("cities", (prev) => [
-      ...prev,
-      { city: newCity, order: prev.length },
-    ]);
+    setGuesses("cities", (prev) => [...prev, newCity]);
     if (newCity.id === ans()?.id) return;
     setMsg(
       `${newCity.city_ascii} is ${formatKm(guesses.closest)} ${
