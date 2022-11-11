@@ -97,10 +97,29 @@ export const makeGlobalStateContext = () => {
     setDistanceUnit,
   };
 };
-type GlobalStateContextType = ReturnType<typeof makeGlobalStateContext>;
-const GlobalStateContext = createContext<GlobalStateContextType>();
 
-export const useGlobalStateContext = () => useContext(GlobalStateContext)!;
+const [theme, setTheme] = createSignal(initial.theme);
+const [storedStats, storeStats] = createSignal(initial.storedStats);
+const [storedGuesses, storeGuesses] = createSignal(initial.storedGuesses);
+const [distanceUnit, setDistanceUnit] = createSignal(initial.distanceUnit);
+
+const defaults = {
+  theme,
+  setTheme,
+  storedStats,
+  storeStats,
+  storedGuesses,
+  storeGuesses,
+  resetStats: () => storeStats(initial.storedStats),
+  resetGuesses: () => storeGuesses(initial.storedGuesses),
+  distanceUnit,
+  setDistanceUnit,
+};
+
+const GlobalStateContext =
+  createContext<ReturnType<typeof makeGlobalStateContext>>(defaults);
+
+export const useGlobalStateContext = () => useContext(GlobalStateContext);
 
 export const Wrapper: ParentComponent = (props) => {
   const [theme, setTheme] = useLocalStorage("theme", initial.theme);
@@ -120,7 +139,7 @@ export const Wrapper: ParentComponent = (props) => {
   return (
     <GlobalStateContext.Provider
       value={{
-        theme: theme,
+        theme,
         setTheme,
         storedStats,
         storeStats,

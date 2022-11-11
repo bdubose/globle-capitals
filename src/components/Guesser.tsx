@@ -3,7 +3,6 @@ import { SetStoreFunction } from "solid-js/store";
 import rawAnswerData from "../data/answers.json";
 import bigCityNames from "../data/big_cities.json";
 import { getAnswer } from "../util/encryption";
-// import { distanceUnit } from "../util/globalState";
 import Fuse from "fuse.js";
 import { formatKm } from "./List";
 import { useGlobalStateContext } from "../Context";

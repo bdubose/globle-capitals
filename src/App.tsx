@@ -9,12 +9,9 @@ import { useGlobalStateContext } from "./Context";
 import Game from "./routes/Game";
 import Home from "./routes/Home";
 import Settings from "./routes/Settings";
-// import { theme } from "./util/globalState";
-
-// Global state
-export const [showStats, setShowStats] = createSignal(false);
 
 const App: Component = () => {
+  const [showStats, setShowStats] = createSignal(false);
   const context = useGlobalStateContext();
   return (
     <div
@@ -28,7 +25,7 @@ const App: Component = () => {
         <Header showStats={showStats} setShowStats={setShowStats} />
         <Routes>
           <Route path="/" component={Home} />
-          <Route path="/game" component={Game} />
+          <Route path="/game" element={<Game setShowStats={setShowStats} />} />
           <Route path="/settings" component={Settings} />
         </Routes>
       </main>

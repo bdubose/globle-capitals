@@ -6,6 +6,7 @@ import {
   lazy,
   on,
   onMount,
+  Setter,
   Show,
   Suspense,
 } from "solid-js";
@@ -14,21 +15,27 @@ import { computeDistanceBetween } from "spherical-geometry-js";
 import Guesser from "../components/Guesser";
 import List from "../components/List";
 import data from "../data/answers.json";
-import { setShowStats } from "../App";
 import { getAnswer } from "../util/encryption";
 import { emojiString } from "../util/emojis";
 import { useGlobalStateContext } from "../Context";
 
 const GameGlobe = lazy(() => import("../components/globes/GameGlobe"));
 
-export default function () {
+type Props = {
+  setShowStats: Setter<boolean>;
+};
+
+export default function (props: Props) {
   // Signals
+  const context = useGlobalStateContext();
   const [pov, setPov] = createSignal<Coords | null>(null);
-  const [win, setWin] = createSignal(false);
+
+  const lastWin = dayjs(context.storedStats().lastWin);
+  const [win, setWin] = createSignal(lastWin.isSame(dayjs(), "date"));
+
   const cities = data["data"] as City[];
   const [ans] = createResource(getAnswer);
 
-  const context = useGlobalStateContext();
   const restoredGuesses = () => {
     return context.storedGuesses().cities.map((cityName, idx) => {
       const city = cities.find((c) => c.city_ascii === cityName);
@@ -41,7 +48,6 @@ export default function () {
     cities: restoredGuesses() as City[],
     get sortedGuesses() {
       const copy = [...this.cities];
-      // if (!ans()) return []
       return copy.sort((a, z) => {
         const proximityA = computeDistanceBetween(a, ans() || a);
         const proximityB = computeDistanceBetween(z, ans() || z);
@@ -66,11 +72,12 @@ export default function () {
   // Stores guesses when new guess added
   // TODO guesses not resetting on globle??
   onMount(() => {
+    console.log("Mounting game");
     if (context.storedGuesses().cities.length === 0) {
       setGuesses({ cities: [] });
       return;
     }
-    if (win()) setTimeout(() => setShowStats(true), 2000);
+    if (win()) setTimeout(() => props.setShowStats(true), 3000);
   });
 
   // Resets guesses when stored guesses expired
@@ -115,7 +122,7 @@ export default function () {
         context.storeStats(newStats);
 
         // Show stats
-        setTimeout(() => setShowStats(true), 2000);
+        setTimeout(() => props.setShowStats(true), 2000);
       }
     })
   );
