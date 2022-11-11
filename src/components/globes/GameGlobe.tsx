@@ -161,6 +161,15 @@ export default function ({ guesses, pov, ans }: Props) {
     if (newPov) turnGlobe(newPov);
   });
 
+  // Clicking the zoom buttons on mobile
+  function zoom(z: number) {
+    const controls = globe.controls() as any;
+    controls.autoRotate = false;
+    const coords = globe.pointOfView();
+    coords["altitude"] = Math.max(coords.altitude + z, 0.05);
+    globe.pointOfView(coords, 250);
+  }
+
   return (
     <div>
       <Show when={!isLoaded}>
@@ -174,6 +183,22 @@ export default function ({ guesses, pov, ans }: Props) {
           "clip-path": `circle(${size / 2}px at ${size / 2}px ${size / 2}px)`,
         }}
       ></div>
+      <div class="w-full flex justify-between text-md sm:hidden">
+        <button
+          class=" px-4 border rounded-md select-none dark:bg-[#582679] 
+            bg-[#F3BC63] dark:border-[#350a46] border-[#FF8E57]"
+          onTouchStart={() => zoom(0.2)}
+        >
+          -
+        </button>
+        <button
+          class=" px-4 border rounded-md select-none dark:bg-[#582679] 
+            bg-[#F3BC63] dark:border-[#350a46] border-[#FF8E57]"
+          onTouchStart={() => zoom(-0.2)}
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 }
