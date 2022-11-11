@@ -1,10 +1,11 @@
 import { useNavigate } from "@solidjs/router";
 import dayjs from "dayjs";
 import { Accessor, createMemo, createSignal, Setter } from "solid-js";
-import { resetGuesses, resetStats, storedStats } from "../util/globalState";
+// import { resetGuesses, resetStats, storedStats } from "../util/globalState";
 import Icon from "./Icon";
 import Prompt from "./Prompt";
 import UAParser from "ua-parser-js";
+import { useGlobalStateContext } from "../Context";
 
 type Props = {
   showStats: Accessor<boolean>;
@@ -13,6 +14,7 @@ type Props = {
 
 export default function (props: Props) {
   const navigate = useNavigate();
+  const context = useGlobalStateContext();
 
   const {
     gamesWon,
@@ -21,10 +23,10 @@ export default function (props: Props) {
     maxStreak,
     usedGuesses,
     emojiGuesses,
-  } = storedStats();
+  } = context.storedStats();
 
   const wonToday = createMemo(() => {
-    const lastWin = dayjs(storedStats().lastWin);
+    const lastWin = dayjs(context.storedStats().lastWin);
     return lastWin.isSame(dayjs(), "date");
   });
 
@@ -64,8 +66,8 @@ export default function (props: Props) {
   }
 
   function triggerResetStats() {
-    resetGuesses();
-    resetStats();
+    context.resetGuesses();
+    context.resetStats();
     setPromptType("Message");
     setPromptText("Stats reset.");
     setTimeout(() => {

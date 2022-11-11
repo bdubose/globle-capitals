@@ -3,9 +3,10 @@ import { SetStoreFunction } from "solid-js/store";
 import rawAnswerData from "../data/answers.json";
 import bigCityNames from "../data/big_cities.json";
 import { getAnswer } from "../util/encryption";
-import { distanceUnit, theme } from "../util/globalState";
+// import { distanceUnit } from "../util/globalState";
 import Fuse from "fuse.js";
 import { formatKm } from "./List";
+import { useGlobalStateContext } from "../Context";
 
 // TODO Cities list emptied after I refreshed for first time after new day!
 
@@ -17,12 +18,15 @@ type Props = {
 
 export default function ({ setGuesses, guesses, win }: Props) {
   const [ans] = createResource(getAnswer);
+  const context = useGlobalStateContext();
 
   const answers = rawAnswerData["data"] as City[];
   const [msg, setMsg] = createSignal("");
   const msgColour = () => {
-    const green = theme().isDark ? "rgb(134 239 172)" : "rgb(22 101 52)";
-    const neutral = theme().isDark ? "rgb(229 231 235)" : "black";
+    const green = context.theme().isDark
+      ? "rgb(134 239 172)"
+      : "rgb(22 101 52)";
+    const neutral = context.theme().isDark ? "rgb(229 231 235)" : "black";
     // if (win()) return green;
     // if (msg().includes("not a capital city")) return neutral;
     // if (msg().includes("from the answer")) return neutral;
@@ -102,7 +106,7 @@ export default function ({ setGuesses, guesses, win }: Props) {
     if (newCity.id === ans()?.id) return;
     setMsg(
       `${newCity.city_ascii} is ${formatKm(guesses.closest)} ${
-        distanceUnit().unit
+        context.distanceUnit().unit
       } from the answer!`
     );
   }

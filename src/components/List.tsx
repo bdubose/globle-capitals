@@ -7,7 +7,8 @@ import {
   Show,
   Switch,
 } from "solid-js";
-import { distanceUnit, setDistanceUnit, setTheme } from "../util/globalState";
+import { useGlobalStateContext } from "../Context";
+// import { distanceUnit, setDistanceUnit, setTheme } from "../util/globalState";
 import Toggle from "./Toggle";
 
 type Props = {
@@ -21,7 +22,8 @@ export function formatKm(m: number) {
     km: 1000,
     miles: 1609.34,
   };
-  const value = m / unitMap[distanceUnit().unit];
+  const context = useGlobalStateContext();
+  const value = m / unitMap[context.distanceUnit().unit];
   if (value < BIN) return "< " + BIN;
   const rounded = Math.round(value / BIN) * BIN;
   const format = (num: number) =>
@@ -30,6 +32,7 @@ export function formatKm(m: number) {
 }
 
 export default function ({ guesses, setPov }: Props) {
+  const context = useGlobalStateContext();
   const [isSortedByDistance, toggleSortByDistance] = createSignal(true);
 
   const sortedGuesses = () => {
@@ -40,9 +43,11 @@ export default function ({ guesses, setPov }: Props) {
     }
   };
 
-  const isAlreadyShowingKm = distanceUnit().unit === "km";
+  const isAlreadyShowingKm = context.distanceUnit().unit === "km";
   const [isShowingKm, setShowingKm] = createSignal(isAlreadyShowingKm);
-  createEffect(() => setDistanceUnit({ unit: isShowingKm() ? "km" : "miles" }));
+  createEffect(() =>
+    context.setDistanceUnit({ unit: isShowingKm() ? "km" : "miles" })
+  );
 
   return (
     <div class="md:ml-10 md:mr-0 py-8 dark:text-white z-30 mb-20">

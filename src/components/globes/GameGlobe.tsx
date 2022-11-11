@@ -4,7 +4,7 @@ import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
 import { arcGradient, cityColour, getCitySize } from "../../util/geometry";
 import rawCountryData from "../../data/country_data.json";
-import { theme } from "../../util/globalState";
+import { useGlobalStateContext } from "../../Context";
 
 type Props = {
   guesses: GuessStore;
@@ -14,6 +14,7 @@ type Props = {
 
 export default function ({ guesses, pov, ans }: Props) {
   const countryData = rawCountryData["features"];
+  const context = useGlobalStateContext();
 
   // Refs
   let globeRef: HTMLDivElement | undefined;
@@ -21,7 +22,7 @@ export default function ({ guesses, pov, ans }: Props) {
 
   // Signals
   const [isLoaded, setIsLoaded] = createSignal(false);
-  const labelBg = theme().isDark ? "#F3E2F1" : "#FEFCE8";
+  const labelBg = context.theme().isDark ? "#F3E2F1" : "#FEFCE8";
 
   // Derived signals
   const cityPoints = () =>
@@ -116,7 +117,9 @@ export default function ({ guesses, pov, ans }: Props) {
         .width(size)
         .height(size)
         .backgroundColor("#00000000")
-        .atmosphereColor(theme().isDark ? "rgba(63, 201, 255)" : "lightskyblue")
+        .atmosphereColor(
+          context.theme().isDark ? "rgba(63, 201, 255)" : "lightskyblue"
+        )
         .onGlobeReady(() => setIsLoaded(true))
         .onGlobeClick(turnGlobe)
 

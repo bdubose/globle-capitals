@@ -7,9 +7,11 @@ import earthDayNoBg from "../images/earth-day-no-bg.webp";
 import earthNightNoBg from "../images/earth-night-no-bg.webp";
 import earthDaySafari from "../images/safari-14-earth-day.jpg";
 import earthNightSafari from "../images/safari-14-earth-night.jpg";
-import { theme } from "./globalState";
+import { useGlobalStateContext } from "../Context";
+// import { theme } from "./globalState";
 
 export const globeImg = () => {
+  const { theme } = useGlobalStateContext();
   const parser = new UAParser();
   const browser = parser.getBrowser();
 
@@ -33,6 +35,7 @@ export const globeImg = () => {
 };
 
 export const globePreviewImg = () => {
+  const { theme } = useGlobalStateContext();
   const parser = new UAParser();
   const browser = parser.getBrowser();
 

@@ -16,13 +16,8 @@ import List from "../components/List";
 import data from "../data/answers.json";
 import { setShowStats } from "../App";
 import { getAnswer } from "../util/encryption";
-import {
-  storedGuesses,
-  storeGuesses,
-  storedStats,
-  storeStats,
-} from "../util/globalState";
 import { emojiString } from "../util/emojis";
+import { useGlobalStateContext } from "../Context";
 
 const GameGlobe = lazy(() => import("../components/globes/GameGlobe"));
 
@@ -33,8 +28,9 @@ export default function () {
   const cities = data["data"] as City[];
   const [ans] = createResource(getAnswer);
 
+  const context = useGlobalStateContext();
   const restoredGuesses = () => {
-    return storedGuesses().cities.map((cityName, idx) => {
+    return context.storedGuesses().cities.map((cityName, idx) => {
       const city = cities.find((c) => c.city_ascii === cityName);
       return city;
     });
@@ -70,7 +66,7 @@ export default function () {
   // Stores guesses when new guess added
   // TODO guesses not resetting on globle??
   onMount(() => {
-    if (storedGuesses().cities.length === 0) {
+    if (context.storedGuesses().cities.length === 0) {
       setGuesses({ cities: [] });
       return;
     }
@@ -80,7 +76,7 @@ export default function () {
   // Resets guesses when stored guesses expired
   createEffect(() => {
     const storable = guesses.cities.map((guess) => guess.city_ascii);
-    storeGuesses({
+    context.storeGuesses({
       cities: storable,
       expiration: dayjs().endOf("day").toDate(),
     });
@@ -90,20 +86,23 @@ export default function () {
   createEffect(
     on(win, () => {
       const today = dayjs();
-      const lastWin = dayjs(storedStats().lastWin);
+      const lastWin = dayjs(context.storedStats().lastWin);
       if (win() && lastWin.isBefore(today, "date")) {
         // Store new stats in local storage
         const lastWin = today;
-        const gamesWon = storedStats().gamesWon + 1;
+        const gamesWon = context.storedStats().gamesWon + 1;
         const streakBroken = lastWin.diff(today, "date") > 1;
         const currentStreak = streakBroken
           ? 1
-          : storedStats().currentStreak + 1;
+          : context.storedStats().currentStreak + 1;
         const maxStreak =
-          currentStreak > storedStats().maxStreak
+          currentStreak > context.storedStats().maxStreak
             ? currentStreak
-            : storedStats().maxStreak;
-        const usedGuesses = [...storedStats().usedGuesses, guesses.numGuesses];
+            : context.storedStats().maxStreak;
+        const usedGuesses = [
+          ...context.storedStats().usedGuesses,
+          guesses.numGuesses,
+        ];
         const emojiGuesses = emojiString(guesses.cities, ans());
         const newStats = {
           lastWin: lastWin.toString(),
@@ -113,7 +112,7 @@ export default function () {
           usedGuesses,
           emojiGuesses,
         };
-        storeStats(newStats);
+        context.storeStats(newStats);
 
         // Show stats
         setTimeout(() => setShowStats(true), 2000);

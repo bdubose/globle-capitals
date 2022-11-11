@@ -2,11 +2,13 @@ import dayjs from "dayjs";
 import jwtDecode from "jwt-decode";
 import { createSignal, onMount, Show } from "solid-js";
 import Prompt from "../components/Prompt";
-import { resetStats, storedStats, storeStats } from "../util/globalState";
+import { useGlobalStateContext } from "../Context";
+// import { resetStats, storedStats, storeStats } from "../util/globalState";
 
 // TODO create resource and loading visibilty
 
 export default function () {
+  const context = useGlobalStateContext();
   const [isConnected, setIsConnected] = createSignal(false);
   const [token, setToken] = createSignal("");
   const [msg, setMsg] = createSignal("");
@@ -58,7 +60,7 @@ export default function () {
   async function saveBackup() {
     try {
       const body = JSON.stringify({
-        stats: storedStats(),
+        stats: context.storedStats(),
         token: token(),
       });
       const netlifyResponse = await fetch("/.netlify/functions/backup", {
@@ -70,7 +72,7 @@ export default function () {
       setPromptType("Message");
       setPromptText(message);
       setShowPrompt(true);
-      setBackupStats(storedStats());
+      setBackupStats(context.storedStats());
     } catch (e) {
       console.log("Failed to save score.");
       console.error(e);
@@ -92,7 +94,7 @@ export default function () {
       const endpoint = `/.netlify/functions/backup?token=${token()}`;
       const netlifyResponse = await fetch(endpoint);
       const data = await netlifyResponse.json();
-      storeStats(data.document);
+      context.storeStats(data.document);
       setPromptType("Message");
       setPromptText("Backup restored.");
     } catch (e) {
@@ -115,7 +117,7 @@ export default function () {
         method: "DELETE",
       });
       const data = await netlifyResponse.json();
-      resetStats();
+      context.resetStats();
       setPromptType("Message");
       setPromptText(data.message);
       setBackupStats(null);

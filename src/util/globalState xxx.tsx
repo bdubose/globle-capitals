@@ -44,9 +44,9 @@ function useLocalStorage<T extends Record<string, any>>(
 }
 
 // Theme
-export const [theme, setTheme] = useLocalStorage<{ isDark: boolean }>("theme", {
-  isDark: false,
-});
+// export const [theme, setTheme] = useLocalStorage<{ isDark: boolean }>("theme", {
+//   isDark: false,
+// });
 
 // Stats
 const firstStats = {
