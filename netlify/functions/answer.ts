@@ -1,7 +1,6 @@
 import { Handler } from "@netlify/functions";
 import data from "../../src/data/answers.json";
 import crypto from "crypto-js";
-import dayjs from "dayjs";
 
 // TODO there could be potential daylight savings time issues
 
@@ -13,9 +12,7 @@ function encrypt(text: string) {
 
 function generateKey(list: any[], dayCode: number) {
   const SHUFFLE_KEY = process.env.SHUFFLE_KEY || "1";
-  const shuffleAdjust = dayjs().isBefore(dayjs("2022-08-01")) ? "5" : "15";
-  const key =
-    Math.floor(dayCode / parseInt(SHUFFLE_KEY + shuffleAdjust)) % list.length;
+  const key = Math.floor(dayCode / parseInt(SHUFFLE_KEY)) % list.length;
   return key;
 }
 
