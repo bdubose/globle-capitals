@@ -9,7 +9,7 @@ import { getContext } from "../Context";
 // "The given origin is not allowed for the given client ID."
 
 export default function () {
-  const context = context();
+  const context = getContext();
   const [isConnected, setIsConnected] = createSignal(false);
   const [token, setToken] = createSignal("");
   const [msg, setMsg] = createSignal("");
