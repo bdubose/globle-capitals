@@ -6,14 +6,14 @@ import { render } from "solid-js/web";
 import "./index.css";
 import App from "./App";
 import { Router } from "@solidjs/router";
-import { Wrapper } from "./Context";
+import { GlobalContext, makeContext } from "./Context";
 
 render(
   () => (
     <Router>
-      <Wrapper>
+      <GlobalContext.Provider value={makeContext("Stored")}>
         <App />
-      </Wrapper>
+      </GlobalContext.Provider>
     </Router>
   ),
   document.getElementById("root") as HTMLElement

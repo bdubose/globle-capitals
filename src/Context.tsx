@@ -4,7 +4,6 @@ import {
   createContext,
   createEffect,
   createSignal,
-  ParentComponent,
   Setter,
   useContext,
 } from "solid-js";
@@ -68,21 +67,29 @@ const initial = {
   distanceUnit: { unit: "km" as Unit },
 };
 
-// GLOBAL STATE CONTEXT
-export const makeGlobalStateContext = () => {
-  const [theme, setTheme] = useLocalStorage("theme", initial.theme);
-  const [storedStats, storeStats] = useLocalStorage(
-    "statistics",
-    initial.storedStats
-  );
-  const [storedGuesses, storeGuesses] = useLocalStorage(
+export const makeContext = (mode: "Stored" | "Static") => {
+  // There needs to be the "Static" option for initial page render, otherwise
+  // there's warnings in the console because it doesn't like the createEffect
+  // in useLocalStorage running outside of render.
+  const create = (props: Parameters<typeof useLocalStorage>) => {
+    const [key, defaultValue] = props;
+    if (mode === "Stored") {
+      return useLocalStorage(key, defaultValue);
+    } else {
+      return createSignal(defaultValue);
+    }
+  };
+
+  const [theme, setTheme] = create(["theme", initial.theme]);
+  const [storedStats, storeStats] = create(["statistics", initial.storedStats]);
+  const [storedGuesses, storeGuesses] = create([
     "guesses",
-    initial.storedGuesses
-  );
-  const [distanceUnit, setDistanceUnit] = useLocalStorage<{ unit: Unit }>(
+    initial.storedGuesses,
+  ]);
+  const [distanceUnit, setDistanceUnit] = create([
     "distance_unit",
-    initial.distanceUnit
-  );
+    initial.distanceUnit,
+  ]);
 
   return {
     theme,
@@ -98,60 +105,6 @@ export const makeGlobalStateContext = () => {
   };
 };
 
-const [theme, setTheme] = createSignal(initial.theme);
-const [storedStats, storeStats] = createSignal(initial.storedStats);
-const [storedGuesses, storeGuesses] = createSignal(initial.storedGuesses);
-const [distanceUnit, setDistanceUnit] = createSignal(initial.distanceUnit);
+export const GlobalContext = createContext(makeContext("Static"));
 
-const defaults = {
-  theme,
-  setTheme,
-  storedStats,
-  storeStats,
-  storedGuesses,
-  storeGuesses,
-  resetStats: () => storeStats(initial.storedStats),
-  resetGuesses: () => storeGuesses(initial.storedGuesses),
-  distanceUnit,
-  setDistanceUnit,
-};
-
-const GlobalStateContext =
-  createContext<ReturnType<typeof makeGlobalStateContext>>(defaults);
-
-export const useGlobalStateContext = () => useContext(GlobalStateContext);
-
-export const Wrapper: ParentComponent = (props) => {
-  const [theme, setTheme] = useLocalStorage("theme", initial.theme);
-  const [storedStats, storeStats] = useLocalStorage(
-    "statistics",
-    initial.storedStats
-  );
-  const [storedGuesses, storeGuesses] = useLocalStorage(
-    "guesses",
-    initial.storedGuesses
-  );
-  const [distanceUnit, setDistanceUnit] = useLocalStorage(
-    "distance_unit",
-    initial.distanceUnit
-  );
-
-  return (
-    <GlobalStateContext.Provider
-      value={{
-        theme,
-        setTheme,
-        storedStats,
-        storeStats,
-        storedGuesses,
-        storeGuesses,
-        resetStats: () => storeStats(initial.storedStats),
-        resetGuesses: () => storeGuesses(initial.storedGuesses),
-        distanceUnit,
-        setDistanceUnit,
-      }}
-    >
-      {props.children}
-    </GlobalStateContext.Provider>
-  );
-};
+export const useGlobalStateContext = () => useContext(GlobalContext);

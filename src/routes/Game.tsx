@@ -129,13 +129,20 @@ export default function (props: Props) {
 
   return (
     <div>
-      <Guesser setGuesses={setGuesses} guesses={guesses} win={win} />
       <Show when={ans()} keyed>
         {(ans) => {
           return (
-            <Suspense fallback={<p>Loading...</p>}>
-              <GameGlobe guesses={guesses} pov={pov} ans={ans} />
-            </Suspense>
+            <>
+              <Guesser
+                setGuesses={setGuesses}
+                guesses={guesses}
+                win={win}
+                ans={ans}
+              />
+              <Suspense fallback={<p>Loading...</p>}>
+                <GameGlobe guesses={guesses} pov={pov} ans={ans} />
+              </Suspense>
+            </>
           );
         }}
       </Show>

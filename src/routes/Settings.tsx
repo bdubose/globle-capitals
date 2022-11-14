@@ -1,7 +1,7 @@
-import { createEffect, createSignal, For } from "solid-js";
+import { createEffect, createSignal, For, onMount } from "solid-js";
 import Backup from "../components/Backup";
 import Toggle from "../components/Toggle";
-import { useGlobalStateContext } from "../Context";
+import { useGlobalStateContext, useLocalStorage } from "../Context";
 
 export default function () {
   const context = useGlobalStateContext();

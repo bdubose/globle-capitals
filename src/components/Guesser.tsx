@@ -1,11 +1,10 @@
-import { Accessor, createEffect, createResource, createSignal } from "solid-js";
+import { Accessor, createEffect, createSignal } from "solid-js";
 import { SetStoreFunction } from "solid-js/store";
 import rawAnswerData from "../data/answers.json";
 import bigCityNames from "../data/big_cities.json";
-import { getAnswer } from "../util/encryption";
 import Fuse from "fuse.js";
-import { formatKm } from "./List";
-import { useGlobalStateContext } from "../Context";
+import { useGlobalStateContext, useLocalStorage } from "../Context";
+import { computeDistanceBetween } from "spherical-geometry-js";
 
 // TODO Cities list emptied after I refreshed for first time after new day!
 
@@ -13,10 +12,10 @@ type Props = {
   setGuesses: SetStoreFunction<GuessStore>;
   guesses: GuessStore;
   win: Accessor<boolean>;
+  ans: City;
 };
 
-export default function ({ setGuesses, guesses, win }: Props) {
-  const [ans] = createResource(getAnswer);
+export default function (props: Props) {
   const context = useGlobalStateContext();
 
   const answers = rawAnswerData["data"] as City[];
@@ -26,22 +25,13 @@ export default function ({ setGuesses, guesses, win }: Props) {
       ? "rgb(134 239 172)"
       : "rgb(22 101 52)";
     const neutral = context.theme().isDark ? "rgb(229 231 235)" : "black";
-    // if (win()) return green;
-    // if (msg().includes("not a capital city")) return neutral;
-    // if (msg().includes("from the answer")) return neutral;
-    // if (msg().includes("Did you mean")) return neutral;
-    return win() ? green : neutral;
+    return props.win() ? green : neutral;
   };
 
   createEffect(() => {
-    // console.log(ans());
-    if (ans.loading) {
-      setMsg("");
-    } else if (ans.state === "ready" && !ans()) {
-      setMsg("An error has occurred. Please try again later.");
-    } else if (win() && ans()?.city_ascii) {
-      setMsg(`The mystery city is ${ans()?.city_ascii}!`);
-    } else if (win() && !ans()?.city_ascii) {
+    if (props.win() && props.ans.city_ascii) {
+      setMsg(`The mystery city is ${props.ans.city_ascii}!`);
+    } else if (props.win() && !props.ans.city_ascii) {
       setMsg("You win!");
     }
   });
@@ -63,7 +53,7 @@ export default function ({ setGuesses, guesses, win }: Props) {
     const topAnswer = results[0];
     const topScore = topAnswer.score ?? 1;
     if (topScore < 0.025) {
-      const existingGuess = guesses.cities.find((guess) => {
+      const existingGuess = props.guesses.cities.find((guess) => {
         return topAnswer.item.id === guess.id;
       });
       if (existingGuess) {
@@ -101,13 +91,14 @@ export default function ({ setGuesses, guesses, win }: Props) {
     if (!newCity) return;
     if (newCity.capital !== "primary")
       return setMsg(`${newCity.city_ascii} is not a capital city.`);
-    setGuesses("cities", (prev) => [...prev, newCity]);
-    if (newCity.id === ans()?.id) return;
-    setMsg(
-      `${newCity.city_ascii} is ${formatKm(guesses.closest)} ${
-        context.distanceUnit().unit
-      } from the answer!`
-    );
+    const distance = computeDistanceBetween(newCity, props.ans);
+    const direction = distance < props.guesses.closest ? "warmer!" : "cooler.";
+    console.log("distance:", distance);
+    console.log("closest:", props.guesses.closest);
+    console.log("direction:", direction);
+    props.setGuesses("cities", (prev) => [...prev, newCity]);
+    if (newCity.id === props.ans.id) return;
+    setMsg(`${newCity.city_ascii} is ${direction}`);
   }
 
   return (
@@ -128,15 +119,16 @@ export default function ({ setGuesses, guesses, win }: Props) {
           w-full"
           placeholder="Enter city name here."
           autocomplete="off"
-          disabled={win() || !ans()}
+          disabled={props.win() || !props.ans}
           required
         />
         <button
           type="submit"
           class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 
-          dark:hover:bg-purple-900 dark:disabled:bg-purple-900 disabled:bg-blue-900  text-white 
+          dark:hover:bg-purple-900 dark:disabled:bg-purple-900 
+          disabled:bg-blue-900 text-white 
           font-bold py-1 md:py-2 px-4 rounded focus:shadow-outline"
-          disabled={win() || !ans()}
+          disabled={props.win() || !props.ans}
         >
           Enter
         </button>
