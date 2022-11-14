@@ -1,5 +1,5 @@
 import { Route, Routes } from "@solidjs/router";
-import { Component, createEffect, createSignal } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import "./background.css";
 
 import Header from "./components/Header";
@@ -10,12 +10,15 @@ import Game from "./routes/Game";
 import Home from "./routes/Home";
 import Settings from "./routes/Settings";
 
+// TODO FAQ and privacy policy pages
+// TODO wrap routes in suspense/lazy loading
+
 const App: Component = () => {
   const [showStats, setShowStats] = createSignal(false);
   const context = useGlobalStateContext();
   return (
     <div
-      class="relative top-0 bottom-0 left-0 right-0 min-h-screen "
+      class="relative top-0 bottom-0 left-0 right-0 min-h-screen"
       classList={{ dark: context.theme().isDark }}
     >
       <Modal trigger={showStats} setTrigger={setShowStats}>

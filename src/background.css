@@ -17,12 +17,17 @@
 }
 
 .sky {
+  background: blue;
   background: radial-gradient(
       ellipse at top,
-      var(--myColor1),
-      var(--foreground)
+      var(--myColor1, rgba(63, 201, 255, 0.7)),
+      var(--foreground, transparent)
     ),
-    radial-gradient(ellipse at bottom, var(--myColor2), var(--foreground))
+    radial-gradient(
+        ellipse at bottom,
+        var(--myColor2, rgba(255, 196, 87, 0.7)),
+        var(--foreground, transparent)
+      )
       no-repeat fixed;
   transition: --myColor1 1s, --myColor2 1s, --foreground 1s;
 }

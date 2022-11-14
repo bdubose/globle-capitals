@@ -3,9 +3,10 @@ import jwtDecode from "jwt-decode";
 import { createSignal, onMount, Show } from "solid-js";
 import Prompt from "../components/Prompt";
 import { useGlobalStateContext } from "../Context";
-// import { resetStats, storedStats, storeStats } from "../util/globalState";
 
 // TODO create resource and loading visibilty
+// TODO add domains to google cloud dashboard
+// "The given origin is not allowed for the given client ID."
 
 export default function () {
   const context = useGlobalStateContext();
@@ -45,15 +46,17 @@ export default function () {
   }
 
   onMount(() => {
-    google.accounts.id.initialize({
-      client_id:
-        "197638666704-ta3tn996fsubrmog0nmkrekp0u7nslq7.apps.googleusercontent.com",
-      callback: handleCredentialResponse,
-      auto_select: true,
-    });
-    google.accounts.id.renderButton(googleBtn, {
-      type: "standard",
-    });
+    if (google) {
+      google.accounts.id.initialize({
+        client_id:
+          "197638666704-ta3tn996fsubrmog0nmkrekp0u7nslq7.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
+        auto_select: true,
+      });
+      google.accounts.id.renderButton(googleBtn, {
+        type: "standard",
+      });
+    }
   });
 
   // Saving score
@@ -161,7 +164,7 @@ export default function () {
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
           text-white rounded-md px-8 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
-          disabled:bg-blue-400
+          disabled:bg-blue-400 dark:disabled:bg-purple-900
           justify-around"
           disabled={!isConnected()}
           onClick={saveBackup}
@@ -172,7 +175,7 @@ export default function () {
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
           text-white rounded-md px-8 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
-          disabled:bg-blue-400
+          disabled:bg-blue-400 dark:disabled:bg-purple-900
           justify-around"
           disabled={!isConnected()}
           onClick={restoreBackupPrompt}
