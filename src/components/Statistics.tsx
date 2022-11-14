@@ -1,11 +1,10 @@
 import { useNavigate } from "@solidjs/router";
 import dayjs from "dayjs";
 import { Accessor, createMemo, createSignal, Setter } from "solid-js";
-// import { resetGuesses, resetStats, storedStats } from "../util/globalState";
 import Icon from "./Icon";
 import Prompt from "./Prompt";
 import UAParser from "ua-parser-js";
-import { useGlobalStateContext } from "../Context";
+import { getContext } from "../Context";
 
 type Props = {
   showStats: Accessor<boolean>;
@@ -14,7 +13,7 @@ type Props = {
 
 export default function (props: Props) {
   const navigate = useNavigate();
-  const context = useGlobalStateContext();
+  const context = getContext();
 
   const {
     gamesWon,
@@ -122,7 +121,7 @@ ${wonToday() ? emojiGuesses : "--"} = ${todaysGuesses}
         class="absolute top-3 right-4"
         onClick={() => props.setShowStats(false)}
       >
-        <Icon shape="x" />
+        <Icon shape="x" size={18} />
       </button>
       <h2 class="text-3xl text-center font-extrabold font-header dark:text-gray-200">
         Statistics

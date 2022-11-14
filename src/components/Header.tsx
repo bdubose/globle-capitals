@@ -29,7 +29,7 @@ export default function Header({ showStats, setShowStats }: Props) {
       <div class="relative h-full">
         <div class="flex absolute left-0 bottom-1">
           <A href="/">
-            <Icon shape="help" />
+            <Icon shape="help" size={24} />
           </A>
         </div>
         <A
@@ -41,14 +41,14 @@ export default function Header({ showStats, setShowStats }: Props) {
           </h1>
         </A>
         <div class="space-x-1 flex absolute right-0 bottom-1">
-          <Show when={!showStats()} fallback={<Icon shape="stats" />}>
+          <Show when={!showStats()} fallback={<Icon shape="stats" size={24} />}>
             <button aria-label="Statistics" onClick={toggleStats}>
-              <Icon shape="stats" />
+              <Icon shape="stats" size={24} />
             </button>
           </Show>
           <button aria-label="Settings">
             <A href="/settings">
-              <Icon shape="settings" />
+              <Icon shape="settings" size={24} />
             </A>
           </button>
         </div>

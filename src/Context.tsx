@@ -50,46 +50,42 @@ export function useLocalStorage<T extends Record<string, any>>(
   return [newValue, setNewValue];
 }
 
-const initial = {
-  theme: { isDark: false },
-  storedStats: {
-    gamesWon: 0,
-    lastWin: "1970-01-01",
-    currentStreak: 0,
-    maxStreak: 0,
-    usedGuesses: [] as number[],
-    emojiGuesses: "",
-  },
-  storedGuesses: {
-    cities: [] as string[],
-    expiration: dayjs().endOf("day").toDate(),
-  },
-  distanceUnit: { unit: "km" as Unit },
-};
-
 export const makeContext = (mode: "Stored" | "Static") => {
+  const initial = {
+    theme: { isDark: false },
+    statistics: {
+      gamesWon: 0,
+      lastWin: "1970-01-01",
+      currentStreak: 0,
+      maxStreak: 0,
+      usedGuesses: [] as number[],
+      emojiGuesses: "",
+    },
+    guesses: {
+      cities: [] as string[],
+      expiration: dayjs().endOf("day").toDate(),
+    },
+    distanceUnit: { unit: "km" as Unit },
+  };
+
+  type Keys = keyof typeof initial;
+
   // There needs to be the "Static" option for initial page render, otherwise
   // there's warnings in the console because it doesn't like the createEffect
   // in useLocalStorage running outside of render.
-  const create = (props: Parameters<typeof useLocalStorage>) => {
-    const [key, defaultValue] = props;
+  function create<T extends Keys>(key: T) {
+    const defaultValue = initial[key];
     if (mode === "Stored") {
       return useLocalStorage(key, defaultValue);
     } else {
       return createSignal(defaultValue);
     }
-  };
+  }
 
-  const [theme, setTheme] = create(["theme", initial.theme]);
-  const [storedStats, storeStats] = create(["statistics", initial.storedStats]);
-  const [storedGuesses, storeGuesses] = create([
-    "guesses",
-    initial.storedGuesses,
-  ]);
-  const [distanceUnit, setDistanceUnit] = create([
-    "distance_unit",
-    initial.distanceUnit,
-  ]);
+  const [theme, setTheme] = create("theme");
+  const [storedStats, storeStats] = create("statistics");
+  const [storedGuesses, storeGuesses] = create("guesses");
+  const [distanceUnit, setDistanceUnit] = create("distanceUnit");
 
   return {
     theme,
@@ -98,8 +94,8 @@ export const makeContext = (mode: "Stored" | "Static") => {
     storeStats,
     storedGuesses,
     storeGuesses,
-    resetStats: () => storeStats(initial.storedStats),
-    resetGuesses: () => storeGuesses(initial.storedGuesses),
+    resetStats: () => storeStats(initial.statistics),
+    resetGuesses: () => storeGuesses(initial.guesses),
     distanceUnit,
     setDistanceUnit,
   };
@@ -107,4 +103,4 @@ export const makeContext = (mode: "Stored" | "Static") => {
 
 export const GlobalContext = createContext(makeContext("Static"));
 
-export const useGlobalStateContext = () => useContext(GlobalContext);
+export const getContext = () => useContext(GlobalContext);

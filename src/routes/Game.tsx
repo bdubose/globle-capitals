@@ -17,7 +17,7 @@ import List from "../components/List";
 import data from "../data/answers.json";
 import { getAnswer } from "../util/encryption";
 import { emojiString } from "../util/emojis";
-import { useGlobalStateContext } from "../Context";
+import { getContext } from "../Context";
 
 const GameGlobe = lazy(() => import("../components/globes/GameGlobe"));
 
@@ -27,7 +27,8 @@ type Props = {
 
 export default function (props: Props) {
   // Signals
-  const context = useGlobalStateContext();
+  // const {storedStats, storedGuesses, storeGuesses, storeStats} = context();
+  const context = getContext();
   const [pov, setPov] = createSignal<Coords | null>(null);
 
   const lastWin = dayjs(context.storedStats().lastWin);
@@ -58,6 +59,7 @@ export default function (props: Props) {
       return this.cities.length;
     },
     get closest() {
+      if (this.cities.length === 0) return 0;
       const closestCity = this.sortedGuesses[0];
       return computeDistanceBetween(closestCity, ans() || closestCity);
     },

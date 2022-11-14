@@ -4,7 +4,7 @@ import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
 import { arcGradient, cityColour, getCitySize } from "../../util/geometry";
 import rawCountryData from "../../data/country_data.json";
-import { useGlobalStateContext } from "../../Context";
+import { getContext } from "../../Context";
 
 type Props = {
   guesses: GuessStore;
@@ -14,7 +14,7 @@ type Props = {
 
 export default function ({ guesses, pov, ans }: Props) {
   const countryData = rawCountryData["features"];
-  const context = useGlobalStateContext();
+  const context = getContext();
 
   // Refs
   let globeRef: HTMLDivElement | undefined;

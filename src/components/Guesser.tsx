@@ -3,7 +3,7 @@ import { SetStoreFunction } from "solid-js/store";
 import rawAnswerData from "../data/answers.json";
 import bigCityNames from "../data/big_cities.json";
 import Fuse from "fuse.js";
-import { useGlobalStateContext, useLocalStorage } from "../Context";
+import { getContext } from "../Context";
 import { computeDistanceBetween } from "spherical-geometry-js";
 
 // TODO Cities list emptied after I refreshed for first time after new day!
@@ -16,10 +16,18 @@ type Props = {
 };
 
 export default function (props: Props) {
-  const context = useGlobalStateContext();
+  const context = getContext();
+
+  const isFirstGuess = props.guesses.numGuesses === 0;
+  const isSecondGuess = props.guesses.numGuesses === 1;
+  const mountMsg = isFirstGuess
+    ? "Enter the name of any capital city to make your first guess!"
+    : isSecondGuess
+    ? "Enter the your next guess!"
+    : "";
 
   const answers = rawAnswerData["data"] as City[];
-  const [msg, setMsg] = createSignal("");
+  const [msg, setMsg] = createSignal(mountMsg);
   const msgColour = () => {
     const green = context.theme().isDark
       ? "rgb(134 239 172)"
@@ -49,7 +57,6 @@ export default function (props: Props) {
       setMsg(`"${newGuess}" not found in database.`);
       return;
     }
-    // console.log(results);
     const topAnswer = results[0];
     const topScore = topAnswer.score ?? 1;
     if (topScore < 0.025) {
@@ -93,10 +100,8 @@ export default function (props: Props) {
       return setMsg(`${newCity.city_ascii} is not a capital city.`);
     const distance = computeDistanceBetween(newCity, props.ans);
     const direction = distance < props.guesses.closest ? "warmer!" : "cooler.";
-    console.log("distance:", distance);
-    console.log("closest:", props.guesses.closest);
-    console.log("direction:", direction);
     props.setGuesses("cities", (prev) => [...prev, newCity]);
+    if (isSecondGuess) return setMsg(mountMsg);
     if (newCity.id === props.ans.id) return;
     setMsg(`${newCity.city_ascii} is ${direction}`);
   }

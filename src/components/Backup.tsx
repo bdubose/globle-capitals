@@ -2,14 +2,14 @@ import dayjs from "dayjs";
 import jwtDecode from "jwt-decode";
 import { createSignal, onMount, Show } from "solid-js";
 import Prompt from "../components/Prompt";
-import { useGlobalStateContext } from "../Context";
+import { getContext } from "../Context";
 
 // TODO create resource and loading visibilty
 // TODO add domains to google cloud dashboard
 // "The given origin is not allowed for the given client ID."
 
 export default function () {
-  const context = useGlobalStateContext();
+  const context = context();
   const [isConnected, setIsConnected] = createSignal(false);
   const [token, setToken] = createSignal("");
   const [msg, setMsg] = createSignal("");

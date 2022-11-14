@@ -7,7 +7,7 @@ import {
   Show,
   Switch,
 } from "solid-js";
-import { useGlobalStateContext } from "../Context";
+import { getContext } from "../Context";
 // import { distanceUnit, setDistanceUnit, setTheme } from "../util/globalState";
 import Toggle from "./Toggle";
 
@@ -22,7 +22,7 @@ export function formatKm(m: number) {
     km: 1000,
     miles: 1609.34,
   };
-  const context = useGlobalStateContext();
+  const context = getContext();
   const value = m / unitMap[context.distanceUnit().unit];
   if (value < BIN) return "< " + BIN;
   const rounded = Math.round(value / BIN) * BIN;
@@ -32,7 +32,7 @@ export function formatKm(m: number) {
 }
 
 export default function ({ guesses, setPov }: Props) {
-  const context = useGlobalStateContext();
+  const context = getContext();
   const [isSortedByDistance, toggleSortByDistance] = createSignal(true);
 
   const sortedGuesses = () => {

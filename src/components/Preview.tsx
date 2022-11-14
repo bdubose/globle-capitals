@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import { interpolateTurbo, scaleSequential } from "d3";
 import { globePreviewImg } from "../util/globe";
 import UAParser from "ua-parser-js";
-import { useGlobalStateContext } from "../Context";
+import { getContext } from "../Context";
 
 type City = {
   name: string;
@@ -12,7 +12,7 @@ type City = {
 };
 
 export default function () {
-  const { theme } = useGlobalStateContext();
+  const { theme } = getContext();
   let svg: SVGSVGElement;
   const parser = new UAParser();
   const isMobile = parser.getDevice().type === "mobile";
