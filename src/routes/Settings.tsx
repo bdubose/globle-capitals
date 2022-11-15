@@ -19,7 +19,7 @@ export default function () {
   }
 
   return (
-    <div class="p-4 space-y-6">
+    <div class="py-4 space-y-6">
       <h2 class="text-3xl text-center font-header font-extrabold dark:text-gray-200">
         Settings
       </h2>

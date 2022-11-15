@@ -49,7 +49,7 @@ export default function ({ guesses, setPov }: Props) {
   );
 
   return (
-    <div class="md:ml-10 md:mr-0 py-8 dark:text-white z-30 mb-20">
+    <div class="py-8 dark:text-white z-30 mb-20">
       <Switch fallback={<p>Guesses will appear here.</p>}>
         <Match when={guesses.numGuesses < 1}>
           <p>Guesses will appear here.</p>

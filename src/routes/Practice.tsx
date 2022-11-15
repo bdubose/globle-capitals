@@ -60,7 +60,7 @@ export default function () {
     <div>
       <Show when={showGlobe()} keyed fallback={<p>Loading...</p>}>
         <>
-          <p class="italic">You are currently in Practice Mode.</p>
+          <p class="italic">You are in Practice Mode.</p>
           <Guesser
             setGuesses={setGuesses}
             guesses={guesses}

@@ -40,10 +40,10 @@ export function useLocalStorage<T extends Record<string, any>>(
 
   createEffect(() => {
     if (isNotExpired) {
-      console.log(`Saving to local storage "${key}".`);
+      // console.log(`Saving to local storage "${key}".`);
       localStorage.setItem(key, JSON.stringify(newValue()));
     } else {
-      console.log(`Local storage "${key}" expired.`);
+      // console.log(`Local storage "${key}" expired.`);
       localStorage.setItem(key, JSON.stringify(defaultValue));
     }
   });

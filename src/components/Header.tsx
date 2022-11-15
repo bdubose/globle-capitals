@@ -28,7 +28,7 @@ export default function Header({ showStats, setShowStats }: Props) {
     <header class="pt-8 h-10 relative dark:text-gray-200 z-10">
       <div class="relative h-full">
         <div class="flex absolute left-0 bottom-1">
-          <A href="/">
+          <A href="/" aria-label="help">
             <Icon shape="help" size={24} />
           </A>
         </div>
@@ -47,7 +47,7 @@ export default function Header({ showStats, setShowStats }: Props) {
             </button>
           </Show>
           <button aria-label="Settings">
-            <A href="/settings">
+            <A href="/settings" aria-label="settings">
               <Icon shape="settings" size={24} />
             </A>
           </button>
