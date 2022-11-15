@@ -40,7 +40,7 @@ export default function (props: Props) {
 
   createEffect(() => {
     if (props.win() && props.ans.city_ascii) {
-      setMsg(`The mystery city is ${props.ans.city_ascii}!`);
+      setMsg(`The Mystery Capitol is ${props.ans.city_ascii}!`);
     } else if (props.win() && !props.ans.city_ascii) {
       setMsg("You win!");
     }
@@ -59,7 +59,6 @@ export default function (props: Props) {
       setMsg(`"${newGuess}" not found in database.`);
       return;
     }
-    console.log(results);
     const topAnswer = results[0];
     const topScore = topAnswer.score ?? 1;
     if (topScore < 0.025) {
@@ -102,12 +101,12 @@ export default function (props: Props) {
     if (newCity.capital !== "primary")
       return setMsg(`${newCity.city_ascii} is not a capital city.`);
     props.setGuesses("cities", (prev) => [...prev, newCity]);
+    if (newCity.id === props.ans.id) return;
     if (props.guesses.numGuesses <= 1) return setMsg(mountMsg);
     const lastGuess = props.guesses.cities[props.guesses.numGuesses - 2];
     const distance = computeDistanceBetween(newCity, props.ans);
     const lastDistance = computeDistanceBetween(lastGuess, props.ans);
     const direction = distance < lastDistance ? "warmer!" : "cooler.";
-    if (newCity.id === props.ans.id) return;
     if (props.guesses.numGuesses > 1) {
       setMsg(`${newCity.city_ascii} is ${direction}`);
     }
@@ -132,6 +131,7 @@ export default function (props: Props) {
           placeholder="Enter city name here."
           autocomplete="off"
           disabled={props.win() || !props.ans}
+          data-cy="guesser"
           required
         />
         <button

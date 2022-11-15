@@ -46,6 +46,7 @@ export function Prompt(props: Props) {
             text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
             onClick={runYes}
             disabled={resetComplete()}
+            data-cy="yes-btn"
           >
             Yes
           </button>
@@ -54,6 +55,7 @@ export function Prompt(props: Props) {
             text-base font-medium hover:bg-blue-900 disabled:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
             onClick={() => props.setShowPrompt(false)}
             disabled={resetComplete()}
+            data-cy="no-btn"
           >
             No
           </button>

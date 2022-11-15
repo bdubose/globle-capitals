@@ -73,6 +73,9 @@ export default function () {
   ];
   return (
     <div class="space-y-6 my-4">
+      <h2 class="text-3xl text-center font-header font-extrabold dark:text-gray-200">
+        FAQ
+      </h2>
       <For each={faqs}>
         {(faq, idx) => {
           return <Item {...faq} idx={idx()} />;

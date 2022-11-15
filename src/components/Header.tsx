@@ -5,36 +5,25 @@ import Icon from "./Icon";
 type Props = {
   showStats: Accessor<boolean>;
   setShowStats: Setter<boolean>;
-  // toggleStats: () => void;
 };
 
 export default function Header({ showStats, setShowStats }: Props) {
-  // const { theme } = useContext(ThemeContext);
-  // const theme = { nightMode: false };
-  // const navigate = useNavigate();
-  // Set up practice mode
-  // const [params] = useSearchParams();
-  // const practiceMode = !!params.get("practice_mode");
-  // let x = showStats();
-  // x;
-
   const toggleStats = () => {
     setShowStats(!showStats());
   };
-
-  // const svgColour = theme.nightMode ? "rgb(209 213 219)" : "black";
 
   return (
     <header class="pt-8 h-10 relative dark:text-gray-200 z-10">
       <div class="relative h-full">
         <div class="flex absolute left-0 bottom-1">
-          <A href="/" aria-label="help">
+          <A href="/" aria-label="help" data-cy="home-link">
             <Icon shape="help" size={24} />
           </A>
         </div>
         <A
           class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-max"
           href="/game"
+          data-cy="game-link"
         >
           <h1 class="text-2xl sm:text-3xl font-extrabold font-header">
             GLOBLE: CAPITALS
@@ -47,7 +36,7 @@ export default function Header({ showStats, setShowStats }: Props) {
             </button>
           </Show>
           <button aria-label="Settings">
-            <A href="/settings" aria-label="settings">
+            <A href="/settings" aria-label="settings" data-cy="settings-link">
               <Icon shape="settings" size={24} />
             </A>
           </button>

@@ -28,6 +28,7 @@ export default function () {
       </div>
       <button
         onClick={enterPracticeMode}
+        data-cy="practice-link"
         class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900
          dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
         focus:ring-4 focus:ring-blue-300 rounded-lg text-sm

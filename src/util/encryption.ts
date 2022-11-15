@@ -6,13 +6,15 @@ dayjs.extend(advancedFormat);
 const key = import.meta.env.VITE_CRYPTO_KEY;
 
 export function decrypt(encryptedText: string) {
-  var bytes = crypto.AES.decrypt(encryptedText, key);
-  var originalText = bytes.toString(crypto.enc.Utf8);
+  const bytes = crypto.AES.decrypt(encryptedText, key);
+  const originalText = bytes.toString(crypto.enc.Utf8);
   return originalText;
 }
 
+export const getDayCode = () => dayjs().endOf("day").format("X");
+
 export async function getAnswer() {
-  const dayCode = dayjs().endOf("day").format("X");
+  const dayCode = getDayCode();
   const endpoint = `/.netlify/functions/answer?day=${dayCode}`;
   try {
     const netlifyResponse = await fetch(endpoint);

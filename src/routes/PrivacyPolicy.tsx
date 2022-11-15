@@ -50,13 +50,6 @@ export default function () {
           by{" "}
           <a
             class="underline"
-            href="https://supabase.com/docs/guides/platform/logs"
-          >
-            Supabase logs
-          </a>{" "}
-          and{" "}
-          <a
-            class="underline"
             href="https://www.netlify.com/privacy/#:~:text=Netlify%20takes%20your%20privacy%20seriously,described%20in%20this%20Privacy%20Policy."
           >
             Netlify Analytics

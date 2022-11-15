@@ -33,7 +33,7 @@ export default function () {
       </Suspense>
       <p>
         Have a question? Check out the{" "}
-        <A href="/faq" class="underline">
+        <A href="/faq" class="underline" data-cy="faq-link">
           FAQ
         </A>
         .

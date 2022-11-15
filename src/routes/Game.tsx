@@ -73,7 +73,6 @@ export default function (props: Props) {
 
   // Stores guesses when new guess added
   onMount(() => {
-    console.log("Mounting game");
     if (context.storedGuesses().cities.length === 0) {
       setGuesses({ cities: [] });
       return;

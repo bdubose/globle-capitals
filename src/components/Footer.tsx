@@ -21,9 +21,10 @@ export default function Footer() {
           <Icon shape="github" size={14} />
         </a>
       </span>
-      {/* <div class="flex flex-col sm:flex-row justify-start"></div> */}
       <span>
-        <A href="/privacy-policy">Privacy policy</A>
+        <A href="/privacy-policy" data-cy="privacy-policy-link">
+          Privacy policy
+        </A>
       </span>
     </footer>
   );

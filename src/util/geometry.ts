@@ -1,5 +1,3 @@
-import { scaleLinear, scaleSequential } from "d3-scale";
-import { interpolateTurbo } from "d3-scale-chromatic";
 import {
   computeDistanceBetween,
   computeHeading,
@@ -7,6 +5,7 @@ import {
 } from "spherical-geometry-js";
 import { MAX_DISTANCE } from "./constants";
 import data from "../data/answers.json";
+import { interpolateTurbo, scaleLinear, scaleSequential } from "d3";
 
 export function arcGradient(a1: Coords, a2: Coords, ans: Coords) {
   // Colours
