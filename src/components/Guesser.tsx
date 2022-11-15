@@ -18,16 +18,17 @@ type Props = {
 export default function (props: Props) {
   const context = getContext();
 
-  const isFirstGuess = props.guesses.numGuesses === 0;
-  const isSecondGuess = props.guesses.numGuesses === 1;
-  const mountMsg = isFirstGuess
-    ? "Enter the name of any capital city to make your first guess!"
-    : isSecondGuess
-    ? "Enter the your next guess!"
-    : "";
+  const isFirstGuess = () => props.guesses.numGuesses === 0;
+  const isSecondGuess = () => props.guesses.numGuesses === 1;
+  const mountMsg = () =>
+    isFirstGuess()
+      ? "Enter the name of any capital city to make your first guess!"
+      : isSecondGuess()
+      ? "Enter the your next guess!"
+      : "";
 
   const answers = rawAnswerData["data"] as City[];
-  const [msg, setMsg] = createSignal(mountMsg);
+  const [msg, setMsg] = createSignal(mountMsg());
   const msgColour = () => {
     const green = context.theme().isDark
       ? "rgb(134 239 172)"
@@ -98,12 +99,16 @@ export default function (props: Props) {
     if (!newCity) return;
     if (newCity.capital !== "primary")
       return setMsg(`${newCity.city_ascii} is not a capital city.`);
-    const distance = computeDistanceBetween(newCity, props.ans);
-    const direction = distance < props.guesses.closest ? "warmer!" : "cooler.";
     props.setGuesses("cities", (prev) => [...prev, newCity]);
-    if (isSecondGuess) return setMsg(mountMsg);
+    if (props.guesses.numGuesses <= 1) return setMsg(mountMsg);
+    const lastGuess = props.guesses.cities[props.guesses.numGuesses - 2];
+    const distance = computeDistanceBetween(newCity, props.ans);
+    const lastDistance = computeDistanceBetween(lastGuess, props.ans);
+    const direction = distance < lastDistance ? "warmer!" : "cooler.";
     if (newCity.id === props.ans.id) return;
-    setMsg(`${newCity.city_ascii} is ${direction}`);
+    if (props.guesses.numGuesses > 1) {
+      setMsg(`${newCity.city_ascii} is ${direction}`);
+    }
   }
 
   return (

@@ -9,6 +9,7 @@ import Statistics from "./components/Statistics";
 import { getContext } from "./Context";
 import Game from "./routes/Game";
 import Home from "./routes/Home";
+import Practice from "./routes/Practice";
 import Settings from "./routes/Settings";
 
 // TODO FAQ and privacy policy pages
@@ -31,6 +32,7 @@ const App: Component = () => {
           <Route path="/" component={Home} />
           <Route path="/game" element={<Game setShowStats={setShowStats} />} />
           <Route path="/settings" component={Settings} />
+          <Route path="/practice" component={Practice} />
         </Routes>
         <Footer />
       </main>
