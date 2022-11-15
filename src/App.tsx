@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Modal from "./components/Modal";
 import Statistics from "./components/Statistics";
 import { getContext } from "./Context";
+import Faq from "./routes/Faq";
 import Game from "./routes/Game";
 import Home from "./routes/Home";
 import Practice from "./routes/Practice";
@@ -35,6 +36,7 @@ const App: Component = () => {
           <Route path="/settings" component={Settings} />
           <Route path="/practice" component={Practice} />
           <Route path="/privacy-policy" component={PrivacyPolicy} />
+          <Route path="/faq" component={Faq} />
         </Routes>
         <Footer />
       </main>

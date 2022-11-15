@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 import { lazy, Suspense } from "solid-js";
 import Preview from "../components/Preview";
 import { maxColour } from "../util/geometry";
@@ -30,6 +31,13 @@ export default function () {
       <Suspense fallback={<p>Loading...</p>}>
         <NavGlobe />
       </Suspense>
+      <p>
+        Have a question? Check out the{" "}
+        <A href="/faq" class="underline">
+          FAQ
+        </A>
+        .
+      </p>
     </div>
   );
 }

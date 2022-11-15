@@ -23,9 +23,7 @@ export default function Footer() {
       </span>
       {/* <div class="flex flex-col sm:flex-row justify-start"></div> */}
       <span>
-        <A class="underline" href="/privacy-policy">
-          Privacy policy
-        </A>
+        <A href="/privacy-policy">Privacy policy</A>
       </span>
     </footer>
   );
