@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 import { getContext } from "../Context";
 import Icon from "./Icon";
 
@@ -24,7 +25,12 @@ export default function Footer() {
           <Icon shape="github" size={14} />
         </a>
       </span>
-      <div class="flex flex-col sm:flex-row justify-start"></div>
+      {/* <div class="flex flex-col sm:flex-row justify-start"></div> */}
+      <span>
+        <A class="underline" href="/privacy-policy">
+          Privacy policy
+        </A>
+      </span>
     </footer>
   );
 }
