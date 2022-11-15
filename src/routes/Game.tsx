@@ -72,7 +72,6 @@ export default function (props: Props) {
   });
 
   // Stores guesses when new guess added
-  // TODO guesses not resetting on globle??
   onMount(() => {
     console.log("Mounting game");
     if (context.storedGuesses().cities.length === 0) {

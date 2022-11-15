@@ -1,21 +1,20 @@
 import { Route, Routes } from "@solidjs/router";
-import { Component, createSignal } from "solid-js";
-import "./background.css";
-import Footer from "./components/Footer";
+import { Component, createSignal, lazy } from "solid-js";
 
+import "./background.css";
+
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Modal from "./components/Modal";
 import Statistics from "./components/Statistics";
 import { getContext } from "./Context";
-import Faq from "./routes/Faq";
-import Game from "./routes/Game";
-import Home from "./routes/Home";
-import Practice from "./routes/Practice";
-import PrivacyPolicy from "./routes/PrivacyPolicy";
-import Settings from "./routes/Settings";
 
-// TODO FAQ and privacy policy pages
-// TODO wrap routes in suspense/lazy loading
+const Faq = lazy(() => import("./routes/Faq"));
+const Game = lazy(() => import("./routes/Game"));
+const Home = lazy(() => import("./routes/Home"));
+const Practice = lazy(() => import("./routes/Practice"));
+const PrivacyPolicy = lazy(() => import("./routes/PrivacyPolicy"));
+const Settings = lazy(() => import("./routes/Settings"));
 
 const App: Component = () => {
   const [showStats, setShowStats] = createSignal(false);

@@ -71,7 +71,7 @@ async function get(event: Event, db: Db) {
     };
   }
   return {
-    statusCode: 404,
+    statusCode: 204,
     body: JSON.stringify({
       message: "No backup score found.",
     }),

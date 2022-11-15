@@ -8,7 +8,6 @@ import {
   Switch,
 } from "solid-js";
 import { getContext } from "../Context";
-// import { distanceUnit, setDistanceUnit, setTheme } from "../util/globalState";
 import Toggle from "./Toggle";
 
 type Props = {

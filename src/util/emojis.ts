@@ -2,7 +2,6 @@ import { computeDistanceBetween } from "spherical-geometry-js";
 import { MAX_DISTANCE } from "./constants";
 
 const getColourEmoji = (guess: City, answer: City) => {
-  const WHITE_SQUARE = "⬜";
   const BLACK_SQUARE = "⬛";
   const PURPLE_SQUARE = "🟪";
   const BLUE_SQUARE = "🟦";

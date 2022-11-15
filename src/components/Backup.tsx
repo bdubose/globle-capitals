@@ -4,10 +4,6 @@ import { createSignal, onMount, Show } from "solid-js";
 import Prompt from "../components/Prompt";
 import { getContext } from "../Context";
 
-// TODO create resource and loading visibilty
-// TODO add domains to google cloud dashboard
-// "The given origin is not allowed for the given client ID."
-
 export default function () {
   const context = getContext();
   const [isConnected, setIsConnected] = createSignal(false);

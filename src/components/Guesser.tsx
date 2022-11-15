@@ -7,6 +7,7 @@ import { getContext } from "../Context";
 import { computeDistanceBetween } from "spherical-geometry-js";
 
 // TODO Cities list emptied after I refreshed for first time after new day!
+// Note: "Qatar" corrects to "Ulaanbaatar"
 
 type Props = {
   setGuesses: SetStoreFunction<GuessStore>;
@@ -58,6 +59,7 @@ export default function (props: Props) {
       setMsg(`"${newGuess}" not found in database.`);
       return;
     }
+    console.log(results);
     const topAnswer = results[0];
     const topScore = topAnswer.score ?? 1;
     if (topScore < 0.025) {
