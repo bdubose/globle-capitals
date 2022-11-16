@@ -25,7 +25,7 @@ const handler: Handler = async (event) => {
   try {
     const today = event.queryStringParameters?.day || "";
     console.log(event.queryStringParameters);
-    const dayCode = parseInt(dayjs.tz(today, "America/Toronto").format("X"));
+    const dayCode = parseInt(dayjs.tz(today, "Etc/UTC").format("X"));
     if (!dayCode) throw "Parameter error";
     console.log(dayCode);
     const cities = data["data"] as City[];
