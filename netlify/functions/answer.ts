@@ -3,7 +3,11 @@ import data from "../../src/data/answers.json";
 import crypto from "crypto-js";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 dayjs.extend(advancedFormat);
+dayjs.extend(timezone);
+dayjs.extend(utc);
 
 function encrypt(text: string) {
   const key = process.env.CRYPTO_KEY || "";
@@ -20,7 +24,8 @@ function generateKey(list: any[], dayCode: number) {
 const handler: Handler = async (event) => {
   try {
     const today = event.queryStringParameters?.day || "";
-    const dayCode = parseInt(dayjs(today).format("X"));
+    console.log(event.queryStringParameters);
+    const dayCode = parseInt(dayjs.tz(today, "America/Toronto").format("X"));
     if (!dayCode) throw "Parameter error";
     console.log(dayCode);
     const cities = data["data"] as City[];
