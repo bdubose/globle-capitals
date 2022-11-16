@@ -6,10 +6,12 @@ import List from "../components/List";
 import { createPracticeAns, getPracticeAns } from "../util/practice";
 import Prompt from "../components/Prompt";
 import { A } from "@solidjs/router";
+import data from "../data/answers.json";
 
 const GameGlobe = lazy(() => import("../components/globes/GameGlobe"));
 
 export default function () {
+  const cities = data["data"] as City[];
   // Signals
   const [pov, setPov] = createSignal<Coords | null>(null);
   const [win, setWin] = createSignal(false);
@@ -18,29 +20,11 @@ export default function () {
   const [showGlobe, setShowGlobe] = createSignal(true);
 
   // Stores
-  const [guesses, setGuesses] = createStore({
-    cities: [] as City[],
-    get sortedGuesses() {
-      const copy = [...this.cities];
-      return copy.sort((a, z) => {
-        const proximityA = computeDistanceBetween(a, ans());
-        const proximityB = computeDistanceBetween(z, ans());
-        return proximityA - proximityB;
-      });
-    },
-    get numGuesses() {
-      return this.cities.length;
-    },
-    get closest() {
-      if (this.cities.length === 0) return 0;
-      const closestCity = this.sortedGuesses[0];
-      return computeDistanceBetween(closestCity, ans());
-    },
-  });
+  const [guesses, setGuesses] = createSignal<City[]>([]);
 
   // Effects
   createEffect(() => {
-    const winningGuess = guesses.cities.find((city) => city.id === ans().id);
+    const winningGuess = guesses().find((city) => city.id === ans().id);
     if (winningGuess) {
       setWin(true);
       setTimeout(() => setShowPrompt(true), 2000);
@@ -49,30 +33,28 @@ export default function () {
 
   // New game
   function newGame() {
-    setGuesses("cities", []);
+    setGuesses([]);
     setWin(false);
     setShowGlobe(false);
     setAns(createPracticeAns());
     setTimeout(() => setShowGlobe(true), 2000);
   }
 
+  function addGuess(newGuess: City) {
+    setGuesses((prev) => [...prev, newGuess]);
+    return;
+  }
+
   return (
     <div>
       <Show when={showGlobe()} keyed fallback={<p>Loading...</p>}>
-        <>
-          <p class="italic">You are in Practice Mode.</p>
-          <Guesser
-            setGuesses={setGuesses}
-            guesses={guesses}
-            win={win}
-            ans={ans()}
-          />
-          <Suspense fallback={<p>Loading...</p>}>
-            <GameGlobe guesses={guesses} pov={pov} ans={ans()} />
-          </Suspense>
-        </>
+        <p class="italic">You are in Practice Mode.</p>
+        <Guesser addGuess={addGuess} guesses={guesses} win={win} ans={ans()} />
+        <Suspense fallback={<p>Loading...</p>}>
+          <GameGlobe guesses={guesses} pov={pov} ans={ans()} />
+        </Suspense>
       </Show>
-      <List guesses={guesses} setPov={setPov} />
+      <List guesses={guesses} setPov={setPov} ans={ans()} />
       <A href="/">
         <button
           class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900

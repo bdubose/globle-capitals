@@ -10,8 +10,6 @@ import {
   Show,
   Suspense,
 } from "solid-js";
-import { createStore } from "solid-js/store";
-import { computeDistanceBetween } from "spherical-geometry-js";
 import Guesser from "../components/Guesser";
 import List from "../components/List";
 import data from "../data/answers.json";
@@ -27,7 +25,6 @@ type Props = {
 
 export default function (props: Props) {
   // Signals
-  // const {storedStats, storedGuesses, storeGuesses, storeStats} = context();
   const context = getContext();
   const [pov, setPov] = createSignal<Coords | null>(null);
 
@@ -41,52 +38,21 @@ export default function (props: Props) {
     return context.storedGuesses().cities.map((cityName, idx) => {
       const city = cities.find((c) => c.city_ascii === cityName);
       return city;
-    });
+    }) as City[];
   };
-
-  // Stores
-  const [guesses, setGuesses] = createStore({
-    cities: restoredGuesses() as City[],
-    get sortedGuesses() {
-      const copy = [...this.cities];
-      return copy.sort((a, z) => {
-        const proximityA = computeDistanceBetween(a, ans() || a);
-        const proximityB = computeDistanceBetween(z, ans() || z);
-        return proximityA - proximityB;
-      });
-    },
-    get numGuesses() {
-      return this.cities.length;
-    },
-    get closest() {
-      if (this.cities.length === 0) return 0;
-      const closestCity = this.sortedGuesses[0];
-      return computeDistanceBetween(closestCity, ans() || closestCity);
-    },
-  });
 
   // Effects
   createEffect(() => {
-    const winningGuess = guesses.cities.find((city) => city.id === ans()?.id);
+    const winningGuess = restoredGuesses().find(
+      (city) => city?.id === ans()?.id
+    );
     if (winningGuess) setWin(true);
   });
 
-  // Stores guesses when new guess added
   onMount(() => {
-    if (context.storedGuesses().cities.length === 0) {
-      setGuesses({ cities: [] });
-      return;
-    }
+    const expiration = dayjs(context.storedGuesses().expiration);
+    if (dayjs().isAfter(expiration)) context.resetGuesses();
     if (win()) setTimeout(() => props.setShowStats(true), 3000);
-  });
-
-  // Resets guesses when stored guesses expired
-  createEffect(() => {
-    const storable = guesses.cities.map((guess) => guess.city_ascii);
-    context.storeGuesses({
-      cities: storable,
-      expiration: dayjs().endOf("day").toDate(),
-    });
   });
 
   // When the player wins!
@@ -108,9 +74,9 @@ export default function (props: Props) {
             : context.storedStats().maxStreak;
         const usedGuesses = [
           ...context.storedStats().usedGuesses,
-          guesses.numGuesses,
+          context.storedGuesses().cities.length,
         ];
-        const emojiGuesses = emojiString(guesses.cities, ans());
+        const emojiGuesses = emojiString(restoredGuesses(), ans());
         const newStats = {
           lastWin: lastWin.toString(),
           gamesWon,
@@ -127,6 +93,13 @@ export default function (props: Props) {
     })
   );
 
+  function updateLocalStorage(newCity: City) {
+    const cityName = newCity.city_ascii;
+    context.storeGuesses((prev) => {
+      return { ...prev, cities: [...prev.cities, cityName] };
+    });
+  }
+
   return (
     <div>
       <Show when={ans()} keyed>
@@ -134,19 +107,19 @@ export default function (props: Props) {
           return (
             <>
               <Guesser
-                setGuesses={setGuesses}
-                guesses={guesses}
+                addGuess={updateLocalStorage}
+                guesses={restoredGuesses}
                 win={win}
                 ans={ans}
               />
               <Suspense fallback={<p>Loading...</p>}>
-                <GameGlobe guesses={guesses} pov={pov} ans={ans} />
+                <GameGlobe guesses={restoredGuesses} pov={pov} ans={ans} />
               </Suspense>
+              <List guesses={restoredGuesses} setPov={setPov} ans={ans} />
             </>
           );
         }}
       </Show>
-      <List guesses={guesses} setPov={setPov} />
     </div>
   );
 }

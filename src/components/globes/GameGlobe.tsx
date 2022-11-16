@@ -7,12 +7,12 @@ import rawCountryData from "../../data/country_data.json";
 import { getContext } from "../../Context";
 
 type Props = {
-  guesses: GuessStore;
+  guesses: Accessor<City[]>;
   pov: Accessor<Coords | null>;
   ans: City;
 };
 
-export default function ({ guesses, pov, ans }: Props) {
+export default function (props: Props) {
   const countryData = rawCountryData["features"];
   const context = getContext();
 
@@ -26,8 +26,8 @@ export default function ({ guesses, pov, ans }: Props) {
 
   // Derived signals
   const cityPoints = () =>
-    guesses.cities.map((city) => {
-      const pointColour = cityColour(city, ans);
+    props.guesses().map((city) => {
+      const pointColour = cityColour(city, props.ans);
       return {
         lat: city.lat,
         lng: city.lng,
@@ -44,12 +44,14 @@ export default function ({ guesses, pov, ans }: Props) {
     });
 
   const countries = () => {
-    return guesses.cities
+    return props
+      .guesses()
       .map((city, idx) => {
         const country = countryData.find((country) => {
           return country.properties.NAME === city.country;
         });
-        const transition = idx === guesses.numGuesses - 1 ? 400 : 0;
+        const numGuesses = props.guesses.length;
+        const transition = idx === numGuesses - 1 ? 400 : 0;
         const output = {
           geometry: country?.geometry,
           colour: "black",
@@ -61,7 +63,7 @@ export default function ({ guesses, pov, ans }: Props) {
   };
 
   function createArc(city1: City, city2: City, isLast: boolean) {
-    const gradient = arcGradient(city1, city2, ans);
+    const gradient = arcGradient(city1, city2, props.ans);
     const label = `<p
     class="text-black py-1 px-2 text-center font-bold bg-yellow-50"
     style="background-color: ${labelBg};"
@@ -79,15 +81,14 @@ export default function ({ guesses, pov, ans }: Props) {
 
   // Option 2: Arcs between consecutive guesses
   const arcs = () => {
-    const { cities } = guesses;
-    if (cities.length <= 1) return [];
-    else if (cities.length === 2)
-      return [createArc(cities[0], cities[1], true)];
+    if (props.guesses().length <= 1) return [];
+    else if (props.guesses().length === 2)
+      return [createArc(props.guesses()[0], props.guesses()[1], true)];
     // All possible combinations
     const arcs = [];
-    for (let i = 0; i < cities.length - 1; i++) {
-      const isLast = i === cities.length - 2;
-      const arc = createArc(cities[i], cities[i + 1], isLast);
+    for (let i = 0; i < props.guesses().length - 1; i++) {
+      const isLast = i === props.guesses().length - 2;
+      const arc = createArc(props.guesses()[i], props.guesses()[i + 1], isLast);
       arcs.push(arc);
     }
     return arcs;
@@ -157,7 +158,7 @@ export default function ({ guesses, pov, ans }: Props) {
 
   // When there's a new guess, turn globe to that point
   createEffect(() => {
-    if (guesses.numGuesses > 0) {
+    if (props.guesses().length > 0) {
       const newestPoint = cityPoints()[cityPoints().length - 1];
       const { lat, lng } = newestPoint;
       turnGlobe({ lat, lng });
@@ -167,7 +168,7 @@ export default function ({ guesses, pov, ans }: Props) {
 
   // When player clicks on a city name, turn to it
   createEffect(() => {
-    const newPov = pov();
+    const newPov = props.pov();
     if (newPov) turnGlobe(newPov);
   });
 

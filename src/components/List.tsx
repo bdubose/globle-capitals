@@ -1,4 +1,5 @@
 import {
+  Accessor,
   createEffect,
   createSignal,
   For,
@@ -7,12 +8,14 @@ import {
   Show,
   Switch,
 } from "solid-js";
+import { computeDistanceBetween } from "spherical-geometry-js";
 import { getContext } from "../Context";
 import Toggle from "./Toggle";
 
 type Props = {
-  guesses: GuessStore;
+  guesses: Accessor<City[]>;
   setPov: Setter<Coords>;
+  ans: City;
 };
 
 export function formatKm(m: number) {
@@ -30,15 +33,21 @@ export function formatKm(m: number) {
   return `${format(rounded)}`;
 }
 
-export default function ({ guesses, setPov }: Props) {
+export default function (props: Props) {
   const context = getContext();
   const [isSortedByDistance, toggleSortByDistance] = createSignal(true);
 
   const sortedGuesses = () => {
+    console.log(props.guesses());
     if (isSortedByDistance()) {
-      return guesses.sortedGuesses;
+      const guesses = [...props.guesses()];
+      return guesses.sort((a, z) => {
+        const proximityA = computeDistanceBetween(a, props.ans || a);
+        const proximityB = computeDistanceBetween(z, props.ans || z);
+        return proximityA - proximityB;
+      });
     } else {
-      return guesses.cities;
+      return props.guesses();
     }
   };
 
@@ -48,10 +57,16 @@ export default function ({ guesses, setPov }: Props) {
     context.setDistanceUnit({ unit: isShowingKm() ? "km" : "miles" })
   );
 
+  const closest = () => {
+    if (props.guesses.length === 0) return 0;
+    const closestCity = sortedGuesses()[0];
+    return computeDistanceBetween(closestCity, props.ans || closestCity);
+  };
+
   return (
     <div class="py-8 dark:text-white z-30 mb-20">
       <Switch fallback={<p>Guesses will appear here.</p>}>
-        <Match when={guesses.numGuesses < 1}>
+        <Match when={props.guesses.length < 1}>
           <p>Guesses will appear here.</p>
         </Match>
         <Match when={isSortedByDistance()}>
@@ -68,7 +83,7 @@ export default function ({ guesses, setPov }: Props) {
             return (
               <li>
                 <button
-                  onClick={() => setPov(city)}
+                  onClick={() => props.setPov(city)}
                   class="flex items-center cursor-pointer"
                 >
                   <img
@@ -82,10 +97,10 @@ export default function ({ guesses, setPov }: Props) {
           }}
         </For>
       </ul>
-      <Show when={guesses.numGuesses > 0}>
+      <Show when={props.guesses.length > 0}>
         <div class="mt-8">
           <div class="flex items-center space-x-1">
-            <p>Closest city: {formatKm(guesses.closest)}</p>
+            <p>Closest city: {formatKm(closest())}</p>
             <Toggle
               setToggle={setShowingKm}
               toggleProp={isShowingKm}

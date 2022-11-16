@@ -5,3 +5,5 @@ client_secret.json
 .netlify
 .env
 cypress.env.json
+cypress/screenshots/
+cypress/videos/

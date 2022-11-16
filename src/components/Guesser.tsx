@@ -1,5 +1,4 @@
 import { Accessor, createEffect, createSignal } from "solid-js";
-import { SetStoreFunction } from "solid-js/store";
 import rawAnswerData from "../data/answers.json";
 import bigCityNames from "../data/big_cities.json";
 import Fuse from "fuse.js";
@@ -10,8 +9,8 @@ import { computeDistanceBetween } from "spherical-geometry-js";
 // Note: "Qatar" corrects to "Ulaanbaatar"
 
 type Props = {
-  setGuesses: SetStoreFunction<GuessStore>;
-  guesses: GuessStore;
+  guesses: Accessor<City[]>;
+  addGuess: (newGuess: City) => void;
   win: Accessor<boolean>;
   ans: City;
 };
@@ -19,8 +18,8 @@ type Props = {
 export default function (props: Props) {
   const context = getContext();
 
-  const isFirstGuess = () => props.guesses.numGuesses === 0;
-  const isSecondGuess = () => props.guesses.numGuesses === 1;
+  const isFirstGuess = () => props.guesses().length === 0;
+  const isSecondGuess = () => props.guesses().length === 1;
   const mountMsg = () =>
     isFirstGuess()
       ? "Enter the name of any capital city to make your first guess!"
@@ -62,7 +61,7 @@ export default function (props: Props) {
     const topAnswer = results[0];
     const topScore = topAnswer.score ?? 1;
     if (topScore < 0.025) {
-      const existingGuess = props.guesses.cities.find((guess) => {
+      const existingGuess = props.guesses().find((guess) => {
         return topAnswer.item.id === guess.id;
       });
       if (existingGuess) {
@@ -90,14 +89,6 @@ export default function (props: Props) {
     }
   }
 
-  function updateLocalStorage(newCity: City) {
-    const cityName = newCity.city_ascii;
-    console.log("Trying to update local storage with", cityName);
-    context.storeGuesses((prev) => {
-      return { ...prev, cities: [...prev.cities, cityName] };
-    });
-  }
-
   function enterGuess(e: Event) {
     e.preventDefault();
     const formData = new FormData(formRef);
@@ -106,21 +97,16 @@ export default function (props: Props) {
     if (!guess) return setMsg("Enter your next guess.");
     const newCity = findCity(guess, answers);
     if (!newCity) return;
-    if (newCity.capital !== "primary")
-      return setMsg(`${newCity.city_ascii} is not a capital city.`);
 
-    props.setGuesses("cities", (prev) => [...prev, newCity]);
-    updateLocalStorage(newCity);
+    props.addGuess(newCity);
 
     if (newCity.id === props.ans.id) return;
-    if (props.guesses.numGuesses <= 1) return setMsg(mountMsg);
-    const lastGuess = props.guesses.cities[props.guesses.numGuesses - 2];
+    if (props.guesses().length <= 1) return setMsg(mountMsg);
+    const lastGuess = props.guesses()[props.guesses().length - 2];
     const distance = computeDistanceBetween(newCity, props.ans);
     const lastDistance = computeDistanceBetween(lastGuess, props.ans);
     const direction = distance < lastDistance ? "warmer!" : "cooler.";
-    if (props.guesses.numGuesses > 1) {
-      setMsg(`${newCity.city_ascii} is ${direction}`);
-    }
+    setMsg(`${newCity.city_ascii} is ${direction}`);
   }
 
   return (
