@@ -14,8 +14,8 @@ export function decrypt(encryptedText: string) {
 export const getDayCode = () => dayjs().endOf("day").format("X");
 
 export async function getAnswer() {
-  const dayCode = getDayCode();
-  const endpoint = `/.netlify/functions/answer?day=${dayCode}`;
+  const today = dayjs().format("YYYY-MM-DD");
+  const endpoint = `/.netlify/functions/answer?day=${today}`;
   try {
     const netlifyResponse = await fetch(endpoint);
     if (netlifyResponse.status !== 200) throw "Server error";

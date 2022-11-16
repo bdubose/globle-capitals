@@ -1,8 +1,9 @@
 import { Handler } from "@netlify/functions";
 import data from "../../src/data/answers.json";
 import crypto from "crypto-js";
-
-// TODO there could be potential daylight savings time issues
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+dayjs.extend(advancedFormat);
 
 function encrypt(text: string) {
   const key = process.env.CRYPTO_KEY || "";
@@ -18,8 +19,8 @@ function generateKey(list: any[], dayCode: number) {
 
 const handler: Handler = async (event) => {
   try {
-    const dayString = event.queryStringParameters?.day || "";
-    const dayCode = parseInt(dayString);
+    const today = event.queryStringParameters?.day || "";
+    const dayCode = parseInt(dayjs(today).format("X"));
     if (!dayCode) throw "Parameter error";
     console.log(dayCode);
     const cities = data["data"] as City[];
