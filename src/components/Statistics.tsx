@@ -131,7 +131,8 @@ ${wonToday() ? emojiGuesses : "--"} = ${todaysGuesses}
         class="mx-auto dark:text-gray-200 w-full max-w-sm"
       >
         <tbody>
-          {statsTable().map((row, idx) => {
+          {statsTable().map((row) => {
+            const cyLabel = row.label.toLowerCase().replace(/ /g, "-");
             return (
               <tr>
                 <td
@@ -143,6 +144,7 @@ ${wonToday() ? emojiGuesses : "--"} = ${todaysGuesses}
                 <td
                   class="pt-4 border-b-2 border-dotted border-slate-700 
                 text-lg font-medium"
+                  data-cy={cyLabel}
                 >
                   {row.value}
                 </td>

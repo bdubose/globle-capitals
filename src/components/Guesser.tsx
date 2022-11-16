@@ -40,7 +40,7 @@ export default function (props: Props) {
 
   createEffect(() => {
     if (props.win() && props.ans.city_ascii) {
-      setMsg(`The Mystery Capitol is ${props.ans.city_ascii}!`);
+      setMsg(`The Mystery Capital is ${props.ans.city_ascii}!`);
     } else if (props.win() && !props.ans.city_ascii) {
       setMsg("You win!");
     }
@@ -90,6 +90,14 @@ export default function (props: Props) {
     }
   }
 
+  function updateLocalStorage(newCity: City) {
+    const cityName = newCity.city_ascii;
+    console.log("Trying to update local storage with", cityName);
+    context.storeGuesses((prev) => {
+      return { ...prev, cities: [...prev.cities, cityName] };
+    });
+  }
+
   function enterGuess(e: Event) {
     e.preventDefault();
     const formData = new FormData(formRef);
@@ -100,7 +108,10 @@ export default function (props: Props) {
     if (!newCity) return;
     if (newCity.capital !== "primary")
       return setMsg(`${newCity.city_ascii} is not a capital city.`);
+
     props.setGuesses("cities", (prev) => [...prev, newCity]);
+    updateLocalStorage(newCity);
+
     if (newCity.id === props.ans.id) return;
     if (props.guesses.numGuesses <= 1) return setMsg(mountMsg);
     const lastGuess = props.guesses.cities[props.guesses.numGuesses - 2];
@@ -122,12 +133,10 @@ export default function (props: Props) {
         <input
           type="text"
           name="guess"
-          class="shadow px-2 py-1 md:py-0
+          class="shadow px-2 py-1 md:py-0 w-full border rounded
           text-gray-700 dark:bg-slate-200 dark:text-gray-900
-          focus:outline-none 
-          focus:shadow-outline disabled:bg-slate-400
-          border rounded disabled:border-slate-400
-          w-full"
+          focus:outline-none focus:shadow-outline disabled:bg-slate-400
+          disabled:border-slate-400"
           placeholder="Enter city name here."
           autocomplete="off"
           disabled={props.win() || !props.ans}

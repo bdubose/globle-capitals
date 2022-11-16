@@ -16,12 +16,7 @@ function generateKey(list: any[], dayCode: number) {
   return key;
 }
 
-const handler: Handler = async (event, context) => {
-  const paris = data["data"].find((city) => city.city === "Paris");
-  console.log(paris);
-  const encryptedParis = encrypt(JSON.stringify(paris));
-  console.log(encryptedParis);
-
+const handler: Handler = async (event) => {
   try {
     // throw "Test error!";
     const dayString = event.queryStringParameters?.day || "";
