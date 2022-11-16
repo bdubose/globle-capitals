@@ -22,7 +22,6 @@ export async function getAnswer() {
     const data = await netlifyResponse.json();
     const encryptedAnswer = data.answer;
     const answer = JSON.parse(decrypt(encryptedAnswer)) as City;
-    // console.log("answer:", answer);
     return answer;
   } catch (e) {
     console.error(e);

@@ -26,7 +26,6 @@ export default function () {
         const netlifyResponse = await fetch(endpoint);
         if (netlifyResponse.status === 200) {
           const data = await netlifyResponse.json();
-          console.log("data:", data);
           if (data.document) {
             setBackupStats(data.document);
           }
@@ -73,7 +72,6 @@ export default function () {
       setShowPrompt(true);
       setBackupStats(context.storedStats());
     } catch (e) {
-      console.log("Failed to save score.");
       console.error(e);
       setMsg("Failed to save score. Please contact support.");
     }
@@ -121,7 +119,6 @@ export default function () {
       setPromptText(data.message);
       setBackupStats(null);
     } catch (e) {
-      console.log("Failed to restore score.");
       console.error(e);
       setMsg("Failed to restore score. Please contact support.");
     }

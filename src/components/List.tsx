@@ -38,7 +38,6 @@ export default function (props: Props) {
   const [isSortedByDistance, toggleSortByDistance] = createSignal(true);
 
   const sortedGuesses = () => {
-    console.log(props.guesses());
     if (isSortedByDistance()) {
       const guesses = [...props.guesses()];
       return guesses.sort((a, z) => {

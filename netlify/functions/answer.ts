@@ -18,15 +18,14 @@ function generateKey(list: any[], dayCode: number) {
 
 const handler: Handler = async (event) => {
   try {
-    // throw "Test error!";
     const dayString = event.queryStringParameters?.day || "";
     const dayCode = parseInt(dayString);
     if (!dayCode) throw "Parameter error";
-    // console.log(dayCode);
+    console.log(dayCode);
     const cities = data["data"] as City[];
     const key = generateKey(cities, dayCode);
     const city = cities[key];
-    // console.log("city", city);
+    console.log("city", city);
     const answer = encrypt(JSON.stringify(city));
     return {
       statusCode: 200,
