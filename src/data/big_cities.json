@@ -1,606 +1,5600 @@
-[
-  "Delhi",
-  "Sao Paulo",
-  "Mumbai",
-  "Shanghai",
-  "Guangzhou",
-  "New York",
-  "Kolkata",
-  "Osaka",
-  "Lagos",
-  "Istanbul",
-  "Karachi",
-  "Shenzhen",
-  "Bangalore",
-  "Ho Chi Minh City",
-  "Los Angeles",
-  "Rio de Janeiro",
-  "Chengdu",
-  "Baoding",
-  "Chennai",
-  "Lahore",
-  "Tianjin",
-  "Linyi",
-  "Shijiazhuang",
-  "Zhengzhou",
-  "Nanyang",
-  "Hyderabad",
-  "Wuhan",
-  "Handan",
-  "Nagoya",
-  "Weifang",
-  "Zhoukou",
-  "Ganzhou",
-  "Tongshan",
-  "Chicago",
-  "Heze",
-  "Chongqing",
-  "Fuyang",
-  "Changsha",
-  "Dongguan",
-  "Jining",
-  "Jinan",
-  "Pune",
-  "Foshan",
-  "Ahmedabad",
-  "Nanjing",
-  "Changchun",
-  "Tangshan",
-  "Cangzhou",
-  "Hefei",
-  "Shaoyang",
-  "Zhanjiang",
-  "Shangqiu",
-  "Nantong",
-  "Yancheng",
-  "Nanning",
-  "Hengyang",
-  "Zhumadian",
-  "Shenyang",
-  "Xingtai",
-  "Xi'an",
-  "Yantai",
-  "Luoyang",
-  "Kunming",
-  "Shangrao",
-  "Hangzhou",
-  "Bijie",
-  "Quanzhou",
-  "Miami",
-  "Wuxi",
-  "Huanggang",
-  "Maoming",
-  "Nanchong",
-  "Zunyi",
-  "Qujing",
-  "Xinyang",
-  "Jieyang",
-  "Allahabad",
-  "Yulin",
-  "Changde",
-  "Liaocheng",
-  "Qingdao",
-  "Dallas",
-  "Nangandao",
-  "Xiangyang",
-  "Philadelphia",
-  "Giza",
-  "Lu'an",
-  "Zhaotong",
-  "Yichun",
-  "Dezhou",
-  "Nanchang",
-  "Tai'an",
-  "Dazhou",
-  "Houston",
-  "Guadalajara",
-  "Yongzhou",
-  "Atlanta",
-  "Toronto",
-  "Suihua",
-  "Saint Petersburg",
-  "Qiqihar",
-  "Suzhou",
-  "Shantou",
-  "Weinan",
-  "Changzhou",
-  "Fuzhou",
-  "Pudong",
-  "Belo Horizonte",
-  "Zhangzhou",
-  "Yuncheng",
-  "Suzhou",
-  "Xianyang",
-  "Guilin",
-  "Taizhou",
-  "Huaihua",
-  "Ji'an",
-  "Xiaoganzhan",
-  "Pingdingshan",
-  "Jiujiang",
-  "Surat",
-  "Guiyang",
-  "Alexandria",
-  "Bozhou",
-  "Sydney",
-  "Huizhou",
-  "Huai'an",
-  "Chenzhou",
-  "Barcelona",
-  "Anqing",
-  "Suqian",
-  "Boston",
-  "Jiangmen",
-  "Mianyang",
-  "Harbin",
-  "Huanglongsi",
-  "Melbourne",
-  "Zibo",
-  "Dalian",
-  "Hengshui",
-  "Yibin",
-  "Yangzhou",
-  "Timbio",
-  "Johannesburg",
-  "Yiyang",
-  "Guigang",
-  "Xinpu",
-  "Meizhou",
-  "Casablanca",
-  "Langfang",
-  "Zhangjiakou",
-  "Chifeng",
-  "Linfen",
-  "Jiangguanchi",
-  "Phoenix",
-  "Luzhou",
-  "Taiyuan",
-  "Zhaoqing",
-  "Xiaoxita",
-  "Xiamen",
-  "Fuzhou",
-  "Liuzhou",
-  "Zhuzhou",
-  "Jeddah",
-  "Chuzhou",
-  "Loudi",
-  "Deyang",
-  "Qingyuan",
-  "Kano",
-  "Wuhu",
-  "Seattle",
-  "Yokohama",
-  "Binzhou",
-  "Baojishi",
-  "Zaozhuang",
-  "Neijiang",
-  "Baicheng",
-  "Anshan",
-  "Lanzhou",
-  "Puyang",
-  "San Francisco",
-  "Jiaozuo",
-  "Hechi",
-  "Montreal",
-  "Detroit",
-  "Chengde",
-  "Busan",
-  "Hanzhong",
-  "Shiyan",
-  "Lucknow",
-  "Siping",
-  "Yulinshi",
-  "Changzhi",
-  "Qinzhou",
-  "Bazhou",
-  "Qincheng",
-  "Zhongshan",
-  "Suining",
-  "Leshan",
-  "San Diego",
-  "Faisalabad",
-  "Guang'an",
-  "Tongren",
-  "Bengbu",
-  "Santa Cruz",
-  "Qinhuangdao",
-  "Tongliao",
-  "Jinzhou",
-  "Zhenjiang",
-  "Urumqi",
-  "Heyuan",
-  "Jaipur",
-  "Xinzhou",
-  "Wuzhou",
-  "Chaoyang",
-  "Mashhad",
-  "Shaoguan",
-  "Shanwei",
-  "Quezon City",
-  "Minneapolis",
-  "Meishan",
-  "Incheon",
-  "Ningde",
-  "Tampa",
-  "Daqing",
-  "Putian",
-  "Bandung",
-  "Surabaya",
-  "Salvador",
-  "Denver",
-  "Hohhot",
-  "Xiangtan",
-  "Taichung",
-  "Weihai",
-  "Rizhao",
-  "Mudanjiang",
-  "Kaohsiung",
-  "Guayaquil",
-  "Tieling",
-  "Cawnpore",
-  "Dingxi",
-  "Taipei",
-  "Nanping",
-  "Zigong",
-  "Chaozhou",
-  "Baotou",
-  "Gulou",
-  "Longyan",
-  "Ankang",
-  "Baoshan",
-  "Huludao",
-  "Yanjiang",
-  "Chattogram",
-  "Sanming",
-  "Longba",
-  "Brooklyn",
-  "Yangjiang",
-  "Jiamusi",
-  "Ibadan",
-  "Luohe",
-  "Lincang",
-  "Medellin",
-  "Xuanzhou",
-  "Yunfu",
-  "Dubai",
-  "Mirzapur",
-  "Guangyuan",
-  "Cali",
-  "Huangshi",
-  "Daegu",
-  "Fortaleza",
-  "Douala",
-  "Jilin",
-  "Dandong",
-  "Lianshan",
-  "Yingkou",
-  "Nagpur",
-  "Omdurman",
-  "Bekasi",
-  "Ghaziabad",
-  "Yuxi",
-  "Brisbane",
-  "Anshun",
-  "Depok",
-  "Shangzhou",
-  "Huainan",
-  "Kuaidamao",
-  "Fukuoka",
-  "Jincheng",
-  "Vancouver",
-  "Tangerang",
-  "Rangoon",
-  "Sanmenxia",
-  "Laibin",
-  "Queens",
-  "Qinbaling",
-  "Xining",
-  "Ma'anshan",
-  "Yan'an",
-  "Gaoping",
-  "Ningbo",
-  "Puning",
-  "Medan",
-  "Huaibei",
-  "Qingyang",
-  "Riverside",
-  "Baltimore",
-  "Haiphong",
-  "Las Vegas",
-  "Chongzuo",
-  "Rawalpindi",
-  "Kumasi",
-  "Portland",
-  "Vadodara",
-  "Hezhou",
-  "Pingliang",
-  "San Antonio",
-  "Perth",
-  "Vishakhapatnam",
-  "Shengli",
-  "Gujranwala",
-  "Baicheng",
-  "Fushun",
-  "St. Louis",
-  "Indore",
-  "Yinchuan",
-  "Kananga",
-  "Peshawar",
-  "Sapporo",
-  "Esfahan",
-  "Pingxiang",
-  "Aleppo",
-  "Tijuana",
-  "Almaty",
-  "Thane",
-  "Sacramento",
-  "Blantyre",
-  "Tainan",
-  "Zhuhai",
-  "Curitiba",
-  "Multan",
-  "Xiping",
-  "Ecatepec",
-  "Jixi",
-  "Saidu Sharif",
-  "Liaoyang",
-  "Hamburg",
-  "Meru",
-  "Orlando",
-  "Fuxin",
-  "Wuwei",
-  "Manaus",
-  "Bhopal",
-  "San Jose",
-  "Lubumbashi",
-  "Davao",
-  "Haikou",
-  "Shuyangzha",
-  "Hyderabad City",
-  "Shuozhou",
-  "Cleveland",
-  "Benxi",
-  "Baiyin",
-  "Pittsburgh",
-  "Patna",
-  "Mosul",
-  "Caloocan City",
-  "Austin",
-  "Sanzhou",
-  "Beihai",
-  "Mecca",
-  "Heihe",
-  "Jingdezhen",
-  "Cincinnati",
-  "Recife",
-  "Yushan",
-  "Zhongli",
-  "Kansas City",
-  "Manhattan",
-  "Bilaspur",
-  "Semarang",
-  "Ludhiana",
-  "Novosibirsk",
-  "Chengtangcun",
-  "Agra",
-  "Karaj",
-  "Wenzhou",
-  "Indianapolis",
-  "Leon de los Aldama",
-  "Puebla",
-  "Kalyan",
-  "Madurai",
-  "Mbuji-Mayi",
-  "Hebi",
-  "Shiraz",
-  "Jamshedpur",
-  "Columbus",
-  "Tabriz",
-  "Maracaibo",
-  "Kawasaki",
-  "Aba",
-  "Palembang",
-  "Zhangjiajie",
-  "Kobe",
-  "Charlotte",
-  "Changshu",
-  "Lianjiang",
-  "Ximeicun",
-  "Jianguang",
-  "Yucheng",
-  "Belem",
-  "Guiping",
-  "Leizhou",
-  "Gwangju",
-  "Munich",
-  "Nasik",
-  "Porto Alegre",
-  "Valencia",
-  "Onitsha",
-  "Virginia Beach",
-  "Daejeon",
-  "Zapopan",
-  "Yekaterinburg",
-  "Huazhou",
-  "Kyoto",
-  "Shuangyashan",
-  "Pizhou",
-  "El Kelaa des Srarhna",
-  "Kharkiv",
-  "Yangshe",
-  "Guyuan",
-  "Khulna",
-  "Bronx",
-  "Gaozhou",
-  "Chizhou",
-  "Faridabad",
-  "Goiania",
-  "Fuqing",
-  "Pingdu",
-  "Milan",
-  "Aurangabad",
-  "Yutan",
-  "Milwaukee",
-  "Huangshan",
-  "Auckland",
-  "Makassar",
-  "Santiago",
-  "Rajkot",
-  "Liangshi",
-  "Cordoba",
-  "Guarulhos",
-  "Al Basrah",
-  "Saitama",
-  "Juarez",
-  "Xintai",
-  "Wusong",
-  "Meerut",
-  "Yushu",
-  "Rongcheng",
-  "Huazhou",
-  "Yangquan",
-  "Adelaide",
-  "Baishan",
-  "Dayan",
-  "Haicheng",
-  "Jiangyin",
-  "Huaiyin",
-  "Wuzhong",
-  "Cacuaco",
-  "Barranquilla",
-  "Soweto",
-  "Jabalpur",
-  "Rucheng",
-  "Nizhniy Novgorod",
-  "Shaoyang",
-  "Dhanbad",
-  "Comayaguela",
-  "Laiwu",
-  "Sharjah",
-  "Jingling",
-  "Kazan",
-  "Suwon",
-  "Yongcheng",
-  "Calgary",
-  "Can Tho",
-  "Mandalay",
-  "Beidao",
-  "Xiangshui",
-  "Dadukou",
-  "Vila Velha",
-  "Chelyabinsk",
-  "Mombasa",
-  "Providence",
-  "Varanasi",
-  "Qom",
-  "Zhangye",
-  "Hiroshima",
-  "Maiduguri",
-  "Rosario",
-  "Pikine",
-  "Xinyu",
-  "Ahvaz",
-  "Jacksonville",
-  "Medina",
-  "Srinagar",
-  "Omsk",
-  "Liaoyuan",
-  "Cilacap",
-  "Yingtan",
-  "Bandar Lampung",
-  "Samara",
-  "Guankou",
-  "Ulsan",
-  "Dingzhou",
-  "Campinas",
-  "Lianyuan",
-  "Rongcheng",
-  "Kaiyuan",
-  "Leiyang",
-  "Yichun",
-  "Benin City",
-  "Birmingham",
-  "Xiantao",
-  "Amritsar",
-  "Callao",
-  "Monterrey",
-  "Aligarh",
-  "Yingchuan",
-  "Ciudad Nezahualcoyotl",
-  "Nampo",
-  "Rostov",
-  "Guwahati",
-  "Ufa",
-  "Fes",
-  "Bien Hoa",
-  "Ikare",
-  "Salt Lake City",
-  "Bhilai",
-  "Haora",
-  "Tamale",
-  "Xibeijie",
-  "Nezahualcoyotl",
-  "Hanchuan",
-  "Gongzhuling",
-  "Krasnoyarsk",
-  "Cologne",
-  "Yicheng",
-  "Zhufeng",
-  "Sao Goncalo",
-  "Nashville",
-  "Vereeniging",
-  "Richmond",
-  "Sao Luis",
-  "Ranchi",
-  "San Pedro Sula",
-  "Taixing",
-  "Gwalior",
-  "Memphis",
-  "Goyang",
-  "Bezwada",
-  "Edmonton",
-  "Mizhou",
-  "Xishan",
-  "Ezhou",
-  "Barquisimeto",
-  "Sendai",
-  "Hegang",
-  "Mexicali",
-  "Voronezh",
-  "Perm",
-  "Changwon",
-  "Zhongwei",
-  "Shouguang",
-  "Bogor",
-  "Raleigh",
-  "Cartagena",
-  "Chandigarh",
-  "Matola",
-  "Jodhpur",
-  "Ogbomoso",
-  "Shymkent",
-  "Taizhou",
-  "Bagam",
-  "Shubra al Khaymah",
-  "Maceio",
-  "Wafangdian",
-  "Zhongxiang",
-  "Odesa",
-  "New Orleans",
-  "Villahermosa",
-  "Thu Duc",
-  "Volgograd",
-  "Mysore",
-  "Xinyi",
-  "Raipur",
-  "Arequipa",
-  "Port Harcourt",
-  "Louisville",
-  "Zaoyang",
-  "Shuizhai",
-  "Xingyi",
-  "Kota",
-  "Quetta",
-  "Bareilly",
-  "Quang Ha"
-]
+{
+  "schema": {
+    "fields": [
+      { "name": "id", "type": "integer" },
+      { "name": "city", "type": "string" },
+      { "name": "city_ascii", "type": "string" },
+      { "name": "country", "type": "string" },
+      { "name": "admin_name", "type": "string" },
+      { "name": "capital", "type": "string" }
+    ],
+    "primaryKey": ["id"],
+    "pandas_version": "1.4.0"
+  },
+  "data": [
+    {
+      "id": 1392685764,
+      "city": "Tokyo",
+      "city_ascii": "Tokyo",
+      "country": "Japan",
+      "admin_name": "T\u014dky\u014d",
+      "capital": "primary"
+    },
+    {
+      "id": 1360771077,
+      "city": "Jakarta",
+      "city_ascii": "Jakarta",
+      "country": "Indonesia",
+      "admin_name": "Jakarta",
+      "capital": "primary"
+    },
+    {
+      "id": 1356872604,
+      "city": "Delhi",
+      "city_ascii": "Delhi",
+      "country": "India",
+      "admin_name": "Delhi",
+      "capital": "admin"
+    },
+    {
+      "id": 1608618140,
+      "city": "Manila",
+      "city_ascii": "Manila",
+      "country": "Philippines",
+      "admin_name": "Manila",
+      "capital": "primary"
+    },
+    {
+      "id": 1076532519,
+      "city": "S\u00e3o Paulo",
+      "city_ascii": "Sao Paulo",
+      "country": "Brazil",
+      "admin_name": "S\u00e3o Paulo",
+      "capital": "admin"
+    },
+    {
+      "id": 1410836482,
+      "city": "Seoul",
+      "city_ascii": "Seoul",
+      "country": "South Korea",
+      "admin_name": "Seoul",
+      "capital": "primary"
+    },
+    {
+      "id": 1356226629,
+      "city": "Mumbai",
+      "city_ascii": "Mumbai",
+      "country": "India",
+      "admin_name": "Mah\u0101r\u0101shtra",
+      "capital": "admin"
+    },
+    {
+      "id": 1156073548,
+      "city": "Shanghai",
+      "city_ascii": "Shanghai",
+      "country": "China",
+      "admin_name": "Shanghai",
+      "capital": "admin"
+    },
+    {
+      "id": 1484247881,
+      "city": "Mexico City",
+      "city_ascii": "Mexico City",
+      "country": "Mexico",
+      "admin_name": "Ciudad de M\u00e9xico",
+      "capital": "primary"
+    },
+    {
+      "id": 1156237133,
+      "city": "Guangzhou",
+      "city_ascii": "Guangzhou",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "admin"
+    },
+    {
+      "id": 1818253931,
+      "city": "Cairo",
+      "city_ascii": "Cairo",
+      "country": "Egypt",
+      "admin_name": "Al Q\u0101hirah",
+      "capital": "primary"
+    },
+    {
+      "id": 1156228865,
+      "city": "Beijing",
+      "city_ascii": "Beijing",
+      "country": "China",
+      "admin_name": "Beijing",
+      "capital": "primary"
+    },
+    {
+      "id": 1840034016,
+      "city": "New York City",
+      "city_ascii": "New York",
+      "country": "United States of America",
+      "admin_name": "New York",
+      "capital": null
+    },
+    {
+      "id": 1356060520,
+      "city": "Kolk\u0101ta",
+      "city_ascii": "Kolkata",
+      "country": "India",
+      "admin_name": "West Bengal",
+      "capital": "admin"
+    },
+    {
+      "id": 1643318494,
+      "city": "Moscow",
+      "city_ascii": "Moscow",
+      "country": "Russia",
+      "admin_name": "Moskva",
+      "capital": "primary"
+    },
+    {
+      "id": 1764068610,
+      "city": "Bangkok",
+      "city_ascii": "Bangkok",
+      "country": "Thailand",
+      "admin_name": "Krung Thep Maha Nakhon",
+      "capital": "primary"
+    },
+    {
+      "id": 1050529279,
+      "city": "Dhaka",
+      "city_ascii": "Dhaka",
+      "country": "Bangladesh",
+      "admin_name": "Dhaka",
+      "capital": "primary"
+    },
+    {
+      "id": 1032717330,
+      "city": "Buenos Aires",
+      "city_ascii": "Buenos Aires",
+      "country": "Argentina",
+      "admin_name": "Buenos Aires, Ciudad Aut\u00f3noma de",
+      "capital": "primary"
+    },
+    {
+      "id": 1392419823,
+      "city": "\u014csaka",
+      "city_ascii": "Osaka",
+      "country": "Japan",
+      "admin_name": "\u014csaka",
+      "capital": "admin"
+    },
+    {
+      "id": 1566593751,
+      "city": "Lagos",
+      "city_ascii": "Lagos",
+      "country": "Nigeria",
+      "admin_name": "Lagos",
+      "capital": "minor"
+    },
+    {
+      "id": 1792756324,
+      "city": "Istanbul",
+      "city_ascii": "Istanbul",
+      "country": "Turkey",
+      "admin_name": "\u0130stanbul",
+      "capital": "admin"
+    },
+    {
+      "id": 1586129469,
+      "city": "Karachi",
+      "city_ascii": "Karachi",
+      "country": "Pakistan",
+      "admin_name": "Sindh",
+      "capital": "admin"
+    },
+    {
+      "id": 1180000363,
+      "city": "Kinshasa",
+      "city_ascii": "Kinshasa",
+      "country": "Democratic Republic of the Congo",
+      "admin_name": "Kinshasa",
+      "capital": "primary"
+    },
+    {
+      "id": 1156158707,
+      "city": "Shenzhen",
+      "city_ascii": "Shenzhen",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1356410365,
+      "city": "Bangalore",
+      "city_ascii": "Bangalore",
+      "country": "India",
+      "admin_name": "Karn\u0101taka",
+      "capital": "admin"
+    },
+    {
+      "id": 1704774326,
+      "city": "Ho Chi Minh City",
+      "city_ascii": "Ho Chi Minh City",
+      "country": "Vietnam",
+      "admin_name": "H\u1ed3 Ch\u00ed Minh",
+      "capital": "admin"
+    },
+    {
+      "id": 1364305026,
+      "city": "Tehran",
+      "city_ascii": "Tehran",
+      "country": "Iran",
+      "admin_name": "Tehr\u0101n",
+      "capital": "primary"
+    },
+    {
+      "id": 1840020491,
+      "city": "Los Angeles",
+      "city_ascii": "Los Angeles",
+      "country": "United States of America",
+      "admin_name": "California",
+      "capital": null
+    },
+    {
+      "id": 1076887657,
+      "city": "Rio de Janeiro",
+      "city_ascii": "Rio de Janeiro",
+      "country": "Brazil",
+      "admin_name": "Rio de Janeiro",
+      "capital": "admin"
+    },
+    {
+      "id": 1156421555,
+      "city": "Chengdu",
+      "city_ascii": "Chengdu",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "admin"
+    },
+    {
+      "id": 1156256829,
+      "city": "Baoding",
+      "city_ascii": "Baoding",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1356374944,
+      "city": "Chennai",
+      "city_ascii": "Chennai",
+      "country": "India",
+      "admin_name": "Tamil N\u0101du",
+      "capital": "admin"
+    },
+    {
+      "id": 1586801463,
+      "city": "Lahore",
+      "city_ascii": "Lahore",
+      "country": "Pakistan",
+      "admin_name": "Punjab",
+      "capital": "admin"
+    },
+    {
+      "id": 1826645935,
+      "city": "London",
+      "city_ascii": "London",
+      "country": "United Kingdom",
+      "admin_name": "London, City of",
+      "capital": "primary"
+    },
+    {
+      "id": 1250015082,
+      "city": "Paris",
+      "city_ascii": "Paris",
+      "country": "France",
+      "admin_name": "\u00cele-de-France",
+      "capital": "primary"
+    },
+    {
+      "id": 1156174046,
+      "city": "Tianjin",
+      "city_ascii": "Tianjin",
+      "country": "China",
+      "admin_name": "Tianjin",
+      "capital": "admin"
+    },
+    {
+      "id": 1156086320,
+      "city": "Linyi",
+      "city_ascii": "Linyi",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1156217541,
+      "city": "Shijiazhuang",
+      "city_ascii": "Shijiazhuang",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": "admin"
+    },
+    {
+      "id": 1156183137,
+      "city": "Zhengzhou",
+      "city_ascii": "Zhengzhou",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": "admin"
+    },
+    {
+      "id": 1156192287,
+      "city": "Nanyang",
+      "city_ascii": "Nanyang",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1356871768,
+      "city": "Hyder\u0101b\u0101d",
+      "city_ascii": "Hyderabad",
+      "country": "India",
+      "admin_name": "Telangana",
+      "capital": "admin"
+    },
+    {
+      "id": 1156117184,
+      "city": "Wuhan",
+      "city_ascii": "Wuhan",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": "admin"
+    },
+    {
+      "id": 1156957080,
+      "city": "Handan",
+      "city_ascii": "Handan",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": "minor"
+    },
+    {
+      "id": 1392407472,
+      "city": "Nagoya",
+      "city_ascii": "Nagoya",
+      "country": "Japan",
+      "admin_name": "Aichi",
+      "capital": "admin"
+    },
+    {
+      "id": 1156912965,
+      "city": "Weifang",
+      "city_ascii": "Weifang",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1604728603,
+      "city": "Lima",
+      "city_ascii": "Lima",
+      "country": "Peru",
+      "admin_name": "Lima",
+      "capital": "primary"
+    },
+    {
+      "id": 1156272098,
+      "city": "Zhoukou",
+      "city_ascii": "Zhoukou",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": "minor"
+    },
+    {
+      "id": 1024949724,
+      "city": "Luanda",
+      "city_ascii": "Luanda",
+      "country": "Angola",
+      "admin_name": "Luanda",
+      "capital": "primary"
+    },
+    {
+      "id": 1156832475,
+      "city": "Ganzhou",
+      "city_ascii": "Ganzhou",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156241678,
+      "city": "Tongshan",
+      "city_ascii": "Tongshan",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1458988644,
+      "city": "Kuala Lumpur",
+      "city_ascii": "Kuala Lumpur",
+      "country": "Malaysia",
+      "admin_name": "Kuala Lumpur",
+      "capital": "primary"
+    },
+    {
+      "id": 1840000494,
+      "city": "Chicago",
+      "city_ascii": "Chicago",
+      "country": "United States of America",
+      "admin_name": "Illinois",
+      "capital": null
+    },
+    {
+      "id": 1156225008,
+      "city": "Heze",
+      "city_ascii": "Heze",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156936556,
+      "city": "Chongqing",
+      "city_ascii": "Chongqing",
+      "country": "China",
+      "admin_name": "Chongqing",
+      "capital": "admin"
+    },
+    {
+      "id": 1704413791,
+      "city": "Hanoi",
+      "city_ascii": "Hanoi",
+      "country": "Vietnam",
+      "admin_name": "H\u00e0 N\u1ed9i",
+      "capital": "primary"
+    },
+    {
+      "id": 1156248008,
+      "city": "Fuyang",
+      "city_ascii": "Fuyang",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": null
+    },
+    {
+      "id": 1156961497,
+      "city": "Changsha",
+      "city_ascii": "Changsha",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "admin"
+    },
+    {
+      "id": 1156478242,
+      "city": "Dongguan",
+      "city_ascii": "Dongguan",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156504601,
+      "city": "Jining",
+      "city_ascii": "Jining",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1156972469,
+      "city": "Jinan",
+      "city_ascii": "Jinan",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": "admin"
+    },
+    {
+      "id": 1356081074,
+      "city": "Pune",
+      "city_ascii": "Pune",
+      "country": "India",
+      "admin_name": "Mah\u0101r\u0101shtra",
+      "capital": null
+    },
+    {
+      "id": 1156738403,
+      "city": "Foshan",
+      "city_ascii": "Foshan",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1170483426,
+      "city": "Bogot\u00e1",
+      "city_ascii": "Bogota",
+      "country": "Colombia",
+      "admin_name": "Bogot\u00e1",
+      "capital": "primary"
+    },
+    {
+      "id": 1356304381,
+      "city": "Ahmedabad",
+      "city_ascii": "Ahmedabad",
+      "country": "India",
+      "admin_name": "Gujar\u0101t",
+      "capital": "minor"
+    },
+    {
+      "id": 1156644065,
+      "city": "Nanjing",
+      "city_ascii": "Nanjing",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "admin"
+    },
+    {
+      "id": 1156078103,
+      "city": "Changchun",
+      "city_ascii": "Changchun",
+      "country": "China",
+      "admin_name": "Jilin",
+      "capital": "admin"
+    },
+    {
+      "id": 1156904299,
+      "city": "Tangshan",
+      "city_ascii": "Tangshan",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1156698069,
+      "city": "Cangzhou",
+      "city_ascii": "Cangzhou",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1834843853,
+      "city": "Dar es Salaam",
+      "city_ascii": "Dar es Salaam",
+      "country": "United Republic of Tanzania",
+      "admin_name": "Dar es Salaam",
+      "capital": "primary"
+    },
+    {
+      "id": 1156332710,
+      "city": "Hefei",
+      "city_ascii": "Hefei",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": "admin"
+    },
+    {
+      "id": 1344982653,
+      "city": "Hong Kong",
+      "city_ascii": "Hong Kong",
+      "country": "Hong Kong",
+      "admin_name": null,
+      "capital": "primary"
+    },
+    {
+      "id": 1156310366,
+      "city": "Shaoyang",
+      "city_ascii": "Shaoyang",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": null
+    },
+    {
+      "id": 1156502170,
+      "city": "Zhanjiang",
+      "city_ascii": "Zhanjiang",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156805441,
+      "city": "Shangqiu",
+      "city_ascii": "Shangqiu",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1156045365,
+      "city": "Nantong",
+      "city_ascii": "Nantong",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156995410,
+      "city": "Yancheng",
+      "city_ascii": "Yancheng",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156605439,
+      "city": "Nanning",
+      "city_ascii": "Nanning",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "admin"
+    },
+    {
+      "id": 1156696884,
+      "city": "Hengyang",
+      "city_ascii": "Hengyang",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": null
+    },
+    {
+      "id": 1156184822,
+      "city": "Zhumadian",
+      "city_ascii": "Zhumadian",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1156309382,
+      "city": "Shenyang",
+      "city_ascii": "Shenyang",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": "admin"
+    },
+    {
+      "id": 1156294952,
+      "city": "Xingtai",
+      "city_ascii": "Xingtai",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1156244079,
+      "city": "Xi\u2019an",
+      "city_ascii": "Xi'an",
+      "country": "China",
+      "admin_name": "Shaanxi",
+      "capital": "admin"
+    },
+    {
+      "id": 1152554349,
+      "city": "Santiago",
+      "city_ascii": "Santiago",
+      "country": "Chile",
+      "admin_name": "Regi\u00f3n Metropolitana",
+      "capital": "primary"
+    },
+    {
+      "id": 1156932948,
+      "city": "Yantai",
+      "city_ascii": "Yantai",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1682999334,
+      "city": "Riyadh",
+      "city_ascii": "Riyadh",
+      "country": "Saudi Arabia",
+      "admin_name": "Ar Riy\u0101\u1e11",
+      "capital": "primary"
+    },
+    {
+      "id": 1156069315,
+      "city": "Luoyang",
+      "city_ascii": "Luoyang",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1156477539,
+      "city": "Kunming",
+      "city_ascii": "Kunming",
+      "country": "China",
+      "admin_name": "Yunnan",
+      "capital": "admin"
+    },
+    {
+      "id": 1156405492,
+      "city": "Shangrao",
+      "city_ascii": "Shangrao",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156275243,
+      "city": "Hangzhou",
+      "city_ascii": "Hangzhou",
+      "country": "China",
+      "admin_name": "Zhejiang",
+      "capital": "admin"
+    },
+    {
+      "id": 1156018927,
+      "city": "Bijie",
+      "city_ascii": "Bijie",
+      "country": "China",
+      "admin_name": "Guizhou",
+      "capital": null
+    },
+    {
+      "id": 1156829655,
+      "city": "Quanzhou",
+      "city_ascii": "Quanzhou",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1840015149,
+      "city": "Miami",
+      "city_ascii": "Miami",
+      "country": "United States of America",
+      "admin_name": "Florida",
+      "capital": null
+    },
+    {
+      "id": 1156019650,
+      "city": "Wuxi",
+      "city_ascii": "Wuxi",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156200037,
+      "city": "Huanggang",
+      "city_ascii": "Huanggang",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": "minor"
+    },
+    {
+      "id": 1156568722,
+      "city": "Maoming",
+      "city_ascii": "Maoming",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156762337,
+      "city": "Nanchong",
+      "city_ascii": "Nanchong",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156539782,
+      "city": "Zunyi",
+      "city_ascii": "Zunyi",
+      "country": "China",
+      "admin_name": "Guizhou",
+      "capital": null
+    },
+    {
+      "id": 1156747998,
+      "city": "Qujing",
+      "city_ascii": "Qujing",
+      "country": "China",
+      "admin_name": "Yunnan",
+      "capital": null
+    },
+    {
+      "id": 1368596238,
+      "city": "Baghdad",
+      "city_ascii": "Baghdad",
+      "country": "Iraq",
+      "admin_name": "Baghd\u0101d",
+      "capital": "primary"
+    },
+    {
+      "id": 1156273453,
+      "city": "Xinyang",
+      "city_ascii": "Xinyang",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1156260378,
+      "city": "Jieyang",
+      "city_ascii": "Jieyang",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1729268475,
+      "city": "Khartoum",
+      "city_ascii": "Khartoum",
+      "country": "Sudan",
+      "admin_name": "Khartoum",
+      "capital": "primary"
+    },
+    {
+      "id": 1724616994,
+      "city": "Madrid",
+      "city_ascii": "Madrid",
+      "country": "Spain",
+      "admin_name": "Madrid",
+      "capital": "primary"
+    },
+    {
+      "id": 1356718332,
+      "city": "Allah\u0101b\u0101d",
+      "city_ascii": "Allahabad",
+      "country": "India",
+      "admin_name": "Uttar Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1156901312,
+      "city": "Yulin",
+      "city_ascii": "Yulin",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156449091,
+      "city": "Changde",
+      "city_ascii": "Changde",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156006600,
+      "city": "Liaocheng",
+      "city_ascii": "Liaocheng",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156112588,
+      "city": "Qingdao",
+      "city_ascii": "Qingdao",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": "minor"
+    },
+    {
+      "id": 1840019440,
+      "city": "Dallas",
+      "city_ascii": "Dallas",
+      "country": "United States of America",
+      "admin_name": "Texas",
+      "capital": null
+    },
+    {
+      "id": 1156127660,
+      "city": "Nangandao",
+      "city_ascii": "Nangandao",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156107325,
+      "city": "Xiangyang",
+      "city_ascii": "Xiangyang",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": "minor"
+    },
+    {
+      "id": 1840000673,
+      "city": "Philadelphia",
+      "city_ascii": "Philadelphia",
+      "country": "United States of America",
+      "admin_name": "Pennsylvania",
+      "capital": null
+    },
+    {
+      "id": 1818925479,
+      "city": "Giza",
+      "city_ascii": "Giza",
+      "country": "Egypt",
+      "admin_name": "Al J\u012bzah",
+      "capital": "admin"
+    },
+    {
+      "id": 1156499624,
+      "city": "Lu\u2019an",
+      "city_ascii": "Lu'an",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": "minor"
+    },
+    {
+      "id": 1156924687,
+      "city": "Zhaotong",
+      "city_ascii": "Zhaotong",
+      "country": "China",
+      "admin_name": "Yunnan",
+      "capital": null
+    },
+    {
+      "id": 1156229590,
+      "city": "Yichun",
+      "city_ascii": "Yichun",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156524080,
+      "city": "Dezhou",
+      "city_ascii": "Dezhou",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": "minor"
+    },
+    {
+      "id": 1404000661,
+      "city": "Nairobi",
+      "city_ascii": "Nairobi",
+      "country": "Kenya",
+      "admin_name": "Nairobi City",
+      "capital": "primary"
+    },
+    {
+      "id": 1156198892,
+      "city": "Nanchang",
+      "city_ascii": "Nanchang",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": "admin"
+    },
+    {
+      "id": 1156095188,
+      "city": "Tai\u2019an",
+      "city_ascii": "Tai'an",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1156834076,
+      "city": "Dazhou",
+      "city_ascii": "Dazhou",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1840020925,
+      "city": "Houston",
+      "city_ascii": "Houston",
+      "country": "United States of America",
+      "admin_name": "Texas",
+      "capital": null
+    },
+    {
+      "id": 1484950208,
+      "city": "Guadalajara",
+      "city_ascii": "Guadalajara",
+      "country": "Mexico",
+      "admin_name": "Jalisco",
+      "capital": "admin"
+    },
+    {
+      "id": 1156694479,
+      "city": "Yongzhou",
+      "city_ascii": "Yongzhou",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": null
+    },
+    {
+      "id": 1840013660,
+      "city": "Atlanta",
+      "city_ascii": "Atlanta",
+      "country": "United States of America",
+      "admin_name": "Georgia",
+      "capital": "admin"
+    },
+    {
+      "id": 1104616656,
+      "city": "Rangoon",
+      "city_ascii": "Rangoon",
+      "country": "Myanmar",
+      "admin_name": "Yangon",
+      "capital": "primary"
+    },
+    {
+      "id": 1124279679,
+      "city": "Toronto",
+      "city_ascii": "Toronto",
+      "country": "Canada",
+      "admin_name": "Ontario",
+      "capital": "admin"
+    },
+    {
+      "id": 1156235493,
+      "city": "Suihua",
+      "city_ascii": "Suihua",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1643616350,
+      "city": "Saint Petersburg",
+      "city_ascii": "Saint Petersburg",
+      "country": "Russia",
+      "admin_name": "Sankt-Peterburg",
+      "capital": "admin"
+    },
+    {
+      "id": 1840006060,
+      "city": "Washington",
+      "city_ascii": "Washington",
+      "country": "United States of America",
+      "admin_name": "District of Columbia",
+      "capital": "primary"
+    },
+    {
+      "id": 1156775905,
+      "city": "Qiqihar",
+      "city_ascii": "Qiqihar",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1156871297,
+      "city": "Suzhou",
+      "city_ascii": "Suzhou",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": null
+    },
+    {
+      "id": 1156457499,
+      "city": "Shantou",
+      "city_ascii": "Shantou",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156903687,
+      "city": "Weinan",
+      "city_ascii": "Weinan",
+      "country": "China",
+      "admin_name": "Shaanxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156185511,
+      "city": "Changzhou",
+      "city_ascii": "Changzhou",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1702341327,
+      "city": "Singapore",
+      "city_ascii": "Singapore",
+      "country": "Singapore",
+      "admin_name": "Central Singapore",
+      "capital": "primary"
+    },
+    {
+      "id": 1156188037,
+      "city": "Fuzhou",
+      "city_ascii": "Fuzhou",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "admin"
+    },
+    {
+      "id": 1156644508,
+      "city": "Pudong",
+      "city_ascii": "Pudong",
+      "country": "China",
+      "admin_name": "Shanghai",
+      "capital": "minor"
+    },
+    {
+      "id": 1076967355,
+      "city": "Belo Horizonte",
+      "city_ascii": "Belo Horizonte",
+      "country": "Brazil",
+      "admin_name": "Minas Gerais",
+      "capital": "admin"
+    },
+    {
+      "id": 1156241637,
+      "city": "Zhangzhou",
+      "city_ascii": "Zhangzhou",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1156705644,
+      "city": "Yuncheng",
+      "city_ascii": "Yuncheng",
+      "country": "China",
+      "admin_name": "Shanxi",
+      "capital": null
+    },
+    {
+      "id": 1156029196,
+      "city": "Suzhou",
+      "city_ascii": "Suzhou",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156120117,
+      "city": "Xianyang",
+      "city_ascii": "Xianyang",
+      "country": "China",
+      "admin_name": "Shaanxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156235364,
+      "city": "Guilin",
+      "city_ascii": "Guilin",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156119229,
+      "city": "Taizhou",
+      "city_ascii": "Taizhou",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1384207980,
+      "city": "Abidjan",
+      "city_ascii": "Abidjan",
+      "country": "Ivory Coast",
+      "admin_name": "Abidjan",
+      "capital": "primary"
+    },
+    {
+      "id": 1156353465,
+      "city": "Huaihua",
+      "city_ascii": "Huaihua",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": null
+    },
+    {
+      "id": 1156278215,
+      "city": "Ji\u2019an",
+      "city_ascii": "Ji'an",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156002290,
+      "city": "Xiaoganzhan",
+      "city_ascii": "Xiaoganzhan",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": null
+    },
+    {
+      "id": 1156735124,
+      "city": "Pingdingshan",
+      "city_ascii": "Pingdingshan",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1156206041,
+      "city": "Jiujiang",
+      "city_ascii": "Jiujiang",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1356758738,
+      "city": "S\u016brat",
+      "city_ascii": "Surat",
+      "country": "India",
+      "admin_name": "Gujar\u0101t",
+      "capital": null
+    },
+    {
+      "id": 1156932620,
+      "city": "Guiyang",
+      "city_ascii": "Guiyang",
+      "country": "China",
+      "admin_name": "Guizhou",
+      "capital": "admin"
+    },
+    {
+      "id": 1818695837,
+      "city": "Alexandria",
+      "city_ascii": "Alexandria",
+      "country": "Egypt",
+      "admin_name": "Al Iskandar\u012byah",
+      "capital": "admin"
+    },
+    {
+      "id": 1156356860,
+      "city": "Bozhou",
+      "city_ascii": "Bozhou",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": null
+    },
+    {
+      "id": 1036074917,
+      "city": "Sydney",
+      "city_ascii": "Sydney",
+      "country": "Australia",
+      "admin_name": "New South Wales",
+      "capital": "admin"
+    },
+    {
+      "id": 1156203268,
+      "city": "Huizhou",
+      "city_ascii": "Huizhou",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156634228,
+      "city": "Huai\u2019an",
+      "city_ascii": "Huai'an",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": null
+    },
+    {
+      "id": 1156291915,
+      "city": "Chenzhou",
+      "city_ascii": "Chenzhou",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "minor"
+    },
+    {
+      "id": 1724594040,
+      "city": "Barcelona",
+      "city_ascii": "Barcelona",
+      "country": "Spain",
+      "admin_name": "Catalonia",
+      "capital": "admin"
+    },
+    {
+      "id": 1156238875,
+      "city": "Anqing",
+      "city_ascii": "Anqing",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": "minor"
+    },
+    {
+      "id": 1156212349,
+      "city": "Suqian",
+      "city_ascii": "Suqian",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": null
+    },
+    {
+      "id": 1840000455,
+      "city": "Boston",
+      "city_ascii": "Boston",
+      "country": "United States of America",
+      "admin_name": "Massachusetts",
+      "capital": "admin"
+    },
+    {
+      "id": 1156105613,
+      "city": "Jiangmen",
+      "city_ascii": "Jiangmen",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156417758,
+      "city": "Mianyang",
+      "city_ascii": "Mianyang",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156241528,
+      "city": "Harbin",
+      "city_ascii": "Harbin",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "admin"
+    },
+    {
+      "id": 1156198356,
+      "city": "Huanglongsi",
+      "city_ascii": "Huanglongsi",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1036533631,
+      "city": "Melbourne",
+      "city_ascii": "Melbourne",
+      "country": "Australia",
+      "admin_name": "Victoria",
+      "capital": "admin"
+    },
+    {
+      "id": 1156381094,
+      "city": "Zibo",
+      "city_ascii": "Zibo",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1156175472,
+      "city": "Dalian",
+      "city_ascii": "Dalian",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1156803028,
+      "city": "Hengshui",
+      "city_ascii": "Hengshui",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1156107603,
+      "city": "Yibin",
+      "city_ascii": "Yibin",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156818601,
+      "city": "Yangzhou",
+      "city_ascii": "Yangzhou",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": null
+    },
+    {
+      "id": 1170815311,
+      "city": "Timb\u00edo",
+      "city_ascii": "Timbio",
+      "country": "Colombia",
+      "admin_name": "Cauca",
+      "capital": "minor"
+    },
+    {
+      "id": 1710550792,
+      "city": "Johannesburg",
+      "city_ascii": "Johannesburg",
+      "country": "South Africa",
+      "admin_name": "Gauteng",
+      "capital": "admin"
+    },
+    {
+      "id": 1156218615,
+      "city": "Yiyang",
+      "city_ascii": "Yiyang",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": null
+    },
+    {
+      "id": 1156895251,
+      "city": "Guigang",
+      "city_ascii": "Guigang",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156035381,
+      "city": "Xinpu",
+      "city_ascii": "Xinpu",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156361028,
+      "city": "Meizhou",
+      "city_ascii": "Meizhou",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1504175315,
+      "city": "Casablanca",
+      "city_ascii": "Casablanca",
+      "country": "Morocco",
+      "admin_name": "Casablanca-Settat",
+      "capital": "admin"
+    },
+    {
+      "id": 1156109017,
+      "city": "Langfang",
+      "city_ascii": "Langfang",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1156800221,
+      "city": "Zhangjiakou",
+      "city_ascii": "Zhangjiakou",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1156277458,
+      "city": "Chifeng",
+      "city_ascii": "Chifeng",
+      "country": "China",
+      "admin_name": "Inner Mongolia",
+      "capital": "minor"
+    },
+    {
+      "id": 1156416074,
+      "city": "Linfen",
+      "city_ascii": "Linfen",
+      "country": "China",
+      "admin_name": "Shanxi",
+      "capital": null
+    },
+    {
+      "id": 1156235735,
+      "city": "Jiangguanchi",
+      "city_ascii": "Jiangguanchi",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": "minor"
+    },
+    {
+      "id": 1004993580,
+      "city": "Kabul",
+      "city_ascii": "Kabul",
+      "country": "Afghanistan",
+      "admin_name": "K\u0101bul",
+      "capital": "primary"
+    },
+    {
+      "id": 1840020568,
+      "city": "Phoenix",
+      "city_ascii": "Phoenix",
+      "country": "United States of America",
+      "admin_name": "Arizona",
+      "capital": "admin"
+    },
+    {
+      "id": 1156582079,
+      "city": "Luzhou",
+      "city_ascii": "Luzhou",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156632014,
+      "city": "Taiyuan",
+      "city_ascii": "Taiyuan",
+      "country": "China",
+      "admin_name": "Shanxi",
+      "capital": "admin"
+    },
+    {
+      "id": 1156170144,
+      "city": "Zhaoqing",
+      "city_ascii": "Zhaoqing",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156764447,
+      "city": "Xiaoxita",
+      "city_ascii": "Xiaoxita",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": "minor"
+    },
+    {
+      "id": 1156212809,
+      "city": "Xiamen",
+      "city_ascii": "Xiamen",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1156915325,
+      "city": "Fuzhou",
+      "city_ascii": "Fuzhou",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": null
+    },
+    {
+      "id": 1156360785,
+      "city": "Liuzhou",
+      "city_ascii": "Liuzhou",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156041962,
+      "city": "Zhuzhou",
+      "city_ascii": "Zhuzhou",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "minor"
+    },
+    {
+      "id": 1400522593,
+      "city": "Amman",
+      "city_ascii": "Amman",
+      "country": "Jordan",
+      "admin_name": "Al \u2018\u0100\u015fimah",
+      "capital": "primary"
+    },
+    {
+      "id": 1682926944,
+      "city": "Jeddah",
+      "city_ascii": "Jeddah",
+      "country": "Saudi Arabia",
+      "admin_name": "Makkah al Mukarramah",
+      "capital": null
+    },
+    {
+      "id": 1156036420,
+      "city": "Chuzhou",
+      "city_ascii": "Chuzhou",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": null
+    },
+    {
+      "id": 1156010654,
+      "city": "Loudi",
+      "city_ascii": "Loudi",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": null
+    },
+    {
+      "id": 1156127147,
+      "city": "Deyang",
+      "city_ascii": "Deyang",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156135890,
+      "city": "Qingyuan",
+      "city_ascii": "Qingyuan",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1566422868,
+      "city": "Kano",
+      "city_ascii": "Kano",
+      "country": "Nigeria",
+      "admin_name": "Kano",
+      "capital": "admin"
+    },
+    {
+      "id": 1156315512,
+      "city": "Wuhu",
+      "city_ascii": "Wuhu",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": "minor"
+    },
+    {
+      "id": 1840021117,
+      "city": "Seattle",
+      "city_ascii": "Seattle",
+      "country": "United States of America",
+      "admin_name": "Washington",
+      "capital": null
+    },
+    {
+      "id": 1392118339,
+      "city": "Yokohama",
+      "city_ascii": "Yokohama",
+      "country": "Japan",
+      "admin_name": "Kanagawa",
+      "capital": "admin"
+    },
+    {
+      "id": 1156564962,
+      "city": "Binzhou",
+      "city_ascii": "Binzhou",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1156101096,
+      "city": "Baojishi",
+      "city_ascii": "Baojishi",
+      "country": "China",
+      "admin_name": "Shaanxi",
+      "capital": null
+    },
+    {
+      "id": 1156796454,
+      "city": "Zaozhuang",
+      "city_ascii": "Zaozhuang",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1156516335,
+      "city": "Neijiang",
+      "city_ascii": "Neijiang",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156981113,
+      "city": "Baicheng",
+      "city_ascii": "Baicheng",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1276451290,
+      "city": "Berlin",
+      "city_ascii": "Berlin",
+      "country": "Germany",
+      "admin_name": "Berlin",
+      "capital": "primary"
+    },
+    {
+      "id": 1156901825,
+      "city": "Anshan",
+      "city_ascii": "Anshan",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1156280566,
+      "city": "Lanzhou",
+      "city_ascii": "Lanzhou",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": "admin"
+    },
+    {
+      "id": 1156431924,
+      "city": "Puyang",
+      "city_ascii": "Puyang",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": "minor"
+    },
+    {
+      "id": 1840021543,
+      "city": "San Francisco",
+      "city_ascii": "San Francisco",
+      "country": "United States of America",
+      "admin_name": "California",
+      "capital": null
+    },
+    {
+      "id": 1156157854,
+      "city": "Jiaozuo",
+      "city_ascii": "Jiaozuo",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1156167204,
+      "city": "Hechi",
+      "city_ascii": "Hechi",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1124586170,
+      "city": "Montr\u00e9al",
+      "city_ascii": "Montreal",
+      "country": "Canada",
+      "admin_name": "Quebec",
+      "capital": null
+    },
+    {
+      "id": 1840003971,
+      "city": "Detroit",
+      "city_ascii": "Detroit",
+      "country": "United States of America",
+      "admin_name": "Michigan",
+      "capital": null
+    },
+    {
+      "id": 1156197800,
+      "city": "Chengde",
+      "city_ascii": "Chengde",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1410601465,
+      "city": "Busan",
+      "city_ascii": "Busan",
+      "country": "South Korea",
+      "admin_name": "Busan",
+      "capital": "admin"
+    },
+    {
+      "id": 1012973369,
+      "city": "Algiers",
+      "city_ascii": "Algiers",
+      "country": "Algeria",
+      "admin_name": "Alger",
+      "capital": "primary"
+    },
+    {
+      "id": 1156382678,
+      "city": "Hanzhong",
+      "city_ascii": "Hanzhong",
+      "country": "China",
+      "admin_name": "Shaanxi",
+      "capital": null
+    },
+    {
+      "id": 1156383921,
+      "city": "Shiyan",
+      "city_ascii": "Shiyan",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": "minor"
+    },
+    {
+      "id": 1356891790,
+      "city": "Lucknow",
+      "city_ascii": "Lucknow",
+      "country": "India",
+      "admin_name": "Uttar Pradesh",
+      "capital": "admin"
+    },
+    {
+      "id": 1156063295,
+      "city": "Siping",
+      "city_ascii": "Siping",
+      "country": "China",
+      "admin_name": "Jilin",
+      "capital": null
+    },
+    {
+      "id": 1156280672,
+      "city": "Yulinshi",
+      "city_ascii": "Yulinshi",
+      "country": "China",
+      "admin_name": "Shaanxi",
+      "capital": null
+    },
+    {
+      "id": 1156057944,
+      "city": "Changzhi",
+      "city_ascii": "Changzhi",
+      "country": "China",
+      "admin_name": "Shanxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156106602,
+      "city": "Qinzhou",
+      "city_ascii": "Qinzhou",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156271365,
+      "city": "Bazhou",
+      "city_ascii": "Bazhou",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156104017,
+      "city": "Qincheng",
+      "city_ascii": "Qincheng",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156579621,
+      "city": "Zhongshan",
+      "city_ascii": "Zhongshan",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156655650,
+      "city": "Suining",
+      "city_ascii": "Suining",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156203130,
+      "city": "Leshan",
+      "city_ascii": "Leshan",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": null
+    },
+    {
+      "id": 1840021990,
+      "city": "San Diego",
+      "city_ascii": "San Diego",
+      "country": "United States of America",
+      "admin_name": "California",
+      "capital": null
+    },
+    {
+      "id": 1586323916,
+      "city": "Faisalabad",
+      "city_ascii": "Faisalabad",
+      "country": "Pakistan",
+      "admin_name": "Punjab",
+      "capital": "minor"
+    },
+    {
+      "id": 1156377302,
+      "city": "Guang\u2019an",
+      "city_ascii": "Guang'an",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156803442,
+      "city": "Tongren",
+      "city_ascii": "Tongren",
+      "country": "China",
+      "admin_name": "Guizhou",
+      "capital": null
+    },
+    {
+      "id": 1156440668,
+      "city": "Bengbu",
+      "city_ascii": "Bengbu",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": null
+    },
+    {
+      "id": 1068129363,
+      "city": "Santa Cruz",
+      "city_ascii": "Santa Cruz",
+      "country": "Bolivia",
+      "admin_name": "Santa Cruz",
+      "capital": "admin"
+    },
+    {
+      "id": 1156091093,
+      "city": "Qinhuangdao",
+      "city_ascii": "Qinhuangdao",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1156358686,
+      "city": "Tongliao",
+      "city_ascii": "Tongliao",
+      "country": "China",
+      "admin_name": "Inner Mongolia",
+      "capital": "minor"
+    },
+    {
+      "id": 1156157151,
+      "city": "Jinzhou",
+      "city_ascii": "Jinzhou",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1156934125,
+      "city": "Zhenjiang",
+      "city_ascii": "Zhenjiang",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156051276,
+      "city": "\u00dcr\u00fcmqi",
+      "city_ascii": "Urumqi",
+      "country": "China",
+      "admin_name": "Xinjiang",
+      "capital": "admin"
+    },
+    {
+      "id": 1156665165,
+      "city": "Heyuan",
+      "city_ascii": "Heyuan",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1356293537,
+      "city": "Jaipur",
+      "city_ascii": "Jaipur",
+      "country": "India",
+      "admin_name": "R\u0101jasth\u0101n",
+      "capital": "admin"
+    },
+    {
+      "id": 1156617534,
+      "city": "Xinzhou",
+      "city_ascii": "Xinzhou",
+      "country": "China",
+      "admin_name": "Shanxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156620133,
+      "city": "Wuzhou",
+      "city_ascii": "Wuzhou",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1231824991,
+      "city": "Addis Ababa",
+      "city_ascii": "Addis Ababa",
+      "country": "Ethiopia",
+      "admin_name": "\u0100d\u012bs \u0100beba",
+      "capital": "primary"
+    },
+    {
+      "id": 1156706927,
+      "city": "Chaoyang",
+      "city_ascii": "Chaoyang",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1076144436,
+      "city": "Bras\u00edlia",
+      "city_ascii": "Brasilia",
+      "country": "Brazil",
+      "admin_name": "Distrito Federal",
+      "capital": "primary"
+    },
+    {
+      "id": 1364123206,
+      "city": "Mashhad",
+      "city_ascii": "Mashhad",
+      "country": "Iran",
+      "admin_name": "Khor\u0101s\u0101n-e Ra\u1e95av\u012b",
+      "capital": "admin"
+    },
+    {
+      "id": 1156617066,
+      "city": "Shaoguan",
+      "city_ascii": "Shaoguan",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1414102075,
+      "city": "Kuwait City",
+      "city_ascii": "Kuwait City",
+      "country": "Kuwait",
+      "admin_name": "Al \u2018\u0100\u015fimah",
+      "capital": "primary"
+    },
+    {
+      "id": 1156939010,
+      "city": "Shanwei",
+      "city_ascii": "Shanwei",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1608974097,
+      "city": "Quezon City",
+      "city_ascii": "Quezon City",
+      "country": "Philippines",
+      "admin_name": "Quezon",
+      "capital": "admin"
+    },
+    {
+      "id": 1840007830,
+      "city": "Minneapolis",
+      "city_ascii": "Minneapolis",
+      "country": "United States of America",
+      "admin_name": "Minnesota",
+      "capital": null
+    },
+    {
+      "id": 1804382913,
+      "city": "Kyiv",
+      "city_ascii": "Kyiv",
+      "country": "Ukraine",
+      "admin_name": "Kyyiv, Misto",
+      "capital": "primary"
+    },
+    {
+      "id": 1887750814,
+      "city": "Sanaa",
+      "city_ascii": "Sanaa",
+      "country": "Yemen",
+      "admin_name": "Am\u0101nat al \u2018\u0100\u015fimah",
+      "capital": "primary"
+    },
+    {
+      "id": 1156185501,
+      "city": "Meishan",
+      "city_ascii": "Meishan",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": null
+    },
+    {
+      "id": 1320197916,
+      "city": "Guatemala City",
+      "city_ascii": "Guatemala City",
+      "country": "Guatemala",
+      "admin_name": "Guatemala",
+      "capital": "primary"
+    },
+    {
+      "id": 1410160313,
+      "city": "Incheon",
+      "city_ascii": "Incheon",
+      "country": "South Korea",
+      "admin_name": "Incheon",
+      "capital": "admin"
+    },
+    {
+      "id": 1156909802,
+      "city": "Ningde",
+      "city_ascii": "Ningde",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1840015982,
+      "city": "Tampa",
+      "city_ascii": "Tampa",
+      "country": "United States of America",
+      "admin_name": "Florida",
+      "capital": null
+    },
+    {
+      "id": 1156403962,
+      "city": "Daqing",
+      "city_ascii": "Daqing",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": null
+    },
+    {
+      "id": 1156811601,
+      "city": "Putian",
+      "city_ascii": "Putian",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1360313023,
+      "city": "Bandung",
+      "city_ascii": "Bandung",
+      "country": "Indonesia",
+      "admin_name": "Jawa Barat",
+      "capital": "admin"
+    },
+    {
+      "id": 1360484663,
+      "city": "Surabaya",
+      "city_ascii": "Surabaya",
+      "country": "Indonesia",
+      "admin_name": "Jawa Timur",
+      "capital": "admin"
+    },
+    {
+      "id": 1076923789,
+      "city": "Salvador",
+      "city_ascii": "Salvador",
+      "country": "Brazil",
+      "admin_name": "Bahia",
+      "capital": "admin"
+    },
+    {
+      "id": 1840018789,
+      "city": "Denver",
+      "city_ascii": "Denver",
+      "country": "United States of America",
+      "admin_name": "Colorado",
+      "capital": "admin"
+    },
+    {
+      "id": 1380382862,
+      "city": "Rome",
+      "city_ascii": "Rome",
+      "country": "Italy",
+      "admin_name": "Lazio",
+      "capital": "primary"
+    },
+    {
+      "id": 1068000064,
+      "city": "La Paz",
+      "city_ascii": "La Paz",
+      "country": "Bolivia",
+      "admin_name": "La Paz",
+      "capital": "primary"
+    },
+    {
+      "id": 1156210167,
+      "city": "Hohhot",
+      "city_ascii": "Hohhot",
+      "country": "China",
+      "admin_name": "Inner Mongolia",
+      "capital": "admin"
+    },
+    {
+      "id": 1156195684,
+      "city": "Xiangtan",
+      "city_ascii": "Xiangtan",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": null
+    },
+    {
+      "id": 1408738594,
+      "city": "Pyongyang",
+      "city_ascii": "Pyongyang",
+      "country": "North Korea",
+      "admin_name": "P\u2019y\u014fngyang",
+      "capital": "primary"
+    },
+    {
+      "id": 1158689622,
+      "city": "Taichung",
+      "city_ascii": "Taichung",
+      "country": "Taiwan",
+      "admin_name": "Taichung",
+      "capital": "admin"
+    },
+    {
+      "id": 1156473300,
+      "city": "Weihai",
+      "city_ascii": "Weihai",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156032841,
+      "city": "Rizhao",
+      "city_ascii": "Rizhao",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156249698,
+      "city": "Mudanjiang",
+      "city_ascii": "Mudanjiang",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1158331334,
+      "city": "Kaohsiung",
+      "city_ascii": "Kaohsiung",
+      "country": "Taiwan",
+      "admin_name": "Kaohsiung",
+      "capital": "admin"
+    },
+    {
+      "id": 1218802178,
+      "city": "Guayaquil",
+      "city_ascii": "Guayaquil",
+      "country": "Ecuador",
+      "admin_name": "Guayas",
+      "capital": "admin"
+    },
+    {
+      "id": 1156089994,
+      "city": "Tieling",
+      "city_ascii": "Tieling",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1356575238,
+      "city": "Cawnpore",
+      "city_ascii": "Cawnpore",
+      "country": "India",
+      "admin_name": "Uttar Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1156518274,
+      "city": "Dingxi",
+      "city_ascii": "Dingxi",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": "minor"
+    },
+    {
+      "id": 1158881289,
+      "city": "Taipei",
+      "city_ascii": "Taipei",
+      "country": "Taiwan",
+      "admin_name": "Taipei",
+      "capital": null
+    },
+    {
+      "id": 1156927445,
+      "city": "Nanping",
+      "city_ascii": "Nanping",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1156023354,
+      "city": "Zigong",
+      "city_ascii": "Zigong",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": null
+    },
+    {
+      "id": 1156549118,
+      "city": "Chaozhou",
+      "city_ascii": "Chaozhou",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156032751,
+      "city": "Baotou",
+      "city_ascii": "Baotou",
+      "country": "China",
+      "admin_name": "Inner Mongolia",
+      "capital": null
+    },
+    {
+      "id": 1156680279,
+      "city": "Gulou",
+      "city_ascii": "Gulou",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1156012979,
+      "city": "Longyan",
+      "city_ascii": "Longyan",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1156255711,
+      "city": "Ankang",
+      "city_ascii": "Ankang",
+      "country": "China",
+      "admin_name": "Shaanxi",
+      "capital": null
+    },
+    {
+      "id": 1156546994,
+      "city": "Baoshan",
+      "city_ascii": "Baoshan",
+      "country": "China",
+      "admin_name": "Yunnan",
+      "capital": null
+    },
+    {
+      "id": 1156580218,
+      "city": "Huludao",
+      "city_ascii": "Huludao",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": "minor"
+    },
+    {
+      "id": 1450978461,
+      "city": "Antananarivo",
+      "city_ascii": "Antananarivo",
+      "country": "Madagascar",
+      "admin_name": "Antananarivo",
+      "capital": "primary"
+    },
+    {
+      "id": 1156217114,
+      "city": "Yanjiang",
+      "city_ascii": "Yanjiang",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1050830722,
+      "city": "Chattogram",
+      "city_ascii": "Chattogram",
+      "country": "Bangladesh",
+      "admin_name": "Chittagong",
+      "capital": "admin"
+    },
+    {
+      "id": 1214636202,
+      "city": "Santo Domingo",
+      "city_ascii": "Santo Domingo",
+      "country": "Dominican Republic",
+      "admin_name": "Ozama",
+      "capital": "primary"
+    },
+    {
+      "id": 1156294429,
+      "city": "Sanming",
+      "city_ascii": "Sanming",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1156633259,
+      "city": "Longba",
+      "city_ascii": "Longba",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": null
+    },
+    {
+      "id": 1840034030,
+      "city": "Brooklyn",
+      "city_ascii": "Brooklyn",
+      "country": "United States of America",
+      "admin_name": "New York",
+      "capital": null
+    },
+    {
+      "id": 1156123172,
+      "city": "Yangjiang",
+      "city_ascii": "Yangjiang",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1156350864,
+      "city": "Jiamusi",
+      "city_ascii": "Jiamusi",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1566366407,
+      "city": "Ibadan",
+      "city_ascii": "Ibadan",
+      "country": "Nigeria",
+      "admin_name": "Oyo",
+      "capital": "admin"
+    },
+    {
+      "id": 1156330876,
+      "city": "Luohe",
+      "city_ascii": "Luohe",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156044130,
+      "city": "Lincang",
+      "city_ascii": "Lincang",
+      "country": "China",
+      "admin_name": "Yunnan",
+      "capital": null
+    },
+    {
+      "id": 1170680389,
+      "city": "Medell\u00edn",
+      "city_ascii": "Medellin",
+      "country": "Colombia",
+      "admin_name": "Antioquia",
+      "capital": "admin"
+    },
+    {
+      "id": 1156424311,
+      "city": "Xuanzhou",
+      "city_ascii": "Xuanzhou",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": null
+    },
+    {
+      "id": 1156057251,
+      "city": "Yunfu",
+      "city_ascii": "Yunfu",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1784736618,
+      "city": "Dubai",
+      "city_ascii": "Dubai",
+      "country": "United Arab Emirates",
+      "admin_name": "Dubayy",
+      "capital": "admin"
+    },
+    {
+      "id": 1356427908,
+      "city": "Mirz\u0101pur",
+      "city_ascii": "Mirzapur",
+      "country": "India",
+      "admin_name": "Uttar Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1860331871,
+      "city": "Tashkent",
+      "city_ascii": "Tashkent",
+      "country": "Uzbekistan",
+      "admin_name": "Toshkent",
+      "capital": "primary"
+    },
+    {
+      "id": 1156084562,
+      "city": "Guangyuan",
+      "city_ascii": "Guangyuan",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": null
+    },
+    {
+      "id": 1170417589,
+      "city": "Cali",
+      "city_ascii": "Cali",
+      "country": "Colombia",
+      "admin_name": "Valle del Cauca",
+      "capital": "admin"
+    },
+    {
+      "id": 1156234290,
+      "city": "Huangshi",
+      "city_ascii": "Huangshi",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": "minor"
+    },
+    {
+      "id": 1854029208,
+      "city": "Ouagadougou",
+      "city_ascii": "Ouagadougou",
+      "country": "Burkina Faso",
+      "admin_name": "Centre",
+      "capital": "primary"
+    },
+    {
+      "id": 1410095252,
+      "city": "Daegu",
+      "city_ascii": "Daegu",
+      "country": "South Korea",
+      "admin_name": "Daegu",
+      "capital": "admin"
+    },
+    {
+      "id": 1076567885,
+      "city": "Fortaleza",
+      "city_ascii": "Fortaleza",
+      "country": "Brazil",
+      "admin_name": "Cear\u00e1",
+      "capital": "admin"
+    },
+    {
+      "id": 1120298240,
+      "city": "Yaound\u00e9",
+      "city_ascii": "Yaounde",
+      "country": "Cameroon",
+      "admin_name": "Centre",
+      "capital": "primary"
+    },
+    {
+      "id": 1120494607,
+      "city": "Douala",
+      "city_ascii": "Douala",
+      "country": "Cameroon",
+      "admin_name": "Littoral",
+      "capital": "admin"
+    },
+    {
+      "id": 1156646448,
+      "city": "Jilin",
+      "city_ascii": "Jilin",
+      "country": "China",
+      "admin_name": "Jilin",
+      "capital": null
+    },
+    {
+      "id": 1156178316,
+      "city": "Dandong",
+      "city_ascii": "Dandong",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1156046704,
+      "city": "Lianshan",
+      "city_ascii": "Lianshan",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": "minor"
+    },
+    {
+      "id": 1156257074,
+      "city": "Yingkou",
+      "city_ascii": "Yingkou",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": "minor"
+    },
+    {
+      "id": 1356365743,
+      "city": "N\u0101gpur",
+      "city_ascii": "Nagpur",
+      "country": "India",
+      "admin_name": "Mah\u0101r\u0101shtra",
+      "capital": null
+    },
+    {
+      "id": 1729912179,
+      "city": "Omdurman",
+      "city_ascii": "Omdurman",
+      "country": "Sudan",
+      "admin_name": "Khartoum",
+      "capital": null
+    },
+    {
+      "id": 1360006015,
+      "city": "Bekasi",
+      "city_ascii": "Bekasi",
+      "country": "Indonesia",
+      "admin_name": "Jawa Barat",
+      "capital": null
+    },
+    {
+      "id": 1356691871,
+      "city": "Gh\u0101zi\u0101b\u0101d",
+      "city_ascii": "Ghaziabad",
+      "country": "India",
+      "admin_name": "Uttar Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1156682309,
+      "city": "Yuxi",
+      "city_ascii": "Yuxi",
+      "country": "China",
+      "admin_name": "Yunnan",
+      "capital": "minor"
+    },
+    {
+      "id": 1036192929,
+      "city": "Brisbane",
+      "city_ascii": "Brisbane",
+      "country": "Australia",
+      "admin_name": "Queensland",
+      "capital": "admin"
+    },
+    {
+      "id": 1156415948,
+      "city": "Anshun",
+      "city_ascii": "Anshun",
+      "country": "China",
+      "admin_name": "Guizhou",
+      "capital": null
+    },
+    {
+      "id": 1360962899,
+      "city": "Depok",
+      "city_ascii": "Depok",
+      "country": "Indonesia",
+      "admin_name": "Jawa Barat",
+      "capital": null
+    },
+    {
+      "id": 1156091241,
+      "city": "Shangzhou",
+      "city_ascii": "Shangzhou",
+      "country": "China",
+      "admin_name": "Shaanxi",
+      "capital": null
+    },
+    {
+      "id": 1156877299,
+      "city": "Huainan",
+      "city_ascii": "Huainan",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": null
+    },
+    {
+      "id": 1156106507,
+      "city": "Kuaidamao",
+      "city_ascii": "Kuaidamao",
+      "country": "China",
+      "admin_name": "Jilin",
+      "capital": "minor"
+    },
+    {
+      "id": 1288299415,
+      "city": "Accra",
+      "city_ascii": "Accra",
+      "country": "Ghana",
+      "admin_name": "Greater Accra",
+      "capital": "primary"
+    },
+    {
+      "id": 1392576294,
+      "city": "Fukuoka",
+      "city_ascii": "Fukuoka",
+      "country": "Japan",
+      "admin_name": "Fukuoka",
+      "capital": "admin"
+    },
+    {
+      "id": 1156163376,
+      "city": "Jincheng",
+      "city_ascii": "Jincheng",
+      "country": "China",
+      "admin_name": "Shanxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1124825478,
+      "city": "Vancouver",
+      "city_ascii": "Vancouver",
+      "country": "Canada",
+      "admin_name": "British Columbia",
+      "capital": null
+    },
+    {
+      "id": 1360002844,
+      "city": "Tangerang",
+      "city_ascii": "Tangerang",
+      "country": "Indonesia",
+      "admin_name": "Jawa Barat",
+      "capital": null
+    },
+    {
+      "id": 1156529682,
+      "city": "Sanmenxia",
+      "city_ascii": "Sanmenxia",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1156925734,
+      "city": "Laibin",
+      "city_ascii": "Laibin",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1840034002,
+      "city": "Queens",
+      "city_ascii": "Queens",
+      "country": "United States of America",
+      "admin_name": "New York",
+      "capital": null
+    },
+    {
+      "id": 1156032582,
+      "city": "Qinbaling",
+      "city_ascii": "Qinbaling",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": null
+    },
+    {
+      "id": 1156081448,
+      "city": "Xining",
+      "city_ascii": "Xining",
+      "country": "China",
+      "admin_name": "Qinghai",
+      "capital": "admin"
+    },
+    {
+      "id": 1156847452,
+      "city": "Ma\u2019anshan",
+      "city_ascii": "Ma'anshan",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": "minor"
+    },
+    {
+      "id": 1156546342,
+      "city": "Yan\u2019an",
+      "city_ascii": "Yan'an",
+      "country": "China",
+      "admin_name": "Shaanxi",
+      "capital": null
+    },
+    {
+      "id": 1031946365,
+      "city": "Baku",
+      "city_ascii": "Baku",
+      "country": "Azerbaijan",
+      "admin_name": "Bak\u0131",
+      "capital": "primary"
+    },
+    {
+      "id": 1156522457,
+      "city": "Gaoping",
+      "city_ascii": "Gaoping",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1716196799,
+      "city": "Harare",
+      "city_ascii": "Harare",
+      "country": "Zimbabwe",
+      "admin_name": "Harare",
+      "capital": "primary"
+    },
+    {
+      "id": 1192752771,
+      "city": "Havana",
+      "city_ascii": "Havana",
+      "country": "Cuba",
+      "admin_name": "La Habana",
+      "capital": "primary"
+    },
+    {
+      "id": 1116260534,
+      "city": "Phnom Penh",
+      "city_ascii": "Phnom Penh",
+      "country": "Cambodia",
+      "admin_name": "Phnom Penh",
+      "capital": "primary"
+    },
+    {
+      "id": 1156170787,
+      "city": "Ningbo",
+      "city_ascii": "Ningbo",
+      "country": "China",
+      "admin_name": "Zhejiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1706893395,
+      "city": "Mogadishu",
+      "city_ascii": "Mogadishu",
+      "country": "Somalia",
+      "admin_name": "Banaadir",
+      "capital": "primary"
+    },
+    {
+      "id": 1156756494,
+      "city": "Puning",
+      "city_ascii": "Puning",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": null
+    },
+    {
+      "id": 1360543171,
+      "city": "Medan",
+      "city_ascii": "Medan",
+      "country": "Indonesia",
+      "admin_name": "Sumatera Utara",
+      "capital": "admin"
+    },
+    {
+      "id": 1156142626,
+      "city": "Huaibei",
+      "city_ascii": "Huaibei",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": null
+    },
+    {
+      "id": 1156273372,
+      "city": "Qingyang",
+      "city_ascii": "Qingyang",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1840020551,
+      "city": "Riverside",
+      "city_ascii": "Riverside",
+      "country": "United States of America",
+      "admin_name": "California",
+      "capital": null
+    },
+    {
+      "id": 1840001592,
+      "city": "Baltimore",
+      "city_ascii": "Baltimore",
+      "country": "United States of America",
+      "admin_name": "Maryland",
+      "capital": null
+    },
+    {
+      "id": 1704000623,
+      "city": "Haiphong",
+      "city_ascii": "Haiphong",
+      "country": "Vietnam",
+      "admin_name": "H\u1ea3i Ph\u00f2ng",
+      "capital": "admin"
+    },
+    {
+      "id": 1840020364,
+      "city": "Las Vegas",
+      "city_ascii": "Las Vegas",
+      "country": "United States of America",
+      "admin_name": "Nevada",
+      "capital": null
+    },
+    {
+      "id": 1156438670,
+      "city": "Chongzuo",
+      "city_ascii": "Chongzuo",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1586344001,
+      "city": "Rawalpindi",
+      "city_ascii": "Rawalpindi",
+      "country": "Pakistan",
+      "admin_name": "Punjab",
+      "capital": "minor"
+    },
+    {
+      "id": 1288181103,
+      "city": "Kumasi",
+      "city_ascii": "Kumasi",
+      "country": "Ghana",
+      "admin_name": "Ashanti",
+      "capital": "admin"
+    },
+    {
+      "id": 1840019941,
+      "city": "Portland",
+      "city_ascii": "Portland",
+      "country": "United States of America",
+      "admin_name": "Oregon",
+      "capital": null
+    },
+    {
+      "id": 1356705249,
+      "city": "Vadodara",
+      "city_ascii": "Vadodara",
+      "country": "India",
+      "admin_name": "Gujar\u0101t",
+      "capital": null
+    },
+    {
+      "id": 1156459799,
+      "city": "Hezhou",
+      "city_ascii": "Hezhou",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156216904,
+      "city": "Pingliang",
+      "city_ascii": "Pingliang",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": "minor"
+    },
+    {
+      "id": 1840022220,
+      "city": "San Antonio",
+      "city_ascii": "San Antonio",
+      "country": "United States of America",
+      "admin_name": "Texas",
+      "capital": null
+    },
+    {
+      "id": 1036178956,
+      "city": "Perth",
+      "city_ascii": "Perth",
+      "country": "Australia",
+      "admin_name": "Western Australia",
+      "capital": "admin"
+    },
+    {
+      "id": 1356692563,
+      "city": "Vish\u0101khapatnam",
+      "city_ascii": "Vishakhapatnam",
+      "country": "India",
+      "admin_name": "Andhra Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1156672254,
+      "city": "Shengli",
+      "city_ascii": "Shengli",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": "minor"
+    },
+    {
+      "id": 1586400472,
+      "city": "Gujranwala",
+      "city_ascii": "Gujranwala",
+      "country": "Pakistan",
+      "admin_name": "Punjab",
+      "capital": "minor"
+    },
+    {
+      "id": 1156435764,
+      "city": "Baicheng",
+      "city_ascii": "Baicheng",
+      "country": "China",
+      "admin_name": "Jilin",
+      "capital": "minor"
+    },
+    {
+      "id": 1156857743,
+      "city": "Fushun",
+      "city_ascii": "Fushun",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1840001651,
+      "city": "St. Louis",
+      "city_ascii": "St. Louis",
+      "country": "United States of America",
+      "admin_name": "Missouri",
+      "capital": null
+    },
+    {
+      "id": 1466965925,
+      "city": "Bamako",
+      "city_ascii": "Bamako",
+      "country": "Mali",
+      "admin_name": "Bamako",
+      "capital": "primary"
+    },
+    {
+      "id": 1218441993,
+      "city": "Quito",
+      "city_ascii": "Quito",
+      "country": "Ecuador",
+      "admin_name": "Pichincha",
+      "capital": "primary"
+    },
+    {
+      "id": 1112348503,
+      "city": "Minsk",
+      "city_ascii": "Minsk",
+      "country": "Belarus",
+      "admin_name": "Minsk",
+      "capital": "primary"
+    },
+    {
+      "id": 1356402812,
+      "city": "Indore",
+      "city_ascii": "Indore",
+      "country": "India",
+      "admin_name": "Madhya Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1156359072,
+      "city": "Yinchuan",
+      "city_ascii": "Yinchuan",
+      "country": "China",
+      "admin_name": "Ningxia",
+      "capital": "admin"
+    },
+    {
+      "id": 1180172460,
+      "city": "Kananga",
+      "city_ascii": "Kananga",
+      "country": "Democratic Republic of the Congo",
+      "admin_name": "Kasa\u00ef Central",
+      "capital": "admin"
+    },
+    {
+      "id": 1586851102,
+      "city": "Peshawar",
+      "city_ascii": "Peshawar",
+      "country": "Pakistan",
+      "admin_name": "Khyber Pakhtunkhwa",
+      "capital": "admin"
+    },
+    {
+      "id": 1392000195,
+      "city": "Sapporo",
+      "city_ascii": "Sapporo",
+      "country": "Japan",
+      "admin_name": "Hokkaid\u014d",
+      "capital": "admin"
+    },
+    {
+      "id": 1364023865,
+      "city": "E\u015ffah\u0101n",
+      "city_ascii": "Esfahan",
+      "country": "Iran",
+      "admin_name": "E\u015ffah\u0101n",
+      "capital": "admin"
+    },
+    {
+      "id": 1862748204,
+      "city": "Caracas",
+      "city_ascii": "Caracas",
+      "country": "Venezuela",
+      "admin_name": "Distrito Capital",
+      "capital": "primary"
+    },
+    {
+      "id": 1156066465,
+      "city": "Pingxiang",
+      "city_ascii": "Pingxiang",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1760366651,
+      "city": "Aleppo",
+      "city_ascii": "Aleppo",
+      "country": "Syria",
+      "admin_name": "\u1e28alab",
+      "capital": "admin"
+    },
+    {
+      "id": 1484708778,
+      "city": "Tijuana",
+      "city_ascii": "Tijuana",
+      "country": "Mexico",
+      "admin_name": "Baja California",
+      "capital": "minor"
+    },
+    {
+      "id": 1398351701,
+      "city": "Almaty",
+      "city_ascii": "Almaty",
+      "country": "Kazakhstan",
+      "admin_name": "Almaty",
+      "capital": "admin"
+    },
+    {
+      "id": 1040261752,
+      "city": "Vienna",
+      "city_ascii": "Vienna",
+      "country": "Austria",
+      "admin_name": "Wien",
+      "capital": "primary"
+    },
+    {
+      "id": 1356681152,
+      "city": "Th\u0101ne",
+      "city_ascii": "Thane",
+      "country": "India",
+      "admin_name": "Mah\u0101r\u0101shtra",
+      "capital": null
+    },
+    {
+      "id": 1840021491,
+      "city": "Sacramento",
+      "city_ascii": "Sacramento",
+      "country": "United States of America",
+      "admin_name": "California",
+      "capital": "admin"
+    },
+    {
+      "id": 1454145012,
+      "city": "Blantyre",
+      "city_ascii": "Blantyre",
+      "country": "Malawi",
+      "admin_name": "Blantyre",
+      "capital": "admin"
+    },
+    {
+      "id": 1158061376,
+      "city": "Tainan",
+      "city_ascii": "Tainan",
+      "country": "Taiwan",
+      "admin_name": "Tainan",
+      "capital": "admin"
+    },
+    {
+      "id": 1156722242,
+      "city": "Zhuhai",
+      "city_ascii": "Zhuhai",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1642414442,
+      "city": "Bucharest",
+      "city_ascii": "Bucharest",
+      "country": "Romania",
+      "admin_name": "Bucure\u015fti",
+      "capital": "primary"
+    },
+    {
+      "id": 1076701712,
+      "city": "Curitiba",
+      "city_ascii": "Curitiba",
+      "country": "Brazil",
+      "admin_name": "Paran\u00e1",
+      "capital": "admin"
+    },
+    {
+      "id": 1586256291,
+      "city": "Multan",
+      "city_ascii": "Multan",
+      "country": "Pakistan",
+      "admin_name": "Punjab",
+      "capital": "minor"
+    },
+    {
+      "id": 1156898522,
+      "city": "Xiping",
+      "city_ascii": "Xiping",
+      "country": "China",
+      "admin_name": "Shanxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1484003694,
+      "city": "Ecatepec",
+      "city_ascii": "Ecatepec",
+      "country": "Mexico",
+      "admin_name": "M\u00e9xico",
+      "capital": "minor"
+    },
+    {
+      "id": 1156393765,
+      "city": "Jixi",
+      "city_ascii": "Jixi",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1586619596,
+      "city": "Saidu Sharif",
+      "city_ascii": "Saidu Sharif",
+      "country": "Pakistan",
+      "admin_name": "Khyber Pakhtunkhwa",
+      "capital": "minor"
+    },
+    {
+      "id": 1156202749,
+      "city": "Liaoyang",
+      "city_ascii": "Liaoyang",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1276041799,
+      "city": "Hamburg",
+      "city_ascii": "Hamburg",
+      "country": "Germany",
+      "admin_name": "Hamburg",
+      "capital": "admin"
+    },
+    {
+      "id": 1404588252,
+      "city": "Meru",
+      "city_ascii": "Meru",
+      "country": "Kenya",
+      "admin_name": "Meru",
+      "capital": "admin"
+    },
+    {
+      "id": 1178340306,
+      "city": "Brazzaville",
+      "city_ascii": "Brazzaville",
+      "country": "Republic of the Congo",
+      "admin_name": "Brazzaville",
+      "capital": "primary"
+    },
+    {
+      "id": 1840015099,
+      "city": "Orlando",
+      "city_ascii": "Orlando",
+      "country": "United States of America",
+      "admin_name": "Florida",
+      "capital": null
+    },
+    {
+      "id": 1156141954,
+      "city": "Fuxin",
+      "city_ascii": "Fuxin",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1156760291,
+      "city": "Wuwei",
+      "city_ascii": "Wuwei",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": "minor"
+    },
+    {
+      "id": 1076607274,
+      "city": "Manaus",
+      "city_ascii": "Manaus",
+      "country": "Brazil",
+      "admin_name": "Amazonas",
+      "capital": "admin"
+    },
+    {
+      "id": 1356734039,
+      "city": "Bhop\u0101l",
+      "city_ascii": "Bhopal",
+      "country": "India",
+      "admin_name": "Madhya Pradesh",
+      "capital": "admin"
+    },
+    {
+      "id": 1840021570,
+      "city": "San Jose",
+      "city_ascii": "San Jose",
+      "country": "United States of America",
+      "admin_name": "California",
+      "capital": null
+    },
+    {
+      "id": 1616024847,
+      "city": "Warsaw",
+      "city_ascii": "Warsaw",
+      "country": "Poland",
+      "admin_name": "Mazowieckie",
+      "capital": "primary"
+    },
+    {
+      "id": 1180506234,
+      "city": "Lubumbashi",
+      "city_ascii": "Lubumbashi",
+      "country": "Democratic Republic of the Congo",
+      "admin_name": "Haut-Katanga",
+      "capital": "admin"
+    },
+    {
+      "id": 1608906877,
+      "city": "Davao",
+      "city_ascii": "Davao",
+      "country": "Philippines",
+      "admin_name": "Davao",
+      "capital": "admin"
+    },
+    {
+      "id": 1156183327,
+      "city": "Haikou",
+      "city_ascii": "Haikou",
+      "country": "China",
+      "admin_name": "Hainan",
+      "capital": "admin"
+    },
+    {
+      "id": 1760685964,
+      "city": "Damascus",
+      "city_ascii": "Damascus",
+      "country": "Syria",
+      "admin_name": "Dimashq",
+      "capital": "primary"
+    },
+    {
+      "id": 1156051957,
+      "city": "Shuyangzha",
+      "city_ascii": "Shuyangzha",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": null
+    },
+    {
+      "id": 1056469830,
+      "city": "Brussels",
+      "city_ascii": "Brussels",
+      "country": "Belgium",
+      "admin_name": "Brussels-Capital Region",
+      "capital": "primary"
+    },
+    {
+      "id": 1894157390,
+      "city": "Lusaka",
+      "city_ascii": "Lusaka",
+      "country": "Zambia",
+      "admin_name": "Lusaka",
+      "capital": "primary"
+    },
+    {
+      "id": 1586185019,
+      "city": "Hyderabad City",
+      "city_ascii": "Hyderabad City",
+      "country": "Pakistan",
+      "admin_name": "Sindh",
+      "capital": "minor"
+    },
+    {
+      "id": 1348611435,
+      "city": "Budapest",
+      "city_ascii": "Budapest",
+      "country": "Hungary",
+      "admin_name": "Budapest",
+      "capital": "primary"
+    },
+    {
+      "id": 1156227167,
+      "city": "Shuozhou",
+      "city_ascii": "Shuozhou",
+      "country": "China",
+      "admin_name": "Shanxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1840000596,
+      "city": "Cleveland",
+      "city_ascii": "Cleveland",
+      "country": "United States of America",
+      "admin_name": "Ohio",
+      "capital": null
+    },
+    {
+      "id": 1156097909,
+      "city": "Benxi",
+      "city_ascii": "Benxi",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1156140738,
+      "city": "Baiyin",
+      "city_ascii": "Baiyin",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": "minor"
+    },
+    {
+      "id": 1840001254,
+      "city": "Pittsburgh",
+      "city_ascii": "Pittsburgh",
+      "country": "United States of America",
+      "admin_name": "Pennsylvania",
+      "capital": null
+    },
+    {
+      "id": 1356821429,
+      "city": "Patna",
+      "city_ascii": "Patna",
+      "country": "India",
+      "admin_name": "Bih\u0101r",
+      "capital": "admin"
+    },
+    {
+      "id": 1368194914,
+      "city": "Mosul",
+      "city_ascii": "Mosul",
+      "country": "Iraq",
+      "admin_name": "N\u012bnaw\u00e1",
+      "capital": "admin"
+    },
+    {
+      "id": 1608897690,
+      "city": "Caloocan City",
+      "city_ascii": "Caloocan City",
+      "country": "Philippines",
+      "admin_name": "Caloocan",
+      "capital": "admin"
+    },
+    {
+      "id": 1840019590,
+      "city": "Austin",
+      "city_ascii": "Austin",
+      "country": "United States of America",
+      "admin_name": "Texas",
+      "capital": "admin"
+    },
+    {
+      "id": 1156025536,
+      "city": "Sanzhou",
+      "city_ascii": "Sanzhou",
+      "country": "China",
+      "admin_name": "Chongqing",
+      "capital": null
+    },
+    {
+      "id": 1156421449,
+      "city": "Beihai",
+      "city_ascii": "Beihai",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1682169241,
+      "city": "Mecca",
+      "city_ascii": "Mecca",
+      "country": "Saudi Arabia",
+      "admin_name": "Makkah al Mukarramah",
+      "capital": "admin"
+    },
+    {
+      "id": 1156339225,
+      "city": "Heihe",
+      "city_ascii": "Heihe",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1156038165,
+      "city": "Jingdezhen",
+      "city_ascii": "Jingdezhen",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1324568159,
+      "city": "Conakry",
+      "city_ascii": "Conakry",
+      "country": "Guinea",
+      "admin_name": "Conakry",
+      "capital": "primary"
+    },
+    {
+      "id": 1800406299,
+      "city": "Kampala",
+      "city_ascii": "Kampala",
+      "country": "Uganda",
+      "admin_name": "Kampala",
+      "capital": "primary"
+    },
+    {
+      "id": 1840003814,
+      "city": "Cincinnati",
+      "city_ascii": "Cincinnati",
+      "country": "United States of America",
+      "admin_name": "Ohio",
+      "capital": null
+    },
+    {
+      "id": 1076137337,
+      "city": "Recife",
+      "city_ascii": "Recife",
+      "country": "Brazil",
+      "admin_name": "Pernambuco",
+      "capital": "admin"
+    },
+    {
+      "id": 1156245000,
+      "city": "Yushan",
+      "city_ascii": "Yushan",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1158025380,
+      "city": "Zhongli",
+      "city_ascii": "Zhongli",
+      "country": "Taiwan",
+      "admin_name": "Taoyuan",
+      "capital": null
+    },
+    {
+      "id": 1840008535,
+      "city": "Kansas City",
+      "city_ascii": "Kansas City",
+      "country": "United States of America",
+      "admin_name": "Missouri",
+      "capital": null
+    },
+    {
+      "id": 1840034000,
+      "city": "Manhattan",
+      "city_ascii": "Manhattan",
+      "country": "United States of America",
+      "admin_name": "New York",
+      "capital": null
+    },
+    {
+      "id": 1356820491,
+      "city": "Bil\u0101spur",
+      "city_ascii": "Bilaspur",
+      "country": "India",
+      "admin_name": "Chhatt\u012bsgarh",
+      "capital": null
+    },
+    {
+      "id": 1360745537,
+      "city": "Semarang",
+      "city_ascii": "Semarang",
+      "country": "Indonesia",
+      "admin_name": "Jawa Tengah",
+      "capital": "admin"
+    },
+    {
+      "id": 1356929498,
+      "city": "Ludhi\u0101na",
+      "city_ascii": "Ludhiana",
+      "country": "India",
+      "admin_name": "Punjab",
+      "capital": null
+    },
+    {
+      "id": 1643399240,
+      "city": "Novosibirsk",
+      "city_ascii": "Novosibirsk",
+      "country": "Russia",
+      "admin_name": "Novosibirskaya Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1156883901,
+      "city": "Chengtangcun",
+      "city_ascii": "Chengtangcun",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1356187395,
+      "city": "\u0100gra",
+      "city_ascii": "Agra",
+      "country": "India",
+      "admin_name": "Uttar Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1364258511,
+      "city": "Karaj",
+      "city_ascii": "Karaj",
+      "country": "Iran",
+      "admin_name": "Alborz",
+      "capital": "admin"
+    },
+    {
+      "id": 1156188829,
+      "city": "Wenzhou",
+      "city_ascii": "Wenzhou",
+      "country": "China",
+      "admin_name": "Zhejiang",
+      "capital": null
+    },
+    {
+      "id": 1840030084,
+      "city": "Indianapolis",
+      "city_ascii": "Indianapolis",
+      "country": "United States of America",
+      "admin_name": "Indiana",
+      "capital": "admin"
+    },
+    {
+      "id": 1484811199,
+      "city": "Le\u00f3n de los Aldama",
+      "city_ascii": "Leon de los Aldama",
+      "country": "Mexico",
+      "admin_name": "Guanajuato",
+      "capital": "minor"
+    },
+    {
+      "id": 1484416394,
+      "city": "Puebla",
+      "city_ascii": "Puebla",
+      "country": "Mexico",
+      "admin_name": "Puebla",
+      "capital": "admin"
+    },
+    {
+      "id": 1356172246,
+      "city": "Kaly\u0101n",
+      "city_ascii": "Kalyan",
+      "country": "India",
+      "admin_name": "Mah\u0101r\u0101shtra",
+      "capital": null
+    },
+    {
+      "id": 1356257289,
+      "city": "Madurai",
+      "city_ascii": "Madurai",
+      "country": "India",
+      "admin_name": "Tamil N\u0101du",
+      "capital": "minor"
+    },
+    {
+      "id": 1180399586,
+      "city": "Mbuji-Mayi",
+      "city_ascii": "Mbuji-Mayi",
+      "country": "Democratic Republic of the Congo",
+      "admin_name": "Kasa\u00ef Oriental",
+      "capital": "admin"
+    },
+    {
+      "id": 1156114258,
+      "city": "Hebi",
+      "city_ascii": "Hebi",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1364432238,
+      "city": "Sh\u012br\u0101z",
+      "city_ascii": "Shiraz",
+      "country": "Iran",
+      "admin_name": "F\u0101rs",
+      "capital": "admin"
+    },
+    {
+      "id": 1356501259,
+      "city": "Jamshedpur",
+      "city_ascii": "Jamshedpur",
+      "country": "India",
+      "admin_name": "Jharkhand",
+      "capital": null
+    },
+    {
+      "id": 1840003760,
+      "city": "Columbus",
+      "city_ascii": "Columbus",
+      "country": "United States of America",
+      "admin_name": "Ohio",
+      "capital": "admin"
+    },
+    {
+      "id": 1364141756,
+      "city": "Tabr\u012bz",
+      "city_ascii": "Tabriz",
+      "country": "Iran",
+      "admin_name": "\u0100z\u0304arb\u0101yj\u0101n-e Sharq\u012b",
+      "capital": "admin"
+    },
+    {
+      "id": 1862072711,
+      "city": "Maracaibo",
+      "city_ascii": "Maracaibo",
+      "country": "Venezuela",
+      "admin_name": "Zulia",
+      "capital": "admin"
+    },
+    {
+      "id": 1392003356,
+      "city": "Kawasaki",
+      "city_ascii": "Kawasaki",
+      "country": "Japan",
+      "admin_name": "Kanagawa",
+      "capital": null
+    },
+    {
+      "id": 1566262000,
+      "city": "Aba",
+      "city_ascii": "Aba",
+      "country": "Nigeria",
+      "admin_name": "Abia",
+      "capital": "minor"
+    },
+    {
+      "id": 1360902897,
+      "city": "Palembang",
+      "city_ascii": "Palembang",
+      "country": "Indonesia",
+      "admin_name": "Sumatera Selatan",
+      "capital": "admin"
+    },
+    {
+      "id": 1156072884,
+      "city": "Zhangjiajie",
+      "city_ascii": "Zhangjiajie",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "minor"
+    },
+    {
+      "id": 1392978082,
+      "city": "K\u014dbe",
+      "city_ascii": "Kobe",
+      "country": "Japan",
+      "admin_name": "Hy\u014dgo",
+      "capital": "admin"
+    },
+    {
+      "id": 1840014557,
+      "city": "Charlotte",
+      "city_ascii": "Charlotte",
+      "country": "United States of America",
+      "admin_name": "North Carolina",
+      "capital": null
+    },
+    {
+      "id": 1156901538,
+      "city": "Changshu",
+      "city_ascii": "Changshu",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": null
+    },
+    {
+      "id": 1156944106,
+      "city": "Lianjiang",
+      "city_ascii": "Lianjiang",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": null
+    },
+    {
+      "id": 1156173813,
+      "city": "Ximeicun",
+      "city_ascii": "Ximeicun",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": null
+    },
+    {
+      "id": 1156545200,
+      "city": "Jianguang",
+      "city_ascii": "Jianguang",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": null
+    },
+    {
+      "id": 1156817119,
+      "city": "Yucheng",
+      "city_ascii": "Yucheng",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1076646823,
+      "city": "Bel\u00e9m",
+      "city_ascii": "Belem",
+      "country": "Brazil",
+      "admin_name": "Par\u00e1",
+      "capital": "admin"
+    },
+    {
+      "id": 1156165517,
+      "city": "Guiping",
+      "city_ascii": "Guiping",
+      "country": "China",
+      "admin_name": "Guangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1156863840,
+      "city": "Leizhou",
+      "city_ascii": "Leizhou",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": "minor"
+    },
+    {
+      "id": 1410000087,
+      "city": "Gwangju",
+      "city_ascii": "Gwangju",
+      "country": "South Korea",
+      "admin_name": "Gwangju",
+      "capital": "admin"
+    },
+    {
+      "id": 1276692352,
+      "city": "Munich",
+      "city_ascii": "Munich",
+      "country": "Germany",
+      "admin_name": "Bavaria",
+      "capital": "admin"
+    },
+    {
+      "id": 1356562598,
+      "city": "N\u0101sik",
+      "city_ascii": "Nasik",
+      "country": "India",
+      "admin_name": "Mah\u0101r\u0101shtra",
+      "capital": null
+    },
+    {
+      "id": 1076658221,
+      "city": "Porto Alegre",
+      "city_ascii": "Porto Alegre",
+      "country": "Brazil",
+      "admin_name": "Rio Grande do Sul",
+      "capital": "admin"
+    },
+    {
+      "id": 1862309871,
+      "city": "Valencia",
+      "city_ascii": "Valencia",
+      "country": "Venezuela",
+      "admin_name": "Carabobo",
+      "capital": "admin"
+    },
+    {
+      "id": 1566593483,
+      "city": "Onitsha",
+      "city_ascii": "Onitsha",
+      "country": "Nigeria",
+      "admin_name": "Anambra",
+      "capital": "minor"
+    },
+    {
+      "id": 1784176710,
+      "city": "Abu Dhabi",
+      "city_ascii": "Abu Dhabi",
+      "country": "United Arab Emirates",
+      "admin_name": "Ab\u016b Z\u0327aby",
+      "capital": "primary"
+    },
+    {
+      "id": 1840003871,
+      "city": "Virginia Beach",
+      "city_ascii": "Virginia Beach",
+      "country": "United States of America",
+      "admin_name": "Virginia",
+      "capital": null
+    },
+    {
+      "id": 1410993875,
+      "city": "Daejeon",
+      "city_ascii": "Daejeon",
+      "country": "South Korea",
+      "admin_name": "Daejeon",
+      "capital": "admin"
+    },
+    {
+      "id": 1484198680,
+      "city": "Zapopan",
+      "city_ascii": "Zapopan",
+      "country": "Mexico",
+      "admin_name": "Jalisco",
+      "capital": "minor"
+    },
+    {
+      "id": 1643582706,
+      "city": "Yekaterinburg",
+      "city_ascii": "Yekaterinburg",
+      "country": "Russia",
+      "admin_name": "Sverdlovskaya Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1156796734,
+      "city": "Huazhou",
+      "city_ascii": "Huazhou",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": "minor"
+    },
+    {
+      "id": 1392622735,
+      "city": "Ky\u014dto",
+      "city_ascii": "Kyoto",
+      "country": "Japan",
+      "admin_name": "Ky\u014dto",
+      "capital": "admin"
+    },
+    {
+      "id": 1156245904,
+      "city": "Shuangyashan",
+      "city_ascii": "Shuangyashan",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1156114238,
+      "city": "Pizhou",
+      "city_ascii": "Pizhou",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": null
+    },
+    {
+      "id": 1504846488,
+      "city": "El Kelaa des Srarhna",
+      "city_ascii": "El Kelaa des Srarhna",
+      "country": "Morocco",
+      "admin_name": "Marrakech-Safi",
+      "capital": null
+    },
+    {
+      "id": 1804588111,
+      "city": "Kharkiv",
+      "city_ascii": "Kharkiv",
+      "country": "Ukraine",
+      "admin_name": "Kharkivs\u2019ka Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1156203000,
+      "city": "Yangshe",
+      "city_ascii": "Yangshe",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156817541,
+      "city": "Guyuan",
+      "city_ascii": "Guyuan",
+      "country": "China",
+      "admin_name": "Ningxia",
+      "capital": null
+    },
+    {
+      "id": 1050667339,
+      "city": "Khulna",
+      "city_ascii": "Khulna",
+      "country": "Bangladesh",
+      "admin_name": "Khulna",
+      "capital": "admin"
+    },
+    {
+      "id": 1512035506,
+      "city": "Muscat",
+      "city_ascii": "Muscat",
+      "country": "Oman",
+      "admin_name": "Masqa\u0163",
+      "capital": "primary"
+    },
+    {
+      "id": 1840033999,
+      "city": "Bronx",
+      "city_ascii": "Bronx",
+      "country": "United States of America",
+      "admin_name": "New York",
+      "capital": null
+    },
+    {
+      "id": 1156785303,
+      "city": "Gaozhou",
+      "city_ascii": "Gaozhou",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": null
+    },
+    {
+      "id": 1156131504,
+      "city": "Chizhou",
+      "city_ascii": "Chizhou",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": "minor"
+    },
+    {
+      "id": 1356013205,
+      "city": "Far\u012bd\u0101b\u0101d",
+      "city_ascii": "Faridabad",
+      "country": "India",
+      "admin_name": "Hary\u0101na",
+      "capital": null
+    },
+    {
+      "id": 1496024767,
+      "city": "Ulaanbaatar",
+      "city_ascii": "Ulaanbaatar",
+      "country": "Mongolia",
+      "admin_name": "Ulaanbaatar",
+      "capital": "primary"
+    },
+    {
+      "id": 1076034054,
+      "city": "Goi\u00e2nia",
+      "city_ascii": "Goiania",
+      "country": "Brazil",
+      "admin_name": "Goi\u00e1s",
+      "capital": "admin"
+    },
+    {
+      "id": 1156893569,
+      "city": "Fuqing",
+      "city_ascii": "Fuqing",
+      "country": "China",
+      "admin_name": "Fujian",
+      "capital": "minor"
+    },
+    {
+      "id": 1688374696,
+      "city": "Belgrade",
+      "city_ascii": "Belgrade",
+      "country": "Republic of Serbia",
+      "admin_name": "Beograd",
+      "capital": "primary"
+    },
+    {
+      "id": 1156157078,
+      "city": "Pingdu",
+      "city_ascii": "Pingdu",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1380724377,
+      "city": "Milan",
+      "city_ascii": "Milan",
+      "country": "Italy",
+      "admin_name": "Lombardy",
+      "capital": "admin"
+    },
+    {
+      "id": 1356840670,
+      "city": "Aurang\u0101b\u0101d",
+      "city_ascii": "Aurangabad",
+      "country": "India",
+      "admin_name": "Mah\u0101r\u0101shtra",
+      "capital": null
+    },
+    {
+      "id": 1156592042,
+      "city": "Yutan",
+      "city_ascii": "Yutan",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "minor"
+    },
+    {
+      "id": 1840003046,
+      "city": "Milwaukee",
+      "city_ascii": "Milwaukee",
+      "country": "United States of America",
+      "admin_name": "Wisconsin",
+      "capital": null
+    },
+    {
+      "id": 1156527426,
+      "city": "Huangshan",
+      "city_ascii": "Huangshan",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": "minor"
+    },
+    {
+      "id": 1554435911,
+      "city": "Auckland",
+      "city_ascii": "Auckland",
+      "country": "New Zealand",
+      "admin_name": "Auckland",
+      "capital": "admin"
+    },
+    {
+      "id": 1360051337,
+      "city": "Makassar",
+      "city_ascii": "Makassar",
+      "country": "Indonesia",
+      "admin_name": "Sulawesi Selatan",
+      "capital": "admin"
+    },
+    {
+      "id": 1214985348,
+      "city": "Santiago",
+      "city_ascii": "Santiago",
+      "country": "Dominican Republic",
+      "admin_name": "Cibao Norte",
+      "capital": "admin"
+    },
+    {
+      "id": 1203744823,
+      "city": "Prague",
+      "city_ascii": "Prague",
+      "country": "Czechia",
+      "admin_name": "Praha, Hlavn\u00ed M\u011bsto",
+      "capital": "primary"
+    },
+    {
+      "id": 1356317190,
+      "city": "R\u0101jkot",
+      "city_ascii": "Rajkot",
+      "country": "India",
+      "admin_name": "Gujar\u0101t",
+      "capital": null
+    },
+    {
+      "id": 1156366507,
+      "city": "Liangshi",
+      "city_ascii": "Liangshi",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": null
+    },
+    {
+      "id": 1032803249,
+      "city": "C\u00f3rdoba",
+      "city_ascii": "Cordoba",
+      "country": "Argentina",
+      "admin_name": "C\u00f3rdoba",
+      "capital": "admin"
+    },
+    {
+      "id": 1076730420,
+      "city": "Guarulhos",
+      "city_ascii": "Guarulhos",
+      "country": "Brazil",
+      "admin_name": "S\u00e3o Paulo",
+      "capital": null
+    },
+    {
+      "id": 1368714645,
+      "city": "Al Ba\u015frah",
+      "city_ascii": "Al Basrah",
+      "country": "Iraq",
+      "admin_name": "Al Ba\u015frah",
+      "capital": "admin"
+    },
+    {
+      "id": 1392017719,
+      "city": "Saitama",
+      "city_ascii": "Saitama",
+      "country": "Japan",
+      "admin_name": "Saitama",
+      "capital": "admin"
+    },
+    {
+      "id": 1484840083,
+      "city": "Ju\u00e1rez",
+      "city_ascii": "Juarez",
+      "country": "Mexico",
+      "admin_name": "Chihuahua",
+      "capital": "minor"
+    },
+    {
+      "id": 1858107000,
+      "city": "Montevideo",
+      "city_ascii": "Montevideo",
+      "country": "Uruguay",
+      "admin_name": "Montevideo",
+      "capital": "primary"
+    },
+    {
+      "id": 1156761230,
+      "city": "Xintai",
+      "city_ascii": "Xintai",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1156264408,
+      "city": "Wusong",
+      "city_ascii": "Wusong",
+      "country": "China",
+      "admin_name": "Anhui",
+      "capital": "minor"
+    },
+    {
+      "id": 1356390476,
+      "city": "Meerut",
+      "city_ascii": "Meerut",
+      "country": "India",
+      "admin_name": "Uttar Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1156326773,
+      "city": "Yushu",
+      "city_ascii": "Yushu",
+      "country": "China",
+      "admin_name": "Jilin",
+      "capital": null
+    },
+    {
+      "id": 1156122888,
+      "city": "Rongcheng",
+      "city_ascii": "Rongcheng",
+      "country": "China",
+      "admin_name": "Yunnan",
+      "capital": null
+    },
+    {
+      "id": 1156282637,
+      "city": "Huazhou",
+      "city_ascii": "Huazhou",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": null
+    },
+    {
+      "id": 1156157844,
+      "city": "Yangquan",
+      "city_ascii": "Yangquan",
+      "country": "China",
+      "admin_name": "Shanxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1036538171,
+      "city": "Adelaide",
+      "city_ascii": "Adelaide",
+      "country": "Australia",
+      "admin_name": "South Australia",
+      "capital": "admin"
+    },
+    {
+      "id": 1156960624,
+      "city": "Baishan",
+      "city_ascii": "Baishan",
+      "country": "China",
+      "admin_name": "Jilin",
+      "capital": "minor"
+    },
+    {
+      "id": 1156828380,
+      "city": "Dayan",
+      "city_ascii": "Dayan",
+      "country": "China",
+      "admin_name": "Yunnan",
+      "capital": null
+    },
+    {
+      "id": 1156052713,
+      "city": "Haicheng",
+      "city_ascii": "Haicheng",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": "minor"
+    },
+    {
+      "id": 1156033234,
+      "city": "Jiangyin",
+      "city_ascii": "Jiangyin",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": null
+    },
+    {
+      "id": 1156662372,
+      "city": "Huaiyin",
+      "city_ascii": "Huaiyin",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": null
+    },
+    {
+      "id": 1156139322,
+      "city": "Wuzhong",
+      "city_ascii": "Wuzhong",
+      "country": "China",
+      "admin_name": "Ningxia",
+      "capital": "minor"
+    },
+    {
+      "id": 1024559448,
+      "city": "Cacuaco",
+      "city_ascii": "Cacuaco",
+      "country": "Angola",
+      "admin_name": "Luanda",
+      "capital": null
+    },
+    {
+      "id": 1170179113,
+      "city": "Barranquilla",
+      "city_ascii": "Barranquilla",
+      "country": "Colombia",
+      "admin_name": "Atl\u00e1ntico",
+      "capital": "admin"
+    },
+    {
+      "id": 1100762037,
+      "city": "Sofia",
+      "city_ascii": "Sofia",
+      "country": "Bulgaria",
+      "admin_name": "Sofia-Grad",
+      "capital": "primary"
+    },
+    {
+      "id": 1710627007,
+      "city": "Soweto",
+      "city_ascii": "Soweto",
+      "country": "South Africa",
+      "admin_name": "Gauteng",
+      "capital": null
+    },
+    {
+      "id": 1356115460,
+      "city": "Jabalpur",
+      "city_ascii": "Jabalpur",
+      "country": "India",
+      "admin_name": "Madhya Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1156323529,
+      "city": "Rucheng",
+      "city_ascii": "Rucheng",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1643012126,
+      "city": "Nizhniy Novgorod",
+      "city_ascii": "Nizhniy Novgorod",
+      "country": "Russia",
+      "admin_name": "Nizhegorodskaya Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1156668366,
+      "city": "Shaoyang",
+      "city_ascii": "Shaoyang",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1356103392,
+      "city": "Dhanb\u0101d",
+      "city_ascii": "Dhanbad",
+      "country": "India",
+      "admin_name": "Jharkhand",
+      "capital": null
+    },
+    {
+      "id": 1340762485,
+      "city": "Comayag\u00fcela",
+      "city_ascii": "Comayaguela",
+      "country": "Honduras",
+      "admin_name": "Francisco Moraz\u00e1n",
+      "capital": null
+    },
+    {
+      "id": 1156207332,
+      "city": "Laiwu",
+      "city_ascii": "Laiwu",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1784152993,
+      "city": "Sharjah",
+      "city_ascii": "Sharjah",
+      "country": "United Arab Emirates",
+      "admin_name": "Ash Sh\u0101riqah",
+      "capital": "admin"
+    },
+    {
+      "id": 1156060544,
+      "city": "Jingling",
+      "city_ascii": "Jingling",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": null
+    },
+    {
+      "id": 1643101260,
+      "city": "Kazan",
+      "city_ascii": "Kazan",
+      "country": "Russia",
+      "admin_name": "Tatarstan",
+      "capital": "admin"
+    },
+    {
+      "id": 1410679777,
+      "city": "Suwon",
+      "city_ascii": "Suwon",
+      "country": "South Korea",
+      "admin_name": "Gyeonggi",
+      "capital": "admin"
+    },
+    {
+      "id": 1156841802,
+      "city": "Yongcheng",
+      "city_ascii": "Yongcheng",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1124690423,
+      "city": "Calgary",
+      "city_ascii": "Calgary",
+      "country": "Canada",
+      "admin_name": "Alberta",
+      "capital": null
+    },
+    {
+      "id": 1704783472,
+      "city": "C\u1ea7n Th\u01a1",
+      "city_ascii": "Can Tho",
+      "country": "Vietnam",
+      "admin_name": "C\u1ea7n Th\u01a1",
+      "capital": "admin"
+    },
+    {
+      "id": 1566342270,
+      "city": "Abuja",
+      "city_ascii": "Abuja",
+      "country": "Nigeria",
+      "admin_name": "Federal Capital Territory",
+      "capital": "primary"
+    },
+    {
+      "id": 1104468217,
+      "city": "Mandalay",
+      "city_ascii": "Mandalay",
+      "country": "Myanmar",
+      "admin_name": "Mandalay",
+      "capital": "admin"
+    },
+    {
+      "id": 1156137209,
+      "city": "Beidao",
+      "city_ascii": "Beidao",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156328867,
+      "city": "Xiangshui",
+      "city_ascii": "Xiangshui",
+      "country": "China",
+      "admin_name": "Guizhou",
+      "capital": null
+    },
+    {
+      "id": 1156901342,
+      "city": "Dadukou",
+      "city_ascii": "Dadukou",
+      "country": "China",
+      "admin_name": "Sichuan",
+      "capital": "minor"
+    },
+    {
+      "id": 1076575691,
+      "city": "Vila Velha",
+      "city_ascii": "Vila Velha",
+      "country": "Brazil",
+      "admin_name": "Amap\u00e1",
+      "capital": null
+    },
+    {
+      "id": 1643224011,
+      "city": "Chelyabinsk",
+      "city_ascii": "Chelyabinsk",
+      "country": "Russia",
+      "admin_name": "Chelyabinskaya Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1404512373,
+      "city": "Mombasa",
+      "city_ascii": "Mombasa",
+      "country": "Kenya",
+      "admin_name": "Mombasa",
+      "capital": "admin"
+    },
+    {
+      "id": 1840003289,
+      "city": "Providence",
+      "city_ascii": "Providence",
+      "country": "United States of America",
+      "admin_name": "Rhode Island",
+      "capital": "admin"
+    },
+    {
+      "id": 1356145782,
+      "city": "V\u0101r\u0101nasi",
+      "city_ascii": "Varanasi",
+      "country": "India",
+      "admin_name": "Uttar Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1364701633,
+      "city": "Qom",
+      "city_ascii": "Qom",
+      "country": "Iran",
+      "admin_name": "Qom",
+      "capital": "admin"
+    },
+    {
+      "id": 1156180353,
+      "city": "Zhangye",
+      "city_ascii": "Zhangye",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": "minor"
+    },
+    {
+      "id": 1392373695,
+      "city": "Hiroshima",
+      "city_ascii": "Hiroshima",
+      "country": "Japan",
+      "admin_name": "Hiroshima",
+      "capital": "admin"
+    },
+    {
+      "id": 1566540296,
+      "city": "Maiduguri",
+      "city_ascii": "Maiduguri",
+      "country": "Nigeria",
+      "admin_name": "Borno",
+      "capital": "admin"
+    },
+    {
+      "id": 1508074843,
+      "city": "Maputo",
+      "city_ascii": "Maputo",
+      "country": "Mozambique",
+      "admin_name": "Maputo",
+      "capital": "primary"
+    },
+    {
+      "id": 1634459660,
+      "city": "Doha",
+      "city_ascii": "Doha",
+      "country": "Qatar",
+      "admin_name": "Ad Daw\u1e29ah",
+      "capital": "primary"
+    },
+    {
+      "id": 1032770677,
+      "city": "Rosario",
+      "city_ascii": "Rosario",
+      "country": "Argentina",
+      "admin_name": "Santa Fe",
+      "capital": "minor"
+    },
+    {
+      "id": 1686165071,
+      "city": "Pikine",
+      "city_ascii": "Pikine",
+      "country": "Senegal",
+      "admin_name": "Dakar",
+      "capital": null
+    },
+    {
+      "id": 1156138735,
+      "city": "Xinyu",
+      "city_ascii": "Xinyu",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": "minor"
+    },
+    {
+      "id": 1364350188,
+      "city": "Ahv\u0101z",
+      "city_ascii": "Ahvaz",
+      "country": "Iran",
+      "admin_name": "Kh\u016bzest\u0101n",
+      "capital": "admin"
+    },
+    {
+      "id": 1840015031,
+      "city": "Jacksonville",
+      "city_ascii": "Jacksonville",
+      "country": "United States of America",
+      "admin_name": "Florida",
+      "capital": null
+    },
+    {
+      "id": 1682345785,
+      "city": "Medina",
+      "city_ascii": "Medina",
+      "country": "Saudi Arabia",
+      "admin_name": "Al Mad\u012bnah al Munawwarah",
+      "capital": "admin"
+    },
+    {
+      "id": 1356442950,
+      "city": "Sr\u012bnagar",
+      "city_ascii": "Srinagar",
+      "country": "India",
+      "admin_name": "Jammu and Kashm\u012br",
+      "capital": "admin"
+    },
+    {
+      "id": 1643360863,
+      "city": "Omsk",
+      "city_ascii": "Omsk",
+      "country": "Russia",
+      "admin_name": "Omskaya Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1156249772,
+      "city": "Liaoyuan",
+      "city_ascii": "Liaoyuan",
+      "country": "China",
+      "admin_name": "Jilin",
+      "capital": null
+    },
+    {
+      "id": 1360503809,
+      "city": "Cilacap",
+      "city_ascii": "Cilacap",
+      "country": "Indonesia",
+      "admin_name": "Jawa Tengah",
+      "capital": "minor"
+    },
+    {
+      "id": 1156301061,
+      "city": "Yingtan",
+      "city_ascii": "Yingtan",
+      "country": "China",
+      "admin_name": "Jiangxi",
+      "capital": null
+    },
+    {
+      "id": 1360243491,
+      "city": "Bandar Lampung",
+      "city_ascii": "Bandar Lampung",
+      "country": "Indonesia",
+      "admin_name": "Lampung",
+      "capital": "admin"
+    },
+    {
+      "id": 1643205757,
+      "city": "Samara",
+      "city_ascii": "Samara",
+      "country": "Russia",
+      "admin_name": "Samarskaya Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1156249346,
+      "city": "Guankou",
+      "city_ascii": "Guankou",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "minor"
+    },
+    {
+      "id": 1410134602,
+      "city": "Ulsan",
+      "city_ascii": "Ulsan",
+      "country": "South Korea",
+      "admin_name": "Ulsan",
+      "capital": "admin"
+    },
+    {
+      "id": 1156656582,
+      "city": "Dingzhou",
+      "city_ascii": "Dingzhou",
+      "country": "China",
+      "admin_name": "Hebei",
+      "capital": null
+    },
+    {
+      "id": 1076145766,
+      "city": "Campinas",
+      "city_ascii": "Campinas",
+      "country": "Brazil",
+      "admin_name": "S\u00e3o Paulo",
+      "capital": null
+    },
+    {
+      "id": 1156490109,
+      "city": "Lianyuan",
+      "city_ascii": "Lianyuan",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "minor"
+    },
+    {
+      "id": 1686604760,
+      "city": "Dakar",
+      "city_ascii": "Dakar",
+      "country": "Senegal",
+      "admin_name": "Dakar",
+      "capital": "primary"
+    },
+    {
+      "id": 1156102432,
+      "city": "Rongcheng",
+      "city_ascii": "Rongcheng",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": "minor"
+    },
+    {
+      "id": 1156441554,
+      "city": "Kaiyuan",
+      "city_ascii": "Kaiyuan",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": "minor"
+    },
+    {
+      "id": 1104838105,
+      "city": "Nay Pyi Taw",
+      "city_ascii": "Nay Pyi Taw",
+      "country": "Myanmar",
+      "admin_name": "Nay Pyi Taw",
+      "capital": "primary"
+    },
+    {
+      "id": 1646923541,
+      "city": "Kigali",
+      "city_ascii": "Kigali",
+      "country": "Rwanda",
+      "admin_name": "Kigali",
+      "capital": "primary"
+    },
+    {
+      "id": 1156057789,
+      "city": "Leiyang",
+      "city_ascii": "Leiyang",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156757274,
+      "city": "Yichun",
+      "city_ascii": "Yichun",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1566080151,
+      "city": "Benin City",
+      "city_ascii": "Benin City",
+      "country": "Nigeria",
+      "admin_name": "Edo",
+      "capital": "admin"
+    },
+    {
+      "id": 1826423213,
+      "city": "Birmingham",
+      "city_ascii": "Birmingham",
+      "country": "United Kingdom",
+      "admin_name": "Birmingham",
+      "capital": null
+    },
+    {
+      "id": 1156216927,
+      "city": "Xiantao",
+      "city_ascii": "Xiantao",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": null
+    },
+    {
+      "id": 1356926507,
+      "city": "Amritsar",
+      "city_ascii": "Amritsar",
+      "country": "India",
+      "admin_name": "Punjab",
+      "capital": null
+    },
+    {
+      "id": 1604422141,
+      "city": "Callao",
+      "city_ascii": "Callao",
+      "country": "Peru",
+      "admin_name": "Callao",
+      "capital": "admin"
+    },
+    {
+      "id": 1484559591,
+      "city": "Monterrey",
+      "city_ascii": "Monterrey",
+      "country": "Mexico",
+      "admin_name": "Nuevo Le\u00f3n",
+      "capital": "admin"
+    },
+    {
+      "id": 1356076391,
+      "city": "Al\u012bgarh",
+      "city_ascii": "Aligarh",
+      "country": "India",
+      "admin_name": "Uttar Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1156748426,
+      "city": "Yingchuan",
+      "city_ascii": "Yingchuan",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": "minor"
+    },
+    {
+      "id": 1484016661,
+      "city": "Ciudad Nezahualc\u00f3yotl",
+      "city_ascii": "Ciudad Nezahualcoyotl",
+      "country": "Mexico",
+      "admin_name": "M\u00e9xico",
+      "capital": null
+    },
+    {
+      "id": 1434201852,
+      "city": "Tripoli",
+      "city_ascii": "Tripoli",
+      "country": "Libya",
+      "admin_name": "\u0162ar\u0101bulus",
+      "capital": "primary"
+    },
+    {
+      "id": 1408358410,
+      "city": "Nampo",
+      "city_ascii": "Nampo",
+      "country": "North Korea",
+      "admin_name": "P\u2019y\u014fngnam",
+      "capital": null
+    },
+    {
+      "id": 1643013518,
+      "city": "Rostov",
+      "city_ascii": "Rostov",
+      "country": "Russia",
+      "admin_name": "Rostovskaya Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1340344059,
+      "city": "Tegucigalpa",
+      "city_ascii": "Tegucigalpa",
+      "country": "Honduras",
+      "admin_name": "Francisco Moraz\u00e1n",
+      "capital": "primary"
+    },
+    {
+      "id": 1268203191,
+      "city": "Tbilisi",
+      "city_ascii": "Tbilisi",
+      "country": "Georgia",
+      "admin_name": "Tbilisi",
+      "capital": "primary"
+    },
+    {
+      "id": 1356593800,
+      "city": "Guw\u0101h\u0101ti",
+      "city_ascii": "Guwahati",
+      "country": "India",
+      "admin_name": "Assam",
+      "capital": null
+    },
+    {
+      "id": 1643722928,
+      "city": "Ufa",
+      "city_ascii": "Ufa",
+      "country": "Russia",
+      "admin_name": "Bashkortostan",
+      "capital": "admin"
+    },
+    {
+      "id": 1504861997,
+      "city": "F\u00e8s",
+      "city_ascii": "Fes",
+      "country": "Morocco",
+      "admin_name": "F\u00e8s-Mekn\u00e8s",
+      "capital": "admin"
+    },
+    {
+      "id": 1704863046,
+      "city": "Bi\u00ean H\u00f2a",
+      "city_ascii": "Bien Hoa",
+      "country": "Vietnam",
+      "admin_name": "\u0110\u1ed3ng Nai",
+      "capital": "admin"
+    },
+    {
+      "id": 1148708596,
+      "city": "N\u2019Djamena",
+      "city_ascii": "N'Djamena",
+      "country": "Chad",
+      "admin_name": "Ville de N\u2019Djam\u00e9na",
+      "capital": "primary"
+    },
+    {
+      "id": 1566683694,
+      "city": "Ikare",
+      "city_ascii": "Ikare",
+      "country": "Nigeria",
+      "admin_name": "Ondo",
+      "capital": "minor"
+    },
+    {
+      "id": 1840021383,
+      "city": "Salt Lake City",
+      "city_ascii": "Salt Lake City",
+      "country": "United States of America",
+      "admin_name": "Utah",
+      "capital": "admin"
+    },
+    {
+      "id": 1356071083,
+      "city": "Bhilai",
+      "city_ascii": "Bhilai",
+      "country": "India",
+      "admin_name": "Chhatt\u012bsgarh",
+      "capital": null
+    },
+    {
+      "id": 1356986516,
+      "city": "H\u0101ora",
+      "city_ascii": "Haora",
+      "country": "India",
+      "admin_name": "West Bengal",
+      "capital": null
+    },
+    {
+      "id": 1288890688,
+      "city": "Tamale",
+      "city_ascii": "Tamale",
+      "country": "Ghana",
+      "admin_name": "Northern",
+      "capital": "admin"
+    },
+    {
+      "id": 1156960560,
+      "city": "Xibeijie",
+      "city_ascii": "Xibeijie",
+      "country": "China",
+      "admin_name": "Gansu",
+      "capital": "minor"
+    },
+    {
+      "id": 1208763942,
+      "city": "Copenhagen",
+      "city_ascii": "Copenhagen",
+      "country": "Denmark",
+      "admin_name": "Hovedstaden",
+      "capital": "primary"
+    },
+    {
+      "id": 1484074285,
+      "city": "Nezahualc\u00f3yotl",
+      "city_ascii": "Nezahualcoyotl",
+      "country": "Mexico",
+      "admin_name": "M\u00e9xico",
+      "capital": "minor"
+    },
+    {
+      "id": 1156149248,
+      "city": "Hanchuan",
+      "city_ascii": "Hanchuan",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": null
+    },
+    {
+      "id": 1156696810,
+      "city": "Gongzhuling",
+      "city_ascii": "Gongzhuling",
+      "country": "China",
+      "admin_name": "Jilin",
+      "capital": null
+    },
+    {
+      "id": 1643544975,
+      "city": "Krasnoyarsk",
+      "city_ascii": "Krasnoyarsk",
+      "country": "Russia",
+      "admin_name": "Krasnoyarskiy Kray",
+      "capital": "admin"
+    },
+    {
+      "id": 1276015998,
+      "city": "Cologne",
+      "city_ascii": "Cologne",
+      "country": "Germany",
+      "admin_name": "North Rhine-Westphalia",
+      "capital": null
+    },
+    {
+      "id": 1156292419,
+      "city": "Yicheng",
+      "city_ascii": "Yicheng",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1156522825,
+      "city": "Zhufeng",
+      "city_ascii": "Zhufeng",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1076485783,
+      "city": "S\u00e3o Gon\u00e7alo",
+      "city_ascii": "Sao Goncalo",
+      "country": "Brazil",
+      "admin_name": "Rio de Janeiro",
+      "capital": null
+    },
+    {
+      "id": 1840036155,
+      "city": "Nashville",
+      "city_ascii": "Nashville",
+      "country": "United States of America",
+      "admin_name": "Tennessee",
+      "capital": "admin"
+    },
+    {
+      "id": 1051074169,
+      "city": "Yerevan",
+      "city_ascii": "Yerevan",
+      "country": "Armenia",
+      "admin_name": "Yerevan",
+      "capital": "primary"
+    },
+    {
+      "id": 1398516045,
+      "city": "Nur-Sultan",
+      "city_ascii": "Nur-Sultan",
+      "country": "Kazakhstan",
+      "admin_name": "Astana",
+      "capital": "primary"
+    },
+    {
+      "id": 1478414984,
+      "city": "Nouakchott",
+      "city_ascii": "Nouakchott",
+      "country": "Mauritania",
+      "admin_name": null,
+      "capital": "primary"
+    },
+    {
+      "id": 1710271883,
+      "city": "Vereeniging",
+      "city_ascii": "Vereeniging",
+      "country": "South Africa",
+      "admin_name": "Gauteng",
+      "capital": null
+    },
+    {
+      "id": 1840001698,
+      "city": "Richmond",
+      "city_ascii": "Richmond",
+      "country": "United States of America",
+      "admin_name": "Virginia",
+      "capital": "admin"
+    },
+    {
+      "id": 1076819308,
+      "city": "S\u00e3o Lu\u00eds",
+      "city_ascii": "Sao Luis",
+      "country": "Brazil",
+      "admin_name": "Maranh\u00e3o",
+      "capital": "admin"
+    },
+    {
+      "id": 1356110588,
+      "city": "R\u0101nchi",
+      "city_ascii": "Ranchi",
+      "country": "India",
+      "admin_name": "Jharkhand",
+      "capital": "admin"
+    },
+    {
+      "id": 1340568412,
+      "city": "San Pedro Sula",
+      "city_ascii": "San Pedro Sula",
+      "country": "Honduras",
+      "admin_name": "Cort\u00e9s",
+      "capital": "admin"
+    },
+    {
+      "id": 1156331200,
+      "city": "Taixing",
+      "city_ascii": "Taixing",
+      "country": "China",
+      "admin_name": "Jiangsu",
+      "capital": "minor"
+    },
+    {
+      "id": 1356363967,
+      "city": "Gwalior",
+      "city_ascii": "Gwalior",
+      "country": "India",
+      "admin_name": "Madhya Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1840015457,
+      "city": "Memphis",
+      "city_ascii": "Memphis",
+      "country": "United States of America",
+      "admin_name": "Tennessee",
+      "capital": null
+    },
+    {
+      "id": 1410511255,
+      "city": "Goyang",
+      "city_ascii": "Goyang",
+      "country": "South Korea",
+      "admin_name": "Gyeonggi",
+      "capital": "minor"
+    },
+    {
+      "id": 1356807575,
+      "city": "Bezw\u0101da",
+      "city_ascii": "Bezwada",
+      "country": "India",
+      "admin_name": "Andhra Pradesh",
+      "capital": null
+    },
+    {
+      "id": 1124290735,
+      "city": "Edmonton",
+      "city_ascii": "Edmonton",
+      "country": "Canada",
+      "admin_name": "Alberta",
+      "capital": "admin"
+    },
+    {
+      "id": 1417191971,
+      "city": "Bishkek",
+      "city_ascii": "Bishkek",
+      "country": "Kyrgyzstan",
+      "admin_name": "Bishkek",
+      "capital": "primary"
+    },
+    {
+      "id": 1156935002,
+      "city": "Mizhou",
+      "city_ascii": "Mizhou",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": "minor"
+    },
+    {
+      "id": 1788742103,
+      "city": "Tunis",
+      "city_ascii": "Tunis",
+      "country": "Tunisia",
+      "admin_name": "Tunis",
+      "capital": "primary"
+    },
+    {
+      "id": 1156155575,
+      "city": "Xishan",
+      "city_ascii": "Xishan",
+      "country": "China",
+      "admin_name": "Hunan",
+      "capital": "minor"
+    },
+    {
+      "id": 1156414637,
+      "city": "Ezhou",
+      "city_ascii": "Ezhou",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": "minor"
+    },
+    {
+      "id": 1862860739,
+      "city": "Barquisimeto",
+      "city_ascii": "Barquisimeto",
+      "country": "Venezuela",
+      "admin_name": "Lara",
+      "capital": "admin"
+    },
+    {
+      "id": 1392457903,
+      "city": "Sendai",
+      "city_ascii": "Sendai",
+      "country": "Japan",
+      "admin_name": "Miyagi",
+      "capital": "admin"
+    },
+    {
+      "id": 1156541759,
+      "city": "Hegang",
+      "city_ascii": "Hegang",
+      "country": "China",
+      "admin_name": "Heilongjiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1484788702,
+      "city": "Mexicali",
+      "city_ascii": "Mexicali",
+      "country": "Mexico",
+      "admin_name": "Baja California",
+      "capital": "admin"
+    },
+    {
+      "id": 1643811064,
+      "city": "Voronezh",
+      "city_ascii": "Voronezh",
+      "country": "Russia",
+      "admin_name": "Voronezhskaya Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1643294442,
+      "city": "Perm",
+      "city_ascii": "Perm",
+      "country": "Russia",
+      "admin_name": "Permskiy Kray",
+      "capital": "admin"
+    },
+    {
+      "id": 1410592618,
+      "city": "Changwon",
+      "city_ascii": "Changwon",
+      "country": "South Korea",
+      "admin_name": "Gyeongnam",
+      "capital": "admin"
+    },
+    {
+      "id": 1156956616,
+      "city": "Zhongwei",
+      "city_ascii": "Zhongwei",
+      "country": "China",
+      "admin_name": "Ningxia",
+      "capital": "minor"
+    },
+    {
+      "id": 1156787809,
+      "city": "Shouguang",
+      "city_ascii": "Shouguang",
+      "country": "China",
+      "admin_name": "Shandong",
+      "capital": null
+    },
+    {
+      "id": 1360771925,
+      "city": "Bogor",
+      "city_ascii": "Bogor",
+      "country": "Indonesia",
+      "admin_name": "Jawa Barat",
+      "capital": null
+    },
+    {
+      "id": 1840014497,
+      "city": "Raleigh",
+      "city_ascii": "Raleigh",
+      "country": "United States of America",
+      "admin_name": "North Carolina",
+      "capital": "admin"
+    },
+    {
+      "id": 1170886102,
+      "city": "Cartagena",
+      "city_ascii": "Cartagena",
+      "country": "Colombia",
+      "admin_name": "Bol\u00edvar",
+      "capital": "admin"
+    },
+    {
+      "id": 1356739179,
+      "city": "Chand\u012bgarh",
+      "city_ascii": "Chandigarh",
+      "country": "India",
+      "admin_name": "Chand\u012bgarh",
+      "capital": "admin"
+    },
+    {
+      "id": 1508768577,
+      "city": "Matola",
+      "city_ascii": "Matola",
+      "country": "Mozambique",
+      "admin_name": "Maputo",
+      "capital": null
+    },
+    {
+      "id": 1356727084,
+      "city": "Jodhpur",
+      "city_ascii": "Jodhpur",
+      "country": "India",
+      "admin_name": "R\u0101jasth\u0101n",
+      "capital": null
+    },
+    {
+      "id": 1566373448,
+      "city": "Ogbomoso",
+      "city_ascii": "Ogbomoso",
+      "country": "Nigeria",
+      "admin_name": "Oyo",
+      "capital": "minor"
+    },
+    {
+      "id": 1398791401,
+      "city": "Shymkent",
+      "city_ascii": "Shymkent",
+      "country": "Kazakhstan",
+      "admin_name": "Ongt\u00fcstik Qazaqstan",
+      "capital": "admin"
+    },
+    {
+      "id": 1562932886,
+      "city": "Niamey",
+      "city_ascii": "Niamey",
+      "country": "Niger",
+      "admin_name": "Niamey",
+      "capital": "primary"
+    },
+    {
+      "id": 1156322307,
+      "city": "Taizhou",
+      "city_ascii": "Taizhou",
+      "country": "China",
+      "admin_name": "Zhejiang",
+      "capital": "minor"
+    },
+    {
+      "id": 1558296252,
+      "city": "Managua",
+      "city_ascii": "Managua",
+      "country": "Nicaragua",
+      "admin_name": "Managua",
+      "capital": "primary"
+    },
+    {
+      "id": 1360405604,
+      "city": "Bagam",
+      "city_ascii": "Bagam",
+      "country": "Indonesia",
+      "admin_name": "Kepulauan Riau",
+      "capital": null
+    },
+    {
+      "id": 1818909612,
+      "city": "Shubr\u0101 al Khaymah",
+      "city_ascii": "Shubra al Khaymah",
+      "country": "Egypt",
+      "admin_name": "Al Qaly\u016bb\u012byah",
+      "capital": null
+    },
+    {
+      "id": 1076440479,
+      "city": "Macei\u00f3",
+      "city_ascii": "Maceio",
+      "country": "Brazil",
+      "admin_name": "Alagoas",
+      "capital": "admin"
+    },
+    {
+      "id": 1430477826,
+      "city": "Monrovia",
+      "city_ascii": "Monrovia",
+      "country": "Liberia",
+      "admin_name": "Montserrado",
+      "capital": "primary"
+    },
+    {
+      "id": 1156476417,
+      "city": "Wafangdian",
+      "city_ascii": "Wafangdian",
+      "country": "China",
+      "admin_name": "Liaoning",
+      "capital": null
+    },
+    {
+      "id": 1156631720,
+      "city": "Zhongxiang",
+      "city_ascii": "Zhongxiang",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": null
+    },
+    {
+      "id": 1804178102,
+      "city": "Odesa",
+      "city_ascii": "Odesa",
+      "country": "Ukraine",
+      "admin_name": "Odes\u2019ka Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1840001839,
+      "city": "New Orleans",
+      "city_ascii": "New Orleans",
+      "country": "United States of America",
+      "admin_name": "Louisiana",
+      "capital": null
+    },
+    {
+      "id": 1484460894,
+      "city": "Villahermosa",
+      "city_ascii": "Villahermosa",
+      "country": "Mexico",
+      "admin_name": "Tabasco",
+      "capital": "admin"
+    },
+    {
+      "id": 1704361621,
+      "city": "Th\u1ee7 \u0110\u1ee9c",
+      "city_ascii": "Thu Duc",
+      "country": "Vietnam",
+      "admin_name": "H\u1ed3 Ch\u00ed Minh",
+      "capital": "minor"
+    },
+    {
+      "id": 1643577201,
+      "city": "Volgograd",
+      "city_ascii": "Volgograd",
+      "country": "Russia",
+      "admin_name": "Volgogradskaya Oblast\u2019",
+      "capital": "admin"
+    },
+    {
+      "id": 1356779323,
+      "city": "Mysore",
+      "city_ascii": "Mysore",
+      "country": "India",
+      "admin_name": "Karn\u0101taka",
+      "capital": null
+    },
+    {
+      "id": 1586306717,
+      "city": "Islamabad",
+      "city_ascii": "Islamabad",
+      "country": "Pakistan",
+      "admin_name": "Isl\u0101m\u0101b\u0101d",
+      "capital": "primary"
+    },
+    {
+      "id": 1156936644,
+      "city": "Xinyi",
+      "city_ascii": "Xinyi",
+      "country": "China",
+      "admin_name": "Guangdong",
+      "capital": null
+    },
+    {
+      "id": 1356374983,
+      "city": "Raipur",
+      "city_ascii": "Raipur",
+      "country": "India",
+      "admin_name": "Chhatt\u012bsgarh",
+      "capital": "admin"
+    },
+    {
+      "id": 1604723954,
+      "city": "Arequipa",
+      "city_ascii": "Arequipa",
+      "country": "Peru",
+      "admin_name": "Arequipa",
+      "capital": "admin"
+    },
+    {
+      "id": 1566070649,
+      "city": "Port Harcourt",
+      "city_ascii": "Port Harcourt",
+      "country": "Nigeria",
+      "admin_name": "Rivers",
+      "capital": "admin"
+    },
+    {
+      "id": 1840030815,
+      "city": "Louisville",
+      "city_ascii": "Louisville",
+      "country": "United States of America",
+      "admin_name": "Kentucky",
+      "capital": null
+    },
+    {
+      "id": 1156197076,
+      "city": "Zaoyang",
+      "city_ascii": "Zaoyang",
+      "country": "China",
+      "admin_name": "Hubei",
+      "capital": null
+    },
+    {
+      "id": 1156462734,
+      "city": "Shuizhai",
+      "city_ascii": "Shuizhai",
+      "country": "China",
+      "admin_name": "Henan",
+      "capital": null
+    },
+    {
+      "id": 1156255316,
+      "city": "Xingyi",
+      "city_ascii": "Xingyi",
+      "country": "China",
+      "admin_name": "Guizhou",
+      "capital": null
+    },
+    {
+      "id": 1356820310,
+      "city": "Kota",
+      "city_ascii": "Kota",
+      "country": "India",
+      "admin_name": "R\u0101jasth\u0101n",
+      "capital": null
+    },
+    {
+      "id": 1586556108,
+      "city": "Quetta",
+      "city_ascii": "Quetta",
+      "country": "Pakistan",
+      "admin_name": "Balochist\u0101n",
+      "capital": "admin"
+    }
+  ]
+}

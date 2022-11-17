@@ -1,11 +1,10 @@
-import { Accessor, createEffect, createSignal } from "solid-js";
+import { Accessor, createEffect, createMemo, createSignal } from "solid-js";
 import rawAnswerData from "../data/answers.json";
-import bigCityNames from "../data/big_cities.json";
+import rawBigCities from "../data/big_cities.json";
 import Fuse from "fuse.js";
 import { getContext } from "../Context";
 import { computeDistanceBetween } from "spherical-geometry-js";
 
-// TODO Cities list emptied after I refreshed for first time after new day!
 // Note: "Qatar" corrects to "Ulaanbaatar"
 
 type Props = {
@@ -27,7 +26,6 @@ export default function (props: Props) {
       ? "Enter the your next guess!"
       : "";
 
-  const answers = rawAnswerData["data"] as City[];
   const [msg, setMsg] = createSignal(mountMsg());
   const msgColour = () => {
     const green = context.theme().isDark
@@ -47,13 +45,26 @@ export default function (props: Props) {
 
   let formRef: HTMLFormElement;
 
-  function findCity(newGuess: string, list: City[]) {
-    const searchPhrase = newGuess.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-    const answerIndex = new Fuse(list, {
+  // Search indexes
+  const answerIndex = createMemo(() => {
+    const answers = rawAnswerData["data"] as City[];
+    return new Fuse(answers, {
       keys: ["city", "city_ascii", "admin_name"],
       includeScore: true,
     });
-    const results = answerIndex.search(searchPhrase);
+  });
+  const bigCityIndex = createMemo(() => {
+    const bigCities = rawBigCities["data"] as City[];
+    return new Fuse(bigCities, {
+      keys: ["city", "city_ascii", "admin_name"],
+      includeScore: true,
+    });
+  });
+
+  function findCity(newGuess: string) {
+    const searchPhrase = newGuess.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+
+    const results = answerIndex().search(searchPhrase);
     if (results.length === 0) {
       setMsg(`"${newGuess}" not found in database.`);
       return;
@@ -73,15 +84,17 @@ export default function (props: Props) {
       setMsg(`Did you mean ${topAnswer.item.city_ascii}?`);
       return;
     } else {
-      const bigCityIndex = new Fuse(bigCityNames, {
-        includeScore: true,
-      });
-      const bigCitiesFound = bigCityIndex.search(newGuess);
+      const bigCitiesFound = bigCityIndex().search(newGuess);
       if (bigCitiesFound.length >= 1) {
         const topBigCity = bigCitiesFound[0];
         const topScore = topBigCity.score ?? 1;
+        const { city_ascii, capital, country } = topBigCity.item;
         if (topScore < 0.03) {
-          setMsg(`${topBigCity.item} is not a capital city.`);
+          if (!capital) {
+            setMsg(`${city_ascii} is not a capital city.`);
+          } else {
+            setMsg(`${city_ascii} is not ${country}'s primary capital.`);
+          }
           return;
         }
       }
@@ -95,7 +108,7 @@ export default function (props: Props) {
     formRef.reset();
     const guess = formData.get("guess")?.toString().trim();
     if (!guess) return setMsg("Enter your next guess.");
-    const newCity = findCity(guess, answers);
+    const newCity = findCity(guess);
     if (!newCity) return;
 
     props.addGuess(newCity);

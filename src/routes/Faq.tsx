@@ -40,6 +40,10 @@ export default function () {
       a: "Each city is defined by one pair of latitude and longitude coordinates, so the distance between cities is the distance between 2 pairs of coordinates. Assume that the coordinates are right in the centre of each city.",
     },
     {
+      q: "What about countries with more than one capital city?",
+      a: "While some countries may officially have 2 or 3 capital cities, the game only recognizes one per country. The capital recognized by the game is the political or executive capital city.",
+    },
+    {
       q: "Why are cities different sizes?",
       a: "The dot sizes of cities correlates to their populations.",
     },

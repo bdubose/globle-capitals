@@ -159,7 +159,7 @@ export default function () {
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           disabled:bg-blue-400 dark:disabled:bg-purple-900
           justify-around"
-          disabled={!isConnected()}
+          disabled={!isConnected() || context.storedStats().gamesWon < 1}
           onClick={saveBackup}
         >
           Save
@@ -170,7 +170,7 @@ export default function () {
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           disabled:bg-blue-400 dark:disabled:bg-purple-900
           justify-around"
-          disabled={!isConnected()}
+          disabled={!isConnected() || !backupStats()}
           onClick={restoreBackupPrompt}
         >
           Restore
@@ -180,7 +180,7 @@ export default function () {
           text-base font-medium hover:bg-red-700 hover:text-gray-300
           focus:outline-none focus:ring-2 focus:ring-red-300 
           disabled:text-red-400 disabled:bg-transparent disabled:border-red-400"
-          disabled={!isConnected() || !backupStats}
+          disabled={!isConnected() || !backupStats()}
           onClick={deleteBackupPrompt}
         >
           Delete

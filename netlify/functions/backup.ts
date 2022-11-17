@@ -6,8 +6,6 @@ import jwtDecode from "jwt-decode";
 import { Db, MongoClient } from "mongodb";
 import invariant from "tiny-invariant";
 
-// TODO check that userId is actually unique
-
 export async function verify(token: string) {
   const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "";
 
@@ -16,8 +14,9 @@ export async function verify(token: string) {
     idToken: token,
     audience: GOOGLE_CLIENT_ID,
   });
-  const userId = ticket.getUserId();
-  return userId;
+  // const userId = ticket.getUserId();
+  if (!ticket) throw "Token not verfied.";
+  // return userId;
 }
 
 function convertStats(raw: Stats) {
@@ -35,14 +34,14 @@ async function put(event: Event, db: Db) {
   const userId = await verify(tokenString);
   const email = jwtDecode<Token>(tokenString).email;
   const data = {
-    _id: userId,
+    userId,
     email,
     ...parsedStats,
   };
   invariant(userId, "Token error.");
   const udpateResult = await db
     .collection("users")
-    .updateOne({ _id: userId }, { $set: data }, { upsert: true });
+    .updateOne({ email }, { $set: data }, { upsert: true });
   console.log(udpateResult);
   if (udpateResult.acknowledged) {
     return {
@@ -60,8 +59,9 @@ async function put(event: Event, db: Db) {
 
 async function get(event: Event, db: Db) {
   const tokenString = event.queryStringParameters?.token || "";
-  const userId = (await verify(tokenString)) || "";
-  const document = await db.collection("users").findOne({ _id: userId });
+  await verify(tokenString);
+  const email = jwtDecode<Token>(tokenString).email;
+  const document = await db.collection("users").findOne({ email });
   console.log(document);
   if (document) {
     return {
@@ -82,8 +82,9 @@ async function get(event: Event, db: Db) {
 
 async function del(event: Event, db: Db) {
   const tokenString = event.queryStringParameters?.token || "";
-  const userId = (await verify(tokenString)) || "";
-  const deleteResult = await db.collection("users").deleteOne({ _id: userId });
+  await verify(tokenString);
+  const email = jwtDecode<Token>(tokenString).email;
+  const deleteResult = await db.collection("users").deleteOne({ email });
   console.log(deleteResult);
   if (deleteResult.acknowledged) {
     return {
