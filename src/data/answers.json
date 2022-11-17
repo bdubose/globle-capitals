@@ -2113,23 +2113,6 @@
       "rank": 1.0
     },
     {
-      "id": 1104616656,
-      "city": "Rangoon",
-      "city_ascii": "Rangoon",
-      "lat": 16.795,
-      "lng": 96.16,
-      "country": "Myanmar",
-      "iso2": "MM",
-      "iso3": "MMR",
-      "admin_name": "Yangon",
-      "capital": "primary",
-      "population": 5430000.0,
-      "is_territory": false,
-      "continent": "Asia",
-      "guessable": false,
-      "rank": 1.0
-    },
-    {
       "id": 1104838105,
       "city": "Nay Pyi Taw",
       "city_ascii": "Naypyidaw",
