@@ -2,6 +2,7 @@ import { Handler } from "@netlify/functions";
 import { Event } from "@netlify/functions/dist/function/event";
 import dayjs from "dayjs";
 import { OAuth2Client } from "google-auth-library";
+import jwtDecode from "jwt-decode";
 import { Db, MongoClient } from "mongodb";
 import invariant from "tiny-invariant";
 
@@ -27,14 +28,15 @@ function convertStats(raw: Stats) {
 }
 
 async function put(event: Event, db: Db) {
-  // const body = JSON.parse(body || "{}");
   const body = JSON.parse(event.body || "{}");
   const tokenString = body.token as string;
   const stats = body.stats as Stats;
   const parsedStats = convertStats(stats);
   const userId = await verify(tokenString);
+  const email = jwtDecode<Token>(tokenString).email;
   const data = {
     _id: userId,
+    email,
     ...parsedStats,
   };
   invariant(userId, "Token error.");
