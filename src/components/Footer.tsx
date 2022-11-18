@@ -3,7 +3,7 @@ import Icon from "./Icon";
 
 export default function Footer() {
   return (
-    <footer class="pt-8 pb-4 text-xs flex items-end justify-between w-full">
+    <footer class="pt-8 pb-4 text-xs flex items-end justify-between w-full flex-grow">
       <span class="space-x-1 flex">
         <a href="https://the-abe-train.com">by The Abe Train</a>
         <a
