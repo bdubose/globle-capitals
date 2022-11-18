@@ -132,7 +132,7 @@ export default function (props: Props) {
         .onPointClick(turnGlobe)
 
         .arcColor("color")
-        .arcStroke(1.25)
+        .arcStroke(1.15)
         .arcAltitude(0)
         .arcDashLength(1)
         .arcDashGap(0)
