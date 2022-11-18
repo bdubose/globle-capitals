@@ -219,9 +219,6 @@ export default function () {
       <div
         style={{
           position: "absolute",
-          background: `url(${globePreviewImg()}) 0% 0% / ${width}px ${
-            height + 50
-          }px no-repeat`,
           width: width + "px",
           height: height + "px",
         }}
@@ -230,7 +227,12 @@ export default function () {
         ref={svg!}
         width={width}
         height={height}
-        style={{ "backdrop-filter": "blur(0px)" }}
+        style={{
+          position: "relative",
+          background: `url(${globePreviewImg()}) 0% 0% / ${width}px ${
+            height + 50
+          }px no-repeat`,
+        }}
       />
     </div>
   );
