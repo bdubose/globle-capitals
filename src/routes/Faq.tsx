@@ -64,6 +64,11 @@ export default function () {
       a: "There is a spellchecker built in that will accept small spelling errors and offer solutions for larger errors.",
     },
     {
+      q: "Does Globle: Capitals have a privacy policy?",
+      a: "The Privacy Policy can be found here.",
+      links: [{ text: "here", link: "/privacy-policy" }],
+    },
+    {
       q: "A capital city is missing or is incorrect. What can I do about it?",
       a: "Geography can be a sensitive topic, and some countries' borders are disputed. If you believe a correction should be made, please politely raise an issue on GitHub or DM me on Twitter.",
       links: [

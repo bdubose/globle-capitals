@@ -22,8 +22,8 @@ export default function Footer() {
         </a>
       </span>
       <span>
-        <A href="/privacy-policy" data-cy="privacy-policy-link">
-          Privacy policy
+        <A href="/faq" data-cy="faq-footer-link">
+          FAQ
         </A>
       </span>
     </footer>

@@ -131,8 +131,14 @@ export default function () {
         when={isConnected()}
         fallback={
           <div>
-            <p>Connect to Google to backup your score:</p>
-            <div ref={googleBtn!} class="w-fit my-3" />
+            <p>
+              If you want to keep your stats but play on a different device,
+              connect to your Google account to backup your data in the cloud:
+            </p>
+            <div
+              ref={googleBtn!}
+              class="w-fit my-3 h-10 flex flex-col justify-center"
+            />
           </div>
         }
       >
@@ -183,7 +189,7 @@ export default function () {
           disabled={!isConnected() || !backupStats()}
           onClick={deleteBackupPrompt}
         >
-          Delete
+          Delete backup
         </button>
       </div>
       <Prompt
