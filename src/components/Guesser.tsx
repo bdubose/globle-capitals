@@ -5,8 +5,6 @@ import Fuse from "fuse.js";
 import { getContext } from "../Context";
 import { computeDistanceBetween } from "spherical-geometry-js";
 
-// Note: "Qatar" corrects to "Ulaanbaatar"
-
 type Props = {
   guesses: Accessor<City[]>;
   addGuess: (newGuess: City) => void;
@@ -50,6 +48,7 @@ export default function (props: Props) {
     const answers = rawAnswerData["data"] as City[];
     return new Fuse(answers, {
       keys: ["city", "city_ascii", "admin_name"],
+      distance: 1,
       includeScore: true,
     });
   });
@@ -63,7 +62,6 @@ export default function (props: Props) {
 
   function findCity(newGuess: string) {
     const searchPhrase = newGuess.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-
     const results = answerIndex().search(searchPhrase);
     if (results.length === 0) {
       setMsg(`"${newGuess}" not found in database.`);
