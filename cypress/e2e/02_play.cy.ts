@@ -21,7 +21,7 @@ describe("Play the game", () => {
     cy.contains("Statistics").should("exist");
   });
 
-  it("plays the game", () => {
+  it("plays new game", () => {
     cy.visit("/");
 
     cy.fixture("fake_stats").then((oldStats) => {
@@ -48,8 +48,6 @@ describe("Play the game", () => {
 
     cy.get('[data-cy="guesser"]').type("ottawa{enter}");
     cy.contains("next guess").should("exist");
-
-    cy.pause();
 
     cy.get('[data-cy="guesser"]').type("london{enter}");
     cy.contains("London is warmer").should("exist");
