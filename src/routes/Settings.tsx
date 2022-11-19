@@ -1,9 +1,10 @@
-import { createEffect, createSignal, For, onMount } from "solid-js";
+import { createEffect, createSignal, lazy, Suspense } from "solid-js";
 import Backup from "../components/Backup";
 import Toggle from "../components/Toggle";
 import { getContext } from "../Context";
 import { createPracticeAns } from "../util/practice";
 import { useNavigate } from "@solidjs/router";
+const NavGlobe = lazy(() => import("../components/globes/NavGlobe"));
 
 export default function () {
   const context = getContext();
@@ -19,7 +20,7 @@ export default function () {
   }
 
   return (
-    <div class="py-4 space-y-6">
+    <div class="py-4 space-y-8">
       <h2 class="text-3xl text-center font-header font-extrabold dark:text-gray-200">
         Settings
       </h2>
@@ -33,11 +34,14 @@ export default function () {
          dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
         focus:ring-4 focus:ring-blue-300 rounded-lg text-sm
         px-4 py-2.5 text-center items-center
-        w-32 justify-center self-center mx-auto block"
+        justify-center self-center mx-auto block"
       >
-        <span class="font-medium">Practice mode</span>
+        <span class="font-medium">Play practice game</span>
       </button>
       <Backup />
+      <Suspense fallback={<p>Loading...</p>}>
+        <NavGlobe />
+      </Suspense>
     </div>
   );
 }

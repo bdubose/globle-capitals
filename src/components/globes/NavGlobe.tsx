@@ -27,7 +27,7 @@ export default function () {
 
   return (
     <div class="w-fit mx-auto">
-      <A href="game" data-cy="nav-globe">
+      <A href="/game" data-cy="nav-globe">
         <div ref={globeRef!} class="w-fit mx-auto my-2" />
         <b>{isMobile ? "Tap" : "Click"} the globe to play!</b>
       </A>

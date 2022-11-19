@@ -125,7 +125,7 @@ export default function () {
   }
 
   return (
-    <div class="space-y-6">
+    <div class="space-y-4">
       <h3 class="text-2xl font-extrabold font-header">Stats Backup</h3>
       <Show
         when={isConnected()}

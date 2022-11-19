@@ -1,6 +1,4 @@
 import { createEffect, createSignal, lazy, Show, Suspense } from "solid-js";
-import { createStore } from "solid-js/store";
-import { computeDistanceBetween } from "spherical-geometry-js";
 import Guesser from "../components/Guesser";
 import List from "../components/List";
 import { createPracticeAns, getPracticeAns } from "../util/practice";
@@ -48,7 +46,7 @@ export default function () {
   return (
     <div>
       <Show when={showGlobe()} keyed fallback={<p>Loading...</p>}>
-        <p class="italic">You are in Practice Mode.</p>
+        <p class="italic">You are playing a practice game.</p>
         <Guesser addGuess={addGuess} guesses={guesses} win={win} ans={ans()} />
         <Suspense fallback={<p>Loading...</p>}>
           <GameGlobe guesses={guesses} pov={pov} ans={ans()} />
@@ -62,7 +60,7 @@ export default function () {
              focus:ring-4 focus:ring-blue-300 rounded-lg text-sm
              px-4 py-2.5 text-center w-max"
         >
-          End Practice Mode
+          End practice game
         </button>
       </A>
       <Prompt
