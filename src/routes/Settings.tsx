@@ -11,8 +11,8 @@ export default function () {
   const navigate = useNavigate();
 
   const isAlreadyDark = context.theme().isDark;
-  const [dark, setDark] = createSignal(isAlreadyDark);
-  createEffect(() => context?.setTheme({ isDark: dark() }));
+  const [isDark, setDark] = createSignal(isAlreadyDark);
+  createEffect(() => context?.setTheme({ isDark: isDark() }));
 
   function enterPracticeMode() {
     createPracticeAns();
@@ -25,7 +25,7 @@ export default function () {
         Settings
       </h2>
       <div class="max-w-xs mx-auto">
-        <Toggle setToggle={setDark} toggleProp={dark} on="Night" off="Day" />
+        <Toggle setToggle={setDark} toggleProp={isDark} on="Night" off="Day" />
       </div>
       <button
         onClick={enterPracticeMode}
@@ -40,7 +40,7 @@ export default function () {
       </button>
       <Backup />
       <Suspense fallback={<p>Loading...</p>}>
-        <NavGlobe />
+        <NavGlobe isDark={isDark()} />
       </Suspense>
     </div>
   );

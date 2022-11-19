@@ -89,6 +89,7 @@ export default function (props: Props) {
 🔥 ${currentStreak} | Avg. Guesses: ${showAvgGuesses}
 ${wonToday() ? emojiGuesses : "--"} = ${todaysGuesses}
 
+globle-capitals.com
 #globle #capitals`;
 
     try {
@@ -164,7 +165,7 @@ ${wonToday() ? emojiGuesses : "--"} = ${todaysGuesses}
         </button>
         <button
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
-          disabled:bg-blue-900 dark:disabled:bg-purple-900
+          disabled:bg-blue-400 dark:disabled:bg-purple-900
           text-white dark:text-gray-200 rounded-md px-8 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           justify-around sm:flex-grow sm:mx-10"
@@ -174,7 +175,6 @@ ${wonToday() ? emojiGuesses : "--"} = ${todaysGuesses}
           Share
         </button>
       </div>
-
       <Prompt
         showPrompt={showPrompt}
         setShowPrompt={setShowPrompt}

@@ -13,7 +13,7 @@ export default function Header({ showStats, setShowStats }: Props) {
   };
 
   return (
-    <header class="pt-8 h-10 relative dark:text-gray-200 z-10">
+    <header class="pt-8 h-14 relative dark:text-gray-200 z-10">
       <div class="relative h-full">
         <div class="flex absolute left-0 bottom-1">
           <A href="/" aria-label="help" data-cy="home-link">
@@ -25,7 +25,10 @@ export default function Header({ showStats, setShowStats }: Props) {
           href="/game"
           data-cy="game-link"
         >
-          <h1 class="text-2xl sm:text-3xl font-extrabold font-header">
+          <h1
+            class="text-2xl sm:text-3xl font-extrabold font-header w-min 
+          sm:w-max text-center"
+          >
             GLOBLE: CAPITALS
           </h1>
         </A>
