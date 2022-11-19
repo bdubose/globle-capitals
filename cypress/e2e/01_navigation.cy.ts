@@ -9,7 +9,7 @@ describe("Explore all navigation links", () => {
 
     cy.get('[data-cy="practice-link"]').click();
     cy.url().should("contain", "/practice");
-    cy.contains("Practice Mode").should("exist");
+    cy.contains("playing a practice game").should("exist");
 
     cy.get('[data-cy="game-link"]').click();
     cy.url().should("contain", "/game");
