@@ -48,7 +48,7 @@ export default function (props: Props) {
     const answers = rawAnswerData["data"] as City[];
     return new Fuse(answers, {
       keys: ["city", "city_ascii", "admin_name"],
-      distance: 1,
+      distance: 2,
       includeScore: true,
     });
   });
@@ -56,6 +56,7 @@ export default function (props: Props) {
     const bigCities = rawBigCities["data"] as City[];
     return new Fuse(bigCities, {
       keys: ["city", "city_ascii", "admin_name"],
+      distance: 2,
       includeScore: true,
     });
   });
