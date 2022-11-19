@@ -8,15 +8,15 @@ import invariant from "tiny-invariant";
 
 export async function verify(token: string) {
   const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "";
-
   const oauthClient = new OAuth2Client(GOOGLE_CLIENT_ID);
   const ticket = await oauthClient.verifyIdToken({
     idToken: token,
     audience: GOOGLE_CLIENT_ID,
   });
-  // const userId = ticket.getUserId();
+  console.log(ticket);
+  const userId = ticket.getUserId();
   if (!ticket) throw "Token not verfied.";
-  // return userId;
+  return userId;
 }
 
 function convertStats(raw: Stats) {
