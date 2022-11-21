@@ -1,4 +1,3 @@
-import { A } from "@solidjs/router";
 import { lazy, Suspense } from "solid-js";
 import Preview from "../components/Preview";
 import { maxColour } from "../util/geometry";
