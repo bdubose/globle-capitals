@@ -2,6 +2,8 @@ import crypto from "crypto-js";
 import dayjs from "dayjs";
 
 describe("Play the game", () => {
+  // beforeEach(())
+
   it("plays today's game", () => {
     cy.intercept("GET", "/.netlify/functions/answer**").as("answer");
 
@@ -21,13 +23,12 @@ describe("Play the game", () => {
     cy.contains("Statistics").should("exist");
   });
 
-  it("plays new game", () => {
+  it("plays a game with many guesses", () => {
     cy.visit("/");
 
     cy.fixture("fake_stats").then((oldStats) => {
       const stats = oldStats["statistics"];
       const yesterday = dayjs().subtract(1, "day").toDate();
-
       stats["lastWin"] = yesterday;
       window.localStorage.setItem("statistics", JSON.stringify(stats));
 
@@ -66,11 +67,38 @@ describe("Play the game", () => {
 
     cy.contains("Statistics").should("exist");
     cy.get('[data-cy="games-won"]').should("contain", 5);
+    cy.get('[data-cy="current-streak"]').should("contain", 3);
 
     // Check that the stats remain when you leave and come back
     cy.visit("/");
     cy.visit("/game");
     cy.contains("Santiago").should("exist");
+  });
+
+  it("breaks a streak", () => {
+    cy.visit("/");
+
+    cy.fixture("fake_stats").then((oldStats) => {
+      const stats = oldStats["statistics"];
+      const yesterday = dayjs().subtract(10, "day").toDate();
+      stats["lastWin"] = yesterday;
+      window.localStorage.setItem("statistics", JSON.stringify(stats));
+    });
+
+    cy.intercept("GET", "/.netlify/functions/answer**", (req) => {
+      req.reply({
+        statusCode: 200,
+        fixture: "encrypted_paris.json",
+      });
+    });
+    cy.visit("/game");
+
+    cy.get('[data-cy="guesser"]').type("paris{enter}");
+    cy.contains("The Mystery Capital is Paris").should("exist");
+
+    cy.contains("Statistics").should("exist");
+    cy.get('[data-cy="games-won"]').should("contain", 5);
+    cy.get('[data-cy="current-streak"]').should("contain", 1);
   });
 });
 

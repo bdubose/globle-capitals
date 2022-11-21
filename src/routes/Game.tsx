@@ -62,9 +62,14 @@ export default function (props: Props) {
       const lastWin = dayjs(context.storedStats().lastWin);
       if (win() && lastWin.isBefore(today, "date")) {
         // Store new stats in local storage
-        const lastWin = today;
         const gamesWon = context.storedStats().gamesWon + 1;
-        const streakBroken = lastWin.diff(today, "date") > 1;
+        const streakBroken = !dayjs()
+          .subtract(1, "day")
+          .isSame(lastWin, "date");
+        console.log("last win", context.storedStats().lastWin);
+        console.log("last win", lastWin.toDate());
+        console.log("today", today.toDate());
+        console.log("streak broken", streakBroken);
         const currentStreak = streakBroken
           ? 1
           : context.storedStats().currentStreak + 1;
@@ -78,7 +83,7 @@ export default function (props: Props) {
         ];
         const emojiGuesses = emojiString(restoredGuesses(), ans());
         const newStats = {
-          lastWin: lastWin.toString(),
+          lastWin: today.toString(),
           gamesWon,
           currentStreak,
           maxStreak,
