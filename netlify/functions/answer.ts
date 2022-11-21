@@ -28,7 +28,9 @@ const handler: Handler = async (event) => {
     const dayCode = parseInt(dayjs.tz(today, "Etc/UTC").format("X"));
     if (!dayCode) throw "Parameter error";
     console.log(dayCode);
-    const cities = data["data"] as City[];
+    const cities = data.filter(
+      ({ capital }) => capital === "primary"
+    ) as City[];
     const key = generateKey(cities, dayCode);
     const city = cities[key];
     console.log("city", city);

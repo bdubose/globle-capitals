@@ -3,13 +3,12 @@ import Guesser from "../components/Guesser";
 import List from "../components/List";
 import { createPracticeAns, getPracticeAns } from "../util/practice";
 import Prompt from "../components/Prompt";
-import { A } from "@solidjs/router";
-import data from "../data/answers.json";
+import { A, useNavigate } from "@solidjs/router";
 
 const GameGlobe = lazy(() => import("../components/globes/GameGlobe"));
 
 export default function () {
-  const cities = data["data"] as City[];
+  const navigate = useNavigate();
   // Signals
   const [pov, setPov] = createSignal<Coords | null>(null);
   const [win, setWin] = createSignal(false);
@@ -43,6 +42,10 @@ export default function () {
     return;
   }
 
+  function revealAnswer() {
+    addGuess(ans());
+  }
+
   return (
     <div>
       <Show when={showGlobe()} keyed fallback={<p>Loading...</p>}>
@@ -53,22 +56,23 @@ export default function () {
         </Suspense>
       </Show>
       <List guesses={guesses} setPov={setPov} ans={ans()} />
-      <A href="/">
-        <button
-          class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900
+      <button
+        class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900
               dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
              focus:ring-4 focus:ring-blue-300 rounded-lg text-sm
              px-4 py-2.5 text-center w-max"
-        >
-          End practice game
-        </button>
-      </A>
+        onClick={revealAnswer}
+        disabled={win()}
+      >
+        Reveal answer
+      </button>
       <Prompt
         promptType="Choice"
         text="Play again?"
         showPrompt={showPrompt}
         setShowPrompt={setShowPrompt}
         yes={newGame}
+        no={() => navigate("/")}
       />
     </div>
   );

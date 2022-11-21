@@ -1,7 +1,7 @@
 import data from "../../src/data/answers.json";
 
 export function createPracticeAns() {
-  const cities = data["data"] as City[];
+  const cities = data.filter(({ capital }) => capital === "primary") as City[];
   const practiceAnswer = cities[Math.floor(Math.random() * cities.length)];
   localStorage.setItem("practice", JSON.stringify(practiceAnswer));
   return practiceAnswer;

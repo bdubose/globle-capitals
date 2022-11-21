@@ -31,7 +31,7 @@ export default function (props: Props) {
   const lastWin = dayjs(context.storedStats().lastWin);
   const [win, setWin] = createSignal(lastWin.isSame(dayjs(), "date"));
 
-  const cities = data["data"] as City[];
+  const cities = data.filter(({ capital }) => capital === "primary") as City[];
   const [ans] = createResource(getAnswer);
 
   const restoredGuesses = () => {

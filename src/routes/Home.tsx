@@ -32,11 +32,11 @@ export default function () {
         <NavGlobe />
       </Suspense>
       <p>
-        Have a question? Check out the{" "}
-        <A href="/faq" class="underline" data-cy="faq-link">
-          FAQ
-        </A>
-        .
+        Or{" "}
+        <a class="underline" href="https://globle-game.com">
+          click here
+        </a>{" "}
+        play the Globle with countries!
       </p>
     </div>
   );

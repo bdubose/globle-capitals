@@ -63,7 +63,7 @@ export default function (props: Props) {
   };
 
   return (
-    <div class="py-8 dark:text-white z-30 mb-20">
+    <div class="py-8 dark:text-white z-30 mb-16">
       <Switch fallback={<p>Guesses will appear here.</p>}>
         <Match when={props.guesses.length < 1}>
           <p>Guesses will appear here.</p>

@@ -27,7 +27,7 @@ export function arcGradient(a1: Coords, a2: Coords, ans: Coords) {
 }
 
 export function getCitySize(pop: number) {
-  const cities = data["data"] as City[];
+  const cities = data.filter(({ capital }) => capital === "primary") as City[];
   const populations = cities
     .map((city) => city.population)
     .sort((a, z) => a - z);

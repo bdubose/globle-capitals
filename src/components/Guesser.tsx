@@ -1,9 +1,10 @@
 import { Accessor, createEffect, createMemo, createSignal } from "solid-js";
 import rawAnswerData from "../data/answers.json";
-import rawBigCities from "../data/big_cities.json";
 import Fuse from "fuse.js";
 import { getContext } from "../Context";
 import { computeDistanceBetween } from "spherical-geometry-js";
+
+// TODO JUST USE ONE LIST OF CITIES! Dubai !== Dublin
 
 type Props = {
   guesses: Accessor<City[]>;
@@ -45,16 +46,8 @@ export default function (props: Props) {
 
   // Search indexes
   const answerIndex = createMemo(() => {
-    const answers = rawAnswerData["data"] as City[];
+    const answers = rawAnswerData as City[];
     return new Fuse(answers, {
-      keys: ["city", "city_ascii", "admin_name"],
-      distance: 2,
-      includeScore: true,
-    });
-  });
-  const bigCityIndex = createMemo(() => {
-    const bigCities = rawBigCities["data"] as City[];
-    return new Fuse(bigCities, {
       keys: ["city", "city_ascii", "admin_name"],
       distance: 2,
       includeScore: true,
@@ -70,7 +63,15 @@ export default function (props: Props) {
     }
     const topAnswer = results[0];
     const topScore = topAnswer.score ?? 1;
+    const { city_ascii, capital, country } = topAnswer.item;
     if (topScore < 0.025) {
+      if (!capital) {
+        setMsg(`${city_ascii} is not a capital city.`);
+        return;
+      } else if (capital !== "primary") {
+        setMsg(`${city_ascii} is not ${country}'s primary capital.`);
+        return;
+      }
       const existingGuess = props.guesses().find((guess) => {
         return topAnswer.item.id === guess.id;
       });
@@ -83,20 +84,20 @@ export default function (props: Props) {
       setMsg(`Did you mean ${topAnswer.item.city_ascii}?`);
       return;
     } else {
-      const bigCitiesFound = bigCityIndex().search(newGuess);
-      if (bigCitiesFound.length >= 1) {
-        const topBigCity = bigCitiesFound[0];
-        const topScore = topBigCity.score ?? 1;
-        const { city_ascii, capital, country } = topBigCity.item;
-        if (topScore < 0.03) {
-          if (!capital) {
-            setMsg(`${city_ascii} is not a capital city.`);
-          } else {
-            setMsg(`${city_ascii} is not ${country}'s primary capital.`);
-          }
-          return;
-        }
-      }
+      // const bigCitiesFound = bigCityIndex().search(newGuess);
+      // if (bigCitiesFound.length >= 1) {
+      //   const topBigCity = bigCitiesFound[0];
+      //   const topScore = topBigCity.score ?? 1;
+      //   const { city_ascii, capital, country } = topBigCity.item;
+      //   if (topScore < 0.03) {
+      //     if (!capital) {
+      //       setMsg(`${city_ascii} is not a capital city.`);
+      //     } else {
+      //       setMsg(`${city_ascii} is not ${country}'s primary capital.`);
+      //     }
+      //     return;
+      //   }
+      // }
       setMsg(`"${newGuess}" not found in database.`);
     }
   }

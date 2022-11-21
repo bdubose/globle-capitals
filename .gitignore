@@ -7,3 +7,4 @@ client_secret.json
 cypress.env.json
 cypress/screenshots/
 cypress/videos/
+answers_old.json
