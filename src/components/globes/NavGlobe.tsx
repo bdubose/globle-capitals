@@ -16,6 +16,8 @@ export default function () {
   const navigate = useNavigate();
   const globeImg = () => (context.theme().isDark ? nightImg : dayImg);
 
+  // TODO new transition looks SO BAD
+
   onMount(() => {
     if (globeRef) {
       globe
@@ -32,10 +34,6 @@ export default function () {
       controls.autoRotate = true;
       setTimeout(() => globe.resumeAnimation(), 1000);
     }
-  });
-
-  createEffect(() => {
-    globe.globeImageUrl(globeImg());
   });
 
   return (

@@ -10,6 +10,7 @@ import {
 } from "solid-js";
 import Prompt from "../components/Prompt";
 import { getContext } from "../Context";
+import Statistics from "./Statistics";
 
 export default function () {
   const context = getContext();
@@ -161,7 +162,7 @@ export default function () {
   }
 
   function showStats(stats: Stats, source: "Local Stats" | "Cloud Backup") {
-    if (stats.gamesWon < 1 && source === "Local Stats")
+    if ((stats.gamesWon < 1 || !stats.lastWin) && source === "Local Stats")
       return <p>No local stats recorded.</p>;
     return (
       <p>
