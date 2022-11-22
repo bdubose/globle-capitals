@@ -9,11 +9,15 @@ import invariant from "tiny-invariant";
 export async function verify(token: string) {
   const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "";
   const oauthClient = new OAuth2Client(GOOGLE_CLIENT_ID);
+  console.log({
+    idToken: token,
+    audience: GOOGLE_CLIENT_ID,
+  });
   const ticket = await oauthClient.verifyIdToken({
     idToken: token,
     audience: GOOGLE_CLIENT_ID,
   });
-  console.log(ticket);
+  console.log({ ticket });
   const userId = ticket.getUserId();
   if (!ticket) throw "Token not verfied.";
   return userId;
@@ -29,9 +33,18 @@ function convertStats(raw: Stats) {
 async function put(event: Event, db: Db) {
   const body = JSON.parse(event.body || "{}");
   const tokenString = body.token as string;
+  // invariant(tokenString, "No token submitted")
+  if (!tokenString)
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: "Failed to save backup. Please contact support.",
+      }),
+    };
   const stats = body.stats as Stats;
   const parsedStats = convertStats(stats);
   const userId = await verify(tokenString);
+  console.log({ userId });
   const email = jwtDecode<Token>(tokenString).email;
   const data = {
     userId,
@@ -62,21 +75,17 @@ async function get(event: Event, db: Db) {
   await verify(tokenString);
   const email = jwtDecode<Token>(tokenString).email;
   const document = await db.collection("users").findOne({ email });
-  console.log(document);
+  console.log({ document });
   if (document) {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: "Backup retreived!",
         document,
       }),
     };
   }
   return {
     statusCode: 204,
-    body: JSON.stringify({
-      message: "No backup score found.",
-    }),
   };
 }
 

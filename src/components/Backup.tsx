@@ -1,18 +1,45 @@
 import dayjs from "dayjs";
 import jwtDecode from "jwt-decode";
-import { createEffect, createSignal, Show } from "solid-js";
+import {
+  createEffect,
+  createResource,
+  createSignal,
+  Match,
+  Show,
+  Switch,
+} from "solid-js";
 import Prompt from "../components/Prompt";
 import { getContext } from "../Context";
 
+// Fetch backup
+async function fetchBackup(googleToken: string) {
+  try {
+    const endpoint = `/.netlify/functions/backup?token=${googleToken}`;
+    const response = await fetch(endpoint);
+    if (response.status !== 200) return null;
+    const data = await response.json();
+    return (data?.document as Stats) ?? null;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+}
+
 export default function () {
   const context = getContext();
-  const [isConnected, setIsConnected] = createSignal(context.token().google !== '');
+  const [isConnected, setIsConnected] = createSignal(
+    context.token().google !== ""
+  );
   const [msg, setMsg] = createSignal("");
   const [showPrompt, setShowPrompt] = createSignal(false);
   const [promptText, setPromptText] = createSignal("");
   const [promptType, setPromptType] = createSignal<Prompt>("Choice");
   const [promptAction, setPromptAction] = createSignal(restoreBackup);
-  const [backupStats, setBackupStats] = createSignal<Stats | null>(null);
+  // const [backupStats, setBackupStats] = createSignal<Stats | null>(null);
+  const [backupStats, { mutate, refetch }] = createResource(
+    context.token().google,
+    fetchBackup
+  );
 
   let googleBtn: HTMLDivElement;
   async function handleCredentialResponse(
@@ -29,15 +56,15 @@ export default function () {
 
   createEffect(() => {
     // try to go ahead and grab the back if we're already signed into Google
-    if (isConnected()) {
-      fetchBackup().then(data => {
-        if (data.document) {
-          setBackupStats(data.document);
-        }
-      }).catch(e => {
-        console.error(e);
-      });
-    }
+    // if (isConnected()) {
+    //   fetchBackup().then(data => {
+    //     if (data.document) {
+    //       setBackupStats(data.document);
+    //     }
+    //   }).catch(e => {
+    //     console.error(e);
+    //   });
+    // }
 
     // if we're not signed into google, then display the sign in button
     // which has a callback to grab the backupStats like above
@@ -70,18 +97,11 @@ export default function () {
       setPromptType("Message");
       setPromptText(message);
       setShowPrompt(true);
-      setBackupStats(context.storedStats());
+      // setBackupStats(context.storedStats());
     } catch (e) {
       console.error(e);
       setMsg("Failed to save score. Please contact support.");
     }
-  }
-
-  // Fetch backup
-  async function fetchBackup() {
-    const endpoint = `/.netlify/functions/backup?token=${context.token().google}`;
-    const netlifyResponse = await fetch(endpoint);
-    return await netlifyResponse.json();
   }
 
   // Restore backup
@@ -95,8 +115,8 @@ export default function () {
   }
   async function restoreBackup() {
     try {
-      const data = await fetchBackup();
-      context.storeStats(data.document);
+      const data = await fetchBackup(context.token().google);
+      if (data) context.storeStats(data);
       setPromptType("Message");
       setPromptText("Backup restored.");
     } catch (e) {
@@ -111,10 +131,13 @@ export default function () {
     setPromptText("Are you sure you want to delete your backup?");
     setPromptAction(() => deleteBackup);
     setShowPrompt(true);
+    refetch();
   }
   async function deleteBackup() {
     try {
-      const endpoint = `/.netlify/functions/backup?token=${context.token().google}`;
+      const endpoint = `/.netlify/functions/backup?token=${
+        context.token().google
+      }`;
       const netlifyResponse = await fetch(endpoint, {
         method: "DELETE",
       });
@@ -122,19 +145,20 @@ export default function () {
       context.resetStats();
       setPromptType("Message");
       setPromptText(data.message);
-      setBackupStats(null);
+      // setBackupStats(null);
     } catch (e) {
       console.error(e);
       setMsg("Failed to restore score. Please contact support.");
     }
   }
 
-  function showStats(stats: Stats, source: 'Local Stats' | 'Cloud Backup') {
+  function showStats(stats: Stats, source: "Local Stats" | "Cloud Backup") {
+    if (stats.gamesWon < 1 && source === "Local Stats")
+      return "No local stats recorded.";
     return (
       <p>
         {source} -- Date saved:
-        {dayjs(stats.lastWin).format(" YYYY-MM-DD")}, streak:{" "}
-        {stats.maxStreak}.
+        {dayjs(stats.lastWin).format(" YYYY-MM-DD")}, streak: {stats.maxStreak}.
       </p>
     );
   }
@@ -158,14 +182,36 @@ export default function () {
         }
       >
         <p>
-          Google account <b>{jwtDecode<Token>(context.token().google).email}</b> connected!
+          Google account <b>{jwtDecode<Token>(context.token().google).email}</b>{" "}
+          connected!
         </p>
-        <Show when={backupStats()} fallback={<p>No cloud backup saved yet.</p>} keyed>
-          {(stats) => showStats(stats, 'Cloud Backup')}
-        </Show>
-        <Show when={context.storedStats()} fallback={<p>No local stats saved yet.</p>} keyed>
-          {(stats) => showStats(stats, 'Local Stats')}
-        </Show>
+        <Switch>
+          <Match when={backupStats.loading}>
+            {" "}
+            <p>Loading...</p>{" "}
+          </Match>
+          <Match when={backupStats.error}>
+            {" "}
+            <p>Error connecting to cloud</p>{" "}
+          </Match>
+          <Match when={!backupStats.loading}>
+            <Show
+              when={backupStats()}
+              fallback={<p>No cloud backup saved yet.</p>}
+              keyed
+            >
+              {(stats) => showStats(stats, "Cloud Backup")}
+            </Show>
+            <Show
+              when={context.storedStats()}
+              fallback={<p>No local stats saved yet.</p>}
+              keyed
+            >
+              {(stats) => showStats(stats, "Local Stats")}
+            </Show>
+          </Match>
+          {/* </Show> */}
+        </Switch>
       </Show>
       <p>{msg()}</p>
       <div class="flex space-x-3">
