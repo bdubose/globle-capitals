@@ -129,6 +129,16 @@ export default function () {
     }
   }
 
+  function showStats(stats: Stats, source: 'Local Stats' | 'Cloud Backup') {
+    return (
+      <p>
+        {source} -- Date saved:
+        {dayjs(stats.lastWin).format(" YYYY-MM-DD")}, streak:{" "}
+        {stats.maxStreak}.
+      </p>
+    );
+  }
+
   return (
     <div class="space-y-4">
       <h3 class="text-2xl font-extrabold font-header">Stats Backup</h3>
@@ -150,16 +160,11 @@ export default function () {
         <p>
           Google account <b>{jwtDecode<Token>(context.token().google).email}</b> connected!
         </p>
-        <Show when={backupStats()} fallback={<p>No stats saved yet.</p>} keyed>
-          {(stats) => {
-            return (
-              <p>
-                Date saved:
-                {dayjs(stats.lastWin).format(" YYYY-MM-DD")}, streak:{" "}
-                {stats.maxStreak}.
-              </p>
-            );
-          }}
+        <Show when={backupStats()} fallback={<p>No cloud backup saved yet.</p>} keyed>
+          {(stats) => showStats(stats, 'Cloud Backup')}
+        </Show>
+        <Show when={context.storedStats()} fallback={<p>No local stats saved yet.</p>} keyed>
+          {(stats) => showStats(stats, 'Local Stats')}
         </Show>
       </Show>
       <p>{msg()}</p>
@@ -173,7 +178,7 @@ export default function () {
           disabled={!isConnected() || context.storedStats().gamesWon < 1}
           onClick={saveBackup}
         >
-          Save
+          Save Cloud Backup
         </button>
         <button
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
@@ -184,7 +189,7 @@ export default function () {
           disabled={!isConnected() || !backupStats()}
           onClick={restoreBackupPrompt}
         >
-          Restore
+          Restore from Backup
         </button>
         <button
           class=" text-red-700 border-red-700 border rounded-md px-6 py-2 block
@@ -207,7 +212,3 @@ export default function () {
     </div>
   );
 }
-function useEffect(arg0: () => void, arg1: string[]) {
-  throw new Error("Function not implemented.");
-}
-
