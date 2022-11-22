@@ -1,40 +1,38 @@
 import Globe from "globe.gl";
-import { onMount } from "solid-js";
+import { createEffect, createSignal, on, onMount } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 import dayImg from "../../images/earth-day-min.webp";
 import nightImg from "../../images/earth-night-min.webp";
 import UAParser from "ua-parser-js";
+import { getContext } from "../../Context";
 
-type Props = {
-  isDark?: boolean;
-};
+export default function () {
+  const context = getContext();
 
-export default function (props?: Props) {
   let globeRef: HTMLDivElement | undefined;
   const globe = Globe();
   const parser = new UAParser();
   const isMobile = parser.getDevice().type === "mobile";
   const navigate = useNavigate();
+  const globeImg = () => (context.theme().isDark ? nightImg : dayImg);
+
+  // TODO new transition looks SO BAD
 
   onMount(() => {
     if (globeRef) {
       globe
-        // .globeImageUrl(globeImg(props))
-        .globeImageUrl(props?.isDark ? nightImg : dayImg)
+        .globeImageUrl(globeImg())
         .backgroundColor("#00000000")
         .enablePointerInteraction(false)
         .showAtmosphere(false)
-        .showGlobe(false)
+        .pauseAnimation()
         .width(100)
         .height(100)(globeRef);
 
       const controls = globe.controls() as any;
       globe.pointOfView({ lat: 0, lng: 0, altitude: 1.5 });
-      // globe.pauseAnimation();
       controls.autoRotate = true;
-
-      // setTimeout(() => globe.resumeAnimation(), 1000);
-      setTimeout(() => globe.showGlobe(true), 1000);
+      setTimeout(() => globe.resumeAnimation(), 1000);
     }
   });
 

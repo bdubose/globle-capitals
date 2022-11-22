@@ -156,9 +156,11 @@ globle-capitals.com
       </table>
       <div class="py-6 flex w-full justify-around">
         <button
-          class=" text-red-700 border-red-700 border rounded-md px-6 py-2 block
+          class="text-red-700 border-red-700 border rounded-md px-6 py-2 block
           text-base font-medium hover:bg-red-700 hover:text-gray-300
-          focus:outline-none focus:ring-2 focus:ring-red-300 sm:mx-4"
+          focus:outline-none focus:ring-2 focus:ring-red-300 sm:mx-4
+          dark:text-red-500 dark:border-red-500 dark:disabled:border-red-400
+          dark:hover:bg-red-500 dark:hover:text-black"
           onClick={promptResetStats}
         >
           Reset

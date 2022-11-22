@@ -1,19 +1,55 @@
 import dayjs from "dayjs";
 import jwtDecode from "jwt-decode";
-import { createSignal, onMount, Show } from "solid-js";
+import {
+  createEffect,
+  createResource,
+  createSignal,
+  Match,
+  Show,
+  Switch,
+} from "solid-js";
 import Prompt from "../components/Prompt";
 import { getContext } from "../Context";
+import Statistics from "./Statistics";
 
 export default function () {
   const context = getContext();
-  const [isConnected, setIsConnected] = createSignal(false);
-  const [token, setToken] = createSignal("");
+  // Fetch backup
+  async function fetchBackup(googleToken: string) {
+    try {
+      const endpoint = `/.netlify/functions/backup?token=${googleToken}`;
+      const response = await fetch(endpoint);
+      if (response.status === 205) {
+        context.setToken({ google: "" });
+        return null;
+      }
+      if (response.status === 204) return null;
+      const data = await response.json();
+      return (data?.document as Stats) ?? null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  const isConnected = () => context.token().google !== "";
   const [msg, setMsg] = createSignal("");
   const [showPrompt, setShowPrompt] = createSignal(false);
   const [promptText, setPromptText] = createSignal("");
   const [promptType, setPromptType] = createSignal<Prompt>("Choice");
   const [promptAction, setPromptAction] = createSignal(restoreBackup);
-  const [backupStats, setBackupStats] = createSignal<Stats | null>(null);
+  // const [backupStats, setBackupStats] = createSignal<Stats | null>(null);
+  const [backupStats, { mutate, refetch }] = createResource(
+    context.token().google,
+    fetchBackup
+  );
+  const alreadyBackedUp = () => {
+    const backup = backupStats();
+    if (!backup) return false;
+    return Object.keys(backup).every((key) => {
+      const statKey = key as keyof Stats;
+      return backup[statKey] === context.storedStats()[statKey];
+    });
+  };
 
   let googleBtn: HTMLDivElement;
   async function handleCredentialResponse(
@@ -21,27 +57,28 @@ export default function () {
   ) {
     if (googleResponse) {
       const googleToken = googleResponse?.credential;
-      const endpoint = `/.netlify/functions/backup?token=${googleToken}`;
-      try {
-        const netlifyResponse = await fetch(endpoint);
-        if (netlifyResponse.status === 200) {
-          const data = await netlifyResponse.json();
-          if (data.document) {
-            setBackupStats(data.document);
-          }
-        }
-        setToken(googleToken);
-        setIsConnected(true);
-      } catch (e) {
-        console.error(e);
-      }
+      context.setToken({ google: googleToken });
+      // setIsConnected(true);
     } else {
       setMsg("Failed to connect to Google account.");
     }
   }
 
-  onMount(() => {
-    if (google) {
+  createEffect(() => {
+    // try to go ahead and grab the back if we're already signed into Google
+    // if (isConnected()) {
+    //   fetchBackup().then(data => {
+    //     if (data.document) {
+    //       setBackupStats(data.document);
+    //     }
+    //   }).catch(e => {
+    //     console.error(e);
+    //   });
+    // }
+
+    // if we're not signed into google, then display the sign in button
+    // which has a callback to grab the backupStats like above
+    if (!isConnected() && google) {
       google.accounts.id.initialize({
         client_id:
           "197638666704-ta3tn996fsubrmog0nmkrekp0u7nslq7.apps.googleusercontent.com",
@@ -59,7 +96,7 @@ export default function () {
     try {
       const body = JSON.stringify({
         stats: context.storedStats(),
-        token: token(),
+        token: context.token().google,
       });
       const netlifyResponse = await fetch("/.netlify/functions/backup", {
         method: "PUT",
@@ -70,7 +107,7 @@ export default function () {
       setPromptType("Message");
       setPromptText(message);
       setShowPrompt(true);
-      setBackupStats(context.storedStats());
+      refetch(context.token().google);
     } catch (e) {
       console.error(e);
       setMsg("Failed to save score. Please contact support.");
@@ -88,10 +125,8 @@ export default function () {
   }
   async function restoreBackup() {
     try {
-      const endpoint = `/.netlify/functions/backup?token=${token()}`;
-      const netlifyResponse = await fetch(endpoint);
-      const data = await netlifyResponse.json();
-      context.storeStats(data.document);
+      const data = await fetchBackup(context.token().google);
+      if (data) context.storeStats(data);
       setPromptType("Message");
       setPromptText("Backup restored.");
     } catch (e) {
@@ -107,21 +142,35 @@ export default function () {
     setPromptAction(() => deleteBackup);
     setShowPrompt(true);
   }
+
   async function deleteBackup() {
     try {
-      const endpoint = `/.netlify/functions/backup?token=${token()}`;
+      const endpoint = `/.netlify/functions/backup?token=${
+        context.token().google
+      }`;
       const netlifyResponse = await fetch(endpoint, {
         method: "DELETE",
       });
       const data = await netlifyResponse.json();
-      context.resetStats();
       setPromptType("Message");
       setPromptText(data.message);
-      setBackupStats(null);
+      refetch(context.token().google);
     } catch (e) {
       console.error(e);
       setMsg("Failed to restore score. Please contact support.");
     }
+  }
+
+  function showStats(stats: Stats, source: "Local Stats" | "Cloud Backup") {
+    if ((stats.gamesWon < 1 || !stats.lastWin) && source === "Local Stats")
+      return <p>No local stats recorded.</p>;
+    return (
+      <p>
+        {source} -- Date saved:
+        {dayjs(stats.lastWin).format(" YYYY-MM-DD")}, best streak:{" "}
+        {stats.maxStreak}.
+      </p>
+    );
   }
 
   return (
@@ -143,49 +192,72 @@ export default function () {
         }
       >
         <p>
-          Google account <b>{jwtDecode<Token>(token()).email}</b> connected!
+          Google account <b>{jwtDecode<Token>(context.token().google).email}</b>{" "}
+          connected!
         </p>
-        <Show when={backupStats()} fallback={<p>No stats saved yet.</p>} keyed>
-          {(stats) => {
-            return (
-              <p>
-                Date saved:
-                {dayjs(stats.lastWin).format(" YYYY-MM-DD")}, streak:{" "}
-                {stats.maxStreak}.
-              </p>
-            );
-          }}
+        <Switch>
+          <Match when={backupStats.loading}>
+            {" "}
+            <p>Loading...</p>{" "}
+          </Match>
+          <Match when={backupStats.error}>
+            {" "}
+            <p>Error connecting to cloud</p>{" "}
+          </Match>
+          <Match when={!backupStats.loading}>
+            <Show
+              when={backupStats()}
+              fallback={<p>No cloud backup saved yet.</p>}
+              keyed
+            >
+              {(stats) => showStats(stats, "Cloud Backup")}
+            </Show>
+          </Match>
+        </Switch>
+        <Show
+          when={context.storedStats()}
+          fallback={<p>No local stats saved yet.</p>}
+          keyed
+        >
+          {(stats) => showStats(stats, "Local Stats")}
         </Show>
       </Show>
       <p>{msg()}</p>
       <div class="flex space-x-3">
         <button
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
-          text-white rounded-md px-8 py-2 block text-base font-medium 
+          text-white rounded-md px-4 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           disabled:bg-blue-400 dark:disabled:bg-purple-900
           justify-around"
-          disabled={!isConnected() || context.storedStats().gamesWon < 1}
+          disabled={
+            !isConnected() ||
+            context.storedStats().gamesWon < 1 ||
+            alreadyBackedUp() ||
+            backupStats.loading
+          }
           onClick={saveBackup}
         >
-          Save
+          Save cloud backup
         </button>
         <button
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
-          text-white rounded-md px-8 py-2 block text-base font-medium 
+          text-white rounded-md px-4 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           disabled:bg-blue-400 dark:disabled:bg-purple-900
           justify-around"
           disabled={!isConnected() || !backupStats()}
           onClick={restoreBackupPrompt}
         >
-          Restore
+          Restore from backup
         </button>
         <button
-          class=" text-red-700 border-red-700 border rounded-md px-6 py-2 block
+          class=" text-red-700 border-red-700 border rounded-md px-4 py-2 block
           text-base font-medium hover:bg-red-700 hover:text-gray-300
           focus:outline-none focus:ring-2 focus:ring-red-300 
-          disabled:text-red-400 disabled:bg-transparent disabled:border-red-400"
+          disabled:text-red-400 disabled:bg-transparent disabled:border-red-400
+          dark:text-red-500 dark:border-red-500 dark:disabled:border-red-400
+          dark:hover:bg-red-500 dark:hover:text-black"
           disabled={!isConnected() || !backupStats()}
           onClick={deleteBackupPrompt}
         >

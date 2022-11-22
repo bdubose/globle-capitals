@@ -61,6 +61,7 @@ export const makeContext = (mode: "Stored" | "Static") => {
       expiration: dayjs().endOf("day").toDate(),
     },
     distanceUnit: { unit: "km" as Unit },
+    token: { google: '' },
   };
 
   type Keys = keyof typeof initial;
@@ -80,6 +81,7 @@ export const makeContext = (mode: "Stored" | "Static") => {
   const [theme, setTheme] = create("theme");
   const [storedStats, storeStats] = create("statistics");
   const [storedGuesses, storeGuesses] = create("guesses");
+  const [token, setToken] = create("token");
   // const [storedGuesses, storeGuesses] = useLocalStorage(
   //   "guesses",
   //   initial["guesses"]
@@ -97,6 +99,8 @@ export const makeContext = (mode: "Stored" | "Static") => {
     resetGuesses: () => storeGuesses(initial.guesses),
     distanceUnit,
     setDistanceUnit,
+    token,
+    setToken,
   };
 };
 

@@ -19,6 +19,7 @@ describe("Explore all navigation links", () => {
     cy.url().should("contain", "/faq");
     cy.contains("FAQ").should("exist");
 
+    cy.wait(1000);
     cy.contains("privacy policy").click();
     cy.get('[href="/privacy-policy"]').click();
     cy.url().should("contain", "/privacy-policy");

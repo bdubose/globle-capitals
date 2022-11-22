@@ -28,7 +28,7 @@ const App: Component = () => {
         <Statistics showStats={showStats} setShowStats={setShowStats} />
       </Modal>
       <main
-        class="max-w-2xl mx-auto p-4 sm:py-8 z-20 relative dark:text-gray-200 min-h-screen
+        class="max-w-2xl mx-auto p-4 md:px-0 z-20 relative dark:text-gray-200 min-h-screen
       flex flex-col justify-between"
       >
         <Header showStats={showStats} setShowStats={setShowStats} />

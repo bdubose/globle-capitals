@@ -36,11 +36,11 @@ export default function () {
         px-4 py-2.5 text-center items-center
         justify-center self-center mx-auto block"
       >
-        <span class="font-medium">Play practice game</span>
+        <span class="font-medium text-base">Play practice game</span>
       </button>
       <Backup />
       <Suspense fallback={<p>Loading...</p>}>
-        <NavGlobe isDark={isDark()} />
+        <NavGlobe />
       </Suspense>
     </div>
   );

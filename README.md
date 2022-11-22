@@ -32,3 +32,7 @@ Your app is ready to be deployed!
 ## Deployment
 
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+
+# Testing
+Cypress Google testing instructions
+https://docs.cypress.io/guides/end-to-end-testing/google-authentication

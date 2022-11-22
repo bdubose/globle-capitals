@@ -26,12 +26,9 @@ describe("Play the game", () => {
   it("plays a game with many guesses", () => {
     cy.visit("/");
 
+    const yesterday = dayjs().subtract(1, "day").toDate();
+    cy.loadStats(yesterday);
     cy.fixture("fake_stats").then((oldStats) => {
-      const stats = oldStats["statistics"];
-      const yesterday = dayjs().subtract(1, "day").toDate();
-      stats["lastWin"] = yesterday;
-      window.localStorage.setItem("statistics", JSON.stringify(stats));
-
       const guesses = oldStats["guesses"];
       guesses["expiration"] = yesterday;
       window.localStorage.setItem("guesses", JSON.stringify(guesses));
@@ -78,12 +75,8 @@ describe("Play the game", () => {
   it("breaks a streak", () => {
     cy.visit("/");
 
-    cy.fixture("fake_stats").then((oldStats) => {
-      const stats = oldStats["statistics"];
-      const yesterday = dayjs().subtract(10, "day").toDate();
-      stats["lastWin"] = yesterday;
-      window.localStorage.setItem("statistics", JSON.stringify(stats));
-    });
+    const lastWin = dayjs().subtract(10, "day").toDate();
+    cy.loadStats(lastWin);
 
     cy.intercept("GET", "/.netlify/functions/answer**", (req) => {
       req.reply({
