@@ -225,7 +225,7 @@ export default function () {
       <div class="flex space-x-3">
         <button
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
-          text-white rounded-md px-8 py-2 block text-base font-medium 
+          text-white rounded-md px-4 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           disabled:bg-blue-400 dark:disabled:bg-purple-900
           justify-around"
@@ -237,24 +237,26 @@ export default function () {
           }
           onClick={saveBackup}
         >
-          Save Cloud Backup
+          Save cloud backup
         </button>
         <button
           class="bg-blue-700 hover:bg-blue-900 dark:bg-purple-800 dark:hover:bg-purple-900
-          text-white rounded-md px-8 py-2 block text-base font-medium 
+          text-white rounded-md px-4 py-2 block text-base font-medium 
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           disabled:bg-blue-400 dark:disabled:bg-purple-900
           justify-around"
           disabled={!isConnected() || !backupStats()}
           onClick={restoreBackupPrompt}
         >
-          Restore from Backup
+          Restore from backup
         </button>
         <button
-          class=" text-red-700 border-red-700 border rounded-md px-6 py-2 block
+          class=" text-red-700 border-red-700 border rounded-md px-4 py-2 block
           text-base font-medium hover:bg-red-700 hover:text-gray-300
           focus:outline-none focus:ring-2 focus:ring-red-300 
-          disabled:text-red-400 disabled:bg-transparent disabled:border-red-400"
+          disabled:text-red-400 disabled:bg-transparent disabled:border-red-400
+          dark:text-red-500 dark:border-red-500 dark:disabled:border-red-400
+          dark:hover:bg-red-500 dark:hover:text-black"
           disabled={!isConnected() || !backupStats()}
           onClick={deleteBackupPrompt}
         >
