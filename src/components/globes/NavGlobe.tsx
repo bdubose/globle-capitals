@@ -39,7 +39,10 @@ export default function (props?: Props) {
   });
 
   return (
-    <div class="w-fit mx-auto cursor-pointer" onClick={() => navigate("/game")}>
+    <div
+      class="w-fit mx-auto cursor-pointer text-center"
+      onClick={() => navigate("/game")}
+    >
       <div ref={globeRef!} class="w-fit mx-auto my-2" />
       <b>{isMobile ? "Tap" : "Click"} the globe to play!</b>
     </div>

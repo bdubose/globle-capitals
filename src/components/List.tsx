@@ -96,7 +96,7 @@ export default function (props: Props) {
           }}
         </For>
       </ul>
-      <Show when={props.guesses.length > 0}>
+      <Show when={props.guesses().length > 0}>
         <div class="mt-8">
           <div class="flex items-center space-x-1">
             <p>Closest city: {formatKm(closest())}</p>

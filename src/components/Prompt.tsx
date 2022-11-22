@@ -48,7 +48,7 @@ export function Prompt(props: Props) {
     <>
       <p class="text-gray-900 dark:text-gray-200 max-w-xs">{props.text}</p>
       <Show when={props.promptType === "Choice"}>
-        <div class="py-4 flex justify-center sm:space-x-8">
+        <div class="py-4 flex justify-center space-x-8">
           <button
             class="bg-red-700 text-white rounded-md px-6 py-2 block 
             text-base font-medium hover:bg-red-900 disabled:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-300"
