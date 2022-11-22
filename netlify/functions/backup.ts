@@ -9,24 +9,44 @@ import invariant from "tiny-invariant";
 export async function verify(token: string) {
   const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "";
   const oauthClient = new OAuth2Client(GOOGLE_CLIENT_ID);
-  console.log({
-    idToken: token,
-    audience: GOOGLE_CLIENT_ID,
-  });
-  const ticket = await oauthClient.verifyIdToken({
-    idToken: token,
-    audience: GOOGLE_CLIENT_ID,
-  });
-  console.log({ ticket });
-  const userId = ticket.getUserId();
-  if (!ticket) throw "Token not verfied.";
-  return userId;
+  try {
+    const ticket = await oauthClient.verifyIdToken({
+      idToken: token,
+      audience: GOOGLE_CLIENT_ID,
+    });
+    console.log({ ticket });
+    if (!ticket) throw "Token not verfied.";
+    const userId = ticket.getUserId();
+    return userId;
+  } catch (e) {
+    return null;
+  }
 }
 
 function convertStats(raw: Stats) {
   return {
     ...raw,
     lastWin: dayjs(raw.lastWin).toDate(),
+  };
+}
+
+async function get(event: Event, db: Db) {
+  const tokenString = event.queryStringParameters?.token || "";
+  const userId = await verify(tokenString);
+  if (!userId) return { statusCode: 205 };
+  const email = jwtDecode<Token>(tokenString).email;
+  const document = await db.collection("users").findOne({ email });
+  console.log({ document });
+  if (document) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        document,
+      }),
+    };
+  }
+  return {
+    statusCode: 204,
   };
 }
 
@@ -44,6 +64,7 @@ async function put(event: Event, db: Db) {
   const stats = body.stats as Stats;
   const parsedStats = convertStats(stats);
   const userId = await verify(tokenString);
+  if (!userId) return { statusCode: 205 };
   console.log({ userId });
   const email = jwtDecode<Token>(tokenString).email;
   const data = {
@@ -67,25 +88,6 @@ async function put(event: Event, db: Db) {
     body: JSON.stringify({
       message: "Failed to save backup. Please contact support.",
     }),
-  };
-}
-
-async function get(event: Event, db: Db) {
-  const tokenString = event.queryStringParameters?.token || "";
-  await verify(tokenString);
-  const email = jwtDecode<Token>(tokenString).email;
-  const document = await db.collection("users").findOne({ email });
-  console.log({ document });
-  if (document) {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        document,
-      }),
-    };
-  }
-  return {
-    statusCode: 204,
   };
 }
 

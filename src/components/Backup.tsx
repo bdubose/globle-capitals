@@ -11,25 +11,26 @@ import {
 import Prompt from "../components/Prompt";
 import { getContext } from "../Context";
 
-// Fetch backup
-async function fetchBackup(googleToken: string) {
-  try {
-    const endpoint = `/.netlify/functions/backup?token=${googleToken}`;
-    const response = await fetch(endpoint);
-    if (response.status !== 200) return null;
-    const data = await response.json();
-    return (data?.document as Stats) ?? null;
-  } catch (e) {
-    console.error(e);
-    return null;
-  }
-}
-
 export default function () {
   const context = getContext();
-  const [isConnected, setIsConnected] = createSignal(
-    context.token().google !== ""
-  );
+  // Fetch backup
+  async function fetchBackup(googleToken: string) {
+    try {
+      const endpoint = `/.netlify/functions/backup?token=${googleToken}`;
+      const response = await fetch(endpoint);
+      if (response.status === 205) {
+        context.setToken({ google: "" });
+        return null;
+      }
+      if (response.status === 204) return null;
+      const data = await response.json();
+      return (data?.document as Stats) ?? null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  const isConnected = () => context.token().google !== "";
   const [msg, setMsg] = createSignal("");
   const [showPrompt, setShowPrompt] = createSignal(false);
   const [promptText, setPromptText] = createSignal("");
@@ -40,6 +41,14 @@ export default function () {
     context.token().google,
     fetchBackup
   );
+  const alreadyBackedUp = () => {
+    const backup = backupStats();
+    if (!backup) return false;
+    return Object.keys(backup).every((key) => {
+      const statKey = key as keyof Stats;
+      return backup[statKey] === context.storedStats()[statKey];
+    });
+  };
 
   let googleBtn: HTMLDivElement;
   async function handleCredentialResponse(
@@ -48,7 +57,7 @@ export default function () {
     if (googleResponse) {
       const googleToken = googleResponse?.credential;
       context.setToken({ google: googleToken });
-      setIsConnected(true);
+      // setIsConnected(true);
     } else {
       setMsg("Failed to connect to Google account.");
     }
@@ -86,7 +95,7 @@ export default function () {
     try {
       const body = JSON.stringify({
         stats: context.storedStats(),
-        token: context.token(),
+        token: context.token().google,
       });
       const netlifyResponse = await fetch("/.netlify/functions/backup", {
         method: "PUT",
@@ -97,7 +106,7 @@ export default function () {
       setPromptType("Message");
       setPromptText(message);
       setShowPrompt(true);
-      // setBackupStats(context.storedStats());
+      refetch(context.token().google);
     } catch (e) {
       console.error(e);
       setMsg("Failed to save score. Please contact support.");
@@ -131,8 +140,8 @@ export default function () {
     setPromptText("Are you sure you want to delete your backup?");
     setPromptAction(() => deleteBackup);
     setShowPrompt(true);
-    refetch();
   }
+
   async function deleteBackup() {
     try {
       const endpoint = `/.netlify/functions/backup?token=${
@@ -142,10 +151,9 @@ export default function () {
         method: "DELETE",
       });
       const data = await netlifyResponse.json();
-      context.resetStats();
       setPromptType("Message");
       setPromptText(data.message);
-      // setBackupStats(null);
+      refetch(context.token().google);
     } catch (e) {
       console.error(e);
       setMsg("Failed to restore score. Please contact support.");
@@ -154,11 +162,12 @@ export default function () {
 
   function showStats(stats: Stats, source: "Local Stats" | "Cloud Backup") {
     if (stats.gamesWon < 1 && source === "Local Stats")
-      return "No local stats recorded.";
+      return <p>No local stats recorded.</p>;
     return (
       <p>
         {source} -- Date saved:
-        {dayjs(stats.lastWin).format(" YYYY-MM-DD")}, streak: {stats.maxStreak}.
+        {dayjs(stats.lastWin).format(" YYYY-MM-DD")}, best streak:{" "}
+        {stats.maxStreak}.
       </p>
     );
   }
@@ -202,16 +211,15 @@ export default function () {
             >
               {(stats) => showStats(stats, "Cloud Backup")}
             </Show>
-            <Show
-              when={context.storedStats()}
-              fallback={<p>No local stats saved yet.</p>}
-              keyed
-            >
-              {(stats) => showStats(stats, "Local Stats")}
-            </Show>
           </Match>
-          {/* </Show> */}
         </Switch>
+        <Show
+          when={context.storedStats()}
+          fallback={<p>No local stats saved yet.</p>}
+          keyed
+        >
+          {(stats) => showStats(stats, "Local Stats")}
+        </Show>
       </Show>
       <p>{msg()}</p>
       <div class="flex space-x-3">
@@ -221,7 +229,12 @@ export default function () {
           focus:outline-none focus:ring-2 focus:ring-blue-300 
           disabled:bg-blue-400 dark:disabled:bg-purple-900
           justify-around"
-          disabled={!isConnected() || context.storedStats().gamesWon < 1}
+          disabled={
+            !isConnected() ||
+            context.storedStats().gamesWon < 1 ||
+            alreadyBackedUp() ||
+            backupStats.loading
+          }
           onClick={saveBackup}
         >
           Save Cloud Backup
