@@ -1,13 +1,12 @@
 import dayjs from "dayjs";
 import jwtDecode from "jwt-decode";
-import { createSignal, onMount, Show } from "solid-js";
+import { createEffect, createSignal, onMount, Show } from "solid-js";
 import Prompt from "../components/Prompt";
 import { getContext } from "../Context";
 
 export default function () {
   const context = getContext();
-  const [isConnected, setIsConnected] = createSignal(false);
-  const [token, setToken] = createSignal("");
+  const [isConnected, setIsConnected] = createSignal(context.token().google !== '');
   const [msg, setMsg] = createSignal("");
   const [showPrompt, setShowPrompt] = createSignal(false);
   const [promptText, setPromptText] = createSignal("");
@@ -21,17 +20,15 @@ export default function () {
   ) {
     if (googleResponse) {
       const googleToken = googleResponse?.credential;
-      const endpoint = `/.netlify/functions/backup?token=${googleToken}`;
+      context.setToken({ google: googleToken });
+      setIsConnected(true);
+
+      // proceed to pull backup with google token
       try {
-        const netlifyResponse = await fetch(endpoint);
-        if (netlifyResponse.status === 200) {
-          const data = await netlifyResponse.json();
-          if (data.document) {
-            setBackupStats(data.document);
-          }
+        const data = await fetchBackup();
+        if (data.document) {
+          setBackupStats(data.document);
         }
-        setToken(googleToken);
-        setIsConnected(true);
       } catch (e) {
         console.error(e);
       }
@@ -41,7 +38,7 @@ export default function () {
   }
 
   onMount(() => {
-    if (google) {
+    if (!isConnected() && google) {
       google.accounts.id.initialize({
         client_id:
           "197638666704-ta3tn996fsubrmog0nmkrekp0u7nslq7.apps.googleusercontent.com",
@@ -54,12 +51,31 @@ export default function () {
     }
   });
 
+  createEffect(() => {
+    console.log('the token effect is running! :D');
+    if (context.token().google !== '') {
+      fetchBackup().then(data => {
+        if (data.document) {
+          setBackupStats(data.document);
+        }
+      }).catch(e => {
+        console.log('caught error in effect: ' + e);
+        // the token may be expired, so just reset it
+        context.setToken({ google: ''});
+        setIsConnected(false);
+      });
+    } else {
+      // make sure we know we're not connected
+      setIsConnected(false);
+    }
+  });
+
   // Saving score
   async function saveBackup() {
     try {
       const body = JSON.stringify({
         stats: context.storedStats(),
-        token: token(),
+        token: context.token(),
       });
       const netlifyResponse = await fetch("/.netlify/functions/backup", {
         method: "PUT",
@@ -77,6 +93,14 @@ export default function () {
     }
   }
 
+  // Fetch backup
+  async function fetchBackup() {
+    return { document: { lastWin: '1995-11-26', maxStreak: 789, emojiGuesses: context.token().google } }; // todo remove
+    const endpoint = `/.netlify/functions/backup?token=${context.token().google}`;
+    const netlifyResponse = await fetch(endpoint);
+    return await netlifyResponse.json();
+  }
+
   // Restore backup
   function restoreBackupPrompt() {
     setPromptType("Choice");
@@ -88,9 +112,7 @@ export default function () {
   }
   async function restoreBackup() {
     try {
-      const endpoint = `/.netlify/functions/backup?token=${token()}`;
-      const netlifyResponse = await fetch(endpoint);
-      const data = await netlifyResponse.json();
+      const data = await fetchBackup();
       context.storeStats(data.document);
       setPromptType("Message");
       setPromptText("Backup restored.");
@@ -109,7 +131,7 @@ export default function () {
   }
   async function deleteBackup() {
     try {
-      const endpoint = `/.netlify/functions/backup?token=${token()}`;
+      const endpoint = `/.netlify/functions/backup?token=${context.token().google}`;
       const netlifyResponse = await fetch(endpoint, {
         method: "DELETE",
       });
@@ -143,7 +165,7 @@ export default function () {
         }
       >
         <p>
-          Google account <b>{jwtDecode<Token>(token()).email}</b> connected!
+          Google account <b>{jwtDecode<Token>(context.token().google).email}</b> connected!
         </p>
         <Show when={backupStats()} fallback={<p>No stats saved yet.</p>} keyed>
           {(stats) => {
@@ -202,3 +224,7 @@ export default function () {
     </div>
   );
 }
+function useEffect(arg0: () => void, arg1: string[]) {
+  throw new Error("Function not implemented.");
+}
+
