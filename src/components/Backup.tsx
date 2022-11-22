@@ -22,22 +22,25 @@ export default function () {
       const googleToken = googleResponse?.credential;
       context.setToken({ google: googleToken });
       setIsConnected(true);
-
-      // proceed to pull backup with google token
-      try {
-        const data = await fetchBackup();
-        if (data.document) {
-          setBackupStats(data.document);
-        }
-      } catch (e) {
-        console.error(e);
-      }
     } else {
       setMsg("Failed to connect to Google account.");
     }
   }
 
-  onMount(() => {
+  createEffect(() => {
+    // try to go ahead and grab the back if we're already signed into Google
+    if (isConnected()) {
+      fetchBackup().then(data => {
+        if (data.document) {
+          setBackupStats(data.document);
+        }
+      }).catch(e => {
+        console.error(e);
+      });
+    }
+
+    // if we're not signed into google, then display the sign in button
+    // which has a callback to grab the backupStats like above
     if (!isConnected() && google) {
       google.accounts.id.initialize({
         client_id:
@@ -48,25 +51,6 @@ export default function () {
       google.accounts.id.renderButton(googleBtn, {
         type: "standard",
       });
-    }
-  });
-
-  createEffect(() => {
-    console.log('the token effect is running! :D');
-    if (context.token().google !== '') {
-      fetchBackup().then(data => {
-        if (data.document) {
-          setBackupStats(data.document);
-        }
-      }).catch(e => {
-        console.log('caught error in effect: ' + e);
-        // the token may be expired, so just reset it
-        context.setToken({ google: ''});
-        setIsConnected(false);
-      });
-    } else {
-      // make sure we know we're not connected
-      setIsConnected(false);
     }
   });
 
@@ -95,7 +79,6 @@ export default function () {
 
   // Fetch backup
   async function fetchBackup() {
-    return { document: { lastWin: '1995-11-26', maxStreak: 789, emojiGuesses: context.token().google } }; // todo remove
     const endpoint = `/.netlify/functions/backup?token=${context.token().google}`;
     const netlifyResponse = await fetch(endpoint);
     return await netlifyResponse.json();
