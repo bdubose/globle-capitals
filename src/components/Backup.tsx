@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import jwtDecode from "jwt-decode";
-import { createEffect, createSignal, onMount, Show } from "solid-js";
+import { createEffect, createSignal, Show } from "solid-js";
 import Prompt from "../components/Prompt";
 import { getContext } from "../Context";
 
