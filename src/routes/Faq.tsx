@@ -37,7 +37,7 @@ export default function () {
   const faqs = [
     {
       q: "How is the distance between the answer and my guess calculated?",
-      a: "Each city is defined by one pair of latitude and longitude coordinates, so the distance between cities is the distance between 2 pairs of coordinates. Assume that the coordinates are right in the centre of each city.",
+      a: "Each city is defined by a pair of latitude and longitude coordinates that represents the city, so the distance between cities is the distance between 2 pairs of coordinates. Assume that the coordinates are right in the centre of each city.",
     },
     {
       q: "What about countries with more than one capital city?",
@@ -45,11 +45,11 @@ export default function () {
     },
     {
       q: "Why are cities different sizes?",
-      a: "The dot sizes of cities correlates to their populations.",
+      a: "The size of a city on the globe is proportional to its population.",
     },
     {
       q: "How can I play the game if I am colour blind or visually impaired?",
-      a: "There is no colour-blind version of the game yet. If you have any ideas for a colour blind version, let me know!",
+      a: "There is no colour blind version of the game yet. If you have any ideas for a colour blind version, let me know!",
     },
     {
       q: "Can I play the game in a language other than English?",
@@ -57,11 +57,17 @@ export default function () {
     },
     {
       q: "I found today's Mystery Capital! When do I get to play again?",
-      a: "The Mystery Capital changes and your guesses reset at midnight in your time zone. If you want to practice your skills in the meantime, you can use practice mode.",
+      a: "The Mystery Capital changes and your guesses reset at midnight in your time zone. If you want to practice your skills in the meantime, you can play a practice game.",
+      links: [
+        {
+          text: "practice game",
+          link: "/practice",
+        },
+      ],
     },
     {
       q: "What if my spelling sucks?",
-      a: "There is a spellchecker built in that will accept small spelling errors and offer solutions for larger errors.",
+      a: "There is a built-in spellchecker that will accept small spelling errors and offer solutions for larger errors.",
     },
     {
       q: "Does Globle: Capitals have a privacy policy?",
