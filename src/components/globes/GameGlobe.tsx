@@ -1,5 +1,12 @@
 import Globe from "globe.gl";
-import { Accessor, createEffect, createSignal, onMount, Show } from "solid-js";
+import {
+  Accessor,
+  createEffect,
+  createSignal,
+  onCleanup,
+  onMount,
+  Show,
+} from "solid-js";
 import { UAParser } from "ua-parser-js";
 import { globeImg } from "../../util/globe";
 import { arcGradient, cityColour, getCitySize } from "../../util/geometry";
@@ -155,6 +162,8 @@ export default function (props: Props) {
       globe.pointOfView({ lat: 0, lng: 0, altitude: 1.5 });
     }
   });
+
+  onCleanup(() => globe._destructor());
 
   // When there's a new guess, turn globe to that point
   createEffect(() => {

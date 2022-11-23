@@ -1,5 +1,5 @@
 import Globe from "globe.gl";
-import { createEffect, createSignal, on, onMount } from "solid-js";
+import { createEffect, createSignal, on, onCleanup, onMount } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 import dayImg from "../../images/earth-day-min.webp";
 import nightImg from "../../images/earth-night-min.webp";
@@ -10,7 +10,7 @@ export default function () {
   const context = getContext();
 
   let globeRef: HTMLDivElement | undefined;
-  const globe = Globe();
+  const globe = Globe({ animateIn: false });
   const parser = new UAParser();
   const isMobile = parser.getDevice().type === "mobile";
   const navigate = useNavigate();
@@ -33,6 +33,8 @@ export default function () {
       setTimeout(() => globe.resumeAnimation(), 1000);
     }
   });
+
+  onCleanup(() => globe._destructor());
 
   return (
     <div
