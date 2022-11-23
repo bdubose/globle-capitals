@@ -58,8 +58,11 @@ export default function (props: Props) {
 
   const closest = () => {
     if (props.guesses().length === 0) return 0;
-    const closestCity = sortedGuesses()[0];
-    return computeDistanceBetween(closestCity, props.ans || closestCity);
+    const distances = props
+      .guesses()
+      .map((guess) => computeDistanceBetween(guess, props.ans))
+      .sort((a, z) => a - z);
+    return distances[0];
   };
 
   return (
