@@ -35,7 +35,7 @@ export default function () {
         <a class="underline" href="https://globle-game.com">
           click here
         </a>{" "}
-        play the Globle with countries!
+        to play the <i>Globle</i> with countries!
       </p>
     </div>
   );
