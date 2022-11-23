@@ -26,7 +26,7 @@ export function formatKm(m: number) {
   };
   const context = getContext();
   const value = m / unitMap[context.distanceUnit().unit];
-  if (value < BIN) return "< " + BIN;
+  if (value < BIN) return 0;
   const rounded = Math.round(value / BIN) * BIN;
   const format = (num: number) =>
     num.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -57,7 +57,7 @@ export default function (props: Props) {
   );
 
   const closest = () => {
-    if (props.guesses.length === 0) return 0;
+    if (props.guesses().length === 0) return 0;
     const closestCity = sortedGuesses()[0];
     return computeDistanceBetween(closestCity, props.ans || closestCity);
   };
@@ -75,7 +75,10 @@ export default function (props: Props) {
           <p>Guessed</p>
         </Match>
       </Switch>
-      <ul class="grid grid-cols-3 md:grid-cols-4 gap-3">
+      <ul
+        class="grid grid-cols-3 md:grid-cols-4 gap-3"
+        data-cy="countries-list"
+      >
         <For each={sortedGuesses()}>
           {(city) => {
             const flagProp = city.iso2.toLowerCase();
@@ -111,6 +114,7 @@ export default function (props: Props) {
             <button
               onClick={() => toggleSortByDistance(!isSortedByDistance())}
               class="mt-2"
+              data-cy="change-sort"
             >
               <Switch>
                 <Match when={isSortedByDistance()}>

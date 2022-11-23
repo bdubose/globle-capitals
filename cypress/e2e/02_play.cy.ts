@@ -2,8 +2,6 @@ import crypto from "crypto-js";
 import dayjs from "dayjs";
 
 describe("Play the game", () => {
-  // beforeEach(())
-
   it("plays today's game", () => {
     cy.intercept("GET", "/.netlify/functions/answer**").as("answer");
 
@@ -50,15 +48,30 @@ describe("Play the game", () => {
     cy.get('[data-cy="guesser"]').type("toronto{enter}");
     cy.contains("Toronto is not Canada's primary capital.").should("exist");
 
+    // First guess
     cy.get('[data-cy="guesser"]').type("delhi{enter}");
     cy.contains("next guess").should("exist");
 
+    // Toggle distance unit
+    cy.contains("6,590").should("exist");
+    cy.contains("km").should("exist");
+    cy.contains("miles").should("not.exist");
+    cy.get('[data-cy="toggle-km-miles"]').click();
+    cy.contains("4,100").should("exist");
+    cy.contains("miles").should("exist");
+
+    // More guesses
     cy.get('[data-cy="guesser"]').type("london{enter}");
     cy.contains("London is warmer").should("exist");
-
     cy.get('[data-cy="guesser"]').type("santiago{enter}");
     cy.contains("Santiago is cooler").should("exist");
 
+    // Testing the sorted list
+    cy.get("li").eq(0).should("contain.text", "London");
+    cy.get('[data-cy="change-sort"]').click();
+    cy.get("li").eq(0).should("contain.text", "New Delhi");
+
+    // Winning
     cy.get('[data-cy="guesser"]').type("paris{enter}");
     cy.contains("The Mystery Capital is Paris").should("exist");
 

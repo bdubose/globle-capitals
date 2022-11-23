@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-describe("Try to backup when not signed in", () => {
+describe("Fail backup process", () => {
   it("cannot backup score because not signed in", () => {
     cy.visit("/settings");
     cy.contains("connect to your Google account").should("exist");
