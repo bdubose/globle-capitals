@@ -34,6 +34,10 @@ export default function () {
     }
   });
 
+  // createEffect(() => {
+  //   globe.globeImageUrl(globeImg());
+  // });
+
   onCleanup(() => globe._destructor());
 
   return (

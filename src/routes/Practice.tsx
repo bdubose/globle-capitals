@@ -56,16 +56,30 @@ export default function () {
         </Suspense>
       </Show>
       <List guesses={guesses} setPov={setPov} ans={ans()} />
-      <button
-        class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900
+      <Show
+        when={!win()}
+        fallback={
+          <button
+            class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900
               dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
              focus:ring-4 focus:ring-blue-300 rounded-lg text-sm
              px-4 py-2.5 text-center w-max"
-        onClick={revealAnswer}
-        disabled={win()}
+            onClick={newGame}
+          >
+            Play again
+          </button>
+        }
       >
-        Reveal answer
-      </button>
+        <button
+          class="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900
+              dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
+             focus:ring-4 focus:ring-blue-300 rounded-lg text-sm
+             px-4 py-2.5 text-center w-max"
+          onClick={revealAnswer}
+        >
+          Reveal answer
+        </button>
+      </Show>
       <Prompt
         promptType="Choice"
         text="Play again?"
