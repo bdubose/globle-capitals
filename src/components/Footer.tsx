@@ -22,7 +22,7 @@ export default function Footer() {
         </a>
       </span>
       <span>
-        Have a question?
+        Have a question?{" "}
         <A href="/faq" data-cy="faq-footer-link">
           Check out the FAQ.
         </A>
